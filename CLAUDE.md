@@ -20,4 +20,5 @@ crédibilité : uniquement des faits vérifiés, et un audit avant chaque envoi.
   - `python taches.py tests` est vert ;
   - le rendu a été regardé à taille réelle et à taille téléphone ;
   - les polices sont chargées (les scripts de capture s'arrêtent sinon).
+- **Idées de contenus** : `docs/banque_idees.md` (des exemples, pas une liste fermée ; toujours proposer plusieurs catégories).
 - **Décisions** : chaque décision de forme ou de fond est notée en une ligne datée dans `docs/journal_des_gabarits.md`.

@@ -56,7 +56,13 @@ description: Comment produire un post ou une vidéo MaliDataFoot avec Diaby : fa
 - **À surveiller** : les « bulles » (pops qui montent) peuvent faire enfantin. Lui demander.
 - Préférer des sons secs et sobres. Rien qui sonne jouet ou dessin animé.
 
-## 6. Prochains contenus (proposition du 7 octobre, à décider avec lui)
+## 6. Idées de contenus
+
+- Chaque fois qu'on cherche des idées : en proposer dans **plusieurs catégories** (actu des Aigles, Maliens en club, rétro, lien hier / aujourd'hui, phénomènes, sujets poussés et curieux, formats légers). Pas de stats « bateau » : des sujets qui font comprendre un phénomène.
+- La banque d'exemples est dans `docs/banque_idees.md`. Ce sont des exemples, pas une liste fermée : on continue d'en proposer de nouveaux au même niveau, et on y ajoute ceux qui plaisent.
+- Formats : posts, threads sur X, TikTok en motion design avec voix off (scripts écrits avec les règles de texte ci-dessus).
+
+## 7. Prochains contenus (proposition du 7 octobre, à décider avec lui)
 
 - le début de saison de Sinayoko ;
 - les Aigles avant la double confrontation contre le Rwanda (novembre 2026) ;
