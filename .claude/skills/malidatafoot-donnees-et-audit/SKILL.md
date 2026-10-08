@@ -79,8 +79,17 @@ débit, mettre en cache, et ne jamais dépendre d'une source dont on n'a pas le 
   - possession de 68 % après le carton rouge, contre 47 % avant ;
   - réseau de passes du onze jusqu'à la 62e : 27 passes entre Niakaté et Kouyaté.
 
-## 6. Contexte à revérifier avant chaque post
+## 6. Toujours être à jour
 
-- **Éliminatoires CAN 2027.** Groupe : Rwanda, Cap-Vert, Liberia. Résultats : Mali 3-1 Cap-Vert, victoire au Liberia le 29 septembre 2026. Prochaine étape : double confrontation avec le Rwanda en novembre 2026. Fin : mars 2027.
+**Avant de proposer un sujet ou d'en parler**, vérifier sur le web la dernière actu des Aigles : derniers matchs, dernière liste, résultats, prochains rendez-vous. Ne jamais présenter comme « à venir » quelque chose qui a déjà eu lieu. C'est une exigence de Diaby, rappelée le 8 octobre 2026.
+
+**État au 8 octobre 2026** (à revérifier, ça bouge) :
+- **Sélectionneur** : Anthony Da Silva. Sa première liste date du 10 septembre 2026.
+- **Éliminatoires CAN 2027, groupe K** (Mali, Rwanda, Cap-Vert, Liberia) :
+  - Mali 3-1 Cap-Vert le 25 septembre 2026 ;
+  - Liberia 0-1 Mali le 29 septembre 2026, avec le but d'Ange Martial Tia à la 79e (première convocation) ;
+  - le Mali a 6 points, à égalité avec le Rwanda.
+- **Amical Maroc 1-1 Mali**, le 4 octobre 2026 à Tanger : but marocain d'Ezzalzouli à la 35e, égalisation de Gaoussou Diarra à la 77e. Ce match a remplacé l'amical contre la Tunisie, annulé.
+- **Prochains matchs** : contre le Rwanda le 11 novembre à Bamako puis le 15 novembre à Kigali (calendrier publié sur femafoot.online). Ensuite le Cap-Vert et le Liberia, les 24 et 28 mars 2027.
 - **Sinayoko** au Paris FC : 4 buts et 1 passe décisive en 5 matchs de Ligue 1 début octobre 2026 (à mettre à jour).
 - **Registre des joueurs maliens** : `registre/joueurs.csv`, avec la source de chaque club et un champ « à confirmer ».

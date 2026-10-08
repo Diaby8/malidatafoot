@@ -16,7 +16,9 @@ Une page data entièrement consacrée à une sélection, ça n'existe pas pour l
 - Les débuts du jeune Ange Tia lors de ce rassemblement (Ange Martial Tia, Reims, première convocation ; date de naissance et minutes à vérifier).
 - La CAN 2023 en série « rétro », en parallèle (nos données détaillées).
 
-## Le rassemblement de septembre
+## Le rassemblement de septembre-octobre 2026 (déjà joué : 3-1 contre le Cap-Vert, 1-0 au Liberia, 1-1 contre le Maroc en amical)
+- Ange Martial Tia : première convocation, et le but de la victoire à la 79e au Liberia.
+- Maroc 1-1 Mali à Tanger, face à l'équipe type marocaine : l'égalisation de Gaoussou Diarra à la 77e.
 - La liste en data : où jouent les appelés, âge, nouveaux venus, rescapés de la CAN 2023.
 - Les deux matchs en chiffres (Mali 3-1 Cap-Vert, victoire au Liberia) : qui a joué, minutes, buteurs, changements.
 - Hier et aujourd'hui : le groupe de septembre comparé à celui d'Abidjan.
