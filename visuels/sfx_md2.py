@@ -239,18 +239,33 @@ if not CLOCHES:
     bell = lambda *a, **k: np.zeros(1)
 thock, whoosh, sweep_noise, shimmer, paper = _g(thock, 1.35), _g(whoosh, 1.5), _g(sweep_noise, 1.4), _g(shimmer, 1.7), _g(paper, 1.6)
 impact, crowd = _g(impact, 0.7), _g(crowd, 0.92)
-# Essai du 8 octobre 2026 (Diaby entend encore des « ding ») : sans bulles (sauf sur la carte des tirs), sans scintillement aigu, coups de bois aigus ramenés plus graves.
-# À valider par Diaby avant de devenir le réglage par défaut. SFX_SANS_DING=1 pour l'essai.
+# Essai « sons de terrain » du 8 octobre 2026 (Diaby : encore des « ding », des cliquetis et du xylophone).
+# SFX_SANS_DING=1 : plus de bulles (sauf sur les buts de la carte des tirs), plus de scintillement, plus de coups de bois
+# (le « xylophone »), plus de tics ni de roulements de tics ; les passes de l'anatomie du but deviennent de vraies
+# frappes de balle (synthèse). À valider par Diaby avant de devenir le réglage par défaut.
 import os
 SANS_DING = os.environ.get('SFX_SANS_DING') == '1'
-pop_carte = pop  # les bulles de la carte des tirs restent (Diaby, 8 octobre 2026)
-if SANS_DING:
-    pop = lambda *a, **k: np.zeros(1)
-    _shim = shimmer
-    shimmer = lambda *a, **k: _shim(*a, **k) * 0  # garde le même tirage aléatoire pour le reste
-    _wood = wood
-    wood = lambda f=820, d=0.16: _wood(min(f, 1000), d)
 
+
+def kick(force=1.0):
+    """Frappe de balle : le « poc » sourd du cuir, le claquement du contact, un peu d'air."""
+    d = 0.22
+    t = tt(d)
+    f = 95 + 150 * np.exp(-t / 0.012)
+    s = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t / (0.035 + 0.025 * force))
+    s += 0.55 * np.sin(2 * np.pi * 58 * t) * np.exp(-t / (0.03 + 0.04 * force))
+    s += 0.7 * bp(noise(d), 700, 3800) * np.exp(-t / 0.005)
+    s += 0.12 * force * bp(noise(d), 300, 1200) * np.exp(-t / 0.05)
+    return fade(s / np.max(np.abs(s)), 0.0002, 0.03)
+
+
+pop_carte = pop  # les bulles des buts de la carte des tirs restent
+if SANS_DING:
+    _pop, _shim, _wood, _tick = pop, shimmer, wood, tick
+    pop = lambda *a, **k: _pop(*a, **k) * 0
+    shimmer = lambda *a, **k: _shim(*a, **k) * 0  # « * 0 » garde le même tirage aléatoire pour le reste
+    wood = lambda *a, **k: _wood(*a, **k) * 0
+    tick = lambda *a, **k: _tick(*a, **k) * 0
 
 # ------------------------------------------------------------------ TIMELINE vitrine MaliDataFoot (calée sur tim.json)
 import json
@@ -283,7 +298,7 @@ for i, s in enumerate(shots):
     if s['is_goal']:
         put(bell(1050 + 60 * (i % 6), 0.5), ts, 0.13, pan); put(pop_carte(500, 1300), ts, 0.2, pan)
     else:
-        put(pop_carte(300 + 700 * s['xg'], 700 + 1200 * s['xg'], 0.07), ts, 0.07 + 0.16 * s['xg'], pan)
+        put(pop(300 + 700 * s['xg'], 700 + 1200 * s['xg'], 0.07), ts, 0.07 + 0.16 * s['xg'], pan)
 put(whoosh(0.4, 500, 2600, -0.5, 0.5), t + 2.7, 0.24)
 for i in range(3):
     put(bell(1318.5 + 220 * i, 0.6), t + 2.8 + i * 0.12, 0.14, 0.3); put(pop(), t + 2.8 + i * 0.12, 0.15, 0.3)
@@ -296,12 +311,19 @@ swish_in(t); put(sweep_noise(0.7, 400, 2400, shape='rise'), t + 0.1, 0.12)
 np_ = 0
 for e in BU['seq']:
     if e['type'] == 'Pass':
-        put(wood(620 + 55 * np_, 0.09), e['at'], 0.24, -0.6 + 0.11 * np_); put(tick(2400 + 90 * np_, 0.02), e['at'], 0.06, -0.6 + 0.11 * np_); np_ += 1
+        put(wood(620 + 55 * np_, 0.09), e['at'], 0.24, -0.6 + 0.11 * np_); put(tick(2400 + 90 * np_, 0.02), e['at'], 0.06, -0.6 + 0.11 * np_)
+        if SANS_DING:
+            put(kick(0.8), e['at'], 0.55, -0.6 + 0.11 * np_)
+        np_ += 1
     elif e['type'] == 'Carry':
         put(tick(1700, 0.016), e['at'], 0.035, 0.0)
+        if SANS_DING:
+            put(kick(0.3), e['at'], 0.22, 0.0)  # conduite : petite touche de balle
 put(sweep_noise(BU['A'] * 0.9, 300, 3600, shape='rise'), BU['T0'] + 0.3, 0.13)
 shot_t = [e['at'] for e in BU['seq'] if e['type'] == 'Shot'][0]
 put(whoosh(0.3, 900, 5200, 0.2, 0.9, skew=0.6), shot_t - 0.05, 0.4)
+if SANS_DING:
+    put(kick(1.6), shot_t, 0.8, 0.2)  # la frappe
 g = BU['goal']
 put(impact(1.1), g, 0.95, 0.3); put(djembe('bass'), g, 0.7, 0.3); put(djembe('slap'), g + 0.01, 0.4, 0.4); put(bell(1568, 0.9), g + 0.02, 0.2, 0.3); put(shimmer(1.0), g + 0.03, 0.12)
 put(crowd(2.0), g + 0.02, 0.1)
