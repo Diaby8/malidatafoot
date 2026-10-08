@@ -239,6 +239,16 @@ if not CLOCHES:
     bell = lambda *a, **k: np.zeros(1)
 thock, whoosh, sweep_noise, shimmer, paper = _g(thock, 1.35), _g(whoosh, 1.5), _g(sweep_noise, 1.4), _g(shimmer, 1.7), _g(paper, 1.6)
 impact, crowd = _g(impact, 0.7), _g(crowd, 0.92)
+# Essai du 8 octobre 2026 (Diaby entend encore des « ding ») : sans bulles (pops), sans scintillement aigu, coups de bois aigus ramenés plus graves.
+# À valider par Diaby avant de devenir le réglage par défaut. SFX_SANS_DING=1 pour l'essai.
+import os
+SANS_DING = os.environ.get('SFX_SANS_DING') == '1'
+if SANS_DING:
+    pop = lambda *a, **k: np.zeros(1)
+    _shim = shimmer
+    shimmer = lambda *a, **k: _shim(*a, **k) * 0  # garde le même tirage aléatoire pour le reste
+    _wood = wood
+    wood = lambda f=820, d=0.16: _wood(min(f, 1000), d)
 
 
 # ------------------------------------------------------------------ TIMELINE vitrine MaliDataFoot (calée sur tim.json)
