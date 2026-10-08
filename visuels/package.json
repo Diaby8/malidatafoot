@@ -1,0 +1,13 @@
+{
+  "name": "malidatafoot-visuels",
+  "private": true,
+  "description": "Rendu des visuels et des vidéos MaliDataFoot (pages HTML capturées par Chromium).",
+  "type": "module",
+  "dependencies": {
+    "@fontsource/barlow-condensed": "5.3.0",
+    "@fontsource/barlow-semi-condensed": "5.3.0",
+    "@fontsource/inter": "5.3.0",
+    "gsap": "3.15.0",
+    "playwright": "1.56.0"
+  }
+}

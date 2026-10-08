@@ -1,0 +1,14 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {"label": "MaliDataFoot : installer", "type": "shell", "command": "python taches.py installer"},
+    {"label": "MaliDataFoot : données (pipeline)", "type": "shell", "command": "python taches.py donnees", "group": "build"},
+    {"label": "MaliDataFoot : tests", "type": "shell", "command": "python taches.py tests", "group": "test"},
+    {"label": "MaliDataFoot : fiche joueur", "type": "shell", "command": "python taches.py fiche"},
+    {"label": "MaliDataFoot : duel", "type": "shell", "command": "python taches.py duel"},
+    {"label": "MaliDataFoot : grille des variantes", "type": "shell", "command": "python taches.py grille"},
+    {"label": "MaliDataFoot : bannières", "type": "shell", "command": "python taches.py bannieres"},
+    {"label": "MaliDataFoot : vidéo (contrôle)", "type": "shell", "command": "python taches.py video --controle"},
+    {"label": "MaliDataFoot : vidéo complète", "type": "shell", "command": "python taches.py video"}
+  ]
+}

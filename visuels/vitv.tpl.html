@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>MaliDataFoot — la vitrine, format vertical</title>
+<style>
+@font-face{font-family:"BC";font-style:italic;font-weight:900;src:url(node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-900-italic.woff2) format("woff2")}
+@font-face{font-family:"BC";font-style:italic;font-weight:800;src:url(node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-800-italic.woff2) format("woff2")}
+@font-face{font-family:"BCS";font-style:italic;font-weight:400;src:url(node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-400-italic.woff2) format("woff2")}
+@font-face{font-family:"BCS";font-style:italic;font-weight:600;src:url(node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-600-italic.woff2) format("woff2")}
+@font-face{font-family:"SC";font-weight:600;src:url(node_modules/@fontsource/barlow-semi-condensed/files/barlow-semi-condensed-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"SC";font-weight:700;src:url(node_modules/@fontsource/barlow-semi-condensed/files/barlow-semi-condensed-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"SC";font-weight:800;src:url(node_modules/@fontsource/barlow-semi-condensed/files/barlow-semi-condensed-latin-800-normal.woff2) format("woff2")}
+:root{--or:#F6C41C;--or-h:#FBD134;--or-d:#EFA40A;--or-p:#FCE38A;--vert:#0B7A3B;--vert-l:#19A552;--vert-d:#064A25;--vert-xd:#04331A;--rouge:#D4252A;--encre:#0B1F14;--imp:"BC",sans-serif;--txt:"SC",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#111;width:1080px;height:1920px;overflow:hidden}
+#stage{position:relative;width:1080px;height:1920px;overflow:hidden;background:var(--vert-xd);font-family:var(--txt);color:var(--encre)}
+.layer{position:absolute;inset:0}
+.mask{display:inline-block;overflow:hidden;vertical-align:top;padding:.14em .2em .12em;margin:-.14em -.2em -.12em}
+.mi{display:inline-block;will-change:transform}
+.wipe,.wipeD{--p:0;clip-path:polygon(0% 100%,0% calc(100% - var(--p)*1.2%),33.34% calc(100% - var(--p)*1.2%),33.34% calc(100% - (var(--p) - 15)*1.2%),66.67% calc(100% - (var(--p) - 15)*1.2%),66.67% calc(100% - (var(--p) - 30)*1.2%),100% calc(100% - (var(--p) - 30)*1.2%),100% 100%)}
+#grain{display:none}   /* le grain (effet craie) est retiré : décision du 7 octobre 2026 ; la trame de points reste */
+.dots{position:absolute;left:-40px;top:-40px;width:1160px;height:2000px}
+#bgGreen{background:radial-gradient(120% 70% at 30% 26%, #128F47 0%, var(--vert) 30%, var(--vert-d) 62%, var(--vert-xd) 100%)}
+#bgYellow{background:linear-gradient(180deg,var(--or-h) 0%, var(--or) 45%, var(--or-d) 100%)}
+#pitchBg{position:absolute;left:0;top:0;width:1080px;height:1920px}
+#pitchBg *{fill:none;stroke:#F6C41C;stroke-width:3;stroke-opacity:.42}
+.kb{display:inline-block;width:36px;height:30px;margin-right:16px;vertical-align:-4px}
+
+/* accroche */
+.kick{position:absolute;left:64px;top:166px;font:600 32px/1 var(--txt);letter-spacing:.06em;color:var(--vert-xd);white-space:nowrap}
+.kick b{font-weight:800}
+#hkInfo{color:#fff;letter-spacing:0}.sig{display:inline-flex!important;align-items:center;gap:16px}.sig img{width:78px;height:78px;border-radius:50%;display:block}.sig span{font:italic 400 58px/1 "BCS";letter-spacing:.005em}.sig i{font-style:inherit;font-weight:600}
+.hkLine{position:absolute;left:64px;font:800 124px/1 var(--txt);color:#fff;white-space:nowrap}
+.slam{position:absolute;left:56px;font:italic 900 300px/1 var(--imp);color:var(--or);white-space:nowrap;transform-origin:0 60%}
+
+/* titres de scène */
+.sc{position:absolute;inset:0}
+.cap{position:absolute;inset:0}
+.h1{position:absolute;left:58px;top:206px;font:italic 900 184px/.9 var(--imp);color:var(--vert-d);white-space:nowrap}
+.h2{position:absolute;left:64px;top:378px;font:italic 800 90px/1 var(--imp);color:var(--rouge);white-space:nowrap}
+.ghost{position:absolute;right:56px;top:120px;font:italic 900 430px/1 var(--imp);color:transparent;-webkit-text-stroke:4px #FFF6D0;white-space:nowrap}
+#foot{position:absolute;left:64px;width:882px;top:1472px;display:flex;align-items:center;gap:16px}
+#foot>img{width:76px;height:76px;border-radius:50%;display:block;box-shadow:0 5px 12px rgba(70,40,0,.3)}
+.wm{font:italic 400 56px/1 "BCS";letter-spacing:.005em;color:var(--vert-d);white-space:nowrap}.wm i{font-style:inherit;font-weight:600}
+.soc{margin-left:auto;display:flex;align-items:center;gap:14px;font:700 31px/1 var(--txt);color:var(--vert-d);white-space:nowrap}.soc img{display:block}
+#src{position:absolute;left:64px;top:1557px;font:600 22px/1 var(--txt);color:rgba(4,51,26,.75);white-space:nowrap}
+
+/* gros chiffres */
+.big{position:absolute;white-space:nowrap;transform-origin:0 60%}
+.big b{display:block;font:italic 900 190px/.86 var(--imp);color:var(--vert-d)}
+.big span{display:block;font:800 34px/1.1 var(--txt);letter-spacing:.05em;color:var(--vert-xd);margin-top:4px}
+.bigR{position:absolute;display:flex;align-items:center;gap:18px;white-space:nowrap;transform-origin:0 50%}
+.bigR b{font:italic 900 150px/.86 var(--imp);color:var(--vert-d)}
+.bigR span{font:800 31px/1.15 var(--txt);letter-spacing:.05em;color:var(--vert-xd)}
+.bigR em{font-style:normal;color:var(--rouge)}
+#legB{position:absolute;font:800 25px/1 var(--txt);letter-spacing:.05em;color:var(--vert-xd)}#legB p{display:flex;align-items:center;gap:12px;height:31px}#legB svg{width:44px;height:10px;display:block}
+.note{position:absolute;font:700 29px/1.22 var(--txt);letter-spacing:.03em;color:var(--vert-xd)}
+
+/* 1 tirs */
+#pitch3{position:absolute;left:64px;top:512px;width:866px;height:666.2px;overflow:visible}
+#pitch3 .sp{fill:#FFF3C4}
+#leg3{position:absolute;left:64px;top:1202px;display:flex;gap:34px;align-items:center;font:800 29px/1 var(--txt);letter-spacing:.04em;color:var(--vert-xd);white-space:nowrap}
+#leg3 span{display:flex;align-items:center;gap:12px}
+#leg3 i{display:block;border-radius:50%;width:30px;height:30px}
+#leg3 i.g{background:#fff;box-shadow:inset 0 0 0 6px var(--vert-d)}
+#leg3 i.s{background:rgba(11,122,59,.6);box-shadow:inset 0 0 0 2px var(--vert-d);opacity:.6}
+#s3stat b{font-size:216px}#s3stat span{font-size:40px}
+.ln{fill:none;stroke:#FFF3C4;stroke-width:.46}
+.shot{position:absolute;border-radius:50%;background:rgba(11,122,59,.6);box-shadow:inset 0 0 0 2px var(--vert-d)}
+.shot.g{background:#fff;box-shadow:inset 0 0 0 6px var(--vert-d),0 8px 16px rgba(0,0,0,.25);z-index:3}
+.slab{position:absolute;font:800 32px/1 var(--txt);color:var(--vert-xd);white-space:nowrap;z-index:4;text-shadow:0 0 6px #F6C41C,0 0 6px #F6C41C,0 0 3px #F6C41C}
+
+/* terrains debout */
+.pv{position:absolute;left:64px;top:496px;width:636px;height:954px;overflow:visible}
+#pitB .sg{fill:none;stroke-linecap:round}
+#pitB .ps{stroke:#064A25;stroke-width:.95}
+#pitB .cr{stroke:#064A25;stroke-width:.7;stroke-dasharray:.2 1.5}
+#pitB .sh{stroke:#D4252A;stroke-width:1.5}
+#pitB .nd{fill:#064A25;stroke:#fff;stroke-width:.45}
+#pitB .nt{font:800 3.1px "SC";fill:#fff}
+#gmark circle:first-child{fill:none;stroke:#D4252A;stroke-width:.9}#gmark circle:last-child{fill:#fff;stroke:#04331A;stroke-width:.5}
+.nm{font:800 3.7px "SC";fill:#04331A;paint-order:stroke;stroke:#F6C41C;stroke-width:1.3px;stroke-linejoin:round}
+#ball{fill:#fff;stroke:#04331A;stroke-width:.5}
+#gflash{fill:none;stroke:#D4252A;stroke-width:.9}
+#pitN .ne{stroke:#064A25;stroke-opacity:.5;stroke-linecap:round}
+#pitN .ne.top{stroke:#D4252A;stroke-opacity:1}
+#pitN .nn{fill:#0B7A3B;stroke:#fff;stroke-width:.6}
+#pitN .nm{font-size:3.7px}
+
+/* 3 fil du match */
+#ch4{position:absolute;left:64px;top:500px;width:866px;height:760px;overflow:visible}
+#ch4 .ax{stroke:#064A25;stroke-width:4;fill:none}
+#ch4 .pl{stroke:#FCE38A;stroke-width:3}
+#ch4 .rc{stroke:#D4252A;stroke-width:4;stroke-dasharray:11 9}
+#ch4 text{font-family:"SC";font-weight:700;font-size:29px;fill:#064A25}
+.endv{position:absolute;font:italic 900 90px/1 var(--imp);white-space:nowrap}
+.endn{font:800 25px/1.15 var(--txt);letter-spacing:.04em;color:#0B7A3B}
+.gm{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;background:#fff}
+.gl{position:absolute;font:800 32px/1 var(--txt);white-space:nowrap;text-shadow:0 0 6px #F6C41C,0 0 6px #F6C41C,0 0 3px #F6C41C}
+
+#leg4{position:absolute;left:64px;top:1264px;display:flex;gap:26px;align-items:center;font:800 28px/1 var(--txt);letter-spacing:.04em;color:var(--vert-xd);white-space:nowrap}
+#leg4 span{display:flex;align-items:center;gap:10px}#leg4 i{display:block;width:34px;height:9px;border-radius:5px}#leg4 .q{font-weight:600;opacity:.8}
+.chipF b{font-size:140px}
+
+/* cartes blanches */
+.card{position:absolute;left:64px;top:494px;width:866px;background:#fff;box-shadow:0 26px 48px rgba(70,40,0,.3);transform-origin:50% 100%}
+.fh{position:absolute;left:0;top:0;right:0;height:128px;background:var(--vert-d);color:#fff}
+.fn{position:absolute;left:28px;top:10px;font:italic 900 82px/1 var(--imp);white-space:nowrap}
+.fp{position:absolute;left:30px;top:90px;font:700 27px/1 var(--txt);letter-spacing:.09em;color:var(--or-p);white-space:nowrap}
+.fs{position:absolute;right:24px;top:10px;font:italic 900 108px/1 var(--imp);color:var(--or);white-space:nowrap}
+.fs small{font:italic 800 38px/1 var(--imp);color:#fff;opacity:.8;margin-left:4px}
+#pz{position:absolute;left:6px;top:134px;width:600px;height:600px;overflow:visible}
+#pz .pb{fill:#F3EDDA}
+#pz .pv2{font:800 32px "SC";fill:#04331A}
+#pz .pc0{fill:#fff;stroke:#E9E1C6;stroke-width:2}
+#pz .pc2{font:italic 900 46px "BC";fill:#064A25}
+.rk{position:absolute;left:612px;top:288px;white-space:nowrap}
+.rk b{display:block;font:italic 900 190px/.86 var(--imp);color:var(--vert-d)}
+.rk span{display:block;font:800 34px/1.1 var(--txt);letter-spacing:.04em;color:var(--vert-xd);margin-top:8px}
+.rk em{display:block;font:600 26px/1 var(--txt);font-style:normal;color:rgba(4,51,26,.72);margin-top:14px}
+.leg{position:absolute;left:30px;top:752px;display:flex;gap:26px;font:800 27px/1 var(--txt);letter-spacing:.03em;color:var(--vert-xd);white-space:nowrap}
+.leg i{display:inline-block;width:22px;height:22px;margin-right:9px;vertical-align:-3px}
+.pp{position:absolute;left:0;right:0;top:800px;height:156px;background:#F7F2E2;padding:20px 30px 0;white-space:nowrap}
+.pp>b{display:block;font:800 27px/1 var(--txt);color:var(--rouge);letter-spacing:.08em}
+.pp>div{display:flex;gap:48px;margin-top:14px}
+.pp p b{display:block;font:800 40px/1 var(--txt);color:var(--vert-d)}
+.pp p span{display:block;font:700 25px/1 var(--txt);letter-spacing:.07em;color:rgba(4,51,26,.75);margin-top:7px}
+
+/* 6 duel */
+.dh{position:absolute;top:0;height:170px;width:433px;color:#fff}
+.dh.l{left:0;background:var(--vert);padding-left:28px}.dh.r{left:433px;background:var(--encre);text-align:right;padding-right:28px}
+.dh .n{font:italic 900 86px/1 var(--imp);white-space:nowrap;margin-top:22px}
+.dh .s{font:700 28px/1 var(--txt);letter-spacing:.08em;margin-top:8px;color:var(--or-p);white-space:nowrap}
+#dvs{position:absolute;left:371px;top:23px;width:124px;height:124px;border-radius:50%;background:var(--or);color:var(--vert-xd);font:italic 900 58px/124px var(--imp);text-align:center;box-shadow:0 8px 18px rgba(0,0,0,.3)}
+.dr{position:absolute;left:0;width:866px;height:91px}
+.dr .lb{position:absolute;left:0;right:0;top:2px;text-align:center;font:800 28px/1 var(--txt);letter-spacing:.08em;color:var(--vert-xd);white-space:nowrap}
+.dr .va{position:absolute;top:20px;font:italic 900 66px/1 var(--imp);white-space:nowrap}
+.dr .va.l{left:28px;color:var(--vert)}.dr .va.r{right:28px;color:var(--encre)}
+.dr .va.lo{opacity:.5}
+.dr .tk{position:absolute;top:44px;height:34px;width:270px;background:#F3EDDA}
+.dr .tk.l{left:153px}.dr .tk.r{left:443px}
+.dr .tk i{position:absolute;top:0;bottom:0;width:270px;display:block}
+.dr .tk.l i{right:0;background:var(--vert);transform-origin:100% 50%}.dr .tk.r i{left:0;background:var(--encre);transform-origin:0 50%}
+#dsc{position:absolute;left:0;top:830px;width:866px;height:126px;background:#F7F2E2}
+#dsc .c{position:absolute;left:0;right:0;top:29px;text-align:center;font:800 29px/1.2 var(--txt);letter-spacing:.1em;color:var(--vert-xd)}
+#dsc b{position:absolute;top:5px;font:italic 900 116px/1 var(--imp)}
+#dsc b.l{left:28px;color:var(--vert)}#dsc b.r{right:28px;color:var(--encre)}
+
+/* 7 classement */
+.pr{position:absolute;left:64px;width:866px;height:180px}
+.pr .bg{position:absolute;left:-16px;right:-16px;top:-10px;bottom:8px;background:#fff;box-shadow:0 14px 28px rgba(70,40,0,.22);transform-origin:0 50%}
+.pr .n{position:absolute;left:8px;top:10px;font:800 54px/1 var(--txt);color:var(--vert-d);white-space:nowrap}
+.pr .s{position:absolute;left:8px;top:76px;font:600 29px/1 var(--txt);letter-spacing:.04em;color:rgba(4,51,26,.78);white-space:nowrap}
+.pr .tr{position:absolute;left:8px;top:122px;width:640px;height:32px;background:rgba(252,227,138,.85)}
+.pr .br{position:absolute;left:8px;top:122px;width:640px;height:32px;background:linear-gradient(90deg,var(--vert-l),var(--vert));transform-origin:0 50%}
+.pr .v{position:absolute;right:6px;top:26px;font:italic 900 124px/1 var(--imp);color:var(--vert-d);white-space:nowrap}
+
+/* fin */
+#outro{background:radial-gradient(120% 70% at 50% 26%, #128F47 0%, var(--vert) 30%, var(--vert-d) 62%, var(--vert-xd) 100%)}
+#logo{position:absolute;left:260px;top:286px;width:560px;height:560px;border-radius:50%;overflow:hidden;background:#fff;box-shadow:0 34px 60px rgba(0,30,0,.45)}
+#logo img{width:100%;height:100%;display:block}
+#oWm{position:absolute;left:0;right:0;top:886px;text-align:center;font:italic 400 196px/1 "BCS";color:#fff;white-space:nowrap}
+#oWm i{font-style:inherit;font-weight:600;color:#fff}
+#oTag{position:absolute;left:0;right:0;top:1070px;text-align:center;font:600 46px/1 var(--txt);letter-spacing:.01em;color:var(--or-p);white-space:nowrap}
+.pill{position:absolute;left:210px;width:660px;height:98px;background:#fff;box-shadow:0 16px 30px rgba(0,0,0,.3);font:700 48px/98px var(--txt);color:var(--vert-d);text-align:center;white-space:nowrap}
+.pill{display:flex;align-items:center;justify-content:center;gap:24px}
+.pill img{display:block;width:auto}
+.pill b{font:italic 900 54px/98px var(--imp);color:var(--rouge);margin-right:20px;letter-spacing:.02em}
+#oBars{position:absolute;left:400px;top:1412px;width:280px;height:12px;display:flex;gap:8px}
+#oBars i{flex:1;border-radius:8px;transform-origin:0 50%}
+</style>
+</head>
+<body>
+<div id="stage">
+ <div class="layer" id="cam">
+  <div class="layer" id="bgGreen">
+    <canvas class="dots" id="dotsG" data-c="#19A552" data-o=".5" data-fx="0" data-fy="1920"></canvas>
+    <svg id="pitchBg" viewBox="0 0 1080 1920"><line id="pMid" x1="-20" y1="1470" x2="1100" y2="1470"/><circle id="pCirc" cx="760" cy="1470" r="290"/></svg>
+  </div>
+  <div class="layer" id="hook">
+    <div class="kick" id="hkInfo" style="top:383px"><span class="mask"><span class="mi sig"><img src="logo-verte.png" alt=""><span>Mali<i>Data</i>Foot</span></span></span></div>
+    <div class="hkLine" style="top:493px"><span class="mask"><span class="mi hk">LES AIGLES</span></span></div>
+    <div class="hkLine" style="top:623px"><span class="mask"><span class="mi hk">JOUENT.</span></span></div>
+    <div class="slam" id="slam1" style="top:803px" data-fit="880">LA DATA</div>
+    <div class="slam" id="slam2" style="top:1047px" data-fit="880">PARLE.</div>
+  </div>
+  <div class="layer wipe" id="w1a" style="background:var(--rouge)"></div>
+  <div class="layer wipe" id="w1b" style="background:var(--or-p)"></div>
+
+  <div class="layer wipe" id="yellow">
+    <div class="layer" id="bgYellow"><canvas class="dots" id="dotsY" data-c="#FDEBA6" data-o=".85" data-fx="1080" data-fy="0"></canvas></div>
+
+    <!-- 1 : la carte des tirs -->
+    <div class="sc" id="s3">
+      <div class="cap" id="cap3"><div class="ghost" id="gh3"></div>
+        <div class="kick"><span class="mask"><span class="mi" id="info3"></span></span></div>
+        <div class="h1"><span class="mask"><span class="mi">LA CARTE</span></span></div>
+        <div class="h2"><span class="mask"><span class="mi">DES TIRS</span></span></div></div>
+      <svg id="pitch3" viewBox="14 0 52 40">
+        <line class="ln" x1="14" y1="0" x2="66" y2="0"/><rect class="ln" x="18" y="0" width="44" height="18"/><rect class="ln" x="30" y="0" width="20" height="6"/><path class="ln" d="M32 18A10 10 0 0 0 48 18"/><rect class="ln" x="36" y="-1.8" width="8" height="1.8"/><circle class="sp" cx="40" cy="12" r=".45"/>
+      </svg>
+      <div id="shots"></div>
+      <div id="leg3"><span><i class="g"></i>BUT</span><span><i class="s"></i>TIR · GROS ROND = GROSSE OCCASION</span></div>
+      <div class="bigR" id="s3stat" style="left:64px;top:1258px"><b id="s3g">0</b><span>BUTS DE SINAYOKO EN <i id="s3n" style="font-style:normal">0</i> TIRS<br>POUR <em id="s3x">0</em> BUT ATTENDU</span></div>
+    </div>
+
+    <!-- 2 : l'anatomie d'un but -->
+    <div class="sc" id="sB">
+      <div class="cap" id="capB"><div class="ghost" id="ghB"></div>
+        <div class="kick"><span class="mask"><span class="mi" id="infoB"></span></span></div>
+        <div class="h1"><span class="mask"><span class="mi">L'ANATOMIE</span></span></div>
+        <div class="h2"><span class="mask"><span class="mi">D'UN BUT</span></span></div></div>
+      <svg class="pv" id="pitB" viewBox="0 0 80 120"></svg>
+      <div class="big cb" style="left:726px;top:560px"><b id="bP">0</b><span>PASSES</span></div>
+      <div class="big cb" style="left:726px;top:850px"><b id="bJ">0</b><span>JOUEURS<br>SUR 11</span></div>
+      <div class="big cb" style="left:726px;top:1140px"><b id="bS">0</b><span>SECONDES</span></div>
+      <div class="cb" id="legB" style="left:726px;top:1362px"><p><svg viewBox="0 0 44 10"><line x1="2" y1="5" x2="42" y2="5" stroke="#064A25" stroke-width="5" stroke-linecap="round"/></svg>PASSE</p><p><svg viewBox="0 0 44 10"><line x1="2" y1="5" x2="42" y2="5" stroke="#064A25" stroke-width="4" stroke-linecap="round" stroke-dasharray="1 8"/></svg>CONDUITE</p><p><svg viewBox="0 0 44 10"><line x1="2" y1="5" x2="42" y2="5" stroke="#D4252A" stroke-width="6" stroke-linecap="round"/></svg>TIR</p></div>
+    </div>
+
+    <!-- 3 : le fil du match -->
+    <div class="sc" id="s4">
+      <div class="cap" id="cap4"><div class="ghost">1-2</div>
+        <div class="kick"><span class="mask"><span class="mi" id="info4"></span></span></div>
+        <div class="h1"><span class="mask"><span class="mi">LE FIL</span></span></div>
+        <div class="h2"><span class="mask"><span class="mi">DU MATCH</span></span></div></div>
+      <svg id="ch4" viewBox="0 0 866 760"></svg>
+      <div id="ch4x"></div>
+      <div id="leg4"><span><i style="background:#0B7A3B"></i>MALI</span><span><i style="background:#D4252A"></i>CÔTE D'IVOIRE</span><span class="q">BUTS ATTENDUS CUMULÉS</span></div>
+      <div class="bigR chipF" id="chipA" style="left:64px;top:1320px"><b id="c4p">0</b><span id="c4t"></span></div>
+    </div>
+
+    <!-- 4 : le réseau de passes -->
+    <div class="sc" id="sN">
+      <div class="cap" id="capN"><div class="ghost">11</div>
+        <div class="kick"><span class="mask"><span class="mi" id="infoN"></span></span></div>
+        <div class="h1"><span class="mask"><span class="mi">LE RÉSEAU</span></span></div>
+        <div class="h2"><span class="mask"><span class="mi">DE PASSES</span></span></div></div>
+      <svg class="pv" id="pitN" viewBox="0 0 80 120"></svg>
+      <div class="big" id="chipN" style="left:726px;top:560px"><b id="nT">0</b><span id="nTl"></span></div>
+      <div class="note" id="noteN" style="left:726px;top:980px;font-size:27px">PLUS LE TRAIT<br>EST ÉPAIS,<br>PLUS ILS SE<br>TROUVENT.</div>
+    </div>
+
+    <!-- 5 : la fiche joueur -->
+    <div class="sc" id="sF">
+      <div class="cap" id="capF"><div class="ghost" id="ghF"></div>
+        <div class="kick"><span class="mask"><span class="mi">CAN 2023 · <b>13 INDICATEURS, UN RANG SUR 100</b></span></span></div>
+        <div class="h1"><span class="mask"><span class="mi">LA FICHE</span></span></div>
+        <div class="h2"><span class="mask"><span class="mi">JOUEUR</span></span></div></div>
+      <div class="card" id="fc" style="height:956px">
+        <div class="fh"><div class="fn" id="fN"></div><div class="fp" id="fP"></div><div class="fs"><span id="fScore">0</span><small>/100</small></div></div>
+        <svg id="pz" viewBox="-300 -300 600 600"></svg>
+        <div class="rk" id="frk"><b id="fRk"></b><span id="fRkT"></span><em id="fRkE"></em></div>
+        <div class="leg" id="pleg"><span><i style="background:#D4252A"></i>PRODUCTION</span><span><i style="background:#EFA40A"></i>CRÉATION</span><span><i style="background:#19A552"></i>PROGRESSION</span><span><i style="background:#064A25"></i>DÉFENSE</span></div>
+        <div class="pp" id="sim"></div>
+      </div>
+    </div>
+
+    <!-- 6 : le duel -->
+    <div class="sc" id="sD">
+      <div class="cap" id="capD"><div class="ghost">VS</div>
+        <div class="kick"><span class="mask"><span class="mi">CAN 2023 · <b>DEUX ATTAQUANTS, LA MÊME GRILLE</b></span></span></div>
+        <div class="h1"><span class="mask"><span class="mi">LE DUEL</span></span></div>
+        <div class="h2"><span class="mask"><span class="mi" id="boxD"></span></span></div></div>
+      <div class="card" id="dc" style="height:956px">
+        <div class="dh l"><div class="n" id="dNa"></div><div class="s" id="dSa"></div></div>
+        <div class="dh r"><div class="n" id="dNb"></div><div class="s" id="dSb"></div></div>
+        <div id="dvs">VS</div>
+        <div id="drows"></div>
+        <div id="dsc"><b class="l" id="dA">0</b><div class="c">PLAYER SCORE<br>SUR 100</div><b class="r" id="dB">0</b></div>
+      </div>
+    </div>
+
+    <!-- 7 : le classement -->
+    <div class="sc" id="s5">
+      <div class="cap" id="cap5"><div class="ghost">100</div>
+        <div class="kick"><span class="mask"><span class="mi" id="info5"></span></span></div>
+        <div class="h1"><span class="mask"><span class="mi">LE CLASSEMENT</span></span></div>
+        <div class="h2"><span class="mask"><span class="mi">TOP 5 DES AIGLES</span></span></div></div>
+      <div id="prows"></div>
+    </div>
+
+    <div id="foot"><img src="logo-verte.png" alt=""><div class="wm">Mali<i>Data</i>Foot</div><div class="soc"><img src="logo_x.png" alt="X" style="height:32px"><img src="logo_tt.png" alt="TikTok" style="height:44px">@MaliDataFoot</div></div>
+    <div id="src">CAN 2023 · Données <img src="logo_statsbomb.png" alt="StatsBomb" style="display:inline-block;height:27px;width:auto;vertical-align:-6px;margin-left:4px"></div>
+  </div>
+
+  <div class="layer wipeD" id="w2a" style="background:var(--or-p)"></div>
+  <div class="layer wipeD" id="w2b" style="background:var(--rouge)"></div>
+  <div class="layer wipeD" id="outro">
+    <canvas class="dots" id="dotsO" data-c="#19A552" data-o=".5" data-fx="1080" data-fy="1920"></canvas>
+    <div id="logo"><img src="logo-verte.png" alt=""></div>
+    <div id="oWm"><span class="mask"><span class="mi ow" data-fitmax="826">Mali<i>Data</i>Foot</span></span></div>
+    <div id="oTag"><span class="mask"><span class="mi ot">La data du foot malien</span></span></div>
+    <div class="pill" style="top:1150px"><img src="logo_x.png" alt="X" style="height:56px">@MaliDataFoot</div>
+    <div class="pill" style="top:1270px"><img src="logo_tt.png" alt="TikTok" style="height:72px">@MaliDataFoot</div>
+    <div id="oBars"><i style="background:#14B53A"></i><i style="background:var(--or)"></i><i style="background:var(--rouge)"></i></div>
+  </div>
+ </div>
+ <canvas class="layer" id="grain" width="540" height="960" style="width:1080px;height:1920px"></canvas>
+</div>
+
+<script src="node_modules/gsap/dist/gsap.min.js"></script>
+<script>
+const D = /*DATA*/;
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+let seed=7; const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};
+(()=>{const c=$('#grain'),x=c.getContext('2d'),d=x.createImageData(c.width,c.height);for(let i=0;i<d.data.length;i+=4){const v=rnd()*255|0;d.data[i]=d.data[i+1]=d.data[i+2]=v;d.data[i+3]=255}x.putImageData(d,0,0)})();
+const fr=(v,d=0)=>d?v.toFixed(d).replace('.',','):Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ');
+/* trame de points */
+$$('.dots').forEach(c=>{const W=1160,H=2000;c.width=W;c.height=H;const x=c.getContext('2d');x.fillStyle=c.dataset.c;x.globalAlpha=+c.dataset.o;const fx=+c.dataset.fx+40,fy=+c.dataset.fy+40,st=30;let row=0;
+  for(let y=st/2;y<H;y+=st,row++)for(let X=st/2+(row%2?st/2:0);X<W;X+=st){const d=Math.hypot(X-fx,y-fy)/1500,r=1.2+9*Math.pow(Math.max(0,1-d),2.6);x.beginPath();x.arc(X,y,r,0,7);x.fill()}});
+const KB=(mid,g)=>`<svg class="kb" viewBox="0 0 26 22"><rect x="0" y="12" width="6" height="10" fill="${g}"/><rect x="10" y="6" width="6" height="16" fill="${mid}"/><rect x="20" y="0" width="6" height="22" fill="#D4252A"/></svg>`;
+
+/* ---------- construction des visuels à partir des résultats du pipeline ---------- */
+const V=D.volumes, T=D.totaux, Q=D.matches[D.matches.length-1];
+const ord=n=>n+(n===1?'er':'e');
+const sur=n=>n.split(' ').slice(-1)[0];
+const FAMJ={}; D.joueurs.forEach(p=>{(FAMJ[sur(p.player)]=FAMJ[sur(p.player)]||new Set()).add(p.player)});
+const nomJ=n=>FAMJ[sur(n)]&&FAMJ[sur(n)].size>1?n[0]+'. '+sur(n):sur(n);   // « H. Traoré » : quatre Traoré dans le groupe
+const Tv=(x,y)=>[y,120-x];            // terrain debout : l'attaque monte
+const PITCHV=`<rect class="ln" x="0" y="0" width="80" height="120"/><line class="ln" x1="0" y1="60" x2="80" y2="60"/><circle class="ln" cx="40" cy="60" r="10"/><rect class="ln" x="18" y="0" width="44" height="18"/><rect class="ln" x="30" y="0" width="20" height="6"/><rect class="ln" x="18" y="102" width="44" height="18"/><rect class="ln" x="30" y="114" width="20" height="6"/><path class="ln" d="M32 18A10 10 0 0 0 48 18"/><path class="ln" d="M32 102A10 10 0 0 1 48 102"/><rect class="ln" x="36" y="-1.8" width="8" height="1.8"/>`;
+
+// 1 — tirs
+const SIN=D.joueurs.find(p=>p.player.includes('Sinayoko'));
+const NB=D.tirs.filter(s=>s.is_goal).length, SINT=D.tirs.filter(s=>s.player.includes('Sinayoko')).length; $('#s3n').textContent=SINT;
+$('#info3').innerHTML=`CAN 2023 · <b>${T.tirs} TIRS DU MALI, ${NB} BUTS${T.buts>NB?` (+ ${T.buts-NB} CSC)`:''}</b>`; $('#gh3').textContent=T.tirs;
+const PX=866/52, sx=y=>64+(y-14)*PX, sy=x=>512+(120-x)*PX;
+const LPOS={'Hamari Traoré|59':'L','Lassine Sinayoko|46':'R'};
+$('#shots').innerHTML=D.tirs.map(s=>{const r=Math.sqrt(s.xg)*54+12, sin=s.player.includes('Sinayoko'), X=sx(s.y), Y=sy(s.x);
+  let h=`<i class="shot ${s.is_goal?'g':''} ${sin?'sin':'oth'}" style="left:${X-r}px;top:${Y-r}px;width:${2*r}px;height:${2*r}px"></i>`;
+  if(s.is_goal){const k=LPOS[s.player+'|'+s.minute]||'B';
+    const st=k==='B'?`left:${X}px;top:${Y+r+7}px`:k==='L'?`left:${X-r-12}px;top:${Y-16}px`:`left:${X+r+12}px;top:${Y-16}px`;
+    h+=`<span class="slab ${sin?'sin':'oth'}" data-xp="${k==='B'?-50:k==='L'?-100:0}" style="${st}">${nomJ(s.player)} ${s.minute_aff}'</span>`}
+  return h}).join('');
+
+// 2 — anatomie d'un but
+const B=D.but, SEQ=B.seq;
+$('#infoB').innerHTML=`${B.match[0].toUpperCase()} ${B.match[2]}-${B.match[3]} ${B.match[1].toUpperCase()} · <b>BUT DE ${sur(B.buteur).toUpperCase()}, ${B.minute}e</b>`; $('#ghB').textContent=B.passes;
+{let segs='',dots='',n=0;
+ const fam={}; SEQ.forEach(s=>{(fam[sur(s.player)]=fam[sur(s.player)]||new Set()).add(s.player)});
+ const lab=n=>fam[sur(n)].size>1?n[0]+'. '+sur(n):sur(n);
+ SEQ.forEach((s,i)=>{[s.vx,s.vy]=Tv(s.x,s.y);[s.wx,s.wy]=Tv(s.ex,s.ey);const cls=s.type==='Pass'?'ps':s.type==='Carry'?'cr':'sh';
+  segs+=`<line class="sg ${cls}" data-i="${i}" x1="${s.vx.toFixed(2)}" y1="${s.vy.toFixed(2)}" x2="${s.vx.toFixed(2)}" y2="${s.vy.toFixed(2)}"/>`;
+  if(s.type==='Pass'){n++;dots+=`<g class="sd" data-i="${i}" data-o="${s.vx.toFixed(2)} ${s.vy.toFixed(2)}"><circle class="nd" cx="${s.vx.toFixed(2)}" cy="${s.vy.toFixed(2)}" r="2.5"/><text class="nt" x="${s.vx.toFixed(2)}" y="${(s.vy+1.08).toFixed(2)}" text-anchor="middle">${n}</text></g>`}});
+ const g=SEQ[SEQ.length-1];
+ // placement des noms : à côté de la pastille, là où ça gêne le moins
+ const FS=3.7, hit=(a,b)=>a[0]<b[2]&&b[0]<a[2]&&a[1]<b[3]&&b[1]<a[3];
+ const obst=SEQ.filter(s=>s.type==='Pass').map(s=>[s.vx-2.6,s.vy-2.6,s.vx+2.6,s.vy+2.6]); obst.push([g.wx-4.2,g.wy-4.2,g.wx+4.2,g.wy+4.2]);
+ const pts=[]; SEQ.forEach(s=>{const m=Math.max(2,Math.ceil(Math.hypot(s.wx-s.vx,s.wy-s.vy)/1));for(let k=0;k<=m;k++)pts.push([s.vx+(s.wx-s.vx)*k/m,s.vy+(s.wy-s.vy)*k/m])});
+ const seen=new Set(), placed=[], nommes=[], PAS=SEQ.filter(q=>q.type==='Pass'); let labs='';
+ SEQ.forEach((s,i)=>{const isS=s.player===B.buteur; if(isS&&seen.has(s.player))return; if(s.type!=='Pass'&&!isS)return;
+  if(!isS&&nommes.some(q=>q.p===s.player&&Math.hypot(q.x-s.vx,q.y-s.vy)<10))return;   // même joueur, même endroit : un seul nom
+  seen.add(s.player); nommes.push({p:s.player,x:s.vx,y:s.vy});
+  const txt=lab(s.player), w=txt.length*FS*.5+1, r=isS?1.8:3.3, d=isS?1.5:2.9, x=s.vx, y=s.vy;
+  const C=[[x-w/2,y+r+.5,'middle',x],[x-w/2,y-r-.5-FS,'middle',x],[x+r+.8,y-FS/2,'start',x+r+.8],[x-r-.8-w,y-FS/2,'end',x-r-.8],
+           [x+d,y+d,'start',x+d],[x-d-w,y+d,'end',x-d],[x+d,y-d-FS,'start',x+d],[x-d-w,y-d-FS,'end',x-d],
+           [x-1.5-w,y-r-FS-4.6,'end',x-1.5],[x+1.5,y-r-FS-4.6,'start',x+1.5],[x-1.5-w,y+r+4.6,'end',x-1.5],[x+1.5,y+r+4.6,'start',x+1.5],[x-w/2,y-r-FS-4.6,'middle',x],[x-w/2,y+r+4.6,'middle',x],
+           [Math.min(Math.max(x-w/2,.8),81.6-w),y-r-.5-FS,'start',Math.min(Math.max(x-w/2,.8),81.6-w)],[Math.min(Math.max(x-w/2,.8),81.6-w),y+r+.5,'start',Math.min(Math.max(x-w/2,.8),81.6-w)]]   // au-dessus / en dessous, ramené dans le terrain
+   .map(c=>{const bx=[c[0],c[1],c[0]+w,c[1]+FS]; let cost=0; if(bx[0]<.6||bx[2]>82)cost+=200; else if(bx[2]>79.6)cost+=20; if(bx[1]<1||bx[3]>119)cost+=200;   // un nom peut mordre un peu sur la touche, jamais sur les chiffres de droite
+     if(s.type==='Pass'){const mx=(bx[0]+bx[2])/2,my=(bx[1]+bx[3])/2; if(PAS.reduce((m,q)=>Math.hypot(q.vx-mx,q.vy-my)<Math.hypot(m.vx-mx,m.vy-my)?q:m)!==s)cost+=80}   // jamais plus près d'une autre pastille que de la sienne
+     obst.forEach(o=>{if(hit(bx,o))cost+=100}); placed.forEach(o=>{if(hit(bx,o))cost+=100}); pts.forEach(q=>{if(q[0]>bx[0]-.4&&q[0]<bx[2]+.4&&q[1]>bx[1]-.2&&q[1]<bx[3]+.2)cost+=3});
+     return {b:bx,a:c[2],x:c[3],y:c[1]+FS*.8,cost}});
+  const c=C.reduce((m,k)=>k.cost<m.cost?k:m); placed.push(c.b);
+  labs+=`<text class="nm sl" data-i="${i}" x="${c.x.toFixed(2)}" y="${c.y.toFixed(2)}" text-anchor="${c.a}">${txt}</text>`});
+ $('#pitB').innerHTML=PITCHV+`<g>${segs}</g><g>${dots}</g><g id="gmark" data-o="${g.wx} ${g.wy}"><circle cx="${g.wx}" cy="${g.wy}" r="3.6"/><circle cx="${g.wx}" cy="${g.wy}" r="1.7"/></g><circle id="gflash" cx="${g.wx}" cy="${g.wy}" r="1"/><circle id="ball" cx="${SEQ[0].vx}" cy="${SEQ[0].vy}" r="1.7"/><g>${labs}</g>`;}
+
+// 3 — fil du match
+const E=D.periodes_fin, END=E[E.length-1], CX0=6, CW=700, CY0=690, CH=620, YM=1.5, cx=m=>CX0+m/END*CW, cy=v=>CY0-v/YM*CH;
+const path=camp=>{let c=0,d=`M${cx(0)} ${cy(0)}`;D.xg_chrono.filter(s=>s.camp===camp).forEach(s=>{d+=`H${cx(s.minute_ecoulee).toFixed(1)}`;c+=s.xg;d+=`V${cy(c).toFixed(1)}`});return [d+`H${cx(END)}`,c]};
+const [pA,totA]=path('equipe'),[pB,totB]=path('adversaire');
+const red=D.expulsions.filter(e=>e.minute_ecoulee<END-5)[0];
+$('#ch4').innerHTML=`<defs><clipPath id="rv"><rect id="rvR" x="-10" y="-60" width="16" height="900"/></clipPath></defs>
+ <path class="ax" d="M${CX0} 56V${CY0}H${CX0+CW}"/>
+ ${E.slice(0,-1).map((m,i)=>`<line class="pl" x1="${cx(m)}" x2="${cx(m)}" y1="64" y2="${CY0}"/><text x="${cx(m)}" y="${CY0+40}" text-anchor="middle">${['Mi-temps','Prolongation',''][i]}</text>`).join('')}
+ ${red?`<rect id="rcL" x="${cx(red.minute_ecoulee)}" y="64" width="${cx(END)-cx(red.minute_ecoulee)}" height="${CY0-64}" fill="#fff" fill-opacity=".22"/><g id="rcT"><rect x="${cx(red.minute_ecoulee)}" y="18" width="22" height="30" rx="3" fill="#D4252A"/><text x="${cx(red.minute_ecoulee)+34}" y="44" style="fill:#D4252A;font-weight:800;font-size:31px">Rouge ivoirien (${red.minute_aff}'), 11 contre 10</text></g>`:''}
+ <g clip-path="url(#rv)"><path d="${pB}" fill="none" stroke="#D4252A" stroke-width="9" stroke-linejoin="round"/><path d="${pA}" fill="none" stroke="#0B7A3B" stroke-width="9" stroke-linejoin="round"/></g>`;
+let ca=0,cb=0; const marks=[];
+D.xg_chrono.forEach(s=>{if(s.camp==='equipe')ca+=s.xg;else cb+=s.xg;const v=s.camp==='equipe'?ca:cb,col=s.camp==='equipe'?'#0B7A3B':'#D4252A';
+  if(s.is_goal) marks.push({m:s.minute_ecoulee,x:64+cx(s.minute_ecoulee),y:500+cy(v),col,txt:`But ${sur(s.player)} (${s.minute_aff}')`,goal:1});
+  else if(s.shot_type==='Penalty') marks.push({m:s.minute_ecoulee,x:64+cx(s.minute_ecoulee),y:500+cy(v),col,txt:`Penalty ${s.outcome==='Saved'?'arrêté':'manqué'} (${s.minute_aff}')`,goal:0})});
+marks.forEach(k=>{k.pos=!k.goal||/Adingra/.test(k.txt)?'RB':'LA'});
+$('#ch4x').innerHTML=marks.map((k,i)=>(k.goal?`<i class="gm mk" data-i="${i}" style="left:${k.x}px;top:${k.y}px;box-shadow:inset 0 0 0 8px ${k.col},0 6px 12px rgba(0,0,0,.25)"></i>`:'')+`<span class="gl mk" data-i="${i}" data-xp="${k.pos==='LA'?-100:0}" style="left:${k.pos==='LA'?k.x-24:k.x+(k.goal?28:16)}px;top:${k.pos==='LA'?k.y-58:k.y+18}px;color:${k.col}">${k.txt}</span>`).join('')
+ +`<span class="endv" id="evA" style="left:${64+cx(END)+16}px;top:${500+cy(totA)-45}px;color:#0B7A3B">0</span><span class="endv" id="evB" style="left:${64+cx(END)+16}px;top:${500+cy(totB)-45}px;color:#D4252A">0</span>`;
+// ce que la courbe ne dit pas seule : le poids du penalty dans le total, et qui a le ballon avant / après le carton rouge
+const PENX=D.xg_chrono.filter(s=>s.camp==='equipe'&&s.shot_type==='Penalty').reduce((a,s)=>a+s.xg,0), PP=D.part_passes;
+if(PENX>0) $('#ch4x').insertAdjacentHTML('beforeend',`<span class="endv endn" style="left:${64+cx(END)+18}px;top:${500+cy(totA)+50}px">DONT ${fr(PENX,2)}<br>SUR PENALTY</span>`);
+$('#info4').innerHTML=`${({'Quarter-finals':'QUART DE FINALE','Round of 16':'8e DE FINALE','Semi-finals':'DEMI-FINALE','Final':'FINALE'})[Q.stage]||'CAN 2023'} · <b>MALI ${Q.goals_for}-${Q.goals_against} ${Q.opponent.toUpperCase()}</b>`;
+$('#c4t').innerHTML=PP.apres_rouge!=null?`% DE POSSESSION<br>APRÈS LE ROUGE (${Math.round(PP.avant_rouge)} AVANT)`:`% DE<br>POSSESSION`;   // possession = part des passes du match, le calcul habituel
+const PPV=PP.apres_rouge!=null?PP.apres_rouge:PP.match;
+
+// 4 — réseau de passes
+const NW=D.reseau_passes, ND=Object.fromEntries(NW.nodes.map(n=>[n.player_id,n]));
+const EMAX=Math.max(...NW.edges.map(e=>e.n)), TOP=NW.edges.find(e=>e.n===EMAX);
+const nfam={}; NW.nodes.forEach(n=>{(nfam[sur(n.player)]=nfam[sur(n.player)]||new Set()).add(n.player)});
+const nlab=n=>nfam[sur(n)].size>1?n[0]+'. '+sur(n):sur(n);
+NW.nodes.forEach(n=>{[n.vx,n.vy]=Tv(n.x,n.y);n.r=1.9+Math.sqrt(n.passes)*.32;n.lab=nlab(n.player)});
+{const FS=4.1, hit=(a,b)=>a[0]<b[2]&&b[0]<a[2]&&a[1]<b[3]&&b[1]<a[3];
+ const nb=NW.nodes.map(n=>[n.vx-n.r,n.vy-n.r,n.vx+n.r,n.vy+n.r]), placed=[];
+ NW.nodes.forEach((n,i)=>{const w=n.lab.length*FS*.5+1, g=.9;
+  const cand=[{b:[n.vx-w/2,n.vy+n.r+g,n.vx+w/2,n.vy+n.r+g+FS],a:'middle',x:n.vx,y:n.vy+n.r+g+FS*.82},
+              {b:[n.vx-w/2,n.vy-n.r-g-FS,n.vx+w/2,n.vy-n.r-g],a:'middle',x:n.vx,y:n.vy-n.r-g-FS*.16},
+              {b:[n.vx+n.r+1.2,n.vy-FS/2,n.vx+n.r+1.2+w,n.vy+FS/2],a:'start',x:n.vx+n.r+1.2,y:n.vy+FS*.34},
+              {b:[n.vx-n.r-1.2-w,n.vy-FS/2,n.vx-n.r-1.2,n.vy+FS/2],a:'end',x:n.vx-n.r-1.2,y:n.vy+FS*.34}];
+  const ok=c=>c.b[0]>=-1&&c.b[2]<=83&&!nb.some((o,j)=>j!==i&&hit(c.b,o))&&!placed.some(o=>hit(c.b,o));
+  const c=cand.find(ok)||cand[0]; placed.push(c.b); n.lp=c});}
+$('#infoN').innerHTML=`MALI ${Q.goals_for}-${Q.goals_against} ${Q.opponent.toUpperCase()} · <b>LE ONZE, JUSQU'À LA ${NW.until_clock}e</b>`;
+$('#pitN').innerHTML=PITCHV+`<g>${NW.edges.map(e=>{const a=ND[e.a],b=ND[e.b];return `<line class="ne ${e===TOP?'top':''}" x1="${a.vx}" y1="${a.vy}" x2="${b.vx}" y2="${b.vy}" style="stroke-width:${(.35+e.n*.085).toFixed(2)}"/>`}).join('')}</g>
+ <g>${NW.nodes.map(n=>`<circle class="nn" cx="${n.vx}" cy="${n.vy}" r="${n.r.toFixed(2)}"/>`).join('')}</g><g>${NW.nodes.map(n=>`<text class="nm nl" x="${n.lp.x.toFixed(2)}" y="${n.lp.y.toFixed(2)}" text-anchor="${n.lp.a}">${n.lab}</text>`).join('')}</g>`;
+{const dc=[TOP.a,TOP.b].every(k=>/Center Back/.test(ND[k].poste||'')), av=TOP.avant===0?'AUCUNE VERS':`DONT ${TOP.avant} VERS`;
+ $('#nTl').innerHTML=`PASSES ENTRE<br>${nlab(ND[TOP.a].player).toUpperCase()}<br>ET ${nlab(ND[TOP.b].player).toUpperCase()}`;}
+
+// 5 — fiche joueur
+const F=D.fiche, POSN={DEF:'DÉFENSEUR',MIL:'MILIEU',ATT:'ATTAQUANT'}, POSP={DEF:'DÉFENSEURS',MIL:'MILIEUX',ATT:'ATTAQUANTS'};
+$('#ghF').textContent=Math.round(F.score);
+$('#fN').textContent=F.player.toUpperCase(); $('#fP').textContent=`${POSN[F.pos]} · ${F.team.toUpperCase()}`;
+$('#fRk').textContent=ord(F.rang); $('#fRkT').innerHTML=`SUR ${F.effectif}<br>${POSP[F.pos]}`; $('#fRkE').textContent=`${F.minutes} MIN · ${F.matches} MATCHS`;
+{const N=F.ind.length,da=2*Math.PI/N,gap=.022,R0=64,RM=232,COL={production:'#D4252A',creation:'#EFA40A',progression:'#19A552',defense:'#064A25'};
+ const pol=(r,a)=>[r*Math.cos(a),r*Math.sin(a)];
+ const sector=(r0,r1,a0,a1)=>{const [x0,y0]=pol(r1,a0),[x1,y1]=pol(r1,a1),[x2,y2]=pol(r0,a1),[x3,y3]=pol(r0,a0);return `M${x0.toFixed(2)} ${y0.toFixed(2)}A${r1} ${r1} 0 0 1 ${x1.toFixed(2)} ${y1.toFixed(2)}L${x2.toFixed(2)} ${y2.toFixed(2)}A${r0} ${r0} 0 0 0 ${x3.toFixed(2)} ${y3.toFixed(2)}Z`};
+ $('#pz').innerHTML=F.ind.map((d,i)=>{const a0=-Math.PI/2+i*da+gap,a1=a0+da-2*gap,am=(a0+a1)/2,r1=R0+(RM-R0)*Math.max(d.pct,3)/100,[tx,ty]=pol(RM+38,am);
+   return `<path class="pb" d="${sector(R0,RM,a0,a1)}"/><path class="ps" d="${sector(R0,+r1.toFixed(1),a0,a1)}" fill="${COL[d.pilier]}"/><text class="pv2" x="${tx.toFixed(1)}" y="${(ty+11).toFixed(1)}" text-anchor="middle">${d.pct}</text>`}).join('')
+   +`<circle class="pc0" r="${R0-6}"/><text class="pc2" y="16" text-anchor="middle">${F.pos}</text>`;
+ $('#sim').innerHTML=`<b>PROFILS PROCHES</b><div>`+F.proches.map(p=>`<p><b>${sur(p.player)}</b><span>${p.team.toUpperCase()}</span></p>`).join('')+`</div>`;}
+
+// 6 — duel
+const [DA,DB]=D.duel;
+$('#boxD').textContent=`${sur(DA.player).toUpperCase()} – ${sur(DB.player).toUpperCase()}`;
+$('#dNa').textContent=sur(DA.player).toUpperCase(); $('#dNb').textContent=sur(DB.player).toUpperCase();
+$('#dSa').textContent=`${DA.team.toUpperCase()} · ${DA.minutes} MIN`; $('#dSb').textContent=`${DB.team.toUpperCase()} · ${DB.minutes} MIN`;
+const DR=[['BUTS',DA.brut.buts,DB.brut.buts,0,0],['BUTS ATTENDUS',DA.brut.xg,DB.brut.xg,2,0],['TIRS',DA.brut.tirs,DB.brut.tirs,0,0],
+  ['PRODUCTION',DA.piliers.production,DB.piliers.production,0,100],['CRÉATION',DA.piliers.creation,DB.piliers.creation,0,100],['PROGRESSION',DA.piliers.progression,DB.piliers.progression,0,100],['DÉFENSE',DA.piliers.defense,DB.piliers.defense,0,100]];
+$('#drows').innerHTML=DR.map((r,i)=>{const m=r[4]||Math.max(r[1],r[2]);return `<div class="dr" style="top:${186+i*91}px"><span class="lb">${r[0]}</span><span class="va l ${r[1]<r[2]?'lo':''}" data-n="${r[1]}" data-d="${r[3]}">0</span><div class="tk l"><i data-w="${(r[1]/m).toFixed(4)}"></i></div><div class="tk r"><i data-w="${(r[2]/m).toFixed(4)}"></i></div><span class="va r ${r[2]<r[1]?'lo':''}" data-n="${r[2]}" data-d="${r[3]}">0</span></div>`}).join('');
+
+// 7 — classement
+$('#info5').innerHTML=`CAN 2023 · <b>${V.joueurs_classes} JOUEURS NOTÉS SUR 100</b>`;
+$('#prows').innerHTML=D.scores.slice(0,5).map((p,i)=>`<div class="pr" style="top:${508+i*188}px">${i===0?'<div class="bg"></div>':''}<div class="n">${p.player}</div><div class="s">${POSN[p.pos_group]} · ${ord(p.rang_poste)} SUR ${p.effectif_poste} À SON POSTE</div><i class="tr"></i><i class="br" data-w="${p.score}"></i><div class="v" data-n="${p.score}">0</div></div>`).join('');
+
+
+
+function build(){
+const tw=e=>{const r=document.createRange();r.selectNodeContents(e);return r.getBoundingClientRect()};
+$$('[data-fit]').forEach(e=>{const w=+e.dataset.fit;const fs=parseFloat(getComputedStyle(e).fontSize);e.style.fontSize=(fs*w/tw(e).width)+'px'});
+$$('.h1 .mi').forEach(e=>{const w=tw(e).width;if(w>944)e.parentNode.parentNode.style.fontSize=(184*944/w)+'px'});
+$$('[data-fitmax]').forEach(e=>{const w=tw(e).width,m=+e.dataset.fitmax;if(w>m){const p=e.parentNode.parentNode;p.style.fontSize=(parseFloat(getComputedStyle(p).fontSize)*m/w)+'px'}});
+const dash=(el)=>{const L=el.getTotalLength();el.style.strokeDasharray=L;el.style.strokeDashoffset=L;return L};
+dash($('#pMid')); dash($('#pCirc')); $$('#pitch3 .ln').forEach(dash); $$('.pv .ln').forEach(dash);
+
+gsap.defaults({ease:'expo.out',duration:.8});
+const S=gsap.set;
+S('.mi',{yPercent:122}); S('.slam',{opacity:0,scale:2.4,skewX:-8});
+S('.ghost',{opacity:0,x:60,scale:1.12,transformOrigin:'100% 30%'});
+S('#dotsG',{opacity:0}); S(['#foot','#src'],{opacity:0});
+S(['#sB','#s4','#sN','#sF','#sD','#s5'],{visibility:'hidden'});
+S('.shot',{scale:0}); $$('[data-xp]').forEach(e=>S(e,{xPercent:+e.dataset.xp})); S('.slab',{opacity:0,y:8}); S('#s3stat',{opacity:0,x:-40}); S('#leg3',{opacity:0,y:10}); S('#pitch3 .sp',{opacity:0});
+S('#pitB .sg',{opacity:0}); $$('#pitB .sd').forEach(e=>S(e,{scale:0,svgOrigin:e.dataset.o})); S('#pitB .sl',{opacity:0}); S('#ball',{opacity:0}); S('#gflash',{opacity:0}); S('#gmark',{scale:0,svgOrigin:$('#gmark').dataset.o}); S('.cb',{opacity:0,x:40});
+S('.mk',{opacity:0,scale:.4}); S('.endv',{opacity:0}); S('.chipF',{opacity:0,x:-40}); S(['#rcL','#rcT'],{opacity:0}); S('#leg4',{opacity:0,y:10}); S('#ch4',{opacity:0});
+S('#pitN .ne',{opacity:0}); S('#pitN .nn',{scale:0,transformOrigin:'50% 50%'}); S('#pitN .nl',{opacity:0}); S(['#chipN','#noteN'],{opacity:0,x:40});
+S('.card',{scaleY:0,opacity:0}); S('#pz .ps',{scale:0,svgOrigin:'0 0'}); S('#pz .pv2',{opacity:0}); S(['#frk','#sim','#pleg'],{opacity:0,y:12});
+S('.dr .tk i',{scaleX:0}); S('.dr',{opacity:0}); S('#dvs',{scale:0}); S('#dsc b',{opacity:0,scale:1.6});
+S('.pr',{opacity:0,x:-60}); S('.pr .br',{scaleX:0}); S('.pr .bg',{scaleX:0});
+S('#logo',{y:-900,rotation:-8}); S('.pill',{scale:0}); S('#oBars i',{scaleX:0}); S('#dotsO',{opacity:0});
+
+const tl=gsap.timeline({paused:true});
+const wipe=(ids,t,d=.75)=>ids.forEach((id,i)=>tl.to(id,{'--p':150,duration:d,ease:'power3.inOut'},t+i*.055));
+const capIn=(id,t,out)=>{tl.to(`${id} .ghost`,{opacity:.6,x:0,scale:1,duration:1.2,ease:'power3.out'},t)
+  .to(`${id} .kick .mi`,{yPercent:0,duration:.55},t+.04).to(`${id} .h1 .mi`,{yPercent:0,duration:.7},t+.12).to(`${id} .h2 .mi`,{yPercent:0,duration:.5},t+.4)
+  .to(`${id} .ghost`,{x:-24,duration:out-t-1.2,ease:'none'},t+1.2)};
+const capOut=(id,t)=>{tl.to(`${id} .mi`,{yPercent:-122,duration:.34,ease:'power3.in',stagger:.035},t).to(`${id} .ghost`,{opacity:0,x:-70,duration:.36,ease:'power2.in'},t)};
+const count=(el,n,t,d=1,dec=0)=>{const o={v:0};const up=()=>{el.textContent=fr(o.v,dec)};tl.to(o,{v:n,duration:d,ease:'power2.out',onUpdate:up},t);tl.set(o,{v:0,onComplete:up,onReverseComplete:up},0)};
+const shake=(t,a=1)=>tl.fromTo('#cam',{x:0,y:0},{keyframes:[{x:-14*a,y:9*a,duration:.04},{x:11*a,y:-7*a,duration:.05},{x:-6*a,y:4*a,duration:.05},{x:0,y:0,duration:.06}],ease:'none',immediateRender:false},t);
+const next=(cur,nxt,sel,t)=>{tl.to(sel,{x:-90,opacity:0,duration:.34,ease:'power3.in'},t).set(nxt,{visibility:'visible'},t+.2).set(cur,{visibility:'hidden'},t+.4)};
+const TT=window.TT={tirs:3.15,but:7.85,fil:13.3,res:18.0,fiche:22.3,duel:27.3,score:32.2,fin:36.3,end:41.5};
+
+tl.to('#dotsG',{x:26,y:-18,duration:3.2,ease:'none'},0)
+  .to('#dotsY',{x:-36,y:36,duration:34,ease:'none'},2.7)
+  .to('#dotsO',{x:-22,y:-16,duration:5.2,ease:'none'},TT.fin);
+
+/* 0 — accroche */
+tl.to('#dotsG',{opacity:1,duration:1.3},0).to('#hkInfo .mi',{yPercent:0,duration:.55},.06)
+  .to('.hk',{yPercent:0,duration:.6,stagger:.39},.16)
+  .to('#pMid',{strokeDashoffset:0,duration:.85,ease:'power2.inOut'},.45).to('#pCirc',{strokeDashoffset:0,duration:1,ease:'power2.inOut'},.6)
+  .to('#slam1',{opacity:1,scale:1,skewX:0,duration:.4,ease:'expo.out'},1.5).to('#slam2',{opacity:1,scale:1,skewX:0,duration:.4,ease:'expo.out'},1.82);
+shake(1.58,1); shake(1.9,1.3);
+tl.to('#hook',{scale:1.03,transformOrigin:'30% 45%',duration:1.0,ease:'none'},1.7).to('#hook',{y:-260,opacity:0,duration:.45,ease:'power3.in'},2.65);
+wipe(['#w1a','#w1b','#yellow'],2.7);
+tl.to(['#foot','#src'],{opacity:1,duration:.6},3.4);
+
+/* 1 — tirs */
+{const t=TT.tirs, o=TT.but-.25;
+capIn('#cap3',t,o);
+tl.to('#pitch3 .ln',{strokeDashoffset:0,duration:.8,ease:'power2.inOut',stagger:.05},t+.15);
+$$('.shot').forEach((s,i,a)=>tl.to(s,{scale:1,duration:.4,ease:'back.out(2.2)'},t+.6+i/a.length*1.6));
+tl.to('.slab',{opacity:1,y:0,duration:.4,stagger:.08},t+2.2)
+  .to('#pitch3 .sp',{opacity:1,duration:.3},t+.8).to('#leg3',{opacity:1,y:0,duration:.45},t+1.3)
+  .to('.shot:not(.g)',{opacity:.45,duration:.5},t+2.75)
+  .fromTo('.shot.sin.g',{scale:1},{scale:1.35,duration:.25,ease:'power2.out',repeat:1,yoyo:true,stagger:.12,immediateRender:false},t+2.8)
+  .to('#s3stat',{opacity:1,x:0,duration:.6},t+2.75);
+count($('#s3g'),SIN.goals,t+2.8,.6); count($('#s3x'),SIN.xg,t+2.9,.8,2);
+capOut('#cap3',o); next('#s3','#sB',['#pitch3','#shots','#s3stat','#leg3'],o);}
+
+/* 2 — anatomie d'un but : les compteurs tournent pendant l'action */
+{const t=TT.but, o=TT.fil-.25, T0=t+.75, A=3.05, DUR=SEQ[SEQ.length-1].t, at=x=>T0+x/DUR*A, k=A/DUR;
+window.BUT={T0,A,DUR,seq:SEQ.map(s=>({type:s.type,at:at(s.t)}))};
+capIn('#capB',t,o);
+tl.to('#pitB .ln',{strokeDashoffset:0,duration:.7,ease:'power2.inOut',stagger:.03},t+.1).to('#ball',{opacity:1,duration:.2},T0-.15)
+  .to('.cb',{opacity:1,x:0,duration:.45,stagger:.08},t+.35);
+let prevLab=null;
+SEQ.forEach((s,i)=>{const last=i===SEQ.length-1, d=last?.22:Math.max(.05,s.d*k), ta=at(s.t);
+  tl.set(`#pitB .sg[data-i="${i}"]`,{opacity:1},ta).to(`#pitB .sg[data-i="${i}"]`,{attr:{x2:s.wx,y2:s.wy},duration:d,ease:last?'power2.in':'none'},ta)
+    .fromTo('#ball',{attr:{cx:s.vx,cy:s.vy}},{attr:{cx:s.wx,cy:s.wy},duration:d,ease:last?'power2.in':'none',immediateRender:false},ta);
+  const dot=$(`#pitB .sd[data-i="${i}"]`); if(dot) tl.to(dot,{scale:1,duration:.25,ease:'back.out(3)'},ta);
+  const lb=$(`#pitB .sl[data-i="${i}"]`); if(lb) tl.to(lb,{opacity:1,duration:.2},ta)});
+const tg=at(DUR)+.22; window.BUT.goal=tg;
+{const o2={v:0}, eP=$('#bP'), eJ=$('#bJ'), eS=$('#bS');
+ const up=()=>{const now=T0+o2.v*(tg-T0); let p=0; const pl=new Set();
+   SEQ.forEach(s=>{if(at(s.t)<=now+1e-6){pl.add(s.player); if(s.type==='Pass')p++}});
+   eP.textContent=o2.v<=0?0:p; eJ.textContent=o2.v<=0?0:pl.size; eS.textContent=Math.round(Math.min(B.duree,Math.max(0,(now-T0)/k)))};
+ tl.to(o2,{v:1,duration:tg-T0,ease:'none',onUpdate:up},T0); tl.set(o2,{v:0,onComplete:up,onReverseComplete:up},0);
+ tl.set(o2,{v:1,onComplete:()=>{eP.textContent=B.passes;eJ.textContent=B.joueurs;eS.textContent=Math.round(B.duree)}},tg+.001);}
+tl.fromTo('#gflash',{opacity:1,attr:{r:1}},{opacity:0,attr:{r:14},duration:.7,ease:'power2.out',immediateRender:false},tg).to('#ball',{opacity:0,duration:.2},tg+.1).to('#gmark',{scale:1,duration:.4,ease:'back.out(2.6)'},tg+.05);
+shake(tg,1.1);
+tl.fromTo('.cb',{scale:1},{scale:1.1,duration:.2,ease:'power2.out',repeat:1,yoyo:true,stagger:.1,immediateRender:false},tg+.12);
+capOut('#capB',o); next('#sB','#s4',['#pitB','.cb'],o);}
+
+/* 3 — fil du match */
+{const t=TT.fil, o=TT.res-.25;
+capIn('#cap4',t,o);
+tl.to('#ch4',{opacity:1,duration:.5},t+.3).to('#leg4',{opacity:1,y:0,duration:.45},t+.7);
+const RV0=t+.6, RVD=2.2;
+tl.to('#rvR',{attr:{width:CW+36},duration:RVD,ease:'none'},RV0);
+marks.forEach((k,i)=>tl.to(`.mk[data-i="${i}"]`,{opacity:1,scale:1,duration:.35,ease:'back.out(2.4)'},RV0+k.m/END*RVD));
+if(red) tl.to(['#rcL','#rcT'],{opacity:1,duration:.3},RV0+red.minute_ecoulee/END*RVD);
+window.FIL={RV0,RVD,marks:marks.map(k=>({t:RV0+k.m/END*RVD,goal:k.goal})),red:red?RV0+red.minute_ecoulee/END*RVD:null};
+tl.to('.endv',{opacity:1,duration:.3},RV0+RVD-.2);
+count($('#evA'),totA,RV0+RVD-.2,.6,2); count($('#evB'),totB,RV0+RVD-.2,.6,2);
+tl.to('.chipF',{opacity:1,x:0,duration:.5,stagger:.2},t+2.95);
+count($('#c4p'),PPV,t+3.05,.6);
+capOut('#cap4',o); next('#s4','#sN',['#ch4','#ch4x','.chipF','#leg4'],o);}
+
+/* 4 — réseau de passes */
+{const t=TT.res, o=TT.fiche-.25, WT=+(.35+EMAX*.085).toFixed(2);
+capIn('#capN',t,o);
+tl.to('#pitN .ln',{strokeDashoffset:0,duration:.7,ease:'power2.inOut',stagger:.03},t+.1)
+  .to('#pitN .nn',{scale:1,duration:.45,ease:'back.out(2.4)',stagger:.06},t+.6)
+  .to('#pitN .nl',{opacity:1,duration:.3,stagger:.06},t+.75)
+  .to('#pitN .ne:not(.top)',{opacity:1,duration:.35,stagger:.035},t+1.2)
+  .to('#pitN .ne.top',{opacity:1,duration:.3},t+2.45)
+  .fromTo('#pitN .ne.top',{strokeWidth:6},{strokeWidth:WT,duration:.55,ease:'power2.out',immediateRender:false},t+2.45)
+  .to('#chipN',{opacity:1,x:0,duration:.5},t+2.6).to('#noteN',{opacity:1,x:0,duration:.5},t+3.0);
+count($('#nT'),EMAX,t+2.7,.6);
+capOut('#capN',o); next('#sN','#sF',['#pitN','#chipN','#noteN'],o);}
+
+/* 5 — fiche joueur */
+{const t=TT.fiche, o=TT.duel-.25;
+capIn('#capF',t,o);
+tl.to('#fc',{scaleY:1,opacity:1,duration:.6,ease:'back.out(1.3)'},t+.35)
+  .to('#pz .ps',{scale:1,duration:.6,ease:'back.out(1.4)',stagger:.055},t+.8).to('#pz .pv2',{opacity:1,duration:.25,stagger:.055},t+1.05)
+  .to('#frk',{opacity:1,y:0,duration:.5},t+1.5).to('#pleg',{opacity:1,y:0,duration:.4},t+1.9).to('#sim',{opacity:1,y:0,duration:.45},t+2.6);
+count($('#fScore'),F.score,t+.8,1.0,1);
+capOut('#capF',o); next('#sF','#sD','#fc',o);}
+
+/* 6 — duel */
+{const t=TT.duel, o=TT.score-.25;
+capIn('#capD',t,o);
+tl.to('#dc',{scaleY:1,opacity:1,duration:.6,ease:'back.out(1.3)'},t+.35).to('#dvs',{scale:1,duration:.45,ease:'back.out(2.6)'},t+.8);
+$$('.dr').forEach((r,i)=>{const ts=t+1.0+i*.2;
+  tl.to(r,{opacity:1,duration:.3},ts);
+  r.querySelectorAll('.tk i').forEach(b=>tl.to(b,{scaleX:+b.dataset.w,duration:.6,ease:'power3.out'},ts+.05));
+  r.querySelectorAll('.va').forEach(v=>count(v,+v.dataset.n,ts+.05,.55,+v.dataset.d))});
+tl.to('#dsc b',{opacity:1,scale:1,duration:.4,ease:'expo.out',stagger:.15},t+2.85);
+count($('#dA'),DA.score,t+2.85,.6,1); count($('#dB'),DB.score,t+3.0,.6,1);
+capOut('#capD',o); next('#sD','#s5','#dc',o);}
+
+/* 7 — classement */
+{const t=TT.score, o=TT.fin-.1;
+capIn('#cap5',t,o);
+$$('.pr').forEach((r,i)=>{const ts=t+.4+i*.15;
+  tl.to(r,{opacity:1,x:0,duration:.55},ts).to(r.querySelector('.br'),{scaleX:+r.querySelector('.br').dataset.w/100,duration:1,ease:'power3.out'},ts+.15);
+  count(r.querySelector('.v'),+r.querySelector('.v').dataset.n,ts+.15,.95,1)});
+tl.to('.pr .bg',{scaleX:1,duration:.5,ease:'power4.out'},t+2.2)
+  .fromTo('.pr:first-child',{scale:1},{scale:1.03,duration:.22,ease:'power2.out',repeat:1,yoyo:true,transformOrigin:'0 50%',immediateRender:false},t+2.25);
+capOut('#cap5',o-.05); tl.to(['#foot','#src'],{opacity:0,duration:.3},o-.05);}
+
+/* 8 — fin */
+{const t=TT.fin;
+wipe(['#w2a','#w2b','#outro'],t+.05,.8);
+tl.to('#dotsO',{opacity:1,duration:1.5},t+.5).to('#logo',{y:0,rotation:0,duration:1,ease:'back.out(1.2)'},t+.55)
+  .to('.ow',{yPercent:0,duration:.75},t+1.15).fromTo('#oWm',{scale:1.1},{scale:1,duration:1.5,ease:'power3.out'},t+1.15)
+  .to('.ot',{yPercent:0,duration:.6},t+1.5)
+  .fromTo('#logo',{scale:1},{scale:1.04,duration:.3,ease:'sine.inOut',repeat:1,yoyo:true,immediateRender:false},t+1.75)
+  .to('.pill',{scale:1,duration:.55,ease:'back.out(1.9)',stagger:.22},t+2.0).to('#oBars i',{scaleX:1,duration:.45,ease:'power4.out',stagger:.08},t+2.5)
+  .fromTo('.pill',{scale:1},{scale:1.05,duration:.35,ease:'sine.inOut',repeat:1,yoyo:true,stagger:.15,immediateRender:false},t+3.5)
+  .to({}, {duration:.01}, TT.end-.01);}
+window.tl=tl; window.seek=t=>{tl.time(Math.min(t,TT.end),false)}; tl.time(0);
+}
+window.DURATION=41.5;
+Promise.all([document.fonts.ready, ...[...document.images].map(i=>i.decode().catch(()=>{}))]).then(()=>{build();window.READY=true});
+</script>
+</body>
+</html>

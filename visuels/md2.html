@@ -1,0 +1,39 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>MaliDataFoot — motion design, version 2</title><style>
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#04331A}
+iframe,.bande{position:absolute;left:0;top:0;width:1080px;height:1920px;border:0;display:block}
+.bande{background:#D4252A;visibility:hidden}
+</style></head><body>
+<iframe id="old" src="vitv.html"></iframe>
+<div class="bande" id="ba"></div>
+<iframe id="fi" src="fiche_anim.html"></iframe>
+<div class="bande" id="bb"></div>
+<iframe id="du" src="duel_anim.html"></iframe>
+<script>
+/* Minutage (secondes). L'ancien gabarit joue l'accroche un peu plus vite, puis ses quatre scènes de faits ;
+   la fiche et le duel de la nouvelle DA le recouvrent ; il reprend pour la fin. Le classement n'est plus montré. */
+const TM=window.TM={accroche:2.5, fiche:21.5, duel:27.1, fin:32.25, sortie:33.1, end:37.45, K:3.15/2.5};
+const ease=x=>x<0?0:x>1?1:1-Math.pow(1-x,3);
+const yk=(p,o)=>Math.max(0,Math.min(100,100-(p-o)*1.2));
+const entre=p=>`polygon(0% 100%,0% ${yk(p,0)}%,33.34% ${yk(p,0)}%,33.34% ${yk(p,15)}%,66.67% ${yk(p,15)}%,66.67% ${yk(p,30)}%,100% ${yk(p,30)}%,100% 100%)`;
+const sort=p=>`polygon(0% 0%,100% 0%,100% ${yk(p,30)}%,66.67% ${yk(p,30)}%,66.67% ${yk(p,15)}%,33.34% ${yk(p,15)}%,33.34% ${yk(p,0)}%,0% ${yk(p,0)}%)`;
+const fi=document.getElementById('fi'), du=document.getElementById('du'), ba=document.getElementById('ba'), bb=document.getElementById('bb');
+const AV=.11;   // la bande rouge précède chaque scène de 0,11 s, comme dans les volets d'origine
+window.seek=T=>{
+  // l'ancien gabarit : temps remappé
+  const old = T<TM.accroche ? T*TM.K : (T<TM.fiche+.15 ? T+.65 : (T<TM.fin ? 22.3 : 36.3+(T-TM.fin)));
+  // la fiche : entre de 21,45 à 21,95, reste jusqu'à ce que le duel la recouvre
+  const a=(T-(TM.fiche-.05))/.5;
+  fi.style.visibility=(a>0 && T<TM.duel+.5)?'visible':'hidden'; fi.style.clipPath=a>=1?'none':entre(ease(a)*114);
+  // le duel : entre de 27,05 à 27,55, sort de 33,1 à 33,55
+  const b=(T-(TM.duel-.05))/.5, c=(T-TM.sortie)/.45;
+  du.style.visibility=(b>0 && c<1)?'visible':'hidden'; du.style.clipPath=c>0?sort(ease(c)*114):(b>=1?'none':entre(ease(b)*114));
+  // bandes rouges : devant la fiche à l'entrée, devant le duel à l'entrée, et derrière le duel à la sortie
+  const a0=(T-(TM.fiche-.05-AV))/.5, b0=(T-(TM.duel-.05-AV))/.5, c1=(T-TM.sortie-AV)/.45;
+  if(a0>0 && a<1){ba.style.visibility='visible'; ba.style.clipPath=a0>=1?'none':entre(ease(a0)*114)}
+  else if(T>TM.sortie-.2 && c1<1){ba.style.visibility='visible'; ba.style.clipPath=c1>0?sort(ease(c1)*114):'none'}
+  else ba.style.visibility='hidden';
+  bb.style.visibility=(b0>0 && b<1)?'visible':'hidden'; bb.style.clipPath=b0>=1?'none':entre(ease(b0)*114);
+  return {old, fi:T-TM.fiche, du:T-TM.duel};
+};
+window.seek(0); window.READY=true;
+</script></body></html>

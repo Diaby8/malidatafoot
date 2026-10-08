@@ -1,0 +1,26 @@
+# données téléchargées et produites par le pipeline (retrouvées avec : python taches.py donnees)
+data/
+outputs/
+# tout ce que fabriquent les visuels
+livrables/
+visuels/node_modules/
+visuels/_*.html
+visuels/_images/
+visuels/reel/
+visuels/vr_*.html
+visuels/reel_*.html
+visuels/vitv.html
+visuels/vitrine.json
+visuels/fiche_tt2.html
+visuels/duel_tt2.html
+visuels/fiche_anim.html
+visuels/duel_anim.html
+visuels/sfx_md2.wav
+# secrets : la clé API reste dans une variable d'environnement, jamais dans un fichier suivi
+.env
+*.key
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/

@@ -1,0 +1,165 @@
+# Configuration du pipeline MaliDataFoot
+source:
+  name: statsbomb_open_data
+  base_url: https://raw.githubusercontent.com/statsbomb/open-data/master/data
+  competition_id: 1267      # Coupe d'Afrique des Nations
+  season_id: 107            # édition 2023 (jouée en janv.-févr. 2024)
+team_focus: Mali
+team_labels:               # noms affichés en français
+  South Africa: Afrique du Sud
+  Tunisia: Tunisie
+  Namibia: Namibie
+  Morocco: Maroc
+  Senegal: Sénégal
+  Egypt: Égypte
+  Cameroon: Cameroun
+  Guinea: Guinée
+  Equatorial Guinea: Guinée équatoriale
+  Cape Verde Islands: Cap-Vert
+  Congo DR: RD Congo
+  Algeria: Algérie
+  Mauritania: Mauritanie
+  Gambia: Gambie
+  Mozambique: Mozambique
+  Tanzania: Tanzanie
+  Zambia: Zambie
+min_minutes: 180            # temps de jeu minimal pour entrer dans les comparaisons par poste
+paths:
+  bronze: data/bronze
+  silver: data/silver
+  gold: data/gold
+  warehouse: data/warehouse.duckdb
+  outputs: outputs
+# Mali Player Score : poids des cinq piliers, par groupe de postes (somme = 100)
+score_weights:
+  ATT: {production: 40, creation: 25, progression: 20, defense: 5,  temps_de_jeu: 10}
+  MIL: {production: 15, creation: 25, progression: 30, defense: 20, temps_de_jeu: 10}
+  DEF: {production: 5,  creation: 10, progression: 25, defense: 50, temps_de_jeu: 10}
+# Indicateurs (par 90 minutes) qui composent chaque pilier
+score_pillars:
+  production: [npxg_p90, np_goals_p90, shots_p90]
+  creation: [xa_p90, key_passes_p90, passes_into_box_p90]
+  progression: [prog_passes_p90, prog_carries_p90, dribbles_won_p90]
+  defense: [tackles_interceptions_p90, pressures_p90, recoveries_p90, aerials_won_p90]
+
+# ---------------------------------------------------------------------------
+fiches_supplementaires: [Victor Osimhen]   # joueurs d'autres équipes dont on veut aussi la fiche (duels)
+# Profils par rôle (étape « profils ») : à qui on compare un joueur, et sur quoi.
+# Un rôle sans liste de critères n'est pas encore profilé : on l'ajoute quand la liste est validée.
+# Chaque critère est une valeur par 90 minutes de gold.player_tournament.
+roles:
+  LAT:
+    singulier: latéral
+    pluriel: latéraux
+    reussite:
+      - {nom: Passes réussies,      num: passes_completed,  den: passes}
+      - {nom: Centres réussis,      num: crosses_completed, den: crosses}
+      - {nom: Dribbles réussis,     num: dribbles_won,      den: dribbles}
+      - {nom: Tacles réussis,       num: tackles_won,       den: tackles}
+      - {nom: Duels aériens gagnés, num: aerials_won,       den: aerials_won+aerials_lost}
+    criteres:
+      - {k: xa_p90,                    nom: Passes décisives attendues, court: Passes déc. attendues, famille: Création}
+      - {k: key_passes_p90,            nom: Passes clés,             famille: Création}
+      - {k: passes_into_box_p90,       nom: Passes dans la surface,  famille: Création}
+      - {k: prog_passes_p90,           nom: Passes progressives,     famille: Progression}
+      - {k: prog_carries_p90,          nom: Conduites progressives,   famille: Progression}
+      - {k: dribbles_won_p90,          nom: Dribbles réussis,        famille: Progression}
+      - {k: tackles_interceptions_p90, nom: Tacles + interceptions,  famille: Défense}
+      - {k: recoveries_p90,            nom: Récupérations,           famille: Défense}
+      - {k: pressures_p90,             nom: Pressions,               famille: Défense}
+      - {k: aerials_won_p90,           nom: Duels aériens gagnés,    famille: Défense}
+  DC:
+    singulier: défenseur central
+    pluriel: défenseurs centraux
+    criteres:
+      - {k: tackles_interceptions_p90, nom: Tacles + interceptions,  famille: Défense}
+      - {k: clearances_p90,            nom: Dégagements,             famille: Défense}
+      - {k: blocks_p90,                nom: Contres,                 famille: Défense}
+      - {k: aerials_won_p90,           nom: Duels aériens gagnés,    famille: Défense}
+      - {k: recoveries_p90,            nom: Récupérations,           famille: Défense}
+      - {k: pressures_p90,             nom: Pressions,               famille: Défense}
+      - {k: pass_pct,                  nom: Passes réussies (%),     famille: Relance}
+      - {k: prog_passes_p90,           nom: Passes progressives,     famille: Relance}
+      - {k: passes_final_third_p90,    nom: Passes vers le dernier tiers, court: Vers le dernier tiers, famille: Relance}
+      - {k: prog_carries_p90,          nom: Conduites progressives,   famille: Relance}
+  MDF:
+    singulier: milieu défensif
+    pluriel: milieux défensifs
+    criteres:
+      - {k: tackles_interceptions_p90, nom: Tacles + interceptions,  famille: Défense}
+      - {k: recoveries_p90,            nom: Récupérations,           famille: Défense}
+      - {k: pressures_p90,             nom: Pressions,               famille: Défense}
+      - {k: aerials_won_p90,           nom: Duels aériens gagnés,    famille: Défense}
+      - {k: pass_pct,                  nom: Passes réussies (%),     famille: Construction}
+      - {k: prog_passes_p90,           nom: Passes progressives,     famille: Construction}
+      - {k: passes_final_third_p90,    nom: Passes vers le dernier tiers, court: Vers le dernier tiers, famille: Construction}
+      - {k: prog_carries_p90,          nom: Conduites progressives,   famille: Construction}
+      - {k: key_passes_p90,            nom: Passes clés,             famille: Création}
+      - {k: xa_p90,                    nom: Passes décisives attendues, court: Passes déc. attendues, famille: Création}
+  MIL:
+    singulier: milieu
+    pluriel: milieux
+    criteres:
+      - {k: tackles_interceptions_p90, nom: Tacles + interceptions,  famille: Défense}
+      - {k: recoveries_p90,            nom: Récupérations,           famille: Défense}
+      - {k: pressures_p90,             nom: Pressions,               famille: Défense}
+      - {k: prog_passes_p90,           nom: Passes progressives,     famille: Construction}
+      - {k: passes_final_third_p90,    nom: Passes vers le dernier tiers, court: Vers le dernier tiers, famille: Construction}
+      - {k: prog_carries_p90,          nom: Conduites progressives,   famille: Construction}
+      - {k: xa_p90,                    nom: Passes décisives attendues, court: Passes déc. attendues, famille: Création}
+      - {k: key_passes_p90,            nom: Passes clés,             famille: Création}
+      - {k: passes_into_box_p90,       nom: Passes dans la surface,  famille: Création}
+      - {k: npxg_p90,                  nom: Buts attendus hors penalty, court: Buts attendus hors pen., famille: Création}
+  MOF:
+    singulier: milieu offensif ou ailier
+    pluriel: milieux offensifs et ailiers
+    criteres:
+      - {k: npxg_p90,                  nom: Buts attendus hors penalty, court: Buts attendus hors pen., famille: Finition}
+      - {k: shots_p90,                 nom: Tirs,                    famille: Finition}
+      - {k: xa_p90,                    nom: Passes décisives attendues, court: Passes déc. attendues, famille: Création}
+      - {k: key_passes_p90,            nom: Passes clés,             famille: Création}
+      - {k: passes_into_box_p90,       nom: Passes dans la surface,  famille: Création}
+      - {k: dribbles_won_p90,          nom: Dribbles réussis,        famille: Percussion}
+      - {k: prog_carries_p90,          nom: Conduites progressives,   famille: Percussion}
+      - {k: receptions_in_box_p90,     nom: Ballons reçus dans la surface, court: Reçus dans la surface, famille: Percussion}
+      - {k: pressures_p90,             nom: Pressions,               famille: Travail}
+      - {k: tackles_interceptions_p90, nom: Tacles + interceptions,  famille: Travail}
+  ATT:
+    singulier: avant-centre
+    pluriel: avants-centres
+    criteres:
+      - {k: npxg_p90,                  nom: Buts attendus hors penalty, court: Buts attendus hors pen., famille: Finition}
+      - {k: np_goals_p90,              nom: Buts hors penalty,       famille: Finition}
+      - {k: shots_p90,                 nom: Tirs,                    famille: Finition}
+      - {k: xa_p90,                    nom: Passes décisives attendues, court: Passes déc. attendues, famille: Création}
+      - {k: key_passes_p90,            nom: Passes clés,             famille: Création}
+      - {k: receptions_in_box_p90,     nom: Ballons reçus dans la surface, court: Reçus dans la surface, famille: Présence}
+      - {k: dribbles_won_p90,          nom: Dribbles réussis,        famille: Présence}
+      - {k: prog_carries_p90,          nom: Conduites progressives,   famille: Présence}
+      - {k: pressures_p90,             nom: Pressions,               famille: Travail}
+      - {k: aerials_won_p90,           nom: Duels aériens gagnés,    famille: Travail}
+position_labels:           # postes StatsBomb affichés en français
+  Right Back: Arrière droit
+  Left Back: Arrière gauche
+  Right Wing Back: Piston droit
+  Left Wing Back: Piston gauche
+  Center Back: Défenseur central
+  Right Center Back: Défenseur central
+  Left Center Back: Défenseur central
+  Center Forward: Avant-centre
+  Right Center Forward: Avant-centre
+  Left Center Forward: Avant-centre
+  Secondary Striker: Second attaquant
+  Left Wing: Ailier gauche
+  Right Wing: Ailier droit
+  Center Attacking Midfield: Milieu offensif
+  Left Attacking Midfield: Milieu offensif
+  Right Attacking Midfield: Milieu offensif
+  Center Defensive Midfield: Milieu défensif
+  Left Defensive Midfield: Milieu défensif
+  Right Defensive Midfield: Milieu défensif
+  Left Center Midfield: Milieu
+  Right Center Midfield: Milieu
+  Center Midfield: Milieu
+  Left Midfield: Milieu gauche
+  Right Midfield: Milieu droit

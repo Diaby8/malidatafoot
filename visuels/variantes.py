@@ -1,0 +1,346 @@
+"""Jeu de variantes pour chaque plan : A cadre blanc, B nuit, C encre, D blanc. Format Twitter/X 1080 x 1350.
+Un thème = des couleurs et un cadre ; un plan = un dessin qui ne connaît que les couleurs du thème.
+usage : python3 variantes.py <plan> <A|B|C|D> <sortie.html> [x|tiktok]     plans : accroche tirs but fil reseau fiche fin
+Le format vertical TikTok (1080 x 1920) existe pour la fiche ; les autres plans y viennent quand une variante est retenue."""
+import json, math, sys, os, collections
+from da import BASE_CSS, photo, ordi, fr, COUPE, drapeau, pays, score, avec_logo
+PLAN,TH_,OUT=sys.argv[1],sys.argv[2],sys.argv[3]; FMT=sys.argv[4] if len(sys.argv)>4 else 'x'; TT=FMT=='tiktok'
+V=json.load(open('vitrine.json',encoding='utf-8'))
+THEMES={
+ 'A':dict(nom='Cadre blanc',bg='#F6C41C',carte=True,ink='#0E1A13',titre='#064A25',doux='#5E6B62',trait='#E3E8E3',trait2='#EEF1EE',sA='#0B7A3B',sB='#0E1A13',
+          terrain='#F3F6F3',ligne='#C3CCC6',mute='#8E9A91',piste='#E9EDE8',sig='#064A25',ctx='rgba(14,26,19,.72)',note='rgba(14,26,19,.78)',fond='#FFFFFF',but='#D4252A',
+          niv=('#0B7A3B','#E3A600','#D4252A'),mono=False,blancs=False,hm='rgba(14,26,19,.72)'),
+ 'B':dict(nom='Nuit',bg='#04331A',carte=False,ink='#FFFFFF',titre='#FFFFFF',doux='#A9C2B3',trait='#1F5236',trait2='#154630',sA='#F6C41C',sB='#FFFFFF',
+          terrain='#073C20',ligne='#2F6E4B',mute='#6F957F',piste='#0C4429',sig='#FFFFFF',ctx='#A9C2B3',note='#A9C2B3',fond='#04331A',but='#FFFFFF',
+          niv=('#F6C41C','#CFE3D6','#FF7A6B'),mono=False,blancs=True,hm='#A9C2B3'),
+ 'C':dict(nom='Encre',bg='#F6C41C',carte=False,ink='#0E1A13',titre='#064A25',doux='rgba(14,26,19,.72)',trait='rgba(6,74,37,.3)',trait2='rgba(6,74,37,.16)',sA='#064A25',sB='#064A25',
+          terrain='none',ligne='rgba(6,74,37,.5)',mute='rgba(6,74,37,.5)',piste='rgba(6,74,37,.16)',sig='#064A25',ctx='rgba(14,26,19,.72)',note='rgba(14,26,19,.78)',fond='#F6C41C',but='#064A25',
+          niv=('#064A25','rgba(6,74,37,.5)','none'),mono=True,blancs=False,hm='rgba(14,26,19,.72)'),
+ 'D':dict(nom='Blanc',bg='#FFFFFF',carte=False,ink='#0E1A13',titre='#064A25',doux='#5E6B62',trait='#E3E8E3',trait2='#EEF1EE',sA='#0B7A3B',sB='#0E1A13',
+          terrain='#F5F7F5',ligne='#C9D1CB',mute='#8E9A91',piste='#E9EDE8',sig='#064A25',ctx='rgba(14,26,19,.72)',note='#5E6B62',fond='#FFFFFF',but='#D4252A',
+          niv=('#0B7A3B','#E3A600','#D4252A'),mono=False,blancs=False,hm='#5E6B62'),
+}
+T=THEMES[TH_]; W,H=((896,874) if T['carte'] else (968,930)) if not TT else ((818,1040) if T['carte'] else (890,1096)); Y0=50 if T['carte'] else 60
+surn=lambda p:p.split(' ')[-1]
+def noms_courts(joueurs):
+    """Nom de famille, avec l'initiale du prénom quand deux joueurs portent le même nom."""
+    c=collections.Counter(surn(p) for p in set(joueurs))
+    return {p:(f"{p[0]}. {surn(p)}" if c[surn(p)]>1 else surn(p)) for p in set(joueurs)}
+
+def page(ctx, hero, body, note, css=''):
+    note=tuple(avec_logo(n,T['blancs']) for n in note)
+    band='<div id="band"></div>' if TH_=='D' else ''
+    x,t=('logo_x_blanc.png','logo_tt_blanc.png') if T['blancs'] else ('logo_x.png','logo_tt.png')
+    cadre=f'<div id="p"><div id="in">{body}</div></div>' if T['carte'] else f'<div id="in" class="nu">{body}</div>'
+    th=f'''#c{{background:{T['bg']};color:{T['ink']}}}#band{{position:absolute;left:0;right:0;top:0;height:124px;background:#F6C41C}}
+#brand{{color:{T['sig']}}}#ctx{{color:{T['ctx']}}}
+#nm{{position:absolute;left:0;top:4px;max-width:640px;overflow:hidden;font:italic 900 90px/1 "BC";color:{T['titre']};text-transform:uppercase;white-space:nowrap;padding-right:8px}}
+#m1{{position:absolute;left:3px;top:100px;font:600 25px/1 "IN";color:{T['ink']};white-space:nowrap}}#m2{{position:absolute;left:3px;top:134px;font:500 21px/1 "IN";color:{T['hm']};white-space:nowrap}}
+#sc small{{color:{T['hm']}}}#sc b{{color:{T['titre']}}}#sc span{{color:{T['ink']}}}
+#note{{color:{T['note']}}}#note b{{color:{T['sig']}}}
+#in{{position:absolute;left:36px;top:28px;width:896px;height:874px}}#in.nu{{left:56px;top:312px;width:968px;height:930px}}
+.hd{{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center}}#in.nu .hd{{padding-bottom:16px;border-bottom:1.5px solid {T['trait']}}}
+.hd h3{{font:700 23px/1 "IN";color:{T['ink']}}}.lg{{display:flex;gap:20px;align-items:center;font:500 17.5px/1 "IN";color:{T['doux']}}}.lg span{{display:flex;align-items:center;gap:8px}}.lg i{{display:block;border-radius:50%}}
+.cap{{position:absolute;font:500 16.5px/1 "IN";color:{T['doux']};white-space:nowrap}}
+h4{{font:700 19px/1 "IN";color:{T['ink']}}}
+.th{{position:relative;height:22px;font:500 15px/1 "IN";color:{T['doux']}}}.th span{{position:absolute;top:0}}
+.fam{{font:600 15px/1 "IN";color:{T['doux']};padding:13px 0 7px;border-bottom:1.5px solid {T['trait']}}}
+.r{{position:relative;height:39px;border-bottom:1px solid {T['trait2']}}}.r>span{{position:absolute;white-space:nowrap}}
+.lab{{font:600 17px "IN";fill:{T['ink']};paint-order:stroke;stroke:{T['fond'] if T['terrain']=='none' else T['terrain']};stroke-width:5px;stroke-linejoin:round}}
+'''
+    # format vertical : tout entre y = 150 et y = 1580, et à gauche de x = 946
+    tt=f'''html,body{{width:1080px;height:1920px}}#c{{height:1920px}}#top{{right:134px;top:150px}}#hero{{right:134px;top:238px}}#band{{height:236px}}
+#p{{top:410px;width:890px;height:1096px}}#in{{width:818px;height:1040px}}#in.nu{{top:410px;width:890px;height:1096px}}#nm{{max-width:470px}}
+#note{{top:1518px;right:134px;display:block;font-size:16.5px;line-height:1}}#note p{{white-space:nowrap}}#note div{{display:flex;justify-content:space-between;align-items:center;margin-top:7px;height:30px}}#note b{{font-size:22px}}''' if TT else ''
+    soc=f'<b><img src="{x}" alt="X" style="height:22px"><img src="{t}" alt="TikTok" style="height:30px">@MaliDataFoot</b>'
+    pied=f'<p>{note[0]}</p><div><span>{note[1]}</span>{soc}</div>' if TT else f'<span>{note[0]}<br>{note[1]}</span>{soc}'
+    fit="document.querySelectorAll('#nm').forEach(e=>{let s=90;while(e.scrollWidth>e.clientWidth+1&&s>40){s-=2;e.style.fontSize=s+'px'}});"
+    return f'''<!doctype html><html lang="fr"><head><meta charset="utf-8"><style>{BASE_CSS}{th}{tt}{css}</style></head><body><div id="c">{band}
+<div id="top"><div id="brand"><img src="logo-verte.png" alt=""><div><b>Mali<i>Data</i>Foot</b></div></div><div id="ctx">{ctx}</div></div>
+<div id="hero">{hero}</div>{cadre}
+<div id="note">{pied}</div>
+</div><script>Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{{}}))]).then(()=>{{{fit}window.READY=true}})</script></body></html>'''
+def hero(titre,m1,m2,cle):
+    return f'<div id="nm">{titre}</div><div id="m1">{m1}</div><div id="m2">{m2}</div><div id="sc"><small>{cle[0]}</small><b>{cle[1]}</b><span>{cle[2]}</span></div>'
+CAN="Coupe d'Afrique des nations 2023"
+
+def terrain_entier(S):
+    """Terrain complet vu de haut, l'équipe attaque vers le haut. Repère StatsBomb 120 x 80."""
+    L=f'stroke="{T["ligne"]}" stroke-width="2" fill="none"'; PW,PH=80*S,120*S
+    px=lambda y:y*S; py=lambda x:(120-x)*S
+    g=(f'<rect x="0" y="0" width="{PW}" height="{PH}" fill="{T["terrain"]}"/>' if T['terrain']!='none' else '')+f'<rect x="1" y="1" width="{PW-2}" height="{PH-2}" {L}/>'
+    g+=f'<line x1="0" y1="{PH/2}" x2="{PW}" y2="{PH/2}" {L}/><circle cx="{PW/2}" cy="{PH/2}" r="{10*S}" {L}/>'
+    for top in (True,False):
+        y0=0 if top else PH-18*S; y1=0 if top else PH-6*S
+        g+=f'<rect x="{px(18)}" y="{y0}" width="{44*S}" height="{18*S}" {L}/><rect x="{px(30)}" y="{y1}" width="{20*S}" height="{6*S}" {L}/>'
+    return g,px,py,PW,PH
+def place(cands, boites, PW, PH, tw, th=20):
+    """Choisit, parmi des positions candidates (x du début du texte, y de la ligne de base), celle qui gêne le moins."""
+    best=None
+    for i,(x,yb) in enumerate(cands):
+        x0,y0,x1,y1=x-3,yb-th+3,x+tw+3,yb+5; cost=i*.3
+        if x0<4 or x1>PW-4 or y0<4 or y1>PH-4: cost+=60
+        for (a,b,c,d) in boites:
+            ox=min(x1,c)-max(x0,a); oy=min(y1,d)-max(y0,b)
+            if ox>0 and oy>0: cost+=10+ox*oy/40
+        if best is None or cost<best[0]: best=(cost,x,yb,(x0,y0,x1,y1))
+    return best[1],best[2],best[3]
+tw=lambda s:len(s)*9.4+4
+
+# ------------------------------------------------------------------ carte des tirs
+def plan_tirs():
+    Tr=V['tirs']; M=V['matches']; buts=[t for t in Tr if t['is_goal']]; xg=sum(t['xg'] for t in Tr)
+    in_box=lambda t:t['x']>=102 and 18<=t['y']<=62
+    cadres=[t for t in Tr if t['outcome'] in ('Goal','Saved','Saved to Post')]; csc=sum(m['goals_for'] for m in M)-len(buts)
+    S=W/80; X0=80.5; PW=80*S; PH=(120-X0)*S; GH=2.2*S; px=lambda y:y*S; py=lambda x:GH+(120-x)*S
+    L=f'stroke="{T["ligne"]}" stroke-width="2.2" fill="none"'
+    g=(f'<rect x="0" y="{GH}" width="{PW}" height="{PH}" fill="{T["terrain"]}"/>' if T['terrain']!='none' else '')
+    g+=f'<path d="M0 {GH+PH}V{GH}H{PW}V{GH+PH}" {L}/><rect x="{px(18)}" y="{py(120)}" width="{44*S}" height="{18*S}" {L}/><rect x="{px(30)}" y="{py(120)}" width="{20*S}" height="{6*S}" {L}/>'
+    g+=f'<rect x="{px(36)}" y="{py(120)-GH+1.5}" width="{8*S}" height="{GH-1.5}" stroke="{T["mute"]}" stroke-width="2.6" fill="none"/>'
+    a=math.acos(6/10); ax=10*math.sin(a)*S
+    g+=f'<path d="M{px(40)-ax:.1f} {py(102):.1f}A{10*S} {10*S} 0 0 0 {px(40)+ax:.1f} {py(102):.1f}" {L}/>'
+    R=lambda v:max(6.5,math.sqrt(v)*38)
+    nb=dict(fill=T['mute'],op='.18',st=T['mute']) if not T['mono'] else dict(fill='none',op='0',st=T['mute'])
+    for t in sorted(Tr,key=lambda t:(t['is_goal'],-t['xg'])):
+        x,y,r=px(t['y']),py(t['x']),R(t['xg'])
+        if t['is_goal']: g+=f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" fill="{T["sA"]}" stroke="{T["fond"]}" stroke-width="3"/>'
+        else: g+=f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" fill="{nb["fill"]}" fill-opacity="{nb["op"]}" stroke="{nb["st"]}" stroke-width="1.8"/>'
+    C=[(px(t['y'])-R(t['xg']),py(t['x'])-R(t['xg']),px(t['y'])+R(t['xg']),py(t['x'])+R(t['xg'])) for t in Tr]
+    for t in [t for t in Tr if t['shot_type']=='Penalty' and not t['is_goal']]:
+        x,y,r=px(t['y']),py(t['x']),R(t['xg']); me=(x-r,y-r,x+r,y+r)
+        cands=[(x+(r+d)*math.cos(math.radians(a))+(8 if math.cos(math.radians(a))>=0 else -8-tw('Penalty arrêté')), y+(r+d)*math.sin(math.radians(a))+6) for d in range(30,200,10) for a in (20,160,-20,200,40,140,0,180)]
+        lx,ly,_=place(cands,[c for c in C if c!=me],PW,PH+GH,tw('Penalty arrêté'))
+        g+=f'<line x1="{x+ (r+3)*(1 if lx>x else -1):.1f}" y1="{y:.1f}" x2="{lx-6 if lx>x else lx+tw("Penalty arrêté")+2:.1f}" y2="{ly-6:.1f}" stroke="{T["doux"]}" stroke-width="1.6"/><text x="{lx:.1f}" y="{ly:.1f}" class="lab">Penalty arrêté</text>'
+    by=collections.defaultdict(lambda:[0,0.0,0])
+    for t in [t for t in Tr if t['shot_type']!='Penalty']: by[t['player']][0]+=1; by[t['player']][1]+=t['xg']; by[t['player']][2]+=int(t['is_goal'])
+    top=sorted(by.items(),key=lambda kv:(-kv[1][1],kv[0]))[:5]; mx=top[0][1][1]
+    rows=''.join(f'<div class="r"><span class="n">{n}</span><span class="v1">{v[0]}</span><span class="b"><i style="width:{v[1]/mx*100:.0f}%"></i></span><span class="v2">{fr(v[1],2)}</span><span class="c">{v[2]}</span></div>' for n,v in top)
+    z=lambda nom,l:f'<div class="r"><span class="n">{nom}</span><span class="zv">{len(l)}</span><span class="c">{sum(t["is_goal"] for t in l)}</span></div>'
+    zones='<div class="fam">Zone</div>'+z('Dans la surface',[t for t in Tr if in_box(t)])+z('Hors de la surface',[t for t in Tr if not in_box(t)])+'<div class="fam">Situation</div>'+z('Dans le jeu',[t for t in Tr if t['shot_type']=='Open Play'])+z('Coup franc ou penalty',[t for t in Tr if t['shot_type']!='Open Play'])
+    yb=Y0+PH+GH
+    gl=f'<i style="width:18px;height:18px;background:{T["sA"]}"></i>'; nl=f'<i style="width:18px;height:18px;border:1.8px solid {T["mute"]}"></i>'
+    css=f'''.r .n{{left:0;top:10px;font:500 19px/1 "IN";color:{T['ink']}}}.r .v1{{left:214px;width:44px;top:11px;text-align:right;font:400 18px/1 "IN";color:{T['doux']}}}
+.r .b{{left:286px;width:90px;top:16px;height:6px;border-radius:3px;background:{T['piste']};overflow:hidden}}.r .b i{{display:block;height:100%;border-radius:3px;background:{T['sA']}}}
+.r .v2{{left:386px;width:52px;top:11px;text-align:right;font:400 18px/1 "IN";color:{T['doux']}}}.r .c{{right:0;top:9px;font:700 20px/1 "IN";color:{T['ink']}}}.r .zv{{right:86px;width:60px;top:11px;text-align:right;font:400 18px/1 "IN";color:{T['doux']}}}
+#bt{{position:absolute;left:0;right:0;top:{yb+56:.0f}px;display:grid;grid-template-columns:1.32fr 1fr;gap:56px}}.th.e{{margin-top:16px;border-bottom:1.5px solid {T['trait']};padding-bottom:26px}}.th.n{{margin-top:16px;padding-bottom:6px}}'''
+    body=f'''<div class="hd"><h3>Chaque rond est un tir</h3><div class="lg"><span>{gl}but</span><span>{nl}pas de but</span></div></div>
+<svg style="position:absolute;left:0;top:{Y0}px;overflow:visible" width="{PW:.0f}" height="{PH+GH:.0f}" viewBox="0 0 {PW:.0f} {PH+GH:.0f}">{g}</svg>
+<div class="cap" style="left:0;top:{yb+14:.0f}px">Plus le rond est gros, plus l'occasion était belle (xG)</div>
+<div id="bt"><div><h4>Qui a eu les occasions, hors penalty</h4><div class="th e"><span style="left:214px;width:44px;text-align:right">tirs</span><span style="left:286px">buts attendus (xG)</span><span style="right:0">buts</span></div>{rows}</div>
+<div><h4>Le détail des tirs</h4><div class="th n"><span style="right:86px;width:60px;text-align:right">tirs</span><span style="right:0">buts</span></div>{zones}</div></div>'''
+    h=hero('Les tirs du Mali',f'{len(Tr)} tirs en {len(M)} matchs, dont {len(cadres)} cadrés','Toutes les tentatives des Aigles pendant le tournoi',('Buts marqués sur tir',str(len(buts)),f'pour {fr(xg)} buts attendus (xG)'))
+    pens=[t for t in Tr if t['shot_type']=='Penalty']; arr=all(t['outcome']=='Saved' for t in pens if not t['is_goal'])
+    note=("xG : la chance qu'un tir finisse au fond."+(f" Les {fr(xg)} comptent un penalty {'arrêté' if arr else 'manqué'}." if any(not t['is_goal'] for t in pens) else ''),(f"Autre but du Mali : {'un' if csc==1 else csc} contre son camp. " if csc>0 else '')+"Données StatsBomb Open Data.")
+    return page(CAN,h,body,note,css)
+
+# ------------------------------------------------------------------ l'anatomie d'un but
+def plan_but():
+    B=V['but']; seq=B['seq']; S=(H-Y0-6)/120; g,px,py,PW,PH=terrain_entier(S)
+    nc=noms_courts([e['player'] for e in seq]); r=13
+    for e in seq:
+        x1,y1,x2,y2=px(e['y']),py(e['x']),px(e['ey']),py(e['ex'])
+        if e['type']=='Carry': g+=f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="{T["sA"]}" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>'
+        elif e['type']=='Pass': g+=f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="{T["sA"]}" stroke-width="3.2" stroke-linecap="round"/>'
+        else: g+=f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" stroke="{T["but"]}" stroke-width="5" stroke-linecap="round"/><circle cx="{x2:.1f}" cy="{y2:.1f}" r="11" fill="{T["fond"]}" stroke="{T["but"]}" stroke-width="5"/>'
+    passes=[e for e in seq if e['type']=='Pass']; boites=[(px(e['y'])-r-2,py(e['x'])-r-2,px(e['y'])+r+2,py(e['x'])+r+2) for e in passes]
+    vus=set(); nommes=[]; labs=''
+    for i,e in enumerate(passes,1):
+        x,y=px(e['y']),py(e['x'])
+        g+=f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r}" fill="{T["fond"]}" stroke="{T["sA"]}" stroke-width="3"/><text x="{x:.1f}" y="{y+5.5:.1f}" text-anchor="middle" style="font:700 15px IN;fill:{T["ink"]}">{i}</text>'
+        if any(q==e['player'] and math.hypot(x-qx,y-qy)<70 for q,qx,qy in nommes): continue   # même joueur, même endroit : un seul nom
+        vus.add(e['player']); nommes.append((e['player'],x,y)); n=nc[e['player']]; w=tw(n)
+        cands=[(x+r+8,y+6),(x-r-8-w,y+6),(x-w/2,y-r-9),(x-w/2,y+r+21),(x+r+4,y-r-4),(x-r-4-w,y-r-4),(x+r+4,y+r+18),(x-r-4-w,y+r+18),
+               (x-w/2+16,y+r+21),(x-w/2-16,y+r+21),(x-w/2+16,y-r-9),(x-w/2-16,y-r-9),(x-w/2+30,y+r+23),(x-w/2-30,y+r+23),
+               (x-6-w,y+r+38),(x+6,y+r+38),(x-w/2,y+r+40),(x-6-w,y-r-26),(x+6,y-r-26),(x-w/2,y-r-28)]
+        # un nom ne doit jamais être plus près d'une autre pastille que de la sienne
+        pres=lambda c:min(passes,key=lambda q:math.hypot(c[0]+w/2-px(q['y']),c[1]-7-py(q['x']))) is e
+        cands=[c for c in cands if pres(c)] or cands
+        lx,ly,bx=place(cands,boites,PW,PH,w); boites.append(bx); labs+=f'<text x="{lx:.1f}" y="{ly:.1f}" class="lab">{n}</text>'
+    sh=seq[-1]; n=nc[sh['player']]; x,y=px(sh['y']),py(sh['x']); lx,ly,bx=place([(x-tw(n)-14,y+8),(x+14,y+8),(x-tw(n)/2,y+26)],boites,PW,PH,tw(n))
+    if sh['player'] not in vus: labs+=f'<text x="{lx:.1f}" y="{ly:.1f}" class="lab">{n}</text>'
+    XC=PW+44; CW=W-XC
+    stat=lambda v,l,y:f'<div class="st" style="top:{y}px"><b>{v}</b><span>{l}</span></div>'
+    css=f'''.st{{position:absolute;left:{XC:.0f}px;width:{CW:.0f}px}}.st b{{display:block;font:italic 900 124px/.9 "BC";color:{T['titre']}}}.st span{{display:block;font:600 20px/1.25 "IN";color:{T['ink']};margin-top:6px}}
+#leg{{position:absolute;left:{XC:.0f}px;width:{CW:.0f}px;bottom:8px;font:500 17px/1 "IN";color:{T['doux']}}}#leg div{{display:flex;align-items:center;gap:12px;height:34px;white-space:nowrap}}#leg svg{{flex:none}}'''
+    body=f'''<div class="hd"><h3>Onze passes, en repassant par le gardien</h3></div>
+<svg style="position:absolute;left:0;top:{Y0}px;overflow:visible" width="{PW:.0f}" height="{PH:.0f}" viewBox="0 0 {PW:.0f} {PH:.0f}">{g}{labs}</svg>
+{stat(B['passes'],'passes de suite',Y0+18)}{stat(B['joueurs'],'joueurs sur onze<br>touchent le ballon',Y0+218)}{stat(round(B['duree']),'secondes entre la récupération<br>du ballon et le tir',Y0+448)}
+<div id="leg"><div><svg width="46" height="8"><line x1="2" y1="4" x2="44" y2="4" stroke="{T['sA']}" stroke-width="3.2" stroke-linecap="round"/></svg>passe</div>
+<div><svg width="46" height="8"><line x1="2" y1="4" x2="44" y2="4" stroke="{T['sA']}" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/></svg>conduite de balle</div>
+<div><svg width="46" height="8"><line x1="2" y1="4" x2="44" y2="4" stroke="{T['but']}" stroke-width="5" stroke-linecap="round"/></svg>le tir</div></div>'''
+    m=B['match']; h=hero("L'anatomie d'un but",f'{score(m[0],m[2],m[3],m[1])}, huitième de finale',f'But de {surn(B["buteur"])} à la {B["minute"]}e minute',("Chance de marquer sur ce tir",f'{B["xg"]*100:.0f} %',"d'après sa position (xG)"))
+    return page(CAN,h,body,("Les numéros suivent l'ordre des passes. Le Mali attaque vers le haut.","Données StatsBomb Open Data."),css)
+
+# ------------------------------------------------------------------ le fil du match
+def plan_fil():
+    X=V['xg_chrono']; PF=V['periodes_fin']; EX=V['expulsions']; M=V['matches'][-1]
+    CWd=W-86; CH=H-Y0-26-62-240; tmax=PF[-1]; ymax=1.5; sx=lambda t:t/tmax*CWd; sy=lambda v:CH-v/ymax*CH
+    g=''
+    r0=next(e for e in EX if e['camp']=='adversaire'); x0=sx(r0['minute_ecoulee'])
+    g+=f'<rect x="{x0:.1f}" y="0" width="{CWd-x0:.1f}" height="{CH}" fill="{T["sA"]}" fill-opacity="{.08 if not T["mono"] else .07}"/>'
+    g+=f'<text x="{x0+10:.1f}" y="22" style="font:600 16px IN;fill:{T["doux"]}">{M["opponent"]} à dix dès la {r0["minute_aff"]}e minute</text>'
+    for t,lab in zip(PF[:3],('mi-temps','prolongation','')):
+        g+=f'<line x1="{sx(t):.1f}" y1="0" x2="{sx(t):.1f}" y2="{CH}" stroke="{T["ligne"]}" stroke-width="1.4" stroke-dasharray="3 6"/><text x="{sx(t):.1f}" y="{CH+24}" text-anchor="middle" style="font:500 15px IN;fill:{T["doux"]}">{lab}</text>'
+    g+=f'<line x1="0" y1="{CH}" x2="{CWd}" y2="{CH}" stroke="{T["mute"]}" stroke-width="2"/>'
+    fin={}; marks=[]
+    for camp,col,dash in (('adversaire',T['sB'],'7 6' if T['mono'] else ''),('equipe',T['sA'],'')):
+        v=0; d=f'M0 {CH}'
+        for s in [s for s in X if s['camp']==camp]:
+            d+=f'H{sx(s["minute_ecoulee"]):.1f}'; v+=s['xg']; d+=f'V{sy(v):.1f}'
+            if s['is_goal'] or s['shot_type']=='Penalty': marks.append((camp,s,v,col))
+        d+=f'H{CWd}'; fin[camp]=v
+        da=f' stroke-dasharray="{dash}"' if dash else ''
+        g+=f'<path d="{d}" fill="none" stroke="{col}" stroke-width="4" stroke-linejoin="round"{da}/>'
+        g+=f'<text x="{CWd+12}" y="{sy(v)+9:.1f}" style="font:italic 900 34px BC;fill:{T["titre"] if camp=="equipe" else T["ink"]}">{fr(v,2)}</text>'
+    pos={'Dorgeles':(-14,-16,'end'),'Adingra':(16,30,'start'),'Diakité':(-14,-14,'end'),'Traoré':(16,38,'start')}
+    for camp,s,v,col in marks:
+        x,y=sx(s['minute_ecoulee']),sy(v); nom=surn(s['player']); dx,dy,an=pos.get(nom,(14,-14,'start'))
+        if s['is_goal']:
+            g+=f'<circle cx="{x:.1f}" cy="{y:.1f}" r="9" fill="{T["fond"]}" stroke="{col}" stroke-width="4"/>'; txt=f"But {nom} ({s['minute_aff']}')"
+        else: txt=f"Penalty {'arrêté' if s.get('outcome')=='Saved' else 'manqué'} ({s['minute_aff']}')"
+        g+=f'<text x="{x+dx:.1f}" y="{y+dy:.1f}" text-anchor="{an}" class="lab" style="stroke:{T["fond"]}">{txt}</text>'
+    opp=len([s for s in X if s['camp']=='adversaire']); eq=len([s for s in X if s['camp']=='equipe'])
+    li=lambda l,a,b,ga,gb:f'<div class="r"><span class="n">{l}</span><span class="a{" w" if ga else ""}">{a}</span><span class="b2{" w" if gb else ""}">{b}</span></div>'
+    npa=sum(s['xg'] for s in X if s['camp']=='equipe' and s['shot_type']!='Penalty'); npb=sum(s['xg'] for s in X if s['camp']=='adversaire' and s['shot_type']!='Penalty'); pen=sum(s['xg'] for s in X if s['camp']=='equipe' and s['shot_type']=='Penalty')
+    rows=li('Buts',M['goals_for'],M['goals_against'],M['goals_for']>M['goals_against'],M['goals_against']>M['goals_for'])+li('Buts attendus (xG)',fr(M['xg'],2),fr(M['xg_against'],2),M['xg']>M['xg_against'],M['xg_against']>M['xg'])+li('Buts attendus hors penalty',fr(npa,2),fr(npb,2),npa>npb,npb>npa)+li('Tirs',eq,opp,eq>opp,opp>eq)+li('Possession',f"{M['possession_pct']:.0f} %",f"{100-M['possession_pct']:.0f} %",M['possession_pct']>50,M['possession_pct']<50)
+    def mk(col,dash):
+        da=' stroke-dasharray="7 6"' if dash else ''
+        return f'<svg width="34" height="8"><line x1="2" y1="4" x2="32" y2="4" stroke="{col}" stroke-width="4"{da}/></svg>'
+    yt=Y0+26+CH+62
+    css=f'''#tb{{position:absolute;left:0;top:{yt}px;width:{W}px}}.r .n{{left:0;top:10px;font:500 19px/1 "IN";color:{T['ink']}}}
+.r .a,.r .b2{{top:9px;width:150px;text-align:right;font:500 20px/1 "IN";color:{T['doux']}}}.r .a{{right:190px}}.r .b2{{right:0}}.r .w{{font-weight:700;color:{T['ink']}}}
+.th.e{{border-bottom:1.5px solid {T['trait']};padding-bottom:26px}}.th span{{display:flex;align-items:center;gap:8px}}'''
+    body=f'''<div class="hd"><h3>Les occasions s'additionnent, minute après minute</h3><div class="lg"><span>{mk(T['sA'],False)}Mali</span><span>{mk(T['sB'],T['mono'])}{M['opponent']}</span></div></div>
+<svg style="position:absolute;left:0;top:{Y0+26}px;overflow:visible" width="{W}" height="{CH+30}" viewBox="0 0 {W} {CH+30}">{g}</svg>
+<div id="tb"><div class="th e"><span style="right:190px;width:150px;justify-content:flex-end;gap:0">{pays('Mali',14)}</span><span style="right:0;width:150px;justify-content:flex-end;gap:0">{pays(M['opponent'],14)}</span></div>{rows}</div>'''
+    h=hero('Le fil du match',f"{score('Mali',M['goals_for'],M['goals_against'],M['opponent'])}, quart de finale",'Les occasions de chaque équipe, après prolongation',('Buts attendus du Mali',fr(M['xg'],2),f"dont {fr(pen,2)} sur le penalty"))
+    return page(CAN,h,body,("Chaque marche est un tir : plus elle est haute, plus l'occasion était belle (xG).","Possession : calculée sur les passes du match. Données StatsBomb Open Data."),css)
+
+# ------------------------------------------------------------------ le réseau de passes
+def plan_reseau():
+    R=V['reseau_passes']; N={n['player_id']:n for n in R['nodes']}; E=sorted(R['edges'],key=lambda e:-e['n'])
+    av=lambda e:int(e['avant']); S=(H-Y0-6)/120; g,px,py,PW,PH=terrain_entier(S)
+    nc=noms_courts([n['player'] for n in R['nodes']]); top=E[0]
+    for e in E[::-1]:
+        a,b=N[e['a']],N[e['b']]; first=e is top
+        col=T['but'] if first else T['mute']; op=1 if first else min(.9,.25+e['n']/40)
+        g+=f'<line x1="{px(a["y"]):.1f}" y1="{py(a["x"]):.1f}" x2="{px(b["y"]):.1f}" y2="{py(b["x"]):.1f}" stroke="{col}" stroke-opacity="{op:.2f}" stroke-width="{1.2+e["n"]*.42:.1f}" stroke-linecap="round"/>'
+    rr=lambda n:12+math.sqrt(n['passes'])*1.5; boites=[(px(n['y'])-rr(n),py(n['x'])-rr(n),px(n['y'])+rr(n),py(n['x'])+rr(n)) for n in R['nodes']]; labs=''
+    for n in R['nodes']:
+        x,y,r=px(n['y']),py(n['x']),rr(n); g+=f'<circle cx="{x:.1f}" cy="{y:.1f}" r="{r:.1f}" fill="{T["sA"]}" stroke="{T["fond"] if T["terrain"]=="none" else T["terrain"]}" stroke-width="3"/>'
+        nm=nc[n['player']]; w=tw(nm); cands=[(x-w/2,y+r+21),(x-w/2,y-r-9),(x+r+8,y+6),(x-r-8-w,y+6),(x+r+2,y+r+16),(x-r-2-w,y+r+16),(x+r+2,y-r-4),(x-r-2-w,y-r-4)]
+        lx,ly,bx=place(cands,boites,PW,PH,w); boites.append(bx); labs+=f'<text x="{lx:.1f}" y="{ly:.1f}" class="lab">{nm}</text>'
+    XC=PW+44; CW=W-XC; a,b=nc[N[top['a']]['player']],nc[N[top['b']]['player']]; M=V['matches'][-1]
+    nav=av(top); suite='aucune vers l\'avant' if nav==0 else f'dont {nav} vers l\'avant'
+    rows=''.join(f'<div class="r"><span class="n">{nc[N[e["a"]]["player"]]}–{nc[N[e["b"]]["player"]]}</span><span class="c">{e["n"]}</span></div>' for e in E[:5])
+    dc=all('Center Back' in (N[top[k]].get('poste') or '') for k in ('a','b')); qui='les deux défenseurs centraux' if dc else None
+    avant,apres=round(V['part_passes']['avant_rouge']),round(V['part_passes']['apres_rouge']); r0m=next(e for e in V['expulsions'] if e['camp']=='adversaire')['minute_aff']
+    css=f'''.st{{position:absolute;left:{XC:.0f}px;width:{CW:.0f}px;top:{Y0+18}px}}.st b{{display:block;font:italic 900 124px/.9 "BC";color:{T['titre']}}}.st span{{display:block;font:600 20px/1.25 "IN";color:{T['ink']};margin-top:6px}}
+#ls{{position:absolute;left:{XC:.0f}px;width:{CW:.0f}px;top:{Y0+10}px}}#cx{{position:absolute;left:{XC:.0f}px;width:{CW:.0f}px;top:{Y0+330}px}}#cx p{{margin-top:12px;font:500 18.5px/1.45 "IN";color:{T['ink']}}}.th.e2{{margin-top:14px;padding-bottom:26px;border-bottom:1.5px solid {T['trait']}}}.r .c1{{right:84px;width:70px;top:10px;text-align:right;font:500 19px/1 "IN";color:{T['doux']}}}
+.r .n{{left:0;top:11px;font:500 17px/1 "IN";color:{T['ink']}}}.r .c{{right:0;top:9px;font:700 20px/1 "IN";color:{T['ink']}}}
+#leg{{position:absolute;left:{XC:.0f}px;width:{CW:.0f}px;bottom:8px;font:500 17px/1.4 "IN";color:{T['doux']}}}'''
+    body=f'''<div class="hd"><h3>Qui joue avec qui</h3></div>
+<svg style="position:absolute;left:0;top:{Y0}px;overflow:visible" width="{PW:.0f}" height="{PH:.0f}" viewBox="0 0 {PW:.0f} {PH:.0f}">{g}{labs}</svg>
+<div id="ls"><h4>Les duos les plus sollicités</h4><div class="th e2"><span style="right:0">passes</span></div>{rows}</div>
+<div id="cx"><h4>Le contexte</h4><p>La {M['opponent']} joue à dix dès la {r0m}e minute. Le Mali a {apres} % de possession après le carton, contre {avant} % avant.</p></div>
+<div id="leg">Chaque rond est placé là où le joueur fait ses passes en moyenne ; plus il est gros, plus le joueur en fait. Plus le trait est épais, plus les deux joueurs se sont trouvés (quatre passes au moins).</div>'''
+    h=hero('Le réseau de passes',f"{score('Mali',M['goals_for'],M['goals_against'],M['opponent'])}, quart de finale",f"Onze de départ, jusqu'à la {R['until_clock']}e minute",('Passes du duo le plus sollicité',str(top['n']),f"entre {a} et {b}"+(", les deux centraux" if qui else "")))
+    return page(CAN,h,body,("Onze de départ, jusqu'au premier changement malien.","Le Mali attaque vers le haut. Données StatsBomb Open Data."),css)
+
+# ------------------------------------------------------------------ la fiche joueur
+def plan_fiche():
+    F=json.load(open('../outputs/fiches/hamari-traore_poste.json',encoding='utf-8')); B=F['bassin']; CR=F['criteres']
+    f1,f2,f3=T['niv']; niv=lambda p:(f1 if p>=75 else (f2 if p>=25 else f3))
+    cx,cy,R=(250,262,158) if not TT else (250,206,152); RH=524 if not TT else cy+R+62; N=len(CR); ang=lambda i:-math.pi/2+i*2*math.pi/N; pol=lambda r,i:(cx+r*math.cos(ang(i)),cy+r*math.sin(ang(i)))
+    g=''.join(f'<circle cx="{cx}" cy="{cy}" r="{R*v/100:.1f}" fill="none" stroke="{T["ligne"]}" stroke-width="1.5"/>' for v in (25,75,100))
+    g+=f'<circle cx="{cx}" cy="{cy}" r="{R*.5:.1f}" fill="none" stroke="{T["mute"]}" stroke-width="1.5" stroke-dasharray="3 6"/>'
+    for i in range(N): x,y=pol(R,i); g+=f'<line x1="{cx}" y1="{cy}" x2="{x:.1f}" y2="{y:.1f}" stroke="{T["ligne"]}" stroke-width="1.2"/>'
+    pts=[pol(R*max(c['centile'],2)/100,i) for i,c in enumerate(CR)]
+    g+='<polygon points="'+' '.join(f'{x:.1f},{y:.1f}' for x,y in pts)+f'" fill="{T["sA"]}" fill-opacity=".2" stroke="{T["sA"]}" stroke-width="3" stroke-linejoin="round"/>'
+    g+=''.join(f'<circle class="pt" cx="{x:.1f}" cy="{y:.1f}" r="5.5" fill="{T["fond"]}" stroke="{T["sA"]}" stroke-width="3"/>' for x,y in pts)
+    for i,c in enumerate(CR):
+        a=ang(i); deg=math.degrees(a)+90; bas=math.sin(a)>.15; lines=COUPE.get(c['k'],[c['nom']]); n=len(lines)
+        for j,t in enumerate(lines):
+            rr=R+22+((n-1-j) if not bas else j)*21+(4 if bas else 0); x,y=cx+rr*math.cos(a),cy+rr*math.sin(a)
+            g+=f'<text x="{x:.1f}" y="{y:.1f}" text-anchor="middle" dominant-baseline="middle" transform="rotate({deg+(180 if bas else 0):.1f} {x:.1f} {y:.1f})" class="rl" style="font:600 18px IN;fill:{T["ink"]}">{t}</text>'
+    def barre(c):
+        col=niv(c['centile']); w=max(c['valeur']/c['max']*100,4) if c['max'] else 4; med=c['mediane']/c['max']*100 if c['max'] else 0
+        trait=f'<u style="left:{med:.0f}%"></u>'
+        return (f'<i style="width:{w:.0f}%;background:{col}"></i>' if col!='none' else f'<i style="width:{max(w,10):.0f}%;box-shadow:inset 0 0 0 1.6px {T["sA"]}"></i>')+trait
+    blocs={}                                            # une valeur nulle n'a pas de rang : plusieurs joueurs sont à zéro, les classer entre eux n'a pas de sens
+    for c in CR:
+        blocs.setdefault(c['famille'],f'<div class="fam">{c["famille"]}</div>')
+        blocs[c['famille']]+=f'<div class="r"><span class="n">{c["court"]}</span><span class="v">{fr(c["valeur"],2 if c["k"] in ("xa_p90","npxg_p90") else 1)}</span><span class="b">{barre(c)}</span><span class="c">{ordi(c["rang"]) if c["valeur"]>0 else "–"}</span></div>'
+    fams=list(blocs); TH=f'<div class="th"><span class="t1">par 90 min</span><span style="right:0">rang sur {B["effectif"]}</span></div>'
+    if TT:                                              # vertical : deux colonnes aussi équilibrées que possible, sans couper une famille
+        nb=[sum(1 for c in CR if c['famille']==f) for f in fams]; cut=min(range(1,len(fams)),key=lambda i:abs(sum(nb[:i])-sum(nb[i:])))
+        TABLE=f'<div id="tb" class="deux"><div>{TH}{"".join(blocs[f] for f in fams[:cut])}</div><div>{TH}{"".join(blocs[f] for f in fams[cut:])}</div></div>'
+    else: TABLE=f'<div id="tb">{TH}{"".join(blocs[f] for f in fams)}</div>'
+    colh=max(22+len(fs)*36.5+sum(1 for c in CR if c['famille'] in fs)*(37 if TT else 40) for fs in ((fams[:cut],fams[cut:]) if TT else (fams,)))   # hauteur du tableau
+    # « Ce qu'il réussit » : barres neutres, la couleur ne juge pas un taux
+    reu=''.join(f'<div class="r q"><span class="n">{x["nom"]}</span><span class="v">{x["reussis"]} sur {x["tentes"]}</span><span class="b"><i style="width:{max(x["pct"] or 0,3)}%;background:{T["mute"]}"></i></span><span class="c">{x["pct"] if x["pct"] is not None else "–"} %</span></div>' for x in F['reussite'])
+    notes=list(F['notes_bassin']); notes.remove(F['note']); lo,hi=min(notes+[F['note']]),max(notes+[F['note']])
+    ticks=''.join(f'<i style="left:{(v-lo)/(hi-lo)*100:.2f}%"></i>' for v in notes)
+    club='';
+    import csv
+    for r in csv.DictReader(open('../registre/joueurs.csv',encoding='utf-8')):
+        if r['nom']==F['player'] and r['club'] and r['club_a_confirmer']!='oui': club=r['club']
+    pt=lambda c:(f'<i style="background:{c}"></i>' if c!='none' else f'<i style="box-shadow:inset 0 0 0 1.6px {T["sA"]}"></i>')
+    TX=W-412; RT=Y0-8 if not TT else Y0-2; RL=-14 if not TT else (W-500)//2; YT=Y0 if not TT else RT+RH+30; YS=Y0+560 if not TT else YT+colh+12
+    css=f'''.phh{{position:absolute;left:0;top:4px;width:150px;height:150px;border-radius:50%;overflow:hidden;background:#E9EDE8;box-shadow:0 0 0 5px {'#fff' if TH_!='C' else T['sA']}}}.phh img,.phh svg{{width:100%;height:100%;display:block;object-fit:cover}}
+#nm{{left:178px}}#m1{{left:181px}}#m2{{left:181px}}#m1 .act{{font:500 18px/1 "IN";color:{T['hm']};margin-left:9px}}
+.lg i{{width:11px;height:11px}}
+#tb{{position:absolute;left:{TX}px;top:{Y0}px;width:412px}}.th .t1{{left:168px;width:100px;text-align:right}}.r .n{{left:0;top:11px;font:500 19px/1 "IN";color:{T['ink']}}}.r .v{{left:212px;width:56px;top:10px;text-align:right;font:700 19px/1 "IN";color:{T['ink']}}}
+.r .b{{left:282px;width:74px;top:17px;height:6px;border-radius:3px;background:{T['piste']}}}.r .b i{{display:block;height:100%;border-radius:3px}}.r .b u{{position:absolute;top:-4px;width:2px;height:14px;background:{T['ink']};opacity:.55;text-decoration:none}}
+.r .c{{right:0;top:12px;font:500 17px/1 "IN";color:{T['doux']}}}
+#bt .r.q .n{{left:0}}#bt .r.q .v{{left:auto;right:212px;width:120px;font:400 17px/1 "IN";color:{T['doux']};top:12px}}#bt .r.q .b{{left:auto;right:78px;width:120px}}#bt .r.q .c{{right:0;top:10px;font:700 19px/1 "IN";color:{T['ink']}}}
+#sep{{position:absolute;left:0;right:0;top:{YS}px;border-top:1.5px solid {T['trait']}}}
+#bt{{position:absolute;left:0;right:0;top:{YS+(22 if not TT else 16)}px;display:grid;grid-template-columns:1.72fr 1fr;gap:46px}}#bt h4{{padding-bottom:10px;border-bottom:1.5px solid {T['trait']}}}#bt h4{{font-size:18px;display:flex;align-items:center;gap:9px}}#bt h4 i{{width:11px;height:11px;border-radius:50%;display:block}}
+#bt ul{{list-style:none}}#bt li{{display:flex;align-items:center;gap:8px;height:39px;font:500 18.5px/1 "IN";color:{T['ink']};border-bottom:1px solid {T['trait2']};white-space:nowrap}}#bt li b{{margin-left:auto;font-weight:700}}#bt li em{{font-style:normal;color:{T['doux']};font-size:16px}}
+#stw{{display:none}}#stw h4{{font-size:18px}}#st{{position:relative;height:40px;margin-top:10px;border-bottom:1.5px solid {T['mute']}}}#st i{{position:absolute;bottom:0;width:2px;height:16px;background:{T['mute']}}}
+#st b{{position:absolute;bottom:0;width:5px;height:38px;margin-left:-2px;background:{T['sA']};border-radius:3px 3px 0 0}}#st em{{position:absolute;bottom:-24px;font:500 15px/1 "IN";font-style:normal;color:{T['doux']}}}'''
+    if TT: css+=f'''#tb.deux{{left:0;top:{YT}px;width:{W}px;display:grid;grid-template-columns:1fr 1fr;gap:46px}}.r{{height:36px}}.th .t1{{left:154px}}.r .n{{font-size:18px;top:9px}}.r .v{{left:198px;top:8px}}.r .b{{left:266px;width:64px;top:15px}}.r .c{{top:10px}}
+#bt{{gap:38px}}#bt .r.q .v{{right:186px;width:110px}}#bt .r.q .b{{right:70px;width:104px}}#bt li{{height:36px;font-size:18px}}#cap{{left:0;right:0;text-align:center}}'''
+    body=f'''<div class="hd"><h3>Son tournoi en dix critères</h3><div class="lg"><span>{pt(f1)}au-dessus</span><span>{pt(f2)}dans la moyenne</span><span>{pt(f3)}en dessous</span></div></div>
+<svg id="rad" style="position:absolute;left:{RL}px;top:{RT}px;overflow:visible" width="500" height="{RH}" viewBox="0 0 500 {RH}">{g}</svg>
+<div class="cap" id="cap" style="left:0;top:{Y0+522 if not TT else RT+RH+2}px">Radar : sa place parmi les {B['pluriel']}. Pointillé et petit trait : le {B['singulier']} médian.</div>
+{TABLE}
+<div id="sep"></div>
+<div id="bt"><div><h4>Ce qu'il réussit</h4>{reu}</div>
+<div><h4>Performances proches</h4><ul>{''.join(f'<li>{surn(p["player"])}<em>{pays(p["team"],13)}</em><b>{p["proche"]} %</b></li>' for p in F['proches'])}</ul></div></div>
+<div id="stw"><h4>Sa note parmi les {B['effectif']} {B['pluriel']} du tournoi</h4><div id="st">{ticks}<b style="left:{(F['note']-lo)/(hi-lo)*100:.2f}%"></b><em style="left:0">{lo:.0f}</em><em style="right:0">{hi:.0f}</em></div></div>'''
+    h=f'''<div class="phh">{photo(F['player_id'])}</div><div id="nm">{F['player']}</div><div id="m1">{F['poste']}, {pays(F['team'],19)}{f", {club}<span class='act'>club actuel</span>" if club else ''}</div><div id="m2">{F['minutes']} minutes en {F['matches']} matchs</div>
+<div id="sc"><small>Note du tournoi, sur 100</small><b>{F['note']:.0f}</b><span>{ordi(F['rang'])} sur {B['effectif']} {B['pluriel']}</span></div>'''
+    seuil=f"{B['effectif']} {B['pluriel']} ayant joué au moins {B['min_minutes']} minutes"
+    note=(f"Parmi les {B['effectif']} {B['pluriel']} à {B['min_minutes']} minutes ou plus. Note : part des autres dépassés, en moyenne sur dix critères.","Données StatsBomb Open Data.") if TT else \
+         (f"Rang : sa place parmi les {seuil}.",f"Note : la part des autres {B['pluriel']} qu'il dépasse, en moyenne sur les dix critères.<br>Données StatsBomb Open Data.")
+    css+='#note{top:1250px;line-height:1.32}' if not TT else '#note{font-size:16px}'
+    return page(CAN,h,body,note,css)
+
+# ------------------------------------------------------------------ accroche et fin : quatre habillages
+HAB={'A':dict(bg='radial-gradient(120% 70% at 30% 26%, #128F47 0%, #0B7A3B 30%, #064A25 62%, #04331A 100%)',t='#FFFFFF',s='#F6C41C',d='#FFF6D0',band=False,blancs=True),
+     'B':dict(bg='#04331A',t='#FFFFFF',s='#F6C41C',d='#A9C2B3',band=False,blancs=True),
+     'C':dict(bg='#F6C41C',t='#064A25',s='#064A25',d='rgba(14,26,19,.72)',band=False,blancs=False),
+     'D':dict(bg='#FFFFFF',t='#0E1A13',s='#0B7A3B',d='#5E6B62',band=True,blancs=False)}
+def plein(inner,css):
+    h=HAB[TH_]
+    return f'''<!doctype html><html lang="fr"><head><meta charset="utf-8"><style>{BASE_CSS}#c{{background:{h['bg']};color:{h['t']}}}#band{{position:absolute;left:0;right:0;top:0;height:124px;background:#F6C41C}}
+#brand{{color:{h['t'] if not h['band'] else '#064A25'}}}{css}</style></head><body><div id="c">{'<div id="band"></div>' if h['band'] else ''}{inner}</div>
+<script>Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{{}}))]).then(()=>{{window.READY=true}})</script></body></html>'''
+def plan_accroche():
+    h=HAB[TH_]
+    css=f'''#l{{position:absolute;left:56px;top:{420 if not h['band'] else 450}px;font:800 96px/1.12 "IN";letter-spacing:-.03em;color:{h['t']}}}
+#s{{position:absolute;left:52px;top:{720 if not h['band'] else 750}px;font:italic 900 236px/.9 "BC";text-transform:uppercase;color:{h['s']}}}'''
+    inner='<div id="top"><div id="brand"><img src="logo-verte.png" alt=""><div><b>Mali<i>Data</i>Foot</b></div></div></div><div id="l">Les Aigles<br>jouent.</div><div id="s">La data<br>parle.</div>'
+    return plein(inner,css)
+def plan_fin():
+    h=HAB[TH_]; x,t=('logo_x_blanc.png','logo_tt_blanc.png') if h['blancs'] else ('logo_x.png','logo_tt.png')
+    css=f'''#lo{{position:absolute;left:330px;top:{150 if not h['band'] else 190}px;width:420px;height:420px;border-radius:50%;overflow:hidden;background:#fff;box-shadow:0 0 0 6px #fff}}#lo img{{width:100%;height:100%;display:block}}
+#w{{position:absolute;left:0;right:0;top:{640 if not h['band'] else 672}px;text-align:center;font:italic 400 168px/1 "BCS";color:{h['t'] if TH_!='D' else '#064A25'};white-space:nowrap}}#w i{{font-weight:600}}
+#g{{position:absolute;left:0;right:0;top:{828 if not h['band'] else 858}px;text-align:center;font:500 40px/1 "IN";color:{h['d']}}}
+.cp{{position:absolute;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:20px;font:700 44px/1 "IN";color:{h['t'] if TH_!='D' else '#064A25'}}}.cp img{{display:block}}'''
+    inner=f'<div id="lo"><img src="logo-verte.png" alt=""></div><div id="w">Mali<i>Data</i>Foot</div><div id="g">La data du foot malien</div><div class="cp" style="top:{990 if not h["band"] else 1010}px"><img src="{x}" style="height:44px" alt="X">@MaliDataFoot</div><div class="cp" style="top:{1090 if not h["band"] else 1110}px"><img src="{t}" style="height:56px" alt="TikTok">@MaliDataFoot</div>'
+    return plein(inner,css)
+
+html={'tirs':plan_tirs,'but':plan_but,'fil':plan_fil,'reseau':plan_reseau,'fiche':plan_fiche,'accroche':plan_accroche,'fin':plan_fin}[PLAN]()
+open(OUT,'w',encoding='utf-8').write(html); print('ok',PLAN,TH_,OUT)
