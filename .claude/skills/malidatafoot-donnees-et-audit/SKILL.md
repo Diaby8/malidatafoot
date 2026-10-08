@@ -83,6 +83,12 @@ débit, mettre en cache, et ne jamais dépendre d'une source dont on n'a pas le 
 
 **Avant de proposer un sujet ou d'en parler**, vérifier sur le web la dernière actu des Aigles : derniers matchs, dernière liste, résultats, prochains rendez-vous. Ne jamais présenter comme « à venir » quelque chose qui a déjà eu lieu. C'est une exigence de Diaby, rappelée le 8 octobre 2026.
 
+**Où regarder** :
+- le web (presse sportive, femafoot.online pour le calendrier) ;
+- les pages X suivantes : @femafoot (officielle), @AiglesDuMali_, @Equipesdumali, @malicomps. On les lit avec le navigateur intégré de l'ordinateur de Diaby : sans connexion, X n'affiche que les 5 derniers posts environ, et la page @femafoot non connectée montre surtout des posts anciens.
+
+Ces pages sont des pistes, pas des preuves : un chiffre ou un fait qu'on y lit se recoupe à la source officielle avant d'être repris. Exemple du 8 octobre 2026 : @AiglesDuMali_ annonce le Mali 47e au classement FIFA (+6), alors que le site de la FIFA affiche encore 53e. Il s'agit sans doute d'une projection avant la publication officielle.
+
 **État au 8 octobre 2026** (à revérifier, ça bouge) :
 - **Sélectionneur** : Anthony Da Silva. Sa première liste date du 10 septembre 2026.
 - **Éliminatoires CAN 2027, groupe K** (Mali, Rwanda, Cap-Vert, Liberia) :
@@ -91,5 +97,9 @@ débit, mettre en cache, et ne jamais dépendre d'une source dont on n'a pas le 
   - le Mali a 6 points, à égalité avec le Rwanda.
 - **Amical Maroc 1-1 Mali**, le 4 octobre 2026 à Tanger : but marocain d'Ezzalzouli à la 35e, égalisation de Gaoussou Diarra à la 77e. Ce match a remplacé l'amical contre la Tunisie, annulé.
 - **Prochains matchs** : contre le Rwanda le 11 novembre à Bamako puis le 15 novembre à Kigali (calendrier publié sur femafoot.online). Ensuite le Cap-Vert et le Liberia, les 24 et 28 mars 2027.
+- **Classement FIFA** : 53e sur le site officiel le 8 octobre. La remontée annoncée à la 47e est à confirmer à la publication.
+- **Aigles Dames** : 2e tour des éliminatoires des JO 2028, en double confrontation contre le Bénin. Le premier match se joue à Lomé, vers le 8 octobre.
+- **U20** : tournoi UFOA-A à domicile, qualificatif pour la CAN U20. Le Mali n'y est plus allé depuis son titre de 2019.
+- **Seydou Dembélé** (Reims, arrivé en septembre 2026, révélation de la CAN U17 2025) : 8 buts dans 3 catégories selon @AiglesDuMali_, à recompter.
 - **Sinayoko** au Paris FC : 4 buts et 1 passe décisive en 5 matchs de Ligue 1 début octobre 2026 (à mettre à jour).
 - **Registre des joueurs maliens** : `registre/joueurs.csv`, avec la source de chaque club et un champ « à confirmer ».
