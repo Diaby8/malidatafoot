@@ -55,13 +55,17 @@ Une page data entièrement consacrée à une sélection, ça n'existe pas pour l
 - Quand le Mali encaisse-t-il ?
 - La génération des Mondiaux jeunes, dix ans après.
 
-## Phénomènes pour threads et vidéos
-- Pourquoi le Mali bute sur les quarts.
-- Tirer beaucoup ne suffit pas (expliquer le xG).
-- Jouer à 11 contre 10, est-ce vraiment un avantage ? (tous les cartons rouges de la CAN 2023)
-- Le Mali, une usine à milieux de terrain ?
-- Par où attaque le Mali.
-- Le pressing des Aigles rapporte-t-il ?
+## Phénomènes pour threads et vidéos (en détail)
+
+1. **Pourquoi le Mali bute toujours sur les quarts ?** On reprend les éliminations récentes une par une : occasions ratées, buts encaissés en fin de match, penalties. Et on cherche ce qui revient à chaque fois. C'est le sujet que tout supporter se pose. Format : un thread pour le fond, une vidéo pour le moment clé. Les matchs anciens demandent une vraie vérification.
+2. **Tirer beaucoup ne suffit pas.** Les 64 tirs du Mali à la CAN 2023 contre la qualité des occasions, comparés aux équipes qui sont allées loin. On explique le xG à tout le monde, avec un exemple qui les touche. Format : une vidéo motion design, avec les tirs qui tombent un par un. Faisable tout de suite.
+3. **Jouer à 11 contre 10, est-ce vraiment un avantage ?** On part du quart contre la Côte d'Ivoire, puis on mesure sur tous les cartons rouges de la CAN 2023 ce qui change vraiment après une expulsion. On ne raconte plus seulement le Mali : on explique un phénomène du foot, avec nos données. Format : un thread. Faisable tout de suite.
+4. **Le Mali, une usine à milieux de terrain ?** Keita, Bissouma, Haïdara, Samassékou… Pourquoi le pays sort autant de grands milieux et si peu de buteurs ? On regarde les postes des Maliens dans les grands championnats au fil des années. Ça explique aussi pourquoi Sinayoko compte autant. Format : un thread, avec une carte et une frise. Les données sont à rassembler avec soin.
+5. **Par où attaque le Mali ?** Avec le réseau de passes et les zones du terrain : le jeu passe-t-il surtout par le côté droit d'Hamari Traoré ? On explique l'identité de jeu en un seul visuel. Format : une vidéo. Faisable tout de suite.
+6. **Le pressing des Aigles : intense, mais est-ce qu'il rapporte ?** Combien de ballons récupérés haut finissent vraiment en tir. On distingue un pressing qui sert d'un pressing qui épuise. Format : un thread. Faisable tout de suite.
+
+Pour démarrer : le 3 ou le 2 (faisables tout de suite, données vérifiées, ils montrent qu'on explique au lieu de commenter).
+Le 1 et le 4 sont plus longs à préparer mais peuvent faire connaître la page : à préparer en parallèle.
 
 ## Les questions que se posent les supporters
 - Le Mali domine souvent, mais pourquoi il marque si peu ?
