@@ -120,7 +120,7 @@ Le 1 et le 4 sont plus longs à préparer mais peuvent faire connaître la page 
 
 ## Pistes relevées sur X le 8 octobre 2026 (à recouper avant tout post)
 
-- Le classement FIFA : le Mali serait remonté à la 47e place (+6) d'après @AiglesDuMali_, alors que le site de la FIFA affiche encore la 53e. Idée de post : ce qui fait monter ou descendre une équipe au classement FIFA, expliqué avec les matchs de septembre et d'octobre.
+- Le classement FIFA : le Mali est 47e (+6, 1474,14 points) au classement actuel du site de la FIFA. La prochaine mise à jour officielle est le 18 novembre, juste après les deux matchs contre le Rwanda. Idée de post : ce qui fait monter ou descendre une équipe, et ce que rapportent une victoire, un nul ou une défaite contre le Rwanda (calcul avec la formule de la FIFA).
 - Seydou Dembélé à Reims : 8 buts dans 3 catégories depuis son arrivée en septembre. Idée de post : suivre la progression d'un jeune, de la CAN U17 aux équipes de Reims.
 - Les Aigles Dames contre le Bénin (éliminatoires JO 2028) et les U20 au tournoi UFOA-A : élargir la page aux autres sélections du Mali.
 - Ange-Martial Tia raconte sa trêve avec le Mali au micro de son club : à reprendre pour un post sur ses débuts.

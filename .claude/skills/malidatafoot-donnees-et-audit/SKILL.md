@@ -87,7 +87,7 @@ débit, mettre en cache, et ne jamais dépendre d'une source dont on n'a pas le 
 - le web (presse sportive, femafoot.online pour le calendrier) ;
 - les pages X suivantes : @femafoot (officielle), @AiglesDuMali_, @Equipesdumali, @malicomps. On les lit avec le navigateur intégré de l'ordinateur de Diaby : sans connexion, X n'affiche que les 5 derniers posts environ, et la page @femafoot non connectée montre surtout des posts anciens.
 
-Ces pages sont des pistes, pas des preuves : un chiffre ou un fait qu'on y lit se recoupe à la source officielle avant d'être repris. Exemple du 8 octobre 2026 : @AiglesDuMali_ annonce le Mali 47e au classement FIFA (+6), alors que le site de la FIFA affiche encore 53e. Il s'agit sans doute d'une projection avant la publication officielle.
+Ces pages sont des pistes, pas des preuves : un chiffre ou un fait qu'on y lit se recoupe à la source officielle avant d'être repris. Et la source officielle se lit en entier, après chargement complet de la page. Le 8 octobre 2026, j'ai lu trop vite la page FIFA du Mali (l'encadré « records » disait 53e) et j'ai contredit à tort @AiglesDuMali_ : le tableau du haut affiche bien 47e.
 
 **État au 8 octobre 2026** (à revérifier, ça bouge) :
 - **Sélectionneur** : Anthony Da Silva. Sa première liste date du 10 septembre 2026.
@@ -97,7 +97,7 @@ Ces pages sont des pistes, pas des preuves : un chiffre ou un fait qu'on y lit s
   - le Mali a 6 points, à égalité avec le Rwanda.
 - **Amical Maroc 1-1 Mali**, le 4 octobre 2026 à Tanger : but marocain d'Ezzalzouli à la 35e, égalisation de Gaoussou Diarra à la 77e. Ce match a remplacé l'amical contre la Tunisie, annulé.
 - **Prochains matchs** : contre le Rwanda le 11 novembre à Bamako puis le 15 novembre à Kigali (calendrier publié sur femafoot.online). Ensuite le Cap-Vert et le Liberia, les 24 et 28 mars 2027.
-- **Classement FIFA** : 53e sur le site officiel le 8 octobre. La remontée annoncée à la 47e est à confirmer à la publication.
+- **Classement FIFA** : 47e (+6, 1474,14 points) au classement « actuel » du site de la FIFA, après la fenêtre de septembre-octobre. La dernière mise à jour officielle date du 20 juillet 2026 (53e). La prochaine est prévue le 18 novembre 2026, donc après les deux matchs contre le Rwanda.
 - **Aigles Dames** : 2e tour des éliminatoires des JO 2028, en double confrontation contre le Bénin. Le premier match se joue à Lomé, vers le 8 octobre.
 - **U20** : tournoi UFOA-A à domicile, qualificatif pour la CAN U20. Le Mali n'y est plus allé depuis son titre de 2019.
 - **Seydou Dembélé** (Reims, arrivé en septembre 2026, révélation de la CAN U17 2025) : 8 buts dans 3 catégories selon @AiglesDuMali_, à recompter.
