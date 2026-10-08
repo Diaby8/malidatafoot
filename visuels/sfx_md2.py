@@ -262,10 +262,22 @@ def kick(force=1.0):
 pop_carte = pop  # les bulles des buts de la carte des tirs restent
 if SANS_DING:
     _pop, _shim, _wood, _tick = pop, shimmer, wood, tick
-    pop = lambda *a, **k: _pop(*a, **k) * 0
+    pop = lambda *a, **k: tap() * 0.8  # les bulles deviennent des petits coups mats (sauf buts de la carte)
     shimmer = lambda *a, **k: _shim(*a, **k) * 0  # « * 0 » garde le même tirage aléatoire pour le reste
-    wood = lambda *a, **k: _wood(*a, **k) * 0
     tick = lambda *a, **k: _tick(*a, **k) * 0
+
+
+def tap(d=0.12):
+    """Petit coup mat, sans note (carte qu'on pose, doigt sur la table) : remplace les coups de bois."""
+    t = tt(d)
+    s = bp(noise(d), 250, 1800) * np.exp(-t / 0.006)
+    s += 0.6 * np.sin(2 * np.pi * (150 + 60 * np.exp(-t / 0.01)) * t) * np.exp(-t / 0.018)
+    return fade(s / np.max(np.abs(s)), 0.0002, 0.02)
+
+
+if SANS_DING:
+    wood = lambda *a, **k: (_wood(*a, **k) * 0, tap())[1] * 1.6
+    _roll_tics = None  # les roulements de tics deviennent un souffle qui monte (voir roll)
 
 # ------------------------------------------------------------------ TIMELINE vitrine MaliDataFoot (calée sur tim.json)
 import json
@@ -275,6 +287,9 @@ def swish_in(t):
 def swish_out(t):
     put(whoosh(0.4, 2600, 500, -0.2, -0.8, skew=0.35), t, 0.24)
 def roll(t0, t1, gain=0.05, pan=0.2, f=3400):
+    if SANS_DING:
+        put(sweep_noise(t1 - t0, 600, 2000, q=1.1, shape='rise'), t0, gain * 2.2, pan)  # souffle large, sans sifflement
+        return
     t, step = t0, 0.022
     while t < t1:
         put(tick(f, 0.014), t, gain, pan); step *= 1.07; t += step
@@ -298,7 +313,8 @@ for i, s in enumerate(shots):
     if s['is_goal']:
         put(bell(1050 + 60 * (i % 6), 0.5), ts, 0.13, pan); put(pop_carte(500, 1300), ts, 0.2, pan)
     else:
-        put(pop(300 + 700 * s['xg'], 700 + 1200 * s['xg'], 0.07), ts, 0.07 + 0.16 * s['xg'], pan)
+        if not SANS_DING:  # tirs ratés : plus de son dans l'essai (Diaby : la bulle seulement sur les buts)
+            put(pop(300 + 700 * s['xg'], 700 + 1200 * s['xg'], 0.07), ts, 0.07 + 0.16 * s['xg'], pan)
 put(whoosh(0.4, 500, 2600, -0.5, 0.5), t + 2.7, 0.24)
 for i in range(3):
     put(bell(1318.5 + 220 * i, 0.6), t + 2.8 + i * 0.12, 0.14, 0.3); put(pop(), t + 2.8 + i * 0.12, 0.15, 0.3)
@@ -311,9 +327,10 @@ swish_in(t); put(sweep_noise(0.7, 400, 2400, shape='rise'), t + 0.1, 0.12)
 np_ = 0
 for e in BU['seq']:
     if e['type'] == 'Pass':
-        put(wood(620 + 55 * np_, 0.09), e['at'], 0.24, -0.6 + 0.11 * np_); put(tick(2400 + 90 * np_, 0.02), e['at'], 0.06, -0.6 + 0.11 * np_)
         if SANS_DING:
             put(kick(0.8), e['at'], 0.55, -0.6 + 0.11 * np_)
+        else:
+            put(wood(620 + 55 * np_, 0.09), e['at'], 0.24, -0.6 + 0.11 * np_); put(tick(2400 + 90 * np_, 0.02), e['at'], 0.06, -0.6 + 0.11 * np_)
         np_ += 1
     elif e['type'] == 'Carry':
         put(tick(1700, 0.016), e['at'], 0.035, 0.0)
@@ -353,7 +370,10 @@ swish_out(o - 0.02)
 t = TT['res']; o = TT['fiche'] - 0.25
 swish_in(t); put(sweep_noise(0.7, 400, 2400, shape='rise'), t + 0.1, 0.12)
 for i, n in enumerate(VD['reseau_passes']['nodes']):
-    put(pop(360 + 45 * i, 900 + 90 * i), t + 0.6 + i * 0.06, 0.17, (n['y'] - 40) / 55)
+    if SANS_DING:
+        put(kick(0.45), t + 0.6 + i * 0.06, 0.3, (n['y'] - 40) / 55)  # une touche de balle par joueur
+    else:
+        put(pop(360 + 45 * i, 900 + 90 * i), t + 0.6 + i * 0.06, 0.17, (n['y'] - 40) / 55)
 roll(t + 1.2, t + 2.2, 0.035, 0.0, 2800)
 put(impact(0.6), t + 2.45, 0.55, -0.3); put(djembe('tone'), t + 2.45, 0.45, -0.3); put(bell(1318.5, 0.8), t + 2.47, 0.16, -0.3)
 put(thock(), t + 2.62, 0.45, -0.6); roll(t + 2.8, t + 3.4, 0.04, -0.6)
