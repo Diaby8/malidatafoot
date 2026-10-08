@@ -63,6 +63,50 @@ Une page data entièrement consacrée à une sélection, ça n'existe pas pour l
 - Par où attaque le Mali.
 - Le pressing des Aigles rapporte-t-il ?
 
+## Les questions que se posent les supporters
+- Le Mali domine souvent, mais pourquoi il marque si peu ?
+- Quels Maliens jouent vraiment en club cette saison ?
+- Qui mérite sa place ? (débats de sélection appuyés sur des chiffres)
+- Les binationaux apportent-ils plus que les locaux ? (sensible)
+
+## Le fil rouge du renouveau : « le Mali du nouveau coach, match après match »
+- Est-ce que le jeu change : possession, pressing, qualité des occasions ?
+- Qui sont les nouveaux appelés, et combien ils jouent en club.
+- L'âge et le profil du groupe : est-ce qu'il prépare la suite ?
+- Au fil des matchs, ce qui progresse et ce qui bloque.
+- Rester indépendant : montrer aussi ce qui coince, pas seulement ce qui marche.
+
+## Les familles de posts à faire tourner chaque semaine
+- Actu des Aigles : convocations, avant et après-match en data.
+- Maliens en club : le bilan du week-end.
+- Analyses de fond : pressing, coups de pied arrêtés, dépendance à un joueur.
+- Rétro : la CAN 2023, les grands matchs, les anciens.
+- Formats légers : duels, « qui a été le meilleur », quiz, débats de sélection.
+- Fait maison : nos propres données sur les Aigles et notre modèle xG.
+
+## Analyses de data science à venir
+- Profils de jeu (regroupement de joueurs).
+- Joueurs semblables.
+- Évolution sur la saison.
+- Phénomènes des Aigles : pressing, sorties de balle, coups de pied arrêtés.
+- Brouillons de visuels générés automatiquement après chaque match.
+
+## Idées des échanges de septembre 2026
+- Une base de tous les joueurs maliens et binationaux dans le monde, mise à jour automatiquement.
+- L'historique complet des Aigles : matchs, compos, buteurs, sélectionneurs.
+- Le championnat malien reconstitué à partir de sources publiques.
+- Des alertes quand un Malien marque, est transféré ou se blesse.
+- Le classement des meilleurs Maliens d'Europe.
+- Rétrospectives et records.
+- Un tableau de bord public.
+- Des prédictions pour les matchs des Aigles.
+- Le repérage des jeunes à fort potentiel.
+- « Le prochain Seydou Keita » (profils semblables).
+- Le meilleur XI possible selon la data.
+- Un chatbot sur le foot malien.
+- Des contenus traduits en bambara, en soninké ou en anglais.
+- Les rendez-vous « le joueur malien de la semaine » et « l'analyse d'avant-match des Aigles ».
+
 ## Formats légers
 - Devine le joueur à partir de son radar.
 - Le onze type de la CAN 2023 selon la data.
