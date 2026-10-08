@@ -239,10 +239,11 @@ if not CLOCHES:
     bell = lambda *a, **k: np.zeros(1)
 thock, whoosh, sweep_noise, shimmer, paper = _g(thock, 1.35), _g(whoosh, 1.5), _g(sweep_noise, 1.4), _g(shimmer, 1.7), _g(paper, 1.6)
 impact, crowd = _g(impact, 0.7), _g(crowd, 0.92)
-# Essai du 8 octobre 2026 (Diaby entend encore des « ding ») : sans bulles (pops), sans scintillement aigu, coups de bois aigus ramenés plus graves.
+# Essai du 8 octobre 2026 (Diaby entend encore des « ding ») : sans bulles (sauf sur la carte des tirs), sans scintillement aigu, coups de bois aigus ramenés plus graves.
 # À valider par Diaby avant de devenir le réglage par défaut. SFX_SANS_DING=1 pour l'essai.
 import os
 SANS_DING = os.environ.get('SFX_SANS_DING') == '1'
+pop_carte = pop  # les bulles de la carte des tirs restent (Diaby, 8 octobre 2026)
 if SANS_DING:
     pop = lambda *a, **k: np.zeros(1)
     _shim = shimmer
@@ -280,9 +281,9 @@ shots = VD['tirs']
 for i, s in enumerate(shots):
     ts = t + 0.6 + i / len(shots) * 1.6; pan = (s['y'] - 40) / 60
     if s['is_goal']:
-        put(bell(1050 + 60 * (i % 6), 0.5), ts, 0.13, pan); put(pop(500, 1300), ts, 0.2, pan)
+        put(bell(1050 + 60 * (i % 6), 0.5), ts, 0.13, pan); put(pop_carte(500, 1300), ts, 0.2, pan)
     else:
-        put(pop(300 + 700 * s['xg'], 700 + 1200 * s['xg'], 0.07), ts, 0.07 + 0.16 * s['xg'], pan)
+        put(pop_carte(300 + 700 * s['xg'], 700 + 1200 * s['xg'], 0.07), ts, 0.07 + 0.16 * s['xg'], pan)
 put(whoosh(0.4, 500, 2600, -0.5, 0.5), t + 2.7, 0.24)
 for i in range(3):
     put(bell(1318.5 + 220 * i, 0.6), t + 2.8 + i * 0.12, 0.14, 0.3); put(pop(), t + 2.8 + i * 0.12, 0.15, 0.3)
