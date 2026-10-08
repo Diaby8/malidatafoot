@@ -45,16 +45,18 @@ description: Comment produire un post ou une vidéo MaliDataFoot avec Diaby : fa
 ## 4. Motion design et vidéo
 
 - **Format.** Vertical 1080 × 1920, 60 images/s. Pages HTML + GSAP en timelines arrêtées (`window.seek(t)`, `window.READY`), capturées par Chromium (Playwright) en quatre lots, puis assemblées par ffmpeg : libx264 crf 20, preset slow, AAC 192k. Commande : `python taches.py video` ; `--controle` donne quelques images pour vérifier.
-- **Vidéo de lancement.** 37,45 s, finale du 8 octobre 2026 : `MaliDataFoot-video-de-lancement-tiktok-sans-cloches.mp4`. Elle n'est pas encore postée : Diaby prépare d'abord de vrais posts, pour ne pas la publier puis attendre une semaine.
+- **Vidéo de lancement.** 37,45 s, finale du 8 octobre 2026 : `MaliDataFoot-video-de-lancement-tiktok-essai-4.mp4` (« sons de terrain »). Elle n'est pas encore postée : Diaby prépare d'abord de vrais posts, pour ne pas la publier puis attendre une semaine.
 - **Avant de poster** : écouter au téléphone avec le son, tester la zone du bas de TikTok en brouillon privé, revérifier le « club actuel ».
 
 ## 5. Sons
 
 - Synthèse procédurale (`visuels/sfx_md2.py`), sans mélodie : Diaby ajoute lui-même la musique.
-- **Gardés** : djembés, impacts, souffles de transition, coups de bois, tics, clameur.
-- **Retirés le 8 octobre 2026** : les cloches (« ting ting, ça fait trop »). Le réglage est `CLOCHES = False`.
-- **À surveiller** : les « bulles » (pops qui montent) peuvent faire enfantin. Lui demander.
-- Préférer des sons secs et sobres. Rien qui sonne jouet ou dessin animé.
+- **Version validée le 8 octobre 2026, les « sons de terrain »** : djembés, impacts, souffles de transition, clameur, **frappes de balle** sur les passes, les conduites et le tir de l'anatomie du but, une **touche de balle** par joueur du réseau de passes, des **coups mats sans note** (lignes de la fiche, barres du duel), et un souffle qui monte à la place des roulements de tics.
+- **Retirés à sa demande** : les cloches (« ting ting, ça fait trop »), les bulles (gardées seulement sur les buts de la carte des tirs), le scintillement du but, les coups de bois en série qui montent (« xylophone »), les tics et cliquetis.
+- Ce réglage est celui par défaut. `SFX_SANS_DING=0` redonne les anciens sons, pour comparer.
+- **Règle** : rien qui fasse une note qui tinte (cloche, xylophone, bulle aiguë, scintillement), rien qui sonne jouet ou dessin animé. Préférer des sons de foot (ballon, filet, stade) et des sons secs et sobres.
+- **Contrôle** : chercher par la mesure les sons aigus et tenus (le script d'audit du 8 octobre en trouvait 28 avant, contre 4 souffles seulement après). Faire écouter Diaby au téléphone avant de valider.
+- **Piste** : remplacer un jour les frappes de synthèse par de vrais enregistrements libres de droits (CC0), que Diaby télécharge et dont on vérifie la licence.
 
 ## 6. Idées de contenus
 

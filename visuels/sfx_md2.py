@@ -1,5 +1,6 @@
 """Effets sonores de la vidéo de lancement MaliDataFoot (37,45 s) — synthèse procédurale, calée sur la timeline de md2.html.
-Sons gardés : djembés, impacts, souffles, coups de bois, tics, clameur. Pas de mélodie. Cloches retirées (voir CLOCHES)."""
+Sons (validés par Diaby le 8 octobre 2026) : djembés, impacts, souffles, clameur, frappes de balle, coups mats sans note.
+Pas de mélodie, pas de cloches, pas de bulles (sauf sur les buts de la carte des tirs), pas de xylophone ni de tics."""
 import numpy as np
 from scipy.signal import fftconvolve, butter, sosfilt
 from scipy.io import wavfile
@@ -239,12 +240,12 @@ if not CLOCHES:
     bell = lambda *a, **k: np.zeros(1)
 thock, whoosh, sweep_noise, shimmer, paper = _g(thock, 1.35), _g(whoosh, 1.5), _g(sweep_noise, 1.4), _g(shimmer, 1.7), _g(paper, 1.6)
 impact, crowd = _g(impact, 0.7), _g(crowd, 0.92)
-# Essai « sons de terrain » du 8 octobre 2026 (Diaby : encore des « ding », des cliquetis et du xylophone).
-# SFX_SANS_DING=1 : plus de bulles (sauf sur les buts de la carte des tirs), plus de scintillement, plus de coups de bois
+# « Sons de terrain », validés par Diaby le 8 octobre 2026 (il entendait encore des « ding », des cliquetis et du xylophone).
+# Réglage par défaut. SFX_SANS_DING=0 redonne les anciens sons (pour comparer). Ce réglage enlève : les bulles (sauf sur les buts de la carte des tirs), plus de scintillement, plus de coups de bois
 # (le « xylophone »), plus de tics ni de roulements de tics ; les passes de l'anatomie du but deviennent de vraies
-# frappes de balle (synthèse). À valider par Diaby avant de devenir le réglage par défaut.
+# frappes de balle (synthèse).
 import os
-SANS_DING = os.environ.get('SFX_SANS_DING') == '1'
+SANS_DING = os.environ.get('SFX_SANS_DING', '1') == '1'
 
 
 def kick(force=1.0):

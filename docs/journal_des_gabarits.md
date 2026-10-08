@@ -159,3 +159,10 @@ Le projet sort de l'espace de travail temporaire : dépôt `malidatafoot` (git),
 Toutes les commandes passent par `taches.py`. Vérifié sur une copie neuve : données, fiche, duel, grille, bannières et vidéo
 ressortent identiques aux livrables. Les règles sont dans trois skills (`.claude/skills/`) : forme, fond, production.
 Bannière : leçon retenue, les cartes se font depuis les vrais gabarits allégés (`reel_cartes.py`), pas redessinées.
+
+## 8 octobre 2026 : les sons de la vidéo de lancement
+
+Diaby entendait encore des « ding » après le retrait des cloches : c'étaient les bulles, le scintillement du but, les coups de
+bois en série (« xylophone ») et les tics. Quatre essais. Validé : les « sons de terrain » (frappes de balle sur les passes et le tir,
+touches de balle sur le réseau de passes, coups mats sans note sur la fiche et le duel, bulles seulement sur les buts de la carte
+des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliDataFoot-video-de-lancement-tiktok-essai-4.mp4`.
