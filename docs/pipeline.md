@@ -11,7 +11,7 @@ cinq graphiques sur les Aigles et un fichier de résultats qui alimente les visu
 
 ```bash
 python taches.py donnees      # environ une minute, téléchargement compris
-python taches.py tests        # 28 tests
+python taches.py tests        # 30 tests
 ```
 
 Options : `--only gold charts` pour ne relancer que certaines étapes, `--force` pour
