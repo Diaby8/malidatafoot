@@ -6,7 +6,8 @@ quelles saisons, quels championnats, quelles stats par joueur et par match.
 
 Utilisation (aucune installation, Python 3.9+ suffit) :
     Mac / Linux :  export API_FOOTBALL_KEY="ta_clé"  &&  python3 test_api_football.py
-    Windows     :  set API_FOOTBALL_KEY=ta_clé       &&  python test_api_football.py
+    Windows (PowerShell, terminal de VS Code) :  $env:API_FOOTBALL_KEY="ta_clé"  puis  python outils/test_api_football.py
+    Windows (invite cmd) :  set API_FOOTBALL_KEY=ta_clé  puis  python outils\test_api_football.py
 
 Mets joueurs.csv dans le même dossier que ce script.
 Le script fait environ 35 appels (le compte gratuit en autorise 100 par jour), attend entre
