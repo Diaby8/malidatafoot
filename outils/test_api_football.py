@@ -105,9 +105,20 @@ def main():
                                         "pays": (r.get("country") or {}).get("name"), "erreurs": erreurs(d),
                                         "saisons": [{"annee": s.get("year"), "en_cours": s.get("current"), "detail": s.get("coverage")}
                                                     for s in (r.get("seasons") or []) if s.get("year") in SAISONS]})
-    d = appel("leagues", country="Mali")
-    rapport["championnats_mali"] = {"erreurs": erreurs(d), "liste": [{"numero": (x.get("league") or {}).get("id"), "nom": (x.get("league") or {}).get("name"),
-                                                                     "saisons": [s.get("year") for s in (x.get("seasons") or [])][-4:]} for x in (d.get("response") or [])]}
+    # Le niveau de détail (« coverage ») est donné par l'API même en gratuit : c'est lui qui dit, pour chaque
+    # saison, s'il y a les événements, les compositions et les stats par joueur. On le relève pour le Mali,
+    # les compétitions africaines (CAN, éliminatoires, Ligue des champions CAF) et le Golfe.
+    def ligues(**critere):
+        d = appel("leagues", **critere)
+        return {"critere": critere, "erreurs": erreurs(d),
+                "liste": [{"numero": (x.get("league") or {}).get("id"), "nom": (x.get("league") or {}).get("name"),
+                           "pays": (x.get("country") or {}).get("name"),
+                           "saisons": [{"annee": s.get("year"), "en_cours": s.get("current"), "detail": s.get("coverage")}
+                                       for s in (x.get("seasons") or []) if s.get("year") in SAISONS]}
+                          for x in (d.get("response") or [])]}
+    rapport["championnats_mali"] = ligues(country="Mali")
+    rapport["afrique_et_golfe"] = [ligues(search="Africa Cup"), ligues(search="CAF Champions"),
+                                   ligues(country="Saudi-Arabia"), ligues(country="Qatar")]
 
     print("3. Joueurs témoins : les retrouve-t-on, et avec quelles stats")
     reg = lire_registre()
@@ -178,6 +189,16 @@ def main():
         ans = ", ".join(f"{s['annee']}{' (en cours)' if s['en_cours'] else ''}" for s in ch["saisons"]) or "aucune des saisons testées"
         print(f"  {ch['attendu']:<28} vu par l'API comme « {ch['nom_api']} » : {ans}")
     print(f"  Championnats du Mali connus de l'API : {len(rapport['championnats_mali']['liste'])}")
+    def detail(c):
+        c = c or {}
+        fx = c.get("fixtures") or {}
+        oui = [k for k, v in [("événements", fx.get("events")), ("compos", fx.get("lineups")),
+                              ("stats match", fx.get("statistics_fixtures")), ("stats joueurs", fx.get("statistics_players"))] if v]
+        return ", ".join(oui) or "rien de détaillé"
+    for bloc in [rapport["championnats_mali"]] + rapport["afrique_et_golfe"]:
+        for lg in bloc["liste"][:8]:
+            for sa in lg["saisons"][-1:]:
+                print(f"    {str(lg['nom'])[:38]:38} {sa['annee']} : {detail(sa['detail'])}")
     for j in rapport["joueurs"]:
         etat = "introuvable" if not j["trouve"] else ("trouvé (date de naissance identique)" if j["sur"] else "trouvé (à vérifier)")
         det = " ; ".join(f"{s['annee']} : " + (f"REFUSÉ ({s['erreurs']})" if s["erreurs"] else f"{sum((l['minutes'] or 0) for l in s['lignes'])} min") for s in j["saisons"])

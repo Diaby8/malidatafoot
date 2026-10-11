@@ -49,3 +49,25 @@ un xG avec un modèle entraîné sur les tirs de StatsBomb Open Data. Personne n
 | Fait maison | Tirs des Aigles relevés à la vidéo (FIFA+, YouTube) + notre modèle xG | Gratuit | Oui (nos propres données) | À construire : personne d'autre ne l'a |
 
 Proposition : Understat (gratuit) pour le xG des Maliens du top 5, plus un mois d'API-Football Pro pour juger la richesse des stats par match sur la saison en cours. Décision à Diaby.
+
+## Cartographie : d'où les grandes pages prennent leurs données (recherche du 11 octobre 2026)
+
+**Le constat** : presque tout le foot grand public passe par **Opta (Stats Perform)**. C'est le cas de FotMob (« powered by Opta » sur ses pages de la CAN 2025), de Flashscore, WhoScored, Squawka, EA FC, des données médias de la Premier League et de la BBC. FBref a perdu Opta le 20 janvier 2026 et n'a pas annoncé de remplaçant. Data'Scout utilise des fournisseurs « sous licence » non nommés. La FIFA collecte elle-même ses données (analystes et tracking optique) ; le fournisseur officiel de la CAF n'a pas été trouvé. Les sites grand public interdisent tous l'extraction automatique sans accord écrit (vérifié pour FotMob, Flashscore, Squawka et Data'Scout).
+
+**Ce qu'on peut utiliser tout de suite, légalement**
+
+| Source | Ce qu'elle apporte | Licence | Vérifié le 11/10 |
+|---|---|---|---|
+| martj42/international_results (GitHub) | Tous les matchs internationaux depuis 1872 : **572 matchs du Mali**, à jour jusqu'au Maroc–Mali du 4 octobre 2026. Buteurs aussi, mais incomplets (152 buts maliens, rien après janvier 2026) | **CC0** (domaine public) | Oui, fichiers lus |
+| RSSSF | Archives des sélections : joueurs les plus capés, buteurs du Mali (page mise à jour le 5 octobre 2026) | Copie libre en citant l'auteur | Selon la page |
+| Hudl StatsBomb Open Data | CAN 2023 complète, et d'autres compétitions (voir plus haut) | Gratuit, citation et logo obligatoires | Oui |
+| IMPECT Open Data | Bundesliga 2023-24 (événements et indicateurs de packing) | Citation et logo ; LICENSE.pdf à lire | Non lu |
+| SkillCorner Open Data | 10 matchs avec tracking | MIT | Non lu |
+| FIFA Training Centre | Rapports d'après-match publics de chaque match : Coupe du monde U-17 2025 (Mali U-17), Mondial des clubs 2025, Coupe du monde 2026 | CGU à lire avant de publier | Page vue, CGU non lues |
+| API-Football (gratuit) | Couvre le championnat du Mali, la CAN et ses éliminatoires, la Ligue des champions CAF et le Golfe. Le gratuit ne donne que 2022 à 2024 ; le niveau de détail par saison est relevé par `outils/test_api_football.py` | Conditions à lire pour l'affichage public | Couverture listée sur leur site |
+
+**À demander par écrit** : FotMob (en cours, via le contact de Diaby), Sofascore (équipe partenariats médias), Stats Perform / Opta (licence startup, sur devis), Hudl StatsBomb et SkillCorner (offre étudiants ou créateurs, aucune trouvée publiquement), CAF et FEMAFOOT (fournisseur officiel, feuilles de match).
+
+**Impossible ou à éviter** : scraper FotMob, Sofascore, Flashscore, Squawka ou Data'Scout (interdit) ; les stats avancées de FBref (elles n'existent plus) ; Opta, Wyscout ou Genius en offre individuelle (B2B, sur devis). Transfermarkt, WhoScored et Understat : conditions pas encore lues, donc pas de collecte massive avant lecture.
+
+**Non vérifié** : le partenariat Data'Scout × FEMAFOOT (annoncé sur X d'après Diaby, introuvable ailleurs), le fournisseur officiel de la CAF et celui de la LFP, la source des tirs d'Understat, les CGU de Transfermarkt, WhoScored, FIFA+ et FIFA Training Centre.
