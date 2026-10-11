@@ -25,3 +25,10 @@ Piste propre à MaliDataFoot pour les matchs des Aigles : relever nous-mêmes le
 un xG avec un modèle entraîné sur les tirs de StatsBomb Open Data. Personne n'a ces données pour les éliminatoires africaines.
 
 À faire : lancer `test_api_football.py` (clé dans l'environnement, jamais dans le chat), lire les conditions d'API-Football, vérifier Wyscout.
+
+## Test API-Football du 11 octobre 2026 (compte gratuit, 35 appels)
+
+- **Couverture des championnats** : bonne. Ligue 1, Ligue 2, Premier League, Serie A, Liga, Bundesliga, Eredivisie et Süper Lig existent, avec les saisons 2024, 2025 et 2026 (en cours). La CAN existe (édition 2025). L'API connaît un championnat du Mali.
+- **Joueurs** : les 8 joueurs témoins sont retrouvés, 7 avec la même date de naissance que notre registre (Alimami Gory reste à vérifier).
+- **Blocage** : l'offre gratuite ne donne les stats que pour les saisons 2022 à 2024. Les saisons 2025 et 2026 sont refusées (« Free plans do not have access to this season »). Le test du détail d'un match (partie 4) n'a rien renvoyé pour la même raison.
+- **Conclusion** : le compte gratuit ne sert à rien pour la saison en cours. Il faut une offre payante (à vérifier sur leur page de tarifs) ou une autre source. Décision à prendre par Diaby.
