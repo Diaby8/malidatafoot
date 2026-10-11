@@ -56,6 +56,9 @@ rouge.
 - **API-Football.** Gratuit à 100 requêtes par jour, puis 19, 29 ou 39 $ par mois. La clé reste dans la variable d'environnement `API_FOOTBALL_KEY`, jamais dans la conversation ni dans un fichier suivi par git. Diaby lance lui-même `outils/test_api_football.py` et transmet `rapport_api_football.json`.
 - **Sportmonks.** Environ 29 € par mois pour 5 championnats, plus une option xG à 24–29 € (Ligue 1 et phases finales de la CAN, pas les éliminatoires).
 - **Understat.** Gratuit : top 5 + Russie, avec le xG de chaque tir.
+- **martj42/international_results** (GitHub, CC0) : tous les matchs internationaux depuis 1872, dont 572 du Mali, à jour (octobre 2026). Buteurs incomplets : recouper avec RSSSF.
+- **RSSSF** : archives des sélections (capes, buteurs), copie libre en citant l'auteur.
+- **Opta** est derrière presque tout le grand public (FotMob, WhoScored, Flashscore…) : on ne prend jamais ces données sans accord écrit. Cartographie complète dans `docs/sources_de_donnees.md`.
 - **FBref.** A perdu les données avancées Opta le 20 janvier 2026.
 - **FotMob.** Interdit l'extraction automatique : ne pas l'utiliser.
 - **Wyscout.** Environ 299 € par an en licence personnelle.
@@ -90,6 +93,7 @@ débit, mettre en cache, et ne jamais dépendre d'une source dont on n'a pas le 
 Ces pages sont des pistes, pas des preuves : un chiffre ou un fait qu'on y lit se recoupe à la source officielle avant d'être repris. Et la source officielle se lit en entier, après chargement complet de la page. Le 8 octobre 2026, j'ai lu trop vite la page FIFA du Mali (l'encadré « records » disait 53e) et j'ai contredit à tort @AiglesDuMali_ : le tableau du haut affiche bien 47e.
 
 **État au 8 octobre 2026** (à revérifier, ça bouge) :
+- **CAN 2025** (Maroc) : élimination en quart contre le Sénégal (0-1), le 9 janvier 2026 à Tanger.
 - **Sélectionneur** : Anthony Da Silva. Sa première liste date du 10 septembre 2026.
 - **Éliminatoires CAN 2027, groupe K** (Mali, Rwanda, Cap-Vert, Liberia) :
   - Mali 3-1 Cap-Vert le 25 septembre 2026 ;
