@@ -32,3 +32,20 @@ un xG avec un modèle entraîné sur les tirs de StatsBomb Open Data. Personne n
 - **Joueurs** : les 8 joueurs témoins sont retrouvés, 7 avec la même date de naissance que notre registre (Alimami Gory reste à vérifier).
 - **Blocage** : l'offre gratuite ne donne les stats que pour les saisons 2022 à 2024. Les saisons 2025 et 2026 sont refusées (« Free plans do not have access to this season »). Le test du détail d'un match (partie 4) n'a rien renvoyé pour la même raison.
 - **Conclusion** : le compte gratuit ne sert à rien pour la saison en cours. Il faut une offre payante (à vérifier sur leur page de tarifs) ou une autre source. Décision à prendre par Diaby.
+
+## Recherche du 11 octobre 2026 : toutes les sources possibles pour la saison en cours
+
+| Source | Ce qu'on obtient | Prix | Droit de s'en servir | Verdict |
+|---|---|---|---|---|
+| StatsBomb Open Data | Événements complets : CAN 2023, Euro 2024, Copa América 2024, Ligue 1 2021-23, Bundesliga 2023-24… Pas la saison en cours | Gratuit | Oui, en citant Hudl StatsBomb, sans usage commercial | Garder : rétro et entraînement du modèle xG |
+| Understat | xG de chaque tir, top 5 européen + Russie, saison en cours (Sinayoko au Paris FC) | Gratuit | Pas d'interdiction trouvée ; à relire (robots.txt) avant de brancher ; débit très lent | À brancher en premier |
+| FBref | Stats de base (minutes, buts, passes déc.) ; plus de stats avancées depuis le 20 janvier 2026 | Gratuit | Robots limités à 10 requêtes/minute, sinon blocage d'un jour ; pas de téléchargement autorisé par leurs accords | Vérification ponctuelle seulement |
+| API-Football Pro | Tous les championnats (y compris Golfe, Russie, Afrique, éliminatoires), stats par joueur et par match, saison en cours | 19 $/mois, 7 500 requêtes/jour | Oui, c'est une API faite pour ça | Meilleur rapport couverture/prix |
+| Sportmonks Starter | 5 championnats au choix ; xG en option | 29 €/mois + 29 €/mois pour le xG | Oui | Plus cher pour moins de championnats |
+| FotMob | — | — | Interdit noir sur blanc (« Data Usage & Scraping ») | Non |
+| Sofascore | — | — | Pas d'API, données sous accords fournisseurs | Non |
+| WhoScored | Données Opta | — | Données sous licence | Non |
+| Transfermarkt | Transferts, contrats, valeurs (pas de stats de jeu) | — | Conditions non lues | Non tant qu'on ne les a pas lues |
+| Fait maison | Tirs des Aigles relevés à la vidéo (FIFA+, YouTube) + notre modèle xG | Gratuit | Oui (nos propres données) | À construire : personne d'autre ne l'a |
+
+Proposition : Understat (gratuit) pour le xG des Maliens du top 5, plus un mois d'API-Football Pro pour juger la richesse des stats par match sur la saison en cours. Décision à Diaby.
