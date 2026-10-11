@@ -60,7 +60,7 @@ def run(cfg: Config) -> dict:
     data = {
         "source": "StatsBomb Open Data — Coupe d'Afrique des Nations 2023",
         "volumes": {
-            "fichiers_bruts": len(json.loads((cfg.path("bronze") / "_manifest.json").read_text())),
+            "fichiers_bruts": len(json.loads((cfg.path("bronze") / "_manifest.json").read_text(encoding="utf-8"))),
             "matchs": con.execute("select count(*) from silver.matches").fetchone()[0],
             "evenements": con.execute("select count(*) from silver.events").fetchone()[0],
             "joueurs": con.execute("select count(*) from silver.players").fetchone()[0],

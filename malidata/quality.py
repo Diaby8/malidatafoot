@@ -25,7 +25,7 @@ def run(cfg: Config) -> dict:
 
     # --- bronze : fichiers complets et inchangés depuis la collecte
     bronze = cfg.path("bronze")
-    manifest = json.loads((bronze / "_manifest.json").read_text())
+    manifest = json.loads((bronze / "_manifest.json").read_text(encoding="utf-8"))
     n_matches = one("select count(*) from silver.matches")
     check("bronze_fichiers_complets", len(manifest) == 2 + 2 * n_matches, f"{len(manifest)} fichiers pour {n_matches} matchs")
     altered = [rel for rel, meta in manifest.items()

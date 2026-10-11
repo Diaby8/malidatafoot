@@ -150,7 +150,7 @@ def build_minutes(con: duckdb.DuckDBPyConnection) -> None:
 
 def run(cfg: Config) -> dict:
     bronze, silver = cfg.path("bronze"), cfg.path("silver")
-    raw_matches = json.loads((bronze / f"matches/{cfg.competition_id}/{cfg.season_id}.json").read_text())
+    raw_matches = json.loads((bronze / f"matches/{cfg.competition_id}/{cfg.season_id}.json").read_text(encoding="utf-8"))
 
     matches = pd.DataFrame([{
         "match_id": m["match_id"], "match_date": m["match_date"], "kick_off": m["kick_off"],
@@ -163,10 +163,10 @@ def run(cfg: Config) -> dict:
 
     ev_rows, xi_rows, pl_rows = [], [], []
     for mid in matches["match_id"]:
-        events = json.loads(Path(bronze / f"events/{mid}.json").read_text())
+        events = json.loads(Path(bronze / f"events/{mid}.json").read_text(encoding="utf-8"))
         ev_rows.extend(flatten_event(mid, e) for e in events)
         xi_rows.extend(starting_xi(mid, events))
-        for team in json.loads(Path(bronze / f"lineups/{mid}.json").read_text()):
+        for team in json.loads(Path(bronze / f"lineups/{mid}.json").read_text(encoding="utf-8")):
             for p in team["lineup"]:
                 pl_rows.append({"player_id": p["player_id"], "player": p["player_name"],
                                 "nickname": p.get("player_nickname"), "team": team["team_name"]})

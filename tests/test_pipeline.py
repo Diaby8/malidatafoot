@@ -138,3 +138,19 @@ def test_note_ex_aequo_meme_rang():
     prof = profil_bassin(pop, ["a", "b", "c"])
     egaux = prof[(prof["a"] + prof["b"] + prof["c"]) == 9]            # même somme de places : même note
     assert len(egaux) >= 2 and egaux["rang"].nunique() == 1
+
+
+def test_fichiers_texte_lus_en_utf8():
+    """Sous Windows, Python lit par défaut en cp1252 : « Traoré » devient « TraorÃ© » (bug du 11 octobre 2026).
+    Toute lecture ou écriture de texte du pipeline doit donc préciser encoding="utf-8"."""
+    import re
+    from pathlib import Path
+    racine = Path(__file__).resolve().parents[1]
+    fautifs = []
+    for f in list((racine / "malidata").rglob("*.py")) + list((racine / "visuels").glob("*.py")):
+        for n, ligne in enumerate(f.read_text(encoding="utf-8").splitlines(), 1):
+            if re.search(r"\.(read_text|write_text)\(", ligne) and "encoding" not in ligne:
+                fautifs.append(f"{f.name}:{n}")
+            if re.search(r"(?<![\w.])open\([^)]*\.(json|csv|html|md|txt|yaml)['\"]", ligne) and "encoding" not in ligne:
+                fautifs.append(f"{f.name}:{n}")
+    assert not fautifs, "fichiers texte lus sans encoding='utf-8' : " + ", ".join(fautifs)

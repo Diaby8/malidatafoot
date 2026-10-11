@@ -45,7 +45,7 @@ if K=='1':      # ---- le terrain qui devient des points : à gauche on joue, à
     corps=f'<svg width="{W}" height="{H}" viewBox="0 0 {W} {H}">{trame(CLAIR,.9,W+40,H+40,900)}{g}{lignes}</svg>'
     extra=titre(54,158,88,(('Les Aigles jouent.',VERT_D),('La data parle.',ROUGE)),'right')
 elif K=='2':    # ---- le Mali en points : la carte du pays dessinée avec la trame de la DA
-    bg=NUIT; G=json.load(open('geo/mali.json')); ring=G['coordinates'][0]
+    bg=NUIT; G=json.load(open('geo/mali.json', encoding='utf-8')); ring=G['coordinates'][0]
     lon0,lon1=min(p[0] for p in ring),max(p[0] for p in ring); lat0,lat1=min(p[1] for p in ring),max(p[1] for p in ring); cl=math.cos(math.radians((lat0+lat1)/2))
     S=424/(lat1-lat0); LW=(lon1-lon0)*cl*S; X0=W-52-LW; Y0=38; P=[(X0+(a-lon0)*cl*S,Y0+(lat1-b)*S) for a,b in ring]
     def dedans(x,y):

@@ -40,7 +40,7 @@ def _download(url: str, dest: Path, retries: int = 4) -> bytes:
 def run(cfg: Config, force: bool = False) -> dict:
     bronze = cfg.path("bronze")
     manifest_path = bronze / "_manifest.json"
-    manifest = json.loads(manifest_path.read_text()) if manifest_path.exists() else {}
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8")) if manifest_path.exists() else {}
 
     def fetch(rel: str) -> None:
         dest = bronze / rel
@@ -56,13 +56,13 @@ def run(cfg: Config, force: bool = False) -> dict:
     fetch("competitions.json")
     matches_rel = f"matches/{cfg.competition_id}/{cfg.season_id}.json"
     fetch(matches_rel)
-    match_ids = [m["match_id"] for m in json.loads((bronze / matches_rel).read_text())]
+    match_ids = [m["match_id"] for m in json.loads((bronze / matches_rel).read_text(encoding="utf-8"))]
 
     rels = [f"{kind}/{mid}.json" for mid in match_ids for kind in ("events", "lineups")]
     with ThreadPoolExecutor(max_workers=8) as pool:
         list(pool.map(fetch, rels))
 
-    manifest_path.write_text(json.dumps(manifest, indent=1, sort_keys=True))
+    manifest_path.write_text(json.dumps(manifest, indent=1, sort_keys=True), encoding="utf-8")
     total = sum(v["bytes"] for v in manifest.values())
     log.info("bronze : %d fichiers, %.1f Mo, %d matchs", len(manifest), total / 1e6, len(match_ids))
     return {"files": len(manifest), "bytes": total, "matches": len(match_ids)}
