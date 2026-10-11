@@ -56,9 +56,9 @@ rouge.
 - **API-Football.** Gratuit à 100 requêtes par jour, puis 19, 29 ou 39 $ par mois. La clé reste dans la variable d'environnement `API_FOOTBALL_KEY`, jamais dans la conversation ni dans un fichier suivi par git. Diaby lance lui-même `outils/test_api_football.py` et transmet `rapport_api_football.json`.
 - **Sportmonks.** Environ 29 € par mois pour 5 championnats, plus une option xG à 24–29 € (Ligue 1 et phases finales de la CAN, pas les éliminatoires).
 - **Understat.** Gratuit : top 5 + Russie, avec le xG de chaque tir.
-- **martj42/international_results** (GitHub, CC0) : tous les matchs internationaux depuis 1872, dont 572 du Mali, à jour (octobre 2026). Buteurs incomplets : recouper avec RSSSF.
+- **martj42/international_results** (GitHub, CC0) : tous les matchs internationaux depuis 1872, dont 572 du Mali, à jour (octobre 2026). **Branché dans le pipeline** (étape `aigles`, tables `gold.aigles_matchs` et `gold.aigles_bilan_annuel`), recoupé avec StatsBomb. Buteurs incomplets : recouper avec RSSSF.
 - **RSSSF** : archives des sélections (capes, buteurs), copie libre en citant l'auteur.
-- **Opta** est derrière presque tout le grand public (FotMob, WhoScored, Flashscore…) : on ne prend jamais ces données sans accord écrit. Cartographie complète dans `docs/sources_de_donnees.md`.
+- **Opta** : objectif d'obtenir un accès légal (par FotMob, ou une licence Stats Perform) ; voir `docs/feuille_de_route.md`. Opta est derrière presque tout le grand public (FotMob, WhoScored, Flashscore…) : on ne prend jamais ces données sans accord écrit. Cartographie complète dans `docs/sources_de_donnees.md`.
 - **FBref.** A perdu les données avancées Opta le 20 janvier 2026.
 - **FotMob.** Interdit l'extraction automatique : ne pas l'utiliser.
 - **Wyscout.** Environ 299 € par an en licence personnelle.

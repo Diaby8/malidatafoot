@@ -62,6 +62,41 @@ def run(cfg: Config) -> dict:
     check("score_entre_0_et_100", bad_score == 0, f"{bad_score} score(s) invalide(s)")
     dup = one("select count(*) - count(distinct player_id) from gold.player_scores")
     check("un_score_par_joueur", dup == 0, f"{dup} doublon(s)")
+
+    # --- source 2 : l'historique des Aigles (résultats internationaux, CC0)
+    dossier = bronze / "international_results"
+    man2 = json.loads((dossier / "_manifest.json").read_text(encoding="utf-8"))
+    alt2 = [n for n, meta in man2.items() if hashlib.sha256((dossier / n).read_bytes()).hexdigest() != meta["sha256"]]
+    check("aigles_bronze_intact", len(man2) == len(cfg.raw["resultats_internationaux"]["fichiers"]) and not alt2,
+          f"{len(man2)} fichier(s), {len(alt2)} modifié(s)")
+    # la clé (date, équipes) doit être unique pour les matchs du Mali, ceux qu'on publie. Ailleurs, la source
+    # contient au moins un cas de deux matchs le même jour (Tahiti–Nouvelle-Calédonie, 17/02/1974) : on le signale seulement.
+    dup_mali = one("select count(*) - count(distinct (date, adversaire)) from gold.aigles_matchs")
+    dup_monde = one("select count(*) from silver.intl_matches") - one(
+        "select count(*) from (select distinct date, home_team, away_team from silver.intl_matches)")
+    check("aigles_matchs_cle_unique", dup_mali == 0, f"{dup_mali} doublon(s) chez le Mali ({dup_monde} ailleurs dans la source, signalé)")
+    neg = one("select count(*) from silver.intl_matches where home_score < 0 or away_score < 0")
+    check("aigles_scores_valides", neg == 0, f"{neg} score(s) négatif(s)")
+    n_mali, age = con.execute("select count(*), current_date - max(date) from gold.aigles_matchs").fetchone()
+    limite = int(cfg.raw["resultats_internationaux"]["fraicheur_max_jours"])
+    check("aigles_source_a_jour", n_mali > 500 and age <= limite, f"{n_mali} matchs du Mali, le dernier il y a {age} jours (limite {limite})")
+    # les buteurs sont incomplets, mais ceux qui sont saisis ne doivent jamais dépasser le score
+    trop = one(f"""select count(*) from (
+        select g.date, g.home_team, g.away_team, g.team, count(*) n,
+               max(case when g.team = m.home_team then m.home_score else m.away_score end) score
+        from silver.intl_goals g join silver.intl_matches m using (date, home_team, away_team)
+        group by 1, 2, 3, 4) where n > score""")
+    check("aigles_buteurs_coherents", trop == 0, f"{trop} équipe-match(s) avec plus de buteurs que de buts")
+    # recoupement entre les deux sources : les matchs du Mali à la CAN 2023 doivent avoir le même score
+    ecarts, communs = con.execute(f"""
+        with sb as (select match_date as date,
+                           case when home_team = '{cfg.team}' then home_score else away_score end pour,
+                           case when home_team = '{cfg.team}' then away_score else home_score end contre
+                    from silver.matches where home_team = '{cfg.team}' or away_team = '{cfg.team}')
+        select count(*) filter (sb.pour <> a.buts_pour or sb.contre <> a.buts_contre), count(*)
+        from sb join gold.aigles_matchs a using (date)""").fetchone()
+    n_sb = one(f"select count(*) from silver.matches where home_team = '{cfg.team}' or away_team = '{cfg.team}'")
+    check("aigles_recoupe_statsbomb", ecarts == 0 and communs == n_sb, f"{communs}/{n_sb} matchs retrouvés, {ecarts} écart(s) de score")
     con.close()
 
     report = {"checks": [{"name": n, "ok": ok, "detail": d} for n, ok, d in checks],

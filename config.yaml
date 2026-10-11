@@ -5,6 +5,12 @@ source:
   competition_id: 1267      # Coupe d'Afrique des Nations
   season_id: 107            # édition 2023 (jouée en janv.-févr. 2024)
 team_focus: Mali
+# Deuxième source : tous les matchs internationaux depuis 1872 (domaine public, CC0), pour l'historique des Aigles.
+resultats_internationaux:
+  base_url: https://raw.githubusercontent.com/martj42/international_results/master
+  fichiers: [results.csv, goalscorers.csv, shootouts.csv]
+  equipe: Mali                # nom de l'équipe dans cette source
+  fraicheur_max_jours: 120    # au-delà, la source est jugée périmée (aucun match du Mali depuis)
 team_labels:               # noms affichés en français
   South Africa: Afrique du Sud
   Tunisia: Tunisie

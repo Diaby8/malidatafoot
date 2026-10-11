@@ -154,3 +154,29 @@ def test_fichiers_texte_lus_en_utf8():
             if re.search(r"(?<![\w.])open\([^)]*\.(json|csv|html|md|txt|yaml)['\"]", ligne) and "encoding" not in ligne:
                 fautifs.append(f"{f.name}:{n}")
     assert not fautifs, "fichiers texte lus sans encoding='utf-8' : " + ", ".join(fautifs)
+
+
+def test_aigles_vus_du_cote_du_mali():
+    """Le modèle gold des Aigles remet chaque match du côté du Mali : adversaire, buts, lieu, tirs au but."""
+    from pathlib import Path
+    racine = Path(__file__).resolve().parents[1]
+    con = duckdb.connect()
+    con.execute("create schema silver; create schema gold")
+    con.execute("""create table silver.intl_matches as select * from (values
+        (date '2026-09-25', 'Mali', 'Cape Verde', 3, 1, 'African Cup of Nations qualification', 'Bamako', 'Mali', false),
+        (date '2026-09-29', 'Liberia', 'Mali', 0, 1, 'African Cup of Nations qualification', 'Monrovia', 'Liberia', false),
+        (date '2026-01-03', 'Mali', 'Tunisia', 1, 1, 'African Cup of Nations', 'Casablanca', 'Morocco', true),
+        (date '2026-01-04', 'Senegal', 'Egypt', 2, 0, 'Friendly', 'Dakar', 'Senegal', false)
+    ) t(date, home_team, away_team, home_score, away_score, tournament, city, country, neutral)""")
+    con.execute("""create table silver.intl_shootouts as select * from (values
+        (date '2026-01-03', 'Mali', 'Tunisia', 'Mali')) t(date, home_team, away_team, winner)""")
+    for f in sorted((racine / "sql" / "aigles").glob("*.sql")):
+        con.execute(f.read_text(encoding="utf-8").replace("{equipe}", "Mali"))
+    df = con.execute("select * from gold.aigles_matchs order by date").df()
+    assert len(df) == 3                                     # le match Sénégal–Égypte n'est pas gardé
+    tun, cpv, lib = df.iloc[0], df.iloc[1], df.iloc[2]
+    assert (cpv.adversaire, cpv.buts_pour, cpv.buts_contre, cpv.resultat, cpv.lieu) == ("Cape Verde", 3, 1, "V", "domicile")
+    assert (lib.adversaire, lib.buts_pour, lib.buts_contre, lib.resultat, lib.lieu) == ("Liberia", 1, 0, "V", "extérieur")
+    assert (tun.resultat, tun.lieu, bool(tun.tirs_au_but), bool(tun.tab_gagnes)) == ("N", "neutre", True, True)
+    bilan = con.execute("select * from gold.aigles_bilan_annuel").df().iloc[0]
+    assert (bilan.matchs, bilan.victoires, bilan.nuls, bilan.defaites, bilan.buts_pour) == (3, 2, 1, 0, 5)

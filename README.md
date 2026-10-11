@@ -28,8 +28,8 @@ Toutes les commandes passent par `taches.py`. Elles fonctionnent sur Windows, ma
 
 | Commande | Ce qu'elle fait |
 |---|---|
-| `python taches.py donnees` | pipeline complet (StatsBomb Open Data, CAN 2023), puis exports pour les visuels ; environ 1 min |
-| `python taches.py tests` | les 28 tests du pipeline ; on ne publie rien si un test est rouge |
+| `python taches.py donnees` | pipeline complet (StatsBomb Open Data pour la CAN 2023, et l'historique des Aigles depuis 1960), puis exports pour les visuels ; environ 1 min |
+| `python taches.py tests` | les 30 tests du pipeline ; on ne publie rien si un test est rouge |
 | `python taches.py fiche` | fiche joueur, X et TikTok, dans `livrables/` |
 | `python taches.py duel` | duel, X et TikTok |
 | `python taches.py grille` | grille numérotée des variantes (32 cases) |

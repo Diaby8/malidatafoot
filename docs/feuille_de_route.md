@@ -1,4 +1,4 @@
-# Feuille de route (proposition du 8 octobre 2026, à discuter avec Diaby avant de construire)
+# Feuille de route (proposition du 8 octobre 2026, mise à jour le 11 octobre)
 
 Objectif : passer d'un pipeline qui tourne sur la CAN 2023 à une plateforme qui suit **les Aigles et les Maliens en club,
 saison en cours, automatiquement**, avec des données dont on a le droit de se servir, et qui sort des brouillons de
@@ -16,6 +16,13 @@ visuels après chaque match.
 - Les fonctions qui ramènent ces données au schéma silver. Les modèles gold existants restent les mêmes.
 - La collecte planifiée : chaque nuit pour les clubs, et après chaque match des Aigles. Au début avec GitHub Actions (cron) ou le planificateur de l'ordinateur.
 - Les contrôles qualité étendus : fraîcheur des données, joueurs du registre introuvables, écarts entre sources.
+
+## Objectif : obtenir les données Opta, légalement (décidé le 11 octobre 2026)
+
+Opta (Stats Perform) est derrière presque toutes les données du foot grand public. On ne les aspire pas : on cherche un accès autorisé.
+- **Par FotMob** (données Opta) : demande écrite en cours, avec un contact de Diaby chez eux ; démo de visuels en pièce jointe.
+- **Directement chez Stats Perform** : licences « sur mesure », startups acceptées mais pensées pour des organisations. Il faudra un dossier solide : la page, ses chiffres d'audience, la rigueur du projet (pipeline, contrôles, sources citées). ESDEA Consulting peut servir de structure si un statut d'organisation est demandé (à décider par Diaby).
+- **En attendant** : les sources libres (StatsBomb, résultats internationaux, Understat) et nos propres relevés vidéo, pour montrer ce qu'on sait faire.
 
 ## Étape 3 : ce que personne n'a
 

@@ -51,6 +51,21 @@ tables gold en CSV.
 | `malidata/charts.py` | Graphiques |
 | `tests/` | Tests unitaires |
 
+## Deuxième source : l'historique des Aigles (étape `aigles`)
+
+Tous les matchs internationaux depuis 1872, publiés en domaine public (CC0) sur GitHub par Mart Jürisoo
+(`martj42/international_results`). L'étape `aigles` fait tout le chemin pour cette source :
+
+- **bronze** : `data/bronze/international_results/` (results.csv, goalscorers.csv, shootouts.csv), avec son manifeste. Les fichiers sont retéléchargés au plus une fois par jour.
+- **silver** : `silver.intl_matches`, `silver.intl_goals`, `silver.intl_shootouts`.
+- **gold** (modèles de `sql/aigles/`) :
+  - `gold.aigles_matchs` : un match du Mali par ligne, vu du côté du Mali (adversaire, buts pour et contre, V/N/D, domicile/extérieur/neutre, tirs au but) ;
+  - `gold.aigles_bilan_annuel` : le bilan par année.
+
+**Contrôles** (dans `quality`) : fichiers intacts ; pas de doublon dans les matchs du Mali ; scores valides ; source à jour (dernier match du Mali il y a moins de 120 jours) ; jamais plus de buteurs que de buts ; et **recoupement entre les deux sources** : les 5 matchs du Mali à la CAN 2023 ont le même score chez StatsBomb et ici.
+
+**Limite** : les buteurs sont incomplets (152 buts maliens saisis, rien après janvier 2026). On ne publie pas un classement des buteurs sans le recouper avec RSSSF.
+
 ## Deux choix d'ingénierie à connaître
 
 **Le temps de jeu est recalculé depuis les événements.** Le fichier des compositions
