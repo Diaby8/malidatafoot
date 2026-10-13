@@ -45,6 +45,8 @@ description: Comment produire un post ou une vidéo MaliDataFoot avec Diaby : fa
 
 ## 4. Motion design et vidéo
 
+- **Règle des formats (13 octobre 2026)** : chaque sujet se décline en **motion design pour TikTok** et en **thread pour X**, à partir des mêmes visuels (gabarit `visuels/posts_video.py`, DA section 0). Le thread : un tweet d'accroche avec la première image, puis un tweet et une image par idée. Le motion design : les mêmes images animées, dans la mécanique de la vidéo de lancement (GSAP, `window.seek`).
+
 - **Format.** Vertical 1080 × 1920, 60 images/s. Pages HTML + GSAP en timelines arrêtées (`window.seek(t)`, `window.READY`), capturées par Chromium (Playwright) en quatre lots, puis assemblées par ffmpeg : libx264 crf 20, preset slow, AAC 192k. Commande : `python taches.py video` ; `--controle` donne quelques images pour vérifier.
 - **Vidéo de lancement.** 37,45 s, finale du 8 octobre 2026 : `MaliDataFoot-video-de-lancement-tiktok-essai-4.mp4` (« sons de terrain »). Elle n'est pas encore postée : Diaby prépare d'abord de vrais posts, pour ne pas la publier puis attendre une semaine.
 - **Avant de poster** : écouter au téléphone avec le son, tester la zone du bas de TikTok en brouillon privé, revérifier le « club actuel ».

@@ -75,6 +75,7 @@ def defense_aigles(con: duckdb.DuckDBPyConnection, cfg: Config | None = None) ->
     ref, rec = d[d.annee < 2020], d[d.annee >= 2020]
     b = poisson_irls(_plan(ref), ref["buts_contre"].to_numpy(float))
     attendus = float(np.exp(_plan(rec) @ b).sum())
+    d["attendu"] = np.exp(_plan(d) @ b)   # ce que le Mali de 2000-2019 aurait encaissé dans chaque match (même adversaire, même lieu)
     bilan = lambda s: {"matchs": int(len(s)), "buts_encaisses": int(s.buts_contre.sum()),  # noqa: E731
                        "par_match": float(s.buts_contre.mean()), "sans_encaisser": int((s.buts_contre == 0).sum()),
                        "rang_median_adversaire": float(s.rang_adversaire_avant.median()),
@@ -106,7 +107,7 @@ def defense_aigles(con: duckdb.DuckDBPyConnection, cfg: Config | None = None) ->
         "matchs": [{"date": str(r.date)[:10], "periode": "depuis_2020" if r.annee >= 2020 else "reference", "competition": r.competition,
                     "adversaire": r.adversaire, "buts_pour": int(r.buts_pour), "buts_contre": int(r.buts_contre),
                     "rang_adversaire": int(r.rang_adversaire_avant), "rang_fifa": int(r.rang_fifa), "classement_fifa": r.classement_fifa,
-                    "precision_fifa": r.precision_fifa, "lieu": r.lieu} for r in d.itertuples()],
+                    "precision_fifa": r.precision_fifa, "lieu": r.lieu, "attendu": float(r.attendu)} for r in d.itertuples()],
         "niveau": "rang FIFA de l'adversaire au dernier classement publié avant le match (compilations Dato-Futbol et World Football Rankings)",
         "source": "martj42/international_results (CC0) ; Elo calculé par MaliDataFoot (méthode eloratings.net)",
     }
@@ -136,6 +137,24 @@ def fifa_rwanda(registre) -> dict:
             "source": "registre/classement_fifa.csv ; formule FIFA (SUM, 2018)"}
 
 
+def defense_afrique(con: duckdb.DuckDBPyConnection, depuis: str = "2020-01-01") -> dict:
+    """Les défenses africaines depuis 2020 en match officiel (mêmes compétitions que defense_aigles).
+    Équipe africaine = qui a joué la CAN ou ses éliminatoires depuis 2020. Aucun seuil de matchs n'est nécessaire :
+    le classement du haut est le même avec 10, 20, 30 ou 40 matchs minimum (vérifié le 13 octobre 2026)."""
+    q = f"""
+    with off as (select * from silver.intl_matches where date >= '{depuis}' and tournament in {OFFICIELS}),
+    caf as (select home_team t from silver.intl_matches where date >= '{depuis}' and tournament in ('African Cup of Nations', 'African Cup of Nations qualification')
+            union select away_team from silver.intl_matches where date >= '{depuis}' and tournament in ('African Cup of Nations', 'African Cup of Nations qualification')),
+    l as (select home_team t, away_score enc from off union all select away_team, home_score from off)
+    select t, count(*) n, sum(enc) b, avg(enc) m from l where t in (select t from caf) group by t having count(*) >= 10 order by m, t"""
+    rows = con.execute(q).fetchall()
+    equipes = [{"equipe": t, "matchs": int(n), "buts_encaisses": int(b), "par_match": float(m), "rang": i + 1} for i, (t, n, b, m) in enumerate(rows)]
+    mali = next(e for e in equipes if e["equipe"] == "Mali")
+    return {"question": "Où se place la défense du Mali en Afrique depuis 2020 ?", "perimetre": "CAN, éliminatoires de la CAN et de la Coupe du monde",
+            "depuis": depuis, "equipes": equipes, "mali": mali, "nombre_equipes": len(equipes),
+            "source": "martj42/international_results (CC0)"}
+
+
 def run(cfg: Config) -> dict:
     con = duckdb.connect(str(cfg.path("warehouse")), read_only=True)
     dossier = cfg.path("outputs") / "analyses"
@@ -143,6 +162,9 @@ def run(cfg: Config) -> dict:
     from . import fifa
     fifa.bronze_rangs(cfg)
     res = defense_aigles(con, cfg)
+    afr = defense_afrique(con)
+    (dossier / "defense_afrique.json").write_text(json.dumps(afr, ensure_ascii=False, indent=1), encoding="utf-8")
+    log.info("défenses africaines depuis 2020 : le Mali est %de sur %d (%.3f but encaissé par match)", afr["mali"]["rang"], afr["nombre_equipes"], afr["mali"]["par_match"])
     con.close()
     (dossier / "defense_aigles.json").write_text(json.dumps(res, ensure_ascii=False, indent=1, default=float), encoding="utf-8")
     from .config import ROOT

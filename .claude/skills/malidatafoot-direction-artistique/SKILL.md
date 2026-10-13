@@ -10,9 +10,28 @@ C'est un projet pro. Chaque visuel doit avoir l'air d'une vraie interface de dat
 les applis et institutions du foot), jamais « IA », « débutant » ou « enfantin ». Viser la réussite et la crédibilité :
 mieux vaut un visuel de moins qu'un visuel approximatif.
 
-## 1. Deux styles à ne jamais confondre
+## 0. LA DA DES POSTS : le style de la vidéo (validé le 13 octobre 2026, « la DA, elle est parfaite, c'est ça que je veux »)
 
-**La nouvelle DA = le style « fiche »** (validé le 7 octobre 2026, c'est celui de la grille des variantes) :
+C'est la référence pour **tout post** (X, TikTok) et tout nouveau visuel de données. Gabarit : `visuels/posts_video.py`
+(trois exemples validés : classement des défenses africaines, courbe depuis 2000, points FIFA). Partir de ce fichier,
+ne jamais redessiner « dans l'esprit ».
+- Fond jaune dégradé `linear-gradient(180deg,#FBD134 0%,#F6C41C 45%,#EFA40A 100%)` + trame de points #FDEBA6 (opacité .85) qui grossissent vers le coin haut droit.
+- En haut : ligne d'info en Barlow Semi Condensed 600 capitales (la fin en 800), puis le titre sur deux lignes, Barlow Condensed 900 italique vert #064A25, puis 800 italique rouge #D4252A.
+- Le grand chiffre fantôme du message, en contour crème (#FFF6D0, trait 4 px, opacité .6), en haut à droite.
+- Les données **posées directement sur le jaune** : barres vert #0B7A3B pour le Mali, crème #FFF3C4 pour les autres ; courbe Mali verte pleine, comparaison rouge en pointillés ; axes #064A25 4 px ; grands chiffres en Barlow Condensed 900 italique, vert si bon, rouge si mauvais.
+- En bas du graphique : le chiffre clé en très gros + deux lignes de texte en capitales (un mot en rouge au plus).
+- Pied : logo, Mali*Data*Foot, logos X et TikTok + @MaliDataFoot, puis la ligne de source en petit.
+- **Aucun effet** : ni grain, ni craie, ni ombre, ni lueur, ni cadre ou carte blanche arrondie, ni dégradé sur les barres.
+- **Une idée, deux formats** (Diaby, 13 octobre 2026) : sur TikTok, le sujet devient un **motion design** (les visuels animés, comme la vidéo de lancement) ; sur X, un **thread** (une image par tweet, chaque image porte un message).
+- **Versions de couleurs** : Diaby est d'accord pour en proposer (autres fonds), mais la mise en page et les éléments ci-dessus ne bougent pas.
+
+Pourquoi cette section : jusqu'au 13 octobre, ce skill présentait la « fiche » à cadre blanc comme la nouvelle DA et le
+style vidéo comme un ancien gabarit. Les posts faits sur la fiche ont été jugés « trop IA, pas pro ». Le cadre blanc ne
+sert plus que pour la fiche joueur et le duel déjà validés (à reconfirmer avant de les réutiliser).
+
+## 1. Deux styles à ne jamais confondre (historique ; la section 0 prime)
+
+**Le style « fiche »** (validé le 7 octobre 2026 pour la fiche joueur et le duel, rejeté le 13 octobre pour les posts) :
 - fond jaune uni #F6C41C ;
 - signature en haut à gauche ;
 - grand titre en capitales penchées ;
@@ -24,8 +43,7 @@ Quatre mises en scène : **A cadre blanc** ; **B nuit** (fond #04331A, jaune et 
 sans cadre, une seule encre verte) ; **D blanc** (bandeau jaune en haut, fond blanc).
 La fiche joueur, le duel et le classement n'existent qu'en nouvelle DA.
 
-**Le style « vidéo »** (ancien gabarit, encore utilisé pour les tirs, le but, le fil du match et le réseau dans la vidéo
-de lancement) :
+**Le style « vidéo »** (celui de la vidéo de lancement, devenu la DA des posts, voir section 0) :
 - fond jaune dégradé (#FBD134 → #F6C41C → #EFA40A) avec la trame de points ;
 - titre sur deux lignes, vert foncé puis rouge ;
 - grand chiffre fantôme en contour ;
@@ -47,7 +65,7 @@ l'esprit » de la DA avec ses propres choix : c'est ce qui l'a fait retomber dan
 - **Polices.**
   - Barlow Condensed 900 italique en capitales, pour les titres et les grands chiffres.
   - Barlow Condensed italique pour la signature.
-  - Inter pour tout le reste.
+  - Inter pour le reste dans la fiche ; Barlow Semi Condensed (capitales) pour le reste dans les posts (section 0).
   - Polices locales via npm (`@fontsource`). Une capture qui affiche une police de secours (à empattements) est un défaut bloquant ; les scripts de capture s'arrêtent si une police manque.
 - **Signature.** Logo rond + « MaliDataFoot » écrit Mali*Data*Foot (fin, « Data » en demi-gras). Pas de capitales, pas de rouge, pas de @ dans la signature.
 - **Comptes.** Logos X et TikTok + @MaliDataFoot, toujours présents sur un visuel publié.
@@ -57,7 +75,7 @@ l'esprit » de la DA avec ses propres choix : c'est ce qui l'a fait retomber dan
 - **Pays.** Drapeau dans un petit rond, comme dans les applis de foot (`da.drapeau`).
 - **Clubs.** Écusson seulement si Diaby fournit le fichier.
 - **Photos de joueurs.** Photos officielles des clubs, non libres. La provenance est notée dans `visuels/photos/SOURCES.md`.
-- **Chiffres.** Pas de chiffres posés sur un graphique quand un tableau peut les porter. Pas de gros chiffres décoratifs.
+- **Chiffres.** Pas de chiffres posés sur un graphique quand un tableau peut les porter. Pas de gros chiffres décoratifs, sauf le chiffre fantôme et le chiffre clé du gabarit des posts (section 0), qui portent le message.
 - **Slogan.** « Les Aigles jouent. La data parle. » sert d'accroche (vidéo, fin de vidéo, bio). Jamais sur un visuel de données. Phrase de fin : « La data du foot malien ».
 
 ## 2 bis. Logo : pistes alternatives (leçon du 13 octobre 2026)
@@ -137,6 +155,7 @@ Dans le dépôt `malidatafoot`, dossier `visuels/`.
 
 | Fichier | Rôle |
 |---|---|
+| `posts_video.py` | **le gabarit des posts** (section 0) : `_pv_1.html` défenses africaines, `_pv_2.html` courbe depuis 2000, `_pv_3.html` points FIFA |
 | `da.py` | cadre commun, `fr()` (arrondi « comme à l'école »), `credit()`, `drapeau()` |
 | `variantes.py <plan> <A\|B\|C\|D> <sortie.html> [x\|tiktok]` | plans accroche, tirs, but, fil, reseau, fiche, fin ; historique des Aigles : histoire, scores, decennies, competitions (pensés pour la bannière : le bas de la version X reste à remplir avant d'en faire un post) |
 | `duel_v2.py`, `duel_mises.py`, `duel_commun.py` | le duel |
