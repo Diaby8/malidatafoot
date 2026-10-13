@@ -214,3 +214,16 @@ def test_poisson_irls_retrouve_les_coefficients():
     b = poisson_irls(X, y.astype(float))
     assert b == pytest.approx([-0.3, 0.25], abs=0.02)
     assert poisson_cdf(0, 2.0) == pytest.approx(np.exp(-2.0)) and poisson_cdf(50, 2.0) == pytest.approx(1.0)
+
+
+def test_calcul_fifa():
+    """Formule FIFA : à points égaux, une victoire en éliminatoires rapporte 25 × 0,5 ; ce que l'un gagne, l'autre le perd ;
+    en élimination directe d'une phase finale, le perdant ne perd rien ; tirs au but : 0,75 et 0,5."""
+    from malidata import fifa
+    assert fifa.match(1500, 1500, "V", 25) == pytest.approx((1512.5, 1487.5))
+    a, b = fifa.match(1474.14, 1156.16, "N", 25)
+    assert a - 1474.14 == pytest.approx(-(b - 1156.16))
+    assert fifa.match(1500, 1500, "D", 40, elimination_directe=True)[0] == 1500
+    assert fifa.match(1500, 1500, "TAB_V", 40)[0] == pytest.approx(1510)
+    s = {x["resultats"]: x["ecart"] for x in fifa.scenarios(1474.14, 1156.16, 25)}
+    assert len(s) == 9 and [k for k, v in s.items() if v > 0] == ["VV"]

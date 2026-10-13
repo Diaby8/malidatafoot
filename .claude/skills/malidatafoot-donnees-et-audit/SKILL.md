@@ -100,8 +100,10 @@ Ces pages sont des pistes, pas des preuves : un chiffre ou un fait qu'on y lit s
   - Liberia 0-1 Mali le 29 septembre 2026, avec le but d'Ange Martial Tia à la 79e (première convocation) ;
   - le Mali a 6 points, à égalité avec le Rwanda.
 - **Amical Maroc 1-1 Mali**, le 4 octobre 2026 à Tanger : but marocain d'Ezzalzouli à la 35e, égalisation de Gaoussou Diarra à la 77e. Ce match a remplacé l'amical contre la Tunisie, annulé.
-- **Prochains matchs** : contre le Rwanda le 11 novembre à Bamako puis le 15 novembre à Kigali (calendrier publié sur femafoot.online). Ensuite le Cap-Vert et le Liberia, les 24 et 28 mars 2027.
-- **Classement FIFA** : 47e (+6, 1474,14 points) au classement « actuel » du site de la FIFA, après la fenêtre de septembre-octobre. La dernière mise à jour officielle date du 20 juillet 2026 (53e). La prochaine est prévue le 18 novembre 2026, donc après les deux matchs contre le Rwanda.
+- **Prochains matchs** : contre le Rwanda en novembre, à Bamako puis à Kigali (dates à confirmer, voir plus bas). Ensuite le Cap-Vert et le Liberia, les 23 et 27 mars 2027 selon femafoot.online (lu le 13 octobre).
+- **Classement FIFA** : 47e (+6, 1474,14 points) au classement **officiel du 7 octobre 2026** (article FIFA du 7 octobre ; le précédent, du 20 juillet, le donnait 53e). Rwanda 119e (1156,16 points, à confirmer sur fifa.com). Le prochain classement sort le 18 novembre 2026, après les deux matchs contre le Rwanda. Le calcul FIFA est dans `malidata/fifa.py` (il retrouve les points d'octobre du Mali à 0,14 près) ; les points de départ dans `registre/classement_fifa.csv`.
+- **Dates contre le Rwanda à confirmer** : femafoot.online annonce le 13 novembre à Bamako et le 17 à Kigali (lu le 13 octobre) ; Africa Top Sports (13 octobre) dit le 11 et le 15.
+- **Elo maison** (`malidata/elo.py`, méthode eloratings.net, 49 945 matchs) : le Mali est 54e des sélections actives (1747 points) au 6 octobre 2026.
 - **Aigles Dames** : 2e tour des éliminatoires des JO 2028, en double confrontation contre le Bénin. Le premier match se joue à Lomé, vers le 8 octobre.
 - **U20** : tournoi UFOA-A à domicile, qualificatif pour la CAN U20. Le Mali n'y est plus allé depuis son titre de 2019.
 - **Seydou Dembélé** (Reims, arrivé en septembre 2026, révélation de la CAN U17 2025) : 8 buts dans 3 catégories selon @AiglesDuMali_, à recompter.

@@ -554,6 +554,102 @@ def plan_defense_sans():
     body=f'''<div class="hd"><h3>Chaque case est un match ; pleine, le Mali n'a pas encaissé</h3></div>{g}{bilan_def(D,y+6)}'''
     return page(CTX_DEF,hero_def(D),body,NOTE_DEF,css)
 
-html={'tirs':plan_tirs,'defense':plan_defense,'defense_attendu':plan_defense_attendu,'defense_matchs':plan_defense_matchs,'defense_sans':plan_defense_sans,'but':plan_but,'fil':plan_fil,'reseau':plan_reseau,'fiche':plan_fiche,'accroche':plan_accroche,'fin':plan_fin,
+# ------------------------------------------------------------------ le classement FIFA et le Rwanda (malidata/analyses.py, fifa.py)
+def fifa_d(): return json.load(open('../outputs/analyses/fifa_rwanda.json',encoding='utf-8'))
+CTX_F="Éliminatoires de la CAN 2027, novembre 2026"
+NOTE_F=("Points gagnés = 25 × (résultat − résultat attendu). Points du 7 octobre 2026.","Données : FIFA. Calcul MaliDataFoot.")
+RES_F={'V':'victoire','N':'nul','D':'défaite'}
+sg=lambda v,d=1:('+' if v>=0.05 else ('−' if v<=-0.05 else ''))+fr(abs(v),d)
+def hero_f(F):
+    m,r=F['points_avant']['Mali'],F['points_avant']['Rwanda']; vv=next(s for s in F['deux_matchs'] if s['resultats']=='VV')
+    return hero('Le classement FIFA',"Les deux matchs contre le Rwanda",f"Avant : Mali {fr(m,2)} points, Rwanda {fr(r,2)}",
+                ('Avec deux victoires',sg(vv['ecart']),'le seul cas qui rapporte'))
+def lire_f(F,top):
+    u=F['un_match']; a=round(100*F['attendu_mali'])
+    return f'''<div id="lire" style="top:{top}px"><h4>À lire</h4><p>Le calcul de la FIFA attend une victoire du Mali : son « résultat attendu » est de {a} %. Une victoire ne rapporte donc que {fr(u['V'],1)} points, un nul en coûte {fr(-u['N'],1)} et une défaite {fr(-u['D'],1)}.</p></div>'''
+def col_f(v):
+    return T['niv'][0] if v>0 else T['niv'][2]
+
+def plan_fifa():
+    """2-1 : les neuf scénarios des deux matchs, en grille aller × retour."""
+    F=fifa_d(); S={s['resultats']:s['ecart'] for s in F['deux_matchs']}; mx=max(abs(v) for v in S.values())
+    x0=200; cw=(W-x0)/3; ch=128; top=Y0+100; g=''
+    for j,r in enumerate('VND'):
+        g+=f'<div style="position:absolute;left:{x0+j*cw:.0f}px;top:{top-34}px;width:{cw:.0f}px;text-align:center;font:600 18px/1 IN;color:{T["doux"]}">{RES_F[r]}</div>'
+    g+=f'<div style="position:absolute;left:{x0}px;top:{top-68}px;width:{W-x0}px;text-align:center;font:700 19px/1 IN;color:{T["ink"]}">Match retour, à Kigali</div>'
+    g+=f'<div style="position:absolute;left:0;top:{top+12-34}px;font:700 19px/1 IN;color:{T["ink"]}">Match aller, à Bamako</div>'
+    for i,a in enumerate('VND'):
+        y=top+12+i*(ch+10)
+        g+=f'<div style="position:absolute;left:0;top:{y+ch/2-10:.0f}px;font:600 18px/1 IN;color:{T["doux"]}">{RES_F[a]}</div>'
+        for j,b in enumerate('VND'):
+            v=S[a+b]; ms=max(abs(w) for w in S.values() if (w>0)==(v>0)); op=.25+.75*abs(v)/ms; x=x0+j*cw
+            g+=(f'<div style="position:absolute;left:{x+5:.0f}px;top:{y}px;width:{cw-10:.0f}px;height:{ch}px;border-radius:10px;background:{col_f(v)};opacity:{op:.2f}"></div>'
+                f'<div style="position:absolute;left:{x+5:.0f}px;top:{y+ch/2-26:.0f}px;width:{cw-10:.0f}px;text-align:center;font:italic 900 52px/1 BC;color:{T["fond"] if op>.55 else T["ink"]}">{sg(v)}</div>')
+    yl=top+12+3*(ch+10)+24
+    css=CSS_DEF()
+    lg=f'<span><i style="width:15px;height:15px;border-radius:3px;background:{T["niv"][0]}"></i>le Mali gagne des points</span><span><i style="width:15px;height:15px;border-radius:3px;background:{T["niv"][2]}"></i>il en perd</span>'
+    body=f'''<div class="hd"><h3>Les deux matchs, tous les scénarios</h3><div class="lg">{lg}</div></div>{g}{lire_f(F,yl)}'''
+    return page(CTX_F,hero_f(F),body,NOTE_F,css)
+
+def plan_fifa_un():
+    """2-2 : un seul match, trois résultats, des barres de part et d'autre de zéro."""
+    F=fifa_d(); u=F['un_match']; x0=60; CH=330; top=Y0+60; z=top+120; k=180/20; g=''; gw=(W-x0)/3
+    g+=f'<div style="position:absolute;left:{x0}px;right:0;top:{z}px;height:2px;background:{T["mute"]}"></div>'
+    for i,r in enumerate('VND'):
+        v=u[r]; h=abs(v)*k; x=x0+(i+.5)*gw-55; y=z-h if v>0 else z+2
+        g+=f'<div style="position:absolute;left:{x:.0f}px;top:{y:.0f}px;width:110px;height:{h:.0f}px;border-radius:5px;background:{col_f(v)}"></div>'
+        ly=y-50 if v>0 else y+h+8
+        g+=f'<div style="position:absolute;left:{x-40:.0f}px;width:190px;top:{ly:.0f}px;text-align:center;font:italic 900 46px/1 BC;color:{T["titre"]}">{sg(v,2)}</div>'
+        g+=f'<div style="position:absolute;left:{x-40:.0f}px;width:190px;top:{z-36 if v<0 else z+12:.0f}px;text-align:center;font:600 19px/1 IN;color:{T["ink"]}">{RES_F[r].capitalize()}</div>'
+    S={s['resultats']:s['ecart'] for s in F['deux_matchs']}
+    rows=[('Deux victoires','VV'),('Une victoire et un nul',None),('Deux nuls','NN'),('Deux défaites','DD')]
+    val=lambda c: sg(S[c],1) if c else f"{sg(S['VN'],1)} ou {sg(S['NV'],1)}"
+    li=''.join(f'<div class="r"><span class="n">{a}</span><span class="c" style="right:0;width:220px">{val(c)}</span></div>' for a,c in rows)
+    css=CSS_DEF()
+    yt=z+250
+    body=f'''<div class="hd"><h3>Les points d'un seul match contre le Rwanda</h3></div>{g}
+<div style="position:absolute;left:0;right:0;top:{yt}px"><h4>Sur les deux matchs</h4><div class="th e"><span style="right:0">points pour le Mali</span></div>{li}</div>{lire_f(F,yt+230)}'''
+    return page(CTX_F,hero_f(F),body,NOTE_F,css)
+
+def plan_fifa_courbe():
+    """2-3 : ce que rapporte un match d'éliminatoires selon la force de l'adversaire ; le Rwanda placé sur la courbe."""
+    F=fifa_d(); m=F['points_avant']['Mali']; rw=F['points_avant']['Rwanda']; I=F['importance']
+    att=lambda p:1/(10**(-(m-p)/600)+1); x0=60; CW=W-x0-20; CH=360; top=Y0+60; lo,hi=1000,1900; ymin,ymax=-25,25
+    sx=lambda p:x0+(p-lo)/(hi-lo)*CW; sy=lambda v:CH*(ymax-v)/(ymax-ymin); g=''
+    for v in (-20,-10,0,10,20):
+        g+=f'<line x1="{x0}" y1="{sy(v):.1f}" x2="{x0+CW}" y2="{sy(v):.1f}" stroke="{T["mute"] if v==0 else T["trait2"]}" stroke-width="{2 if v==0 else 1.2}"/><text x="0" y="{sy(v)+6:.1f}" class="ax">{sg(v,0) if v else "0"}</text>'
+    for p in (1000,1200,1400,1600,1800):
+        g+=f'<text x="{sx(p):.1f}" y="{CH+26}" text-anchor="middle" class="ax">{p}</text>'
+    for r,c,da in (('V',T['niv'][0],''),('N',T['niv'][1],''),('D',T['niv'][2],'')):
+        w=RESULT_W[r]; d='M'+'L'.join(f'{sx(p):.1f} {sy(I*(w-att(p))):.1f}' for p in range(lo,hi+1,10))
+        g+=f'<path d="{d}" fill="none" stroke="{c}" stroke-width="4" stroke-linejoin="round"/>'
+        g+=f'<text x="{x0+CW+8}" y="{sy(I*(w-att(hi)))+6:.1f}" class="axt">{RES_F[r]}</text>'
+    for p,lab in ((rw,'Rwanda'),(m,'même niveau que le Mali')):
+        g+=f'<line x1="{sx(p):.1f}" y1="0" x2="{sx(p):.1f}" y2="{CH}" stroke="{T["ink"]}" stroke-width="1.5" stroke-dasharray="4 5"/><text x="{sx(p)+8:.1f}" y="18" class="axt" style="fill:{T["ink"]}">{lab}</text>'
+        for r in 'VND':
+            v=I*(RESULT_W[r]-att(p)); g+=f'<circle cx="{sx(p):.1f}" cy="{sy(v):.1f}" r="7" fill="{T["fond"]}" stroke="{T["ink"]}" stroke-width="2.5"/>'
+    g+=f'<text x="{x0+CW/2:.0f}" y="{CH+54}" text-anchor="middle" class="axt">Points FIFA de l\'adversaire</text>'
+    css=CSS_DEF()
+    body=f'''<div class="hd"><h3>Les points d'un match d'éliminatoires, selon l'adversaire</h3></div>
+<svg style="position:absolute;left:0;top:{top}px;overflow:visible" width="{W-60}" height="{CH+60}" viewBox="0 0 {W-60} {CH+60}">{g}</svg>{lire_f(F,top+CH+90)}'''
+    return page(CTX_F,hero_f(F),body,NOTE_F,css)
+RESULT_W={'V':1.0,'N':0.5,'D':0.0}
+
+def plan_fifa_liste():
+    """2-4 : les neuf scénarios, du meilleur au pire, en barres de part et d'autre de zéro."""
+    F=fifa_d(); S=sorted(F['deux_matchs'],key=lambda s:-s['ecart']); mx=max(abs(s['ecart']) for s in S)
+    lab=lambda c:f"{RES_F[c[0]].capitalize()} à Bamako, {RES_F[c[1]]} à Kigali"
+    pos=max(s['ecart'] for s in S); neg=-min(s['ecart'] for s in S); k=(W-360-80)/(pos+neg); zx=360+neg*k; kneg=k; top=Y0+56; rh=50; g=''
+    for i,s in enumerate(S):
+        y=top+i*rh; v=s['ecart']
+        g+=f'<div style="position:absolute;left:0;top:{y+12}px;font:500 18px/1 IN;color:{T["ink"]};white-space:nowrap">{lab(s["resultats"])}</div>'
+        if v>0: g+=f'<div style="position:absolute;left:{zx:.0f}px;top:{y+8}px;width:{v*k:.0f}px;height:26px;border-radius:0 5px 5px 0;background:{col_f(v)}"></div><div style="position:absolute;left:{zx+v*k+10:.0f}px;top:{y+9}px;font:700 20px/1 IN;color:{T["ink"]}">{sg(v)}</div>'
+        else: g+=f'<div style="position:absolute;left:{zx-(-v)*kneg:.0f}px;top:{y+8}px;width:{-v*kneg:.0f}px;height:26px;border-radius:5px 0 0 5px;background:{col_f(v)}"></div><div style="position:absolute;left:{zx+10:.0f}px;top:{y+9}px;font:700 20px/1 IN;color:{T["ink"]}">{sg(v)}</div>'
+    g+=f'<div style="position:absolute;left:{zx-1:.0f}px;top:{top}px;width:2px;height:{9*rh}px;background:{T["mute"]}"></div>'
+    css=CSS_DEF()
+    body=f'''<div class="hd"><h3>Les neuf scénarios, du meilleur au pire</h3></div>{g}{lire_f(F,top+9*rh+30)}'''
+    return page(CTX_F,hero_f(F),body,NOTE_F,css)
+
+html={'tirs':plan_tirs,'fifa':plan_fifa,'fifa_un':plan_fifa_un,'fifa_courbe':plan_fifa_courbe,'fifa_liste':plan_fifa_liste,'defense':plan_defense,'defense_attendu':plan_defense_attendu,'defense_matchs':plan_defense_matchs,'defense_sans':plan_defense_sans,'but':plan_but,'fil':plan_fil,'reseau':plan_reseau,'fiche':plan_fiche,'accroche':plan_accroche,'fin':plan_fin,
       'histoire':plan_histoire,'scores':plan_scores,'decennies':plan_decennies,'competitions':plan_competitions}[PLAN]()
 open(OUT,'w',encoding='utf-8').write(html); print('ok',PLAN,TH_,OUT)

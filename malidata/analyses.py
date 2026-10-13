@@ -84,6 +84,30 @@ def defense_aigles(con: duckdb.DuckDBPyConnection) -> dict:
     }
 
 
+def fifa_rwanda(registre) -> dict:
+    """« Contre le Rwanda, le Mali a plus à perdre qu'à gagner au classement FIFA. » Points avant (registre/classement_fifa.csv),
+    calcul de la FIFA (fifa.py), deux matchs d'éliminatoires (I = 25). Vérification : en partant des points de juillet, le calcul
+    doit retrouver les points d'octobre du Mali (3-1 contre le Cap-Vert, 1-0 au Liberia, 1-1 au Maroc en amical)."""
+    from . import fifa
+    c = pd.read_csv(registre / "classement_fifa.csv")
+    pt = lambda e, d: float(c[(c.equipe == e) & (c.date_classement == d)].points.iloc[0])  # noqa: E731
+    mali, rwa = pt("Mali", "2026-10-07"), pt("Rwanda", "2026-10-07")
+    un = {r: fifa.match(mali, rwa, r, fifa.IMPORTANCE["eliminatoires"])[0] - mali for r in "VND"}
+    sc = fifa.scenarios(mali, rwa, fifa.IMPORTANCE["eliminatoires"])
+    # vérification sur la fenêtre de septembre-octobre (points des adversaires : ceux de juillet, donc à quelques centièmes près)
+    p = pt("Mali", "2026-07-20")
+    p, _ = fifa.match(p, pt("Cape Verde", "2026-07-20"), "V", 25)
+    p, _ = fifa.match(p, pt("Liberia", "2026-07-20"), "V", 25)
+    p, _ = fifa.match(p, pt("Morocco", "2026-07-20"), "N", 10)
+    return {"question": "Combien de points FIFA le Mali peut-il gagner ou perdre contre le Rwanda ?",
+            "points_avant": {"Mali": mali, "Rwanda": rwa, "date": "2026-10-07"},
+            "attendu_mali": fifa.attendu(mali, rwa), "importance": fifa.IMPORTANCE["eliminatoires"],
+            "un_match": un, "deux_matchs": sc,
+            "verification_octobre": {"recalcule": p, "officiel": mali, "ecart": p - mali},
+            "a_confirmer": c[c.a_confirmer == "oui"].equipe.tolist(),
+            "source": "registre/classement_fifa.csv ; formule FIFA (SUM, 2018)"}
+
+
 def run(cfg: Config) -> dict:
     con = duckdb.connect(str(cfg.path("warehouse")), read_only=True)
     dossier = cfg.path("outputs") / "analyses"
@@ -91,6 +115,11 @@ def run(cfg: Config) -> dict:
     res = defense_aigles(con)
     con.close()
     (dossier / "defense_aigles.json").write_text(json.dumps(res, ensure_ascii=False, indent=1, default=float), encoding="utf-8")
+    from .config import ROOT
+    fr_ = fifa_rwanda(ROOT / "registre")
+    (dossier / "fifa_rwanda.json").write_text(json.dumps(fr_, ensure_ascii=False, indent=1, default=float), encoding="utf-8")
+    log.info("FIFA contre le Rwanda : victoire %+.2f, nul %+.2f, défaite %+.2f ; vérification d'octobre : écart %.2f point",
+             fr_["un_match"]["V"], fr_["un_match"]["N"], fr_["un_match"]["D"], fr_["verification_octobre"]["ecart"])
     r, n, e = res["reference"], res["depuis_2020"], res["a_adversaires_egaux"]
     log.info("défense des Aigles : %.2f but encaissé par match depuis 2020 (%d matchs) contre %.2f en 2000-2019 ; "
              "à adversaires égaux, %.1f buts attendus pour %d réels", n["par_match"], n["matchs"], r["par_match"], e["buts_attendus"], e["buts_reels"])
