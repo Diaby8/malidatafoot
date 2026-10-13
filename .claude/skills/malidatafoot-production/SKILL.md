@@ -10,6 +10,7 @@ description: Comment produire un post ou une vidéo MaliDataFoot avec Diaby : fa
 - En français, court, simple, peu de listes.
 - Discuter et vérifier l'objectif avant de produire quand la demande est ambiguë. Quand il dit « génère plein, on va choisir », produire un lot numéroté.
 - Être aussi critique que lui sur le fond et la forme : « c'est un projet pro ». Auditer soi-même avant d'envoyer, sans attendre qu'il trouve les défauts.
+- **Ça vaut pour tous les contenus, textes des posts compris** (rappel du 13 octobre 2026). Avant de proposer ou de valider une légende : répétitions (« nouvelle page, le nouveau compte »), ton trop froid (un point sec après une accroche), oubli d'une partie du public (les Maliens en club, pas seulement les Aigles), promesse qui enferme la page, longueur (X : 280 caractères, emojis comptés double ; TikTok : 5 hashtags au plus, bio 80 caractères), hashtags inutiles ou ambigus (#CAN = « can » en anglais : préférer #AFCON). Proposer de vraies alternatives, pas seulement corriger ses brouillons.
 - Ne jamais changer un texte, un chiffre ou un son d'un visuel validé sans le lui montrer d'abord.
 - Si une commande ou un rendu est refusé, s'arrêter et attendre son instruction.
 - Ne jamais saisir de mot de passe ou de clé, ne jamais créer de compte ni accepter de cookies à sa place.
