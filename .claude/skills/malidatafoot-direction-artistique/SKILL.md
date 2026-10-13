@@ -106,6 +106,7 @@ Toujours livrer la version X **et** la version TikTok d'un visuel retenu.
   - le crédit StatsBomb reste en bas à droite dès qu'il y a de la donnée ;
   - aperçus de contrôle : `apercu_profil.py` (photo de profil posée dessus) et `apercu_tel.py` (taille téléphone avec les boutons).
 - **13 octobre 2026, suite** : dans la bannière, ni les dataviz de la vidéo ni la CAN 2023 (« on est trop butés là-dessus »). Varier les sources et les sujets. Série actuelle : l'historique des Aigles depuis 1960 (gabarits `histoire`, `scores`, `decennies`, `competitions` de `variantes.py`, cartes par `reel_histoire.py`, données par `aigles_export.py`).
+- **13 octobre 2026, fin** : un décor dessiné en code (stade 3D, projecteurs, lumières) fait « dessin animé, pas pro » ; le vert drapeau en fond a été écarté (« je veux la DA de la vidéo »). Pour la bannière : minimaliste, style vidéo (fond jaune dégradé, trame, terrain crème, données posées sur le fond), une seule data viz, MaliDataFoot + logo en bas juste à droite de la photo de profil (`banniere_mini.py`). Pour du réaliste, seulement une vraie photo libre de droits ou générée (Higgsfield, crédits de Diaby).
 
 ## 6. Audit visuel (toujours, avant d'envoyer)
 
