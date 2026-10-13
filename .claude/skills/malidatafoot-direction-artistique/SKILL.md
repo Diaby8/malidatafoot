@@ -105,6 +105,7 @@ Toujours livrer la version X **et** la version TikTok d'un visuel retenu.
   - sur téléphone, X pose ses boutons en haut à gauche et à droite : aucun titre de carte sous ces zones (environ x 30–155 et x 1170–1450, y 40–160) ;
   - le crédit StatsBomb reste en bas à droite dès qu'il y a de la donnée ;
   - aperçus de contrôle : `apercu_profil.py` (photo de profil posée dessus) et `apercu_tel.py` (taille téléphone avec les boutons).
+- **13 octobre 2026, suite** : dans la bannière, ni les dataviz de la vidéo ni la CAN 2023 (« on est trop butés là-dessus »). Varier les sources et les sujets. Série actuelle : l'historique des Aigles depuis 1960 (gabarits `histoire`, `scores`, `decennies`, `competitions` de `variantes.py`, cartes par `reel_histoire.py`, données par `aigles_export.py`).
 
 ## 6. Audit visuel (toujours, avant d'envoyer)
 
@@ -124,7 +125,7 @@ Dans le dépôt `malidatafoot`, dossier `visuels/`.
 | Fichier | Rôle |
 |---|---|
 | `da.py` | cadre commun, `fr()` (arrondi « comme à l'école »), `credit()`, `drapeau()` |
-| `variantes.py <plan> <A\|B\|C\|D> <sortie.html> [x\|tiktok]` | plans accroche, tirs, but, fil, reseau, fiche, fin |
+| `variantes.py <plan> <A\|B\|C\|D> <sortie.html> [x\|tiktok]` | plans accroche, tirs, but, fil, reseau, fiche, fin ; historique des Aigles : histoire, scores, decennies, competitions (pensés pour la bannière : le bas de la version X reste à remplir avant d'en faire un post) |
 | `duel_v2.py`, `duel_mises.py`, `duel_commun.py` | le duel |
 | `grille.py` | la grille des variantes |
 | `vitv.tpl.html`, `md2.html`, `scenes_md2.py`, `render2.mjs` | la vidéo |

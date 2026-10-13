@@ -1,6 +1,7 @@
 """Jeu de variantes pour chaque plan : A cadre blanc, B nuit, C encre, D blanc. Format Twitter/X 1080 x 1350.
 Un thème = des couleurs et un cadre ; un plan = un dessin qui ne connaît que les couleurs du thème.
 usage : python3 variantes.py <plan> <A|B|C|D> <sortie.html> [x|tiktok]     plans : accroche tirs but fil reseau fiche fin
+        histoire scores decennies competitions (l'historique des Aigles depuis 1960 : python3 aigles_export.py d'abord)
 Le format vertical TikTok (1080 x 1920) existe pour la fiche ; les autres plans y viennent quand une variante est retenue."""
 import json, math, sys, os, collections
 from da import BASE_CSS, photo, ordi, fr, COUPE, drapeau, pays, score, avec_logo
@@ -342,5 +343,112 @@ def plan_fin():
     inner=f'<div id="lo"><img src="logo-verte.png" alt=""></div><div id="w">Mali<i>Data</i>Foot</div><div id="g">La data du foot malien</div><div class="cp" style="top:{990 if not h["band"] else 1010}px"><img src="{x}" style="height:44px" alt="X">@MaliDataFoot</div><div class="cp" style="top:{1090 if not h["band"] else 1110}px"><img src="{t}" style="height:56px" alt="TikTok">@MaliDataFoot</div>'
     return plein(inner,css)
 
-html={'tirs':plan_tirs,'but':plan_but,'fil':plan_fil,'reseau':plan_reseau,'fiche':plan_fiche,'accroche':plan_accroche,'fin':plan_fin}[PLAN]()
+# ------------------------------------------------------------------ l'histoire des Aigles (martj42/international_results, CC0)
+# Données : aigles_histoire.json (python aigles_export.py). Un match par ligne, vu du côté du Mali.
+# Le résultat est celui de la fin du match : un match décidé aux tirs au but compte comme un nul.
+CTX_H="Équipe du Mali, 1960-2026"; SRC_H="Données : résultats internationaux (martj42, CC0)."
+def histoire():
+    H_=json.load(open('aigles_histoire.json',encoding='utf-8')); return H_['matchs']
+def couleurs_res(): return {'V':T['niv'][0],'N':T['niv'][1],'D':T['niv'][2]}
+def leg_res():
+    c=couleurs_res(); return ''.join(f'<span><i style="width:15px;height:15px;background:{c[k]}"></i>{n}</span>' for k,n in (('V','victoire'),('N','nul'),('D','défaite')))
+def date_fr(iso):
+    a,m,j=iso.split('-'); mois=['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'][int(m)-1]
+    return f"{int(j)}{'er' if j=='01' else ''} {mois} {a}"
+CSS_H=f'''.r .n{{left:0;top:10px;font:500 19px/1 "IN";color:{T['ink']}}}.r .c{{right:0;top:9px;font:700 20px/1 "IN";color:{T['ink']}}}.r .v1{{top:11px;text-align:right;font:400 18px/1 "IN";color:{T['doux']}}}
+.th.e{{margin-top:14px;border-bottom:1.5px solid {T['trait']};padding-bottom:26px}}.ax{{font:500 16px IN;fill:{T['doux']}}}.axt{{font:600 16px IN;fill:{T['doux']}}}'''
+
+def plan_histoire():
+    """Un point par match, une colonne par année, empilés victoires, nuls puis défaites."""
+    M=histoire(); ans=list(range(int(M[0]['date'][:4]),int(M[-1]['date'][:4])+1)); par=collections.defaultdict(list); c=couleurs_res()
+    for m in M: par[m['annee']].append(m['resultat'])
+    pas=W/len(ans); r=pas*.39; base=318; g=''
+    for i,a in enumerate(ans):
+        x=(i+.5)*pas
+        for j,k in enumerate(sorted(par.get(a,[]),key='VND'.index)): g+=f'<circle cx="{x:.1f}" cy="{base-(j+.5)*pas:.1f}" r="{r:.2f}" fill="{c[k]}"/>'
+    g+=f'<line x1="0" y1="{base+4}" x2="{W}" y2="{base+4}" stroke="{T["mute"]}" stroke-width="1.6"/>'
+    for a in range(ans[0],ans[-1]+1,10):
+        x=(a-ans[0]+.5)*pas; an='start' if a==ans[0] else 'middle'; tx=0 if a==ans[0] else x
+        g+=f'<line x1="{x:.1f}" y1="{base+4}" x2="{x:.1f}" y2="{base+12}" stroke="{T["mute"]}" stroke-width="1.6"/><text x="{tx:.1f}" y="{base+34}" text-anchor="{an}" class="ax">{a}</text>'
+    n=collections.Counter(m['resultat'] for m in M); top=max(ans,key=lambda a:(len(par.get(a,[])),-a)); vides=[a for a in ans if a not in par]
+    rows=''.join(f'<div class="r"><span class="n"><i style="display:inline-block;width:14px;height:14px;border-radius:50%;background:{c[k]};margin-right:10px;vertical-align:-1px"></i>{l}</span><span class="c">{n[k]}</span></div>' for k,l in (('V','Victoires'),('N','Nuls'),('D','Défaites')))
+    yb=Y0+30+base+60
+    css=CSS_H+f'''#bt{{position:absolute;left:0;right:0;top:{yb}px;display:grid;grid-template-columns:1fr 1fr;gap:56px}}#bt p{{margin-top:14px;font:500 18.5px/1.45 "IN";color:{T['ink']}}}'''
+    body=f'''<div class="hd"><h3>Chaque point est un match</h3><div class="lg">{leg_res()}</div></div>
+<svg style="position:absolute;left:0;top:{Y0+30}px;overflow:visible" width="{W}" height="{base+40}" viewBox="0 0 {W} {base+40}">{g}</svg>
+<div id="bt"><div><h4>Le bilan</h4><div class="th e"><span style="right:0">matchs</span></div>{rows}</div>
+<div><h4>À lire</h4><p>Une colonne par année. L'année la plus chargée : {top}, avec {len(par[top])} matchs.{' Aucun match en '+', '.join(map(str,vides))+'.' if vides else ''}</p></div></div>'''
+    h=hero('Tous les matchs des Aigles',f"{len(M)} matchs, amicaux compris",f"Du {date_fr(M[0]['date'])} au {date_fr(M[-1]['date'])}",('Matchs joués',str(len(M)),f"dont {n['V']} victoires"))
+    return page(CTX_H,h,body,("Résultat à la fin du match : un match décidé aux tirs au but compte comme un nul.",SRC_H),css)
+
+def plan_scores():
+    """Les scores des Aigles : une grille buts du Mali x buts de l'adversaire, la taille du rond suit la fréquence."""
+    M=histoire(); c=couleurs_res(); K=5; cap=lambda v:min(v,K)
+    cnt=collections.Counter((cap(m['buts_pour']),cap(m['buts_contre'])) for m in M); mx=max(cnt.values())
+    cs=66; gx,gy=70,46; g=''
+    for i in range(K+1):
+        lab='5 ou +' if i==K else str(i)
+        g+=f'<text x="{gx+(i+.5)*cs:.0f}" y="{gy-14}" text-anchor="middle" class="ax">{lab}</text><text x="{gx-14}" y="{gy+(i+.5)*cs+6:.0f}" text-anchor="end" class="ax">{lab}</text>'
+        for j in range(K+1):
+            x,y=gx+(j+.5)*cs,gy+(i+.5)*cs; g+=f'<circle cx="{x:.0f}" cy="{y:.0f}" r="2" fill="{T["ligne"]}"/>'
+            v=cnt.get((i,j),0)
+            if v: k='V' if i>j else ('N' if i==j else 'D'); g+=f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{max(3.5,math.sqrt(v/mx)*cs*.47):.1f}" fill="{c[k]}"/>'
+    g+=f'<text x="{gx+(K+1)*cs/2:.0f}" y="{gy-40}" text-anchor="middle" class="axt">Buts de l\'adversaire</text>'
+    g+=f'<text transform="translate({gx-52} {gy+(K+1)*cs/2:.0f}) rotate(-90)" text-anchor="middle" class="axt">Buts du Mali</text>'
+    top=sorted(collections.Counter((m['buts_pour'],m['buts_contre']) for m in M).items(),key=lambda kv:(-kv[1],kv[0]))[:6]
+    rows=''.join(f'<div class="r"><span class="n"><i style="display:inline-block;width:14px;height:14px;border-radius:50%;background:{c["V" if a>b else ("N" if a==b else "D")]};margin-right:10px;vertical-align:-1px"></i>{a}-{b}</span><span class="c">{v}</span></div>' for (a,b),v in top)
+    GW=gx+(K+1)*cs
+    css=CSS_H+f'''#ls{{position:absolute;left:{GW+70}px;right:0;top:{Y0+40}px}}'''
+    body=f'''<div class="hd"><h3>Plus le rond est gros, plus le score est fréquent</h3><div class="lg">{leg_res()}</div></div>
+<svg style="position:absolute;left:0;top:{Y0+70}px;overflow:visible" width="{GW}" height="{gy+(K+1)*cs}" viewBox="0 0 {GW} {gy+(K+1)*cs}">{g}</svg>
+<div id="ls"><h4>Les scores les plus fréquents</h4><div class="th e"><span style="left:0">score du Mali</span><span style="right:0">matchs</span></div>{rows}</div>'''
+    (a,b),v=top[0]
+    h=hero('Les scores des Aigles',f"{len(M)} matchs depuis {M[0]['date'][:4]}",'Le score à la fin du match, vu du côté du Mali',('Le score le plus fréquent',f"{a}-{b}",f"{v} matchs sur {len(M)}"))
+    return page(CTX_H,h,body,("Sous la diagonale : victoires ; sur la diagonale : nuls ; au-dessus : défaites.",SRC_H),css)
+
+def plan_decennies():
+    """Buts marqués et encaissés par match, décennie par décennie."""
+    M=histoire(); dec=collections.defaultdict(lambda:[0,0,0])
+    for m in M: d=dec[m['annee']//10*10]; d[0]+=1; d[1]+=m['buts_pour']; d[2]+=m['buts_contre']
+    D_=sorted(dec); CH=300; ymax=2.0; G0=44; gw=(W-G0)/len(D_); bw=gw*.3; g=''; sy=lambda v:CH-v/ymax*CH
+    for v in (0.5,1,1.5,2):
+        g+=f'<line x1="{G0}" y1="{sy(v):.1f}" x2="{W}" y2="{sy(v):.1f}" stroke="{T["trait2"]}" stroke-width="1.2"/><text x="0" y="{sy(v)+6:.1f}" class="ax">{fr(v)}</text>'
+    for i,d in enumerate(D_):
+        n,bp,bc=dec[d]; x=G0+(i+.5)*gw
+        for k,(v,col) in enumerate(((bp/n,T['sA']),(bc/n,T['sB']))):
+            xb=x-bw-3 if k==0 else x+3; g+=f'<rect x="{xb:.1f}" y="{sy(v):.1f}" width="{bw:.1f}" height="{CH-sy(v):.1f}" rx="3" fill="{col}"/>'
+        g+=f'<text x="{x:.1f}" y="{CH+28}" text-anchor="middle" class="ax">{"années "+str(d) if d>=2000 else "années "+str(d)[2:]}</text>'
+    g+=f'<line x1="{G0}" y1="{CH}" x2="{W}" y2="{CH}" stroke="{T["mute"]}" stroke-width="1.6"/><text x="0" y="{CH+6}" class="ax">0</text>'
+    rows=''.join(f'<div class="r"><span class="n">{"années "+str(d) if d>=2000 else "années "+str(d)[2:]}</span><span class="v1" style="right:250px;width:80px">{dec[d][0]}</span><span class="v1" style="right:120px;width:100px">{fr(dec[d][1]/dec[d][0],2)}</span><span class="c">{fr(dec[d][2]/dec[d][0],2)}</span></div>' for d in D_)
+    css=CSS_H+f'''#bt{{position:absolute;left:0;right:0;top:{Y0+40+CH+70}px}}'''
+    mk=lambda col:f'<i style="width:15px;height:15px;border-radius:3px;background:{col}"></i>'
+    body=f'''<div class="hd"><h3>Buts par match, en moyenne</h3><div class="lg"><span>{mk(T['sA'])}marqués</span><span>{mk(T['sB'])}encaissés</span></div></div>
+<svg style="position:absolute;left:0;top:{Y0+40}px;overflow:visible" width="{W}" height="{CH+40}" viewBox="0 0 {W} {CH+40}">{g}</svg>
+<div id="bt"><div class="th e"><span style="right:250px;width:80px;text-align:right">matchs</span><span style="right:120px;width:100px;text-align:right">marqués</span><span style="right:0">encaissés</span></div>{rows}</div>'''
+    d=D_[-1]; avant=[dec[x][2]/dec[x][0] for x in D_[:-1]]
+    h=hero('Décennie par décennie',f"Buts marqués et encaissés par les Aigles",f"{len(M)} matchs, de {M[0]['date'][:4]} à {M[-1]['date'][:4]}",(f"Encaissés par match depuis {d}",fr(dec[d][2]/dec[d][0],2),f"contre {fr(min(avant),2)} à {fr(max(avant),2)} avant"))
+    return page(CTX_H,h,body,(f"Années {d} : jusqu'au {date_fr(M[-1]['date'])}.",SRC_H),css)
+
+COMPET={'Friendly':'Matchs amicaux','African Cup of Nations qualification':'Éliminatoires de la CAN','Amílcar Cabral Cup':'Coupe Amílcar Cabral',
+        'African Cup of Nations':"Coupe d'Afrique des nations",'FIFA World Cup qualification':'Éliminatoires de la Coupe du monde'}
+def plan_competitions():
+    """Les matchs par compétition, en barres empilées victoires, nuls, défaites."""
+    M=histoire(); c=couleurs_res(); par=collections.defaultdict(collections.Counter)
+    for m in M: par[COMPET.get(m['competition'],'Autres tournois')][m['resultat']]+=1
+    ordre=sorted(par,key=lambda k:(k=='Autres tournois',-sum(par[k].values()))); mx=max(sum(par[k].values()) for k in ordre); BW=470
+    rows=''
+    for k in ordre:
+        n=sum(par[k].values()); seg=''.join(f'<i style="width:{par[k][r]/mx*BW:.1f}px;background:{c[r]}"></i>' for r in 'VND' if par[k][r])
+        rows+=f'<div class="rb"><span class="n">{k}</span><span class="bar">{seg}</span><span class="c">{n}</span></div>'
+    css=CSS_H+f'''#cp{{position:absolute;left:0;right:0;top:{Y0+44}px}}.rb{{position:relative;height:66px;border-bottom:1px solid {T['trait2']}}}.rb>span{{position:absolute}}
+.rb .n{{left:0;top:23px;font:500 19px/1 "IN";color:{T['ink']};white-space:nowrap}}.rb .bar{{left:{W-BW-70}px;top:20px;height:26px;display:flex;gap:2px}}.rb .bar i{{display:block;height:100%}}.rb .bar i:first-child{{border-radius:4px 0 0 4px}}.rb .bar i:last-child{{border-radius:0 4px 4px 0}}
+.rb .c{{right:0;top:22px;font:700 20px/1 "IN";color:{T['ink']}}}.th.e{{margin-top:0}}'''
+    body=f'''<div class="hd"><h3>Combien de matchs, et avec quels résultats</h3><div class="lg">{leg_res()}</div></div>
+<div id="cp"><div class="th e"><span style="right:0">matchs</span></div>{rows}</div>'''
+    can=par["Coupe d'Afrique des nations"]; ncan=sum(can.values())
+    h=hero('Les compétitions',f"{len(M)} matchs des Aigles, compétition par compétition",f"De {M[0]['date'][:4]} à {M[-1]['date'][:4]}",("Matchs en phase finale de CAN",str(ncan),f"dont {can['V']} victoires"))
+    return page(CTX_H,h,body,("Autres tournois : Jeux africains, tournoi du Burkina Faso, Jeux de l'amitié africaine.",SRC_H),css)
+
+html={'tirs':plan_tirs,'but':plan_but,'fil':plan_fil,'reseau':plan_reseau,'fiche':plan_fiche,'accroche':plan_accroche,'fin':plan_fin,
+      'histoire':plan_histoire,'scores':plan_scores,'decennies':plan_decennies,'competitions':plan_competitions}[PLAN]()
 open(OUT,'w',encoding='utf-8').write(html); print('ok',PLAN,TH_,OUT)

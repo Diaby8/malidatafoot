@@ -1,17 +1,19 @@
-"""Bannières X 1500 x 500, série « terrain derrière » (13 octobre 2026), nouvelle DA.
-Deux familles :
-- la data dessine le terrain : un vrai terrain à l'échelle (repère StatsBomb 120 x 80, le Mali attaque vers la droite),
-  avec les 2 153 passes réussies et les 64 tirs du Mali à la CAN 2023 (banniere_passes.json, tiré de silver.events) ;
-- cartes penchées sur le terrain : les vrais gabarits allégés (reel/<plan><thème>.png, faits par reel_cartes.py).
-Aucun nom de joueur, aucun chiffre, aucune écriture hormis le crédit StatsBomb exigé par la licence.
-usage : python3 banniere_terrain.py <1..8> <sortie.html>"""
+"""Bannières X 1500 x 500, série « terrain derrière », nouvelle DA.
+13 octobre 2026 : Diaby ne veut ni les cartes de la vidéo ni la CAN 2023 dans la bannière (« on est trop butés là-dessus »).
+Les variantes 1 à 6 partent donc de l'historique des Aigles (572 matchs depuis 1960, martj42, CC0, aigles_histoire.json) :
+- un point par match (une colonne par année), sur le terrain (un « code-barres » d'un trait par match a été essayé : trop fouillis) ;
+- les vraies cartes « histoire » allégées (reel_histoire.py -> reel/<plan><thème>.png), dispersées ou en éventail.
+Les outils CAN 2023 (terrain à l'échelle, densité des actions, passes, tirs) restent pour d'autres visuels.
+Aucun nom de joueur, aucune écriture.
+usage : python3 banniere_terrain.py <1..6> <sortie.html>   (python3 aigles_export.py d'abord)"""
 import json, math, sys
 from da import BASE_CSS
 K, OUT = int(sys.argv[1]), sys.argv[2]
 W, H = 1500, 500
 OR, VERT, VERT_D, NUIT = '#F6C41C', '#0B7A3B', '#064A25', '#04331A'
 RADIAL = 'radial-gradient(120% 95% at 50% 0%, #0A5A2E 0%, #064A25 45%, #04331A 100%)'
-D = json.load(open('banniere_passes.json', encoding='utf-8'))
+try: D = json.load(open('banniere_passes.json', encoding='utf-8'))   # outils CAN 2023 (python3 banniere_donnees.py)
+except FileNotFoundError: D = None
 
 # ---------------------------------------------------------------- repère du terrain à l'échelle
 S, X0, CY = 10.5, 120, 250            # 1 m StatsBomb = 10,5 px ; buts à x = 120 et x = 1380 ; axe du terrain à y = 250
@@ -111,39 +113,41 @@ def credit(sombre):
     c = 'rgba(255,255,255,.78)' if sombre else 'rgba(14,26,19,.72)'
     return f'<div style="position:absolute;right:18px;bottom:14px;display:flex;align-items:center;gap:6px;font:500 13px/1 \'IN\';color:{c}">Données {img}</div>'
 
+# ---------------------------------------------------------------- l'histoire des Aigles (martj42, CC0) : pas de CAN 2023 dans la bannière (13 octobre)
+HIST = json.load(open('aigles_histoire.json', encoding='utf-8'))['matchs']
+SUR_JAUNE = {'V': VERT_D, 'N': '#FFFFFF', 'D': '#D4252A'}
+SUR_NUIT = {'V': OR, 'N': '#FFFFFF', 'D': '#FF7A6B'}
+
+def points_par_match(coul, x0=440, x1=1468, base=446):
+    """Un point par match, une colonne par année (1960 à 2026), empilés victoires, nuls puis défaites (comme le gabarit « histoire »)."""
+    import collections
+    ans = list(range(int(HIST[0]['date'][:4]), int(HIST[-1]['date'][:4]) + 1)); par = collections.defaultdict(list)
+    for m in HIST: par[m['annee']].append(m['resultat'])
+    pas = (x1 - x0) / len(ans); r = pas * .4; g = ''
+    for i, a in enumerate(ans):
+        for j, k in enumerate(sorted(par.get(a, []), key='VND'.index)):
+            g += f'<circle cx="{x0+(i+.5)*pas:.1f}" cy="{base-(j+.5)*pas:.1f}" r="{r:.2f}" fill="{coul[k]}"/>'
+    return g
+
 # ---------------------------------------------------------------- les variantes
-DISPERSE = lambda a, b, c, d: [(a, 150, 22, 316, 2.2), (b, 418, 150, 400, -2.4), (c, 850, 20, 380, 1.8), (d, 1222, 160, 380, -2.6)]
-EVENTAIL = lambda a, b, c: [(a, 540, 150, 400, -7), (b, 800, 104, 410, 0), (c, 1056, 156, 400, 7)]
-if K == 1:    # la trame de points devient la donnée : où le Mali a eu le ballon, encre verte sur le jaune
-    bg = OR; sombre = False
-    corps = svg(terrain_echelle('#fff', .7) + densite(VERT_D))
-elif K == 2:  # la même, la nuit
-    bg = RADIAL; sombre = True
-    corps = svg(terrain_echelle('#3E8A5E', .8) + densite(OR))
-elif K == 3:  # moitié jaune, moitié nuit, coupé à la ligne médiane
-    bg = OR; sombre = True
-    defs = f'<clipPath id="g"><rect x="0" y="0" width="{HALF}" height="{H}"/></clipPath><clipPath id="d"><rect x="{HALF}" y="0" width="{W-HALF}" height="{H}"/></clipPath>'
-    corps = svg(f'<rect x="{HALF}" y="0" width="{W-HALF}" height="{H}" fill="{NUIT}"/>'
-                f'<g clip-path="url(#g)">{terrain_echelle("#fff", .7)}</g><g clip-path="url(#d)">{terrain_echelle("#3E8A5E", .85)}</g>'
-                + densite(VERT_D, clip='g') + densite(OR, clip="d"), defs)
-elif K == 4:  # la composition qu'il aimait, refaite : terrain jaune, cartes penchées et dispersées, trame
-    bg = OR; sombre = False
-    corps = trame('#FDEBA6', .9, coin=(W, H), portee=1000) + terrain_deco() + cartes(DISPERSE('tirsA', 'radarA', 'filA', 'reseauB'))
-elif K == 5:  # la même sur un terrain de nuit : les cartes jaunes ressortent
-    bg = RADIAL; sombre = True
-    corps = trame('#19A552', .3, coin=(W, H), portee=1000) + terrain_deco('#3E8A5E', .8) + cartes(DISPERSE('tirsA', 'radarA', 'filA', 'reseauA'), lisere=False)
-elif K == 6:  # la trame de données en fond (claire), deux grandes cartes devant
-    bg = OR; sombre = False
-    corps = svg(terrain_echelle('#fff', .6) + densite('#FFF1B8')) + cartes([('tirsA', 540, 34, 430, -2.2), ('filA', 1010, 150, 420, 2.2)])
-elif K == 7:  # éventail : trois grandes cartes ouvertes comme une main, terrain et trame
-    bg = OR; sombre = False
-    corps = trame('#FDEBA6', .9, coin=(W, 0), portee=1100) + terrain_deco() + cartes(EVENTAIL('filA', 'radarA', 'tirsA'))
+DISPERSE = lambda a, b, c, d: [(a, 178, 26, 318, 2.0), (b, 506, 206, 330, -2.4), (c, 818, 52, 350, 1.8), (d, 1150, 258, 330, -2.2)]
+EVENTAIL = lambda a, b, c: [(a, 540, 150, 400, -7), (b, 800, 104, 410, 0), (c, 1056, 150, 400, 7)]
+credit_sb = False   # aucune donnée StatsBomb : l'historique est sous licence CC0, pas de crédit obligatoire
+if K == 1:    # un point par match, sur le jaune
+    bg = OR; corps = terrain_deco() + svg(points_par_match(SUR_JAUNE))
+elif K == 2:  # un point par match, la nuit
+    bg = RADIAL; corps = terrain_deco('#3E8A5E', .8) + svg(points_par_match(SUR_NUIT))
+elif K == 3:  # cartes dispersées sur le terrain jaune
+    bg = OR; corps = trame('#FDEBA6', .9, coin=(W, H), portee=1000) + terrain_deco() + cartes(DISPERSE('histoireA', 'scoresA', 'decenniesA', 'competitionsB'))
+elif K == 4:  # cartes dispersées sur le terrain de nuit
+    bg = RADIAL; corps = trame('#19A552', .3, coin=(W, H), portee=1000) + terrain_deco('#3E8A5E', .8) + cartes(DISPERSE('histoireA', 'scoresA', 'decenniesA', 'competitionsA'), lisere=False)
+elif K == 5:  # éventail sur le jaune
+    bg = OR; corps = trame('#FDEBA6', .9, coin=(W, 0), portee=1100) + terrain_deco() + cartes(EVENTAIL('histoireA', 'decenniesA', 'scoresA'))
 else:         # éventail sur la nuit
-    bg = RADIAL; sombre = True
-    corps = trame('#19A552', .3, coin=(W, 0), portee=1100) + terrain_deco('#3E8A5E', .8) + cartes(EVENTAIL('filA', 'radarA', 'tirsA'), lisere=False)
+    bg = RADIAL; corps = trame('#19A552', .3, coin=(W, 0), portee=1100) + terrain_deco('#3E8A5E', .8) + cartes(EVENTAIL('histoireA', 'decenniesA', 'scoresA'), lisere=False)
 
 I800 = '@font-face{font-family:"IN";font-weight:800;src:url(node_modules/@fontsource/inter/files/inter-latin-800-normal.woff2)}'
 open(OUT, 'w', encoding='utf-8').write(f'''<!doctype html><html><head><meta charset="utf-8"><style>{BASE_CSS}{I800}
 html,body{{width:{W}px;height:{H}px;overflow:hidden}}#b{{position:relative;width:{W}px;height:{H}px;overflow:hidden;background:{bg}}}svg{{display:block}}img{{display:block}}
-</style></head><body><div id="b">{corps}{credit(sombre)}</div><script>Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{{}}))]).then(()=>{{window.READY=true}})</script></body></html>''')
+</style></head><body><div id="b">{corps}{credit(sombre) if credit_sb else ''}</div><script>Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{{}}))]).then(()=>{{window.READY=true}})</script></body></html>''')
 print('ok', K, OUT)

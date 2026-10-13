@@ -3,7 +3,7 @@ data/
 outputs/
 # tout ce que fabriquent les visuels
 livrables/
-visuels/node_modules/
+visuels/node_modules
 visuels/_*.html
 visuels/_images/
 visuels/reel/
@@ -12,6 +12,7 @@ visuels/reel_*.html
 visuels/vitv.html
 visuels/vitrine.json
 visuels/banniere_passes.json
+visuels/aigles_histoire.json
 visuels/fiche_tt2.html
 visuels/duel_tt2.html
 visuels/fiche_anim.html
