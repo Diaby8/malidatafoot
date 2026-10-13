@@ -60,6 +60,16 @@ l'esprit » de la DA avec ses propres choix : c'est ce qui l'a fait retomber dan
 - **Chiffres.** Pas de chiffres posés sur un graphique quand un tableau peut les porter. Pas de gros chiffres décoratifs.
 - **Slogan.** « Les Aigles jouent. La data parle. » sert d'accroche (vidéo, fin de vidéo, bio). Jamais sur un visuel de données. Phrase de fin : « La data du foot malien ».
 
+## 2 bis. Logo : pistes alternatives (leçon du 13 octobre 2026)
+
+Diaby a demandé d'autres idées de logo « au cas où ». Mes esquisses en formes plates géométriques (barres, hexagone, carte en points, silhouette) ont été jugées « hors DA, ça fait IA de ouf ». Ce qu'il avait déjà dit pour le logo, et qui reste la règle :
+- minimaliste et pro, mais **illustré**, au niveau du logo actuel (dégradés, volumes, traits nets), jamais des aplats géométriques (« trop moche ») ni un style dessin animé ;
+- on doit voir la data dans le logo ;
+- le fond reste dans la DA des vidéos, pas un jaune à plat ;
+- le **petit dessin à trois barres** fait partie de l'ancien style à ne plus refaire.
+
+Un logo à ce niveau ne se bricole pas en SVG : discuter d'abord le symbole avec Diaby, puis rédiger un brief précis pour un illustrateur ou un outil de génération d'images, et auditer le résultat contre cette section. Le logo actuel (`logo-verte.png`) reste le logo de la page et ne se modifie pas.
+
 ## 3. Formats
 
 | Sortie | Taille | Contraintes |
