@@ -70,6 +70,17 @@ Diaby a demandé d'autres idées de logo « au cas où ». Mes esquisses en form
 
 Un logo à ce niveau ne se bricole pas en SVG : discuter d'abord le symbole avec Diaby, puis rédiger un brief précis pour un illustrateur ou un outil de génération d'images, et auditer le résultat contre cette section. Le logo actuel (`logo-verte.png`) reste le logo de la page et ne se modifie pas.
 
+## 2 ter. Une image, un message (leçon du 13 octobre 2026)
+
+Critique faite à Diaby, et qu'il a validée (« améliore tout ») : nos visuels faisaient « tableau de bord générique », pas Data'Scout.
+- **Un seul graphique par image, en grand**, qui remplit le cadre. Pas de cadre à moitié vide.
+- **Pas de triple répétition** : un graphique + un tableau + un paragraphe « À lire » qui redit le tweet, c'est trop. Le détail chiffré va dans le texte du post.
+- **Le message est écrit sur le graphique** (une annotation courte : « Deux fois moins »), et seulement les deux ou trois chiffres qui portent le message.
+- **Pas le même bloc partout** : un tableau « Le bilan » répété en bas de chaque variante rend tout pareil.
+- **Couleurs franches** : pas de dégradés pastel (« mise en forme Excel »). Le code des niveaux de la DA (vert, jaune, rouge, rouge foncé) en classes nettes.
+- **Étiquettes courtes** et placées de la même façon pour toutes les barres.
+- **Le ton** : un chiffre qui peut se lire comme négatif pour le Mali se cadre sur ce qu'il faut faire (« il faut gagner deux fois »), pas sur la peur (« plus à perdre qu'à gagner »).
+
 ## 3. Formats
 
 | Sortie | Taille | Contraintes |

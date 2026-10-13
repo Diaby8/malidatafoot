@@ -47,6 +47,19 @@ def poisson_cdf(k: int, lam: float) -> float:
     return sum(math.exp(-lam) * lam ** i / math.factorial(i) for i in range(k + 1))
 
 
+def robustesse(d: pd.DataFrame) -> list[dict]:
+    """Le résultat dépend-il de l'année choisie (2020) ? On refait le calcul pour chaque année de coupure de 2014 à 2023 :
+    buts réels après la coupure / buts attendus à adversaires égaux (modèle appris avant la coupure)."""
+    out = []
+    for coupe in range(2014, 2024):
+        a, r = d[d.annee < coupe], d[d.annee >= coupe]
+        b = poisson_irls(_plan(a), a["buts_contre"].to_numpy(float))
+        att = float(np.exp(_plan(r) @ b).sum())
+        out.append({"coupure": coupe, "matchs_apres": int(len(r)), "attendus": att, "reels": int(r.buts_contre.sum()),
+                    "rapport": float(r.buts_contre.sum() / att)})
+    return out
+
+
 def defense_aigles(con: duckdb.DuckDBPyConnection) -> dict:
     d = con.execute(f"""select date, annee, competition, adversaire, buts_pour, buts_contre, lieu,
                                elo_adversaire_avant, rang_adversaire_avant
@@ -76,6 +89,7 @@ def defense_aigles(con: duckdb.DuckDBPyConnection) -> dict:
                                 "probabilite_si_rien_n_avait_change": poisson_cdf(int(rec.buts_contre.sum()), attendus),
                                 "modele": {"constante": b[0], "par_100_points_elo_adverse": b[1], "domicile": b[2], "exterieur": b[3]}},
         "niveaux": niveaux,
+        "robustesse_annee_de_coupure": robustesse(d),
         "par_annee": par_annee,
         "matchs": [{"date": str(r.date)[:10], "periode": "depuis_2020" if r.annee >= 2020 else "reference", "competition": r.competition,
                     "adversaire": r.adversaire, "buts_pour": int(r.buts_pour), "buts_contre": int(r.buts_contre),

@@ -650,6 +650,119 @@ def plan_fifa_liste():
     body=f'''<div class="hd"><h3>Les neuf scénarios, du meilleur au pire</h3></div>{g}{lire_f(F,top+9*rh+30)}'''
     return page(CTX_F,hero_f(F),body,NOTE_F,css)
 
-html={'tirs':plan_tirs,'fifa':plan_fifa,'fifa_un':plan_fifa_un,'fifa_courbe':plan_fifa_courbe,'fifa_liste':plan_fifa_liste,'defense':plan_defense,'defense_attendu':plan_defense_attendu,'defense_matchs':plan_defense_matchs,'defense_sans':plan_defense_sans,'but':plan_but,'fil':plan_fil,'reseau':plan_reseau,'fiche':plan_fiche,'accroche':plan_accroche,'fin':plan_fin,
+# ------------------------------------------------------------------ versions épurées (13 octobre 2026, critique : trop de texte,
+# graphique + tableau + paragraphe qui redisent la même chose, cadres à moitié vides). Règle : un graphique par image, en grand,
+# le message écrit sur le graphique, pas de tableau ni de paragraphe ; le détail va dans le texte du post.
+def _barres_h(items, top, larg, ep, gap, vmax, unite, x0=0):
+    """Grandes barres horizontales : (étiquette au-dessus, valeur, couleur). La valeur est écrite au bout de la barre."""
+    g=''
+    for i,(lab,v,c) in enumerate(items):
+        y=top+i*(ep+gap)
+        g+=f'<div style="position:absolute;left:{x0}px;top:{y}px;font:600 21px/1 IN;color:{T["ink"]}">{lab}</div>'
+        g+=f'<div style="position:absolute;left:{x0}px;top:{y+34}px;width:{v/vmax*larg:.0f}px;height:{ep}px;border-radius:8px;background:{c}"></div>'
+        g+=f'<div style="position:absolute;left:{x0+v/vmax*larg+20:.0f}px;top:{y+34+ep/2-46:.0f}px;font:italic 900 92px/1 BC;color:{T["titre"]};white-space:nowrap">{round(v)}<small style="font:600 24px IN;font-style:normal;color:{T["doux"]};margin-left:10px">{unite}</small></div>'
+    return g
+
+def plan_defense2():
+    """Post 1, image principale : ce que le Mali d'avant aurait encaissé contre ce qu'il a encaissé, puis les trois niveaux."""
+    D=defense(); A=D['a_adversaires_egaux']; N=D['niveaux']; n=D['depuis_2020']['matchs']
+    top=Y0+56; ep=86; gap=74; larg=W-260
+    g=_barres_h([("Le Mali de 2000-2019 aurait encaissé",A['buts_attendus'],T['mute']),("Le Mali depuis 2020 a encaissé",A['buts_reels'],T['sA'])],top,larg,ep,gap,A['buts_attendus'],'buts')
+    yb=top+34+ep+gap+ep/2
+    g+=(f'<div style="position:absolute;right:0;top:{yb-34:.0f}px;text-align:right;font:italic 900 52px/1 BC;color:{T["titre"]};text-transform:uppercase;white-space:nowrap">'
+        f'Deux fois moins</div><div style="position:absolute;right:0;top:{yb+24:.0f}px;text-align:right;font:500 18px/1.3 IN;color:{T["doux"]};white-space:nowrap">sur les {n} matchs officiels depuis 2020</div>')
+    # les trois niveaux d'adversaire, en petits groupes de barres
+    y2=top+2*(ep+gap)+40; h2=H-y2-70; gw=W/3; bw=min(70,gw*.22); ymax=1.5
+    g+=f'<div style="position:absolute;left:0;right:0;top:{y2}px;border-top:1.5px solid {T["trait"]}"></div>'
+    g+=f'<div style="position:absolute;left:0;top:{y2+24}px;font:700 21px/1 IN;color:{T["ink"]}">Et c\'est vrai à chaque niveau d\'adversaire</div><div class="lg" style="position:absolute;right:0;top:{y2+24}px">{leg_def()}</div>'
+    hb=h2-96; base=y2+70+hb
+    for i,nv in enumerate(N):
+        x=(i+.5)*gw
+        for k,(v,c) in enumerate(((nv['reference']['par_match'],T['mute']),(nv['depuis_2020']['par_match'],T['sA']))):
+            hh=v/ymax*hb; g+=f'<div style="position:absolute;left:{x-bw-4 if k==0 else x+4:.0f}px;top:{base-hh:.0f}px;width:{bw:.0f}px;height:{hh:.0f}px;border-radius:5px 5px 0 0;background:{c}"></div>'
+        g+=f'<div style="position:absolute;left:{x-gw/2:.0f}px;width:{gw:.0f}px;top:{base+12:.0f}px;text-align:center;font:600 18px/1.25 IN;color:{T["ink"]}">{nv["niveau"]}<br><span style="font-weight:500;color:{T["doux"]}">{nv["depuis_2020"]["matchs"]} matchs depuis 2020</span></div>'
+    g+=f'<div style="position:absolute;left:0;right:0;top:{base}px;height:2px;background:{T["mute"]}"></div>'
+    note=("Aurait encaissé : selon la force de l'adversaire (classement Elo) et le lieu.","En bas : buts encaissés par match. Données : résultats internationaux (martj42).")
+    return page(CTX_DEF,hero_def(D),f'<div class="hd"><h3>Face aux mêmes adversaires, aux mêmes endroits</h3></div>{g}',note,CSS_DEF())
+
+def plan_defense2_sans():
+    """Post 1, autre image : les matchs sans encaisser, une case par match, en grand."""
+    D=defense(); M=D['matchs']; top=Y0+70; g=''; y=top
+    haut=lambda c:2*110+(math.ceil(120/c)+math.ceil(50/c))*W/c      # hauteur occupée avec c colonnes : la plus grande grille qui tient
+    cols=min((c for c in range(10,25) if top+haut(c)<=H-40), key=lambda c:H-40-top-haut(c)); pas=W/cols; cote=pas-8
+    for per,lab in (('reference','De 2000 à 2019'),('depuis_2020','Depuis 2020')):
+        L=[m for m in M if m['periode']==per]; b=D[per]; ns=b['sans_encaisser']; pc=round(100*ns/b['matchs']); c=T['sA'] if per=='depuis_2020' else T['mute']
+        g+=f'<div style="position:absolute;left:0;top:{y}px;font:700 22px/1 IN;color:{T["ink"]}">{lab}</div><div style="position:absolute;right:0;top:{y-26}px;font:italic 900 64px/1 BC;color:{T["titre"] if per=="depuis_2020" else T["doux"]}">{pc} %</div>'
+        g+=f'<div style="position:absolute;left:0;top:{y+30}px;font:500 18px/1 IN;color:{T["doux"]}">{ns} matchs sans encaisser sur {b["matchs"]}</div>'
+        y+=70
+        for i,m in enumerate(L):
+            cx,cy=(i%cols)*pas,y+(i//cols)*pas; plein=m['buts_contre']==0
+            g+=f'<i style="position:absolute;left:{cx:.1f}px;top:{cy:.1f}px;width:{cote:.1f}px;height:{cote:.1f}px;border-radius:6px;{"background:"+c if plein else "box-shadow:inset 0 0 0 2px "+T["trait"]}"></i>'
+        y+=math.ceil(len(L)/cols)*pas+40
+    return page(CTX_DEF,hero_def(D),f'<div class="hd"><h3>Chaque case est un match officiel. Pleine : le Mali n\'a pas encaissé.</h3></div>{g}',NOTE_DEF,CSS_DEF())
+
+def plan_defense2_niveaux():
+    """Post 1, image de preuve : les trois niveaux d'adversaire en grand."""
+    D=defense(); N=D['niveaux']; top=Y0+64; x0=56; CH=H-top-150; ymax=1.5; gw=(W-x0)/3; bw=min(96,gw*.28); sy=lambda v:CH-v/ymax*CH; g=''
+    for v in (0.5,1,1.5):
+        g+=f'<line x1="{x0}" y1="{sy(v):.1f}" x2="{W}" y2="{sy(v):.1f}" stroke="{T["trait2"]}" stroke-width="1.4"/><text x="0" y="{sy(v)+6:.1f}" class="ax">{fr(v)}</text>'
+    g+=f'<text x="0" y="{CH+6}" class="ax">0</text>'
+    for i,nv in enumerate(N):
+        x=x0+(i+.5)*gw
+        for k,(v,c) in enumerate(((nv['reference']['par_match'],T['mute']),(nv['depuis_2020']['par_match'],T['sA']))):
+            g+=f'<rect x="{x-bw-6 if k==0 else x+6:.1f}" y="{sy(v):.1f}" width="{bw:.1f}" height="{CH-sy(v):.1f}" rx="5" fill="{c}"/>'
+        g+=f'<text x="{x:.1f}" y="{CH+34}" text-anchor="middle" style="font:600 19px IN;fill:{T["ink"]}">{nv["niveau"]}</text><text x="{x:.1f}" y="{CH+60}" text-anchor="middle" class="ax">{nv["reference"]["matchs"]} et {nv["depuis_2020"]["matchs"]} matchs</text>'
+    g+=f'<line x1="{x0}" y1="{CH}" x2="{W}" y2="{CH}" stroke="{T["mute"]}" stroke-width="2"/>'
+    body=f'''<div class="hd"><h3>Par match, selon le niveau de l'adversaire</h3><div class="lg">{leg_def()}</div></div>
+<svg style="position:absolute;left:0;top:{top}px;overflow:visible" width="{W}" height="{CH+70}" viewBox="0 0 {W} {CH+70}">{g}</svg>'''
+    return page(CTX_DEF,hero_def(D),body,("Niveau : rang de l'adversaire au classement Elo le jour du match.",NOTE_DEF[1]),CSS_DEF())
+
+def hero_f2(F):
+    m,r=F['points_avant']['Mali'],F['points_avant']['Rwanda']; vv=next(s for s in F['deux_matchs'] if s['resultats']=='VV')
+    return hero('Le classement FIFA',"Contre le Rwanda, il faut gagner deux fois",f"Avant les matchs : Mali {fr(m,2)} points, Rwanda {fr(r,2)}",
+                ('Avec deux victoires',sg(vv['ecart']),'points pour le Mali'))
+def classe_f(v):
+    """Trois classes franches, dans le code des niveaux de la DA : gagne, perd un peu, perd beaucoup."""
+    rouge,fonce=(('#FF7A6B','#D4252A') if T['blancs'] else ('#D4252A','#8E1518'))
+    return (T['niv'][0],T['fond'] if not T['blancs'] else '#0E1A13',1) if v>0 else (('#E3A600' if not T['blancs'] else T['niv'][1],'#0E1A13',1) if v>-5 else ((rouge,'#fff',1) if v>-20 else (fonce,'#fff',1)))
+
+def plan_fifa2():
+    """Post 2, image principale : les neuf scénarios, en grand, avec trois classes franches."""
+    F=fifa_d(); S={s['resultats']:s['ecart'] for s in F['deux_matchs']}
+    x0=170; cw=(W-x0)/3; top=Y0+120; ch=(H-top-110)/3; g=''
+    g+=f'<div style="position:absolute;left:{x0}px;top:{top-82}px;width:{W-x0}px;text-align:center;font:700 20px/1 IN;color:{T["ink"]}">Match retour, à Kigali</div>'
+    g+=f'<div style="position:absolute;left:0;top:{top-82}px;font:700 20px/1 IN;color:{T["ink"]}">Match aller,<br>à Bamako</div>'
+    for j,r in enumerate('VND'):
+        g+=f'<div style="position:absolute;left:{x0+j*cw:.0f}px;top:{top-40}px;width:{cw:.0f}px;text-align:center;font:600 19px/1 IN;color:{T["doux"]}">{RES_F[r]}</div>'
+    for i,a in enumerate('VND'):
+        y=top+i*ch
+        g+=f'<div style="position:absolute;left:0;top:{y+ch/2-11:.0f}px;font:600 19px/1 IN;color:{T["doux"]}">{RES_F[a]}</div>'
+        for j,b in enumerate('VND'):
+            v=S[a+b]; c,tc,op=classe_f(v); x=x0+j*cw
+            g+=(f'<div style="position:absolute;left:{x+5:.0f}px;top:{y+5:.0f}px;width:{cw-10:.0f}px;height:{ch-10:.0f}px;border-radius:12px;background:{c};opacity:{op}"></div>'
+                f'<div style="position:absolute;left:{x+5:.0f}px;top:{y+ch/2-(40 if v>0 else 30):.0f}px;width:{cw-10:.0f}px;text-align:center;font:italic 900 {68 if v>0 else 58}px/1 BC;color:{tc}">{sg(v)}</div>')
+            if v>0: g+=f'<div style="position:absolute;left:{x+5:.0f}px;top:{y+ch/2+34:.0f}px;width:{cw-10:.0f}px;text-align:center;font:700 16px/1 IN;color:{tc}">le seul qui rapporte</div>'
+    sq=lambda c,op=1:f'<i style="width:15px;height:15px;border-radius:3px;background:{c};opacity:{op}"></i>'
+    lg=''.join(f'<span>{sq(classe_f(v)[0])}{t}</span>' for v,t in ((1,'gagne'),(-1,'perd un peu'),(-10,'perd'),(-30,'perd beaucoup')))
+    a=round(100*F['attendu_mali'])
+    g+=f'<div style="position:absolute;left:0;right:0;top:{top+3*ch+22:.0f}px;font:600 20px/1.35 IN;color:{T["ink"]}">La FIFA attend une victoire du Mali à {a} % : gagner rapporte peu, ne pas gagner coûte cher.</div>'
+    body=f'<div class="hd"><h3>Tous les scénarios</h3><div class="lg">{lg}</div></div>{g}'
+    return page(CTX_F,hero_f2(F),body,NOTE_F,CSS_DEF())
+
+def plan_fifa2_un():
+    """Post 2, autre image : ce que vaut un seul match, en trois grandes barres de part et d'autre de zéro."""
+    F=fifa_d(); u=F['un_match']; top=Y0+90; z=W*.36; k=(W-z-190)/max(abs(v) for v in u.values()); rh=(H-top-170)/3; g=''
+    for i,r in enumerate('VND'):
+        v=u[r]; y=top+i*rh; c,_,op=classe_f(v); bh=min(92,rh*.5)
+        g+=f'<div style="position:absolute;left:0;top:{y+bh/2-12:.0f}px;font:700 24px/1 IN;color:{T["ink"]}">{RES_F[r].capitalize()}</div>'
+        if v>0: g+=f'<div style="position:absolute;left:{z:.0f}px;top:{y:.0f}px;width:{v*k:.0f}px;height:{bh:.0f}px;border-radius:0 8px 8px 0;background:{c}"></div><div style="position:absolute;left:{z+v*k+18:.0f}px;top:{y+bh/2-38:.0f}px;font:italic 900 76px/1 BC;color:{T["titre"]}">{sg(v)}</div>'
+        else: g+=f'<div style="position:absolute;left:{z:.0f}px;top:{y:.0f}px;width:{-v*k:.0f}px;height:{bh:.0f}px;border-radius:0 8px 8px 0;background:{c};opacity:{op}"></div><div style="position:absolute;left:{z-v*k+18:.0f}px;top:{y+bh/2-38:.0f}px;font:italic 900 76px/1 BC;color:{T["titre"]}">{sg(v)}</div>'
+    g+=f'<div style="position:absolute;left:{z-1:.0f}px;top:{top-16}px;width:2px;height:{3*rh-rh*.3:.0f}px;background:{T["mute"]}"></div>'
+    a=round(100*F['attendu_mali'])
+    g+=f'<div style="position:absolute;left:0;right:0;top:{top+3*rh:.0f}px;font:600 20px/1.35 IN;color:{T["ink"]}">La FIFA attend une victoire du Mali à {a} %. Contre plus fort, un nul rapporte ; contre plus faible, il coûte.</div>'
+    body=f'<div class="hd"><h3>Les points FIFA d\'un seul match contre le Rwanda</h3></div>{g}'
+    return page(CTX_F,hero_f2(F),body,NOTE_F,CSS_DEF())
+
+html={'tirs':plan_tirs,'defense2':plan_defense2,'defense2_sans':plan_defense2_sans,'defense2_niveaux':plan_defense2_niveaux,'fifa2':plan_fifa2,'fifa2_un':plan_fifa2_un,'fifa':plan_fifa,'fifa_un':plan_fifa_un,'fifa_courbe':plan_fifa_courbe,'fifa_liste':plan_fifa_liste,'defense':plan_defense,'defense_attendu':plan_defense_attendu,'defense_matchs':plan_defense_matchs,'defense_sans':plan_defense_sans,'but':plan_but,'fil':plan_fil,'reseau':plan_reseau,'fiche':plan_fiche,'accroche':plan_accroche,'fin':plan_fin,
       'histoire':plan_histoire,'scores':plan_scores,'decennies':plan_decennies,'competitions':plan_competitions}[PLAN]()
 open(OUT,'w',encoding='utf-8').write(html); print('ok',PLAN,TH_,OUT)
