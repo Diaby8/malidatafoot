@@ -11,6 +11,15 @@ resultats_internationaux:
   fichiers: [results.csv, goalscorers.csv, shootouts.csv]
   equipe: Mali                # nom de l'équipe dans cette source
   fraicheur_max_jours: 120    # au-delà, la source est jugée périmée (aucun match du Mali depuis)
+classement_fifa_historique:   # rangs FIFA publiés, compilés par des tiers à partir du site de la FIFA (on cite la FIFA)
+  sources:
+    - nom: dato_futbol           # décembre 1992 à septembre 2024
+      url: https://raw.githubusercontent.com/Dato-Futbol/fifa-ranking/master/ranking_fifa_historical.csv
+      fichier: ranking_fifa_historical.csv
+    - nom: world_football_rankings   # septembre 2025 à juillet 2026 (classements officiels rejoués)
+      url: https://raw.githubusercontent.com/kevinch10/world-football-rankings/main/data/history.json
+      fichier: wfr_history.json
+  ecart_max_jours: 100         # au-delà, le rang retenu est « approché » (trou d'octobre 2024 à août 2025)
 team_labels:               # noms affichés en français
   South Africa: Afrique du Sud
   Tunisia: Tunisie

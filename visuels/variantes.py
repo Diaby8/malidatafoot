@@ -453,7 +453,7 @@ def plan_competitions():
 # Données : ../outputs/analyses/defense_aigles.json. Quatre mises en scène du même message (13 octobre 2026).
 def defense(): return json.load(open('../outputs/analyses/defense_aigles.json',encoding='utf-8'))
 CTX_DEF="Équipe du Mali, matchs officiels"
-NOTE_DEF=("Matchs officiels : CAN et éliminatoires. Rang : classement Elo du jour du match.","Données : résultats internationaux (martj42, CC0).")
+NOTE_DEF=("Matchs officiels : CAN et éliminatoires. Niveau : rang FIFA avant le match.","Données : résultats internationaux (martj42) et classements FIFA.")
 def hero_def(D):
     r,n=D['reference'],D['depuis_2020']
     return hero('La défense des Aigles','Buts encaissés en match officiel','CAN et éliminatoires' if TT else 'CAN et éliminatoires de la CAN et de la Coupe du monde',
@@ -682,7 +682,7 @@ def plan_defense2():
             hh=v/ymax*hb; g+=f'<div style="position:absolute;left:{x-bw-4 if k==0 else x+4:.0f}px;top:{base-hh:.0f}px;width:{bw:.0f}px;height:{hh:.0f}px;border-radius:5px 5px 0 0;background:{c}"></div>'
         g+=f'<div style="position:absolute;left:{x-gw/2:.0f}px;width:{gw:.0f}px;top:{base+12:.0f}px;text-align:center;font:600 18px/1.25 IN;color:{T["ink"]}">{nv["niveau"]}<br><span style="font-weight:500;color:{T["doux"]}">{nv["depuis_2020"]["matchs"]} matchs depuis 2020</span></div>'
     g+=f'<div style="position:absolute;left:0;right:0;top:{base}px;height:2px;background:{T["mute"]}"></div>'
-    note=("Aurait encaissé : selon la force de l'adversaire (classement Elo) et le lieu.","En bas : buts encaissés par match. Données : résultats internationaux (martj42).")
+    note=("Aurait encaissé : selon la force de l'adversaire (Elo) et le lieu.","En bas : rang FIFA avant le match. Données : martj42 (CC0) et FIFA.")
     return page(CTX_DEF,hero_def(D),f'<div class="hd"><h3>Face aux mêmes adversaires, aux mêmes endroits</h3></div>{g}',note,CSS_DEF())
 
 def plan_defense2_sans():
@@ -715,7 +715,7 @@ def plan_defense2_niveaux():
     g+=f'<line x1="{x0}" y1="{CH}" x2="{W}" y2="{CH}" stroke="{T["mute"]}" stroke-width="2"/>'
     body=f'''<div class="hd"><h3>Par match, selon le niveau de l'adversaire</h3><div class="lg">{leg_def()}</div></div>
 <svg style="position:absolute;left:0;top:{top}px;overflow:visible" width="{W}" height="{CH+70}" viewBox="0 0 {W} {CH+70}">{g}</svg>'''
-    return page(CTX_DEF,hero_def(D),body,("Niveau : rang de l'adversaire au classement Elo le jour du match.",NOTE_DEF[1]),CSS_DEF())
+    return page(CTX_DEF,hero_def(D),body,("Niveau : rang FIFA de l'adversaire avant le match.",NOTE_DEF[1]),CSS_DEF())
 
 def hero_f2(F):
     m,r=F['points_avant']['Mali'],F['points_avant']['Rwanda']; vv=next(s for s in F['deux_matchs'] if s['resultats']=='VV')

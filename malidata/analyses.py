@@ -22,7 +22,7 @@ from .config import Config, get_logger
 
 log = get_logger("analyses")
 OFFICIELS = ("African Cup of Nations", "African Cup of Nations qualification", "FIFA World Cup qualification")
-NIVEAUX = ((1, 60, "Top 60"), (61, 100, "61e à 100e"), (101, 10_000, "Au-delà du 100e"))
+NIVEAUX = ((1, 60, "Top 60 FIFA"), (61, 100, "61e à 100e"), (101, 10_000, "Au-delà du 100e"))
 
 
 def poisson_irls(X: np.ndarray, y: np.ndarray, iterations: int = 50) -> np.ndarray:
@@ -60,19 +60,29 @@ def robustesse(d: pd.DataFrame) -> list[dict]:
     return out
 
 
-def defense_aigles(con: duckdb.DuckDBPyConnection) -> dict:
+def defense_aigles(con: duckdb.DuckDBPyConnection, cfg: Config | None = None) -> dict:
     d = con.execute(f"""select date, annee, competition, adversaire, buts_pour, buts_contre, lieu,
                                elo_adversaire_avant, rang_adversaire_avant
                         from gold.aigles_elo where competition in {OFFICIELS} and annee >= 2000 order by date""").df()
+    # 13 octobre : Diaby relève que l'Afrique du Sud et d'autres sont « du top » : les niveaux se lisent au rang FIFA du jour
+    # du match (ce que les supporters connaissent), pas à notre rang Elo (qui compte aussi des sélections non membres de la FIFA).
+    from . import fifa
+    t, noms = fifa.rangs_publies(cfg)
+    ecart = int(cfg.raw["classement_fifa_historique"]["ecart_max_jours"])
+    r = [fifa.rang_le_jour(t, noms, a, j, ecart) for a, j in zip(d.adversaire, d.date)]
+    d["rang_fifa"], d["classement_fifa"], d["precision_fifa"] = zip(*r)
+    assert d.rang_fifa.notna().all(), "adversaire sans rang FIFA"
     ref, rec = d[d.annee < 2020], d[d.annee >= 2020]
     b = poisson_irls(_plan(ref), ref["buts_contre"].to_numpy(float))
     attendus = float(np.exp(_plan(rec) @ b).sum())
     bilan = lambda s: {"matchs": int(len(s)), "buts_encaisses": int(s.buts_contre.sum()),  # noqa: E731
                        "par_match": float(s.buts_contre.mean()), "sans_encaisser": int((s.buts_contre == 0).sum()),
-                       "rang_median_adversaire": float(s.rang_adversaire_avant.median())}
+                       "rang_median_adversaire": float(s.rang_adversaire_avant.median()),
+                       "rang_fifa_median_adversaire": float(s.rang_fifa.median()),
+                       "elo_moyen_adversaire": float(s.elo_adversaire_avant.mean())}
     niveaux = []
     for lo, hi, nom in NIVEAUX:
-        f = lambda s: s[(s.rang_adversaire_avant >= lo) & (s.rang_adversaire_avant <= hi)]  # noqa: E731
+        f = lambda s: s[(s.rang_fifa >= lo) & (s.rang_fifa <= hi)]  # noqa: E731
         a, r = f(ref), f(rec)
         niveaux.append({"niveau": nom, "rang_min": lo, "rang_max": hi,
                         "reference": {"matchs": int(len(a)), "buts": int(a.buts_contre.sum()), "par_match": float(a.buts_contre.mean())},
@@ -86,6 +96,8 @@ def defense_aigles(con: duckdb.DuckDBPyConnection) -> dict:
         "reference": {"periode": "2000-2019", **bilan(ref)},
         "depuis_2020": {"periode": f"2020-{int(d.annee.max())}", "dernier_match": str(d.date.max())[:10], **bilan(rec)},
         "a_adversaires_egaux": {"buts_attendus": attendus, "buts_reels": int(rec.buts_contre.sum()),
+                                # part de la baisse (0,99 -> 0,44) qui vient d'adversaires plus faibles : (0,99 - attendu/match) / (0,99 - 0,44)
+                                "part_de_la_baisse_due_aux_adversaires": float((ref.buts_contre.mean() - attendus / len(rec)) / (ref.buts_contre.mean() - rec.buts_contre.mean())),
                                 "probabilite_si_rien_n_avait_change": poisson_cdf(int(rec.buts_contre.sum()), attendus),
                                 "modele": {"constante": b[0], "par_100_points_elo_adverse": b[1], "domicile": b[2], "exterieur": b[3]}},
         "niveaux": niveaux,
@@ -93,7 +105,9 @@ def defense_aigles(con: duckdb.DuckDBPyConnection) -> dict:
         "par_annee": par_annee,
         "matchs": [{"date": str(r.date)[:10], "periode": "depuis_2020" if r.annee >= 2020 else "reference", "competition": r.competition,
                     "adversaire": r.adversaire, "buts_pour": int(r.buts_pour), "buts_contre": int(r.buts_contre),
-                    "rang_adversaire": int(r.rang_adversaire_avant), "lieu": r.lieu} for r in d.itertuples()],
+                    "rang_adversaire": int(r.rang_adversaire_avant), "rang_fifa": int(r.rang_fifa), "classement_fifa": r.classement_fifa,
+                    "precision_fifa": r.precision_fifa, "lieu": r.lieu} for r in d.itertuples()],
+        "niveau": "rang FIFA de l'adversaire au dernier classement publié avant le match (compilations Dato-Futbol et World Football Rankings)",
         "source": "martj42/international_results (CC0) ; Elo calculé par MaliDataFoot (méthode eloratings.net)",
     }
 
@@ -126,7 +140,9 @@ def run(cfg: Config) -> dict:
     con = duckdb.connect(str(cfg.path("warehouse")), read_only=True)
     dossier = cfg.path("outputs") / "analyses"
     dossier.mkdir(parents=True, exist_ok=True)
-    res = defense_aigles(con)
+    from . import fifa
+    fifa.bronze_rangs(cfg)
+    res = defense_aigles(con, cfg)
     con.close()
     (dossier / "defense_aigles.json").write_text(json.dumps(res, ensure_ascii=False, indent=1, default=float), encoding="utf-8")
     from .config import ROOT

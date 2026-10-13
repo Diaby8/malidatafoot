@@ -23,6 +23,8 @@ cher que dix posts réussis. Il faut être strict, vouloir réussir, et donc vé
 4. **Visuel.** Voir le skill `malidatafoot-direction-artistique`.
 
 **Pièges déjà rencontrés** :
+- **« Top 60 » doit vouloir dire top 60 FIFA** (13 octobre 2026). Notre rang Elo classe aussi des sélections non membres de la FIFA et ne colle pas au rang FIFA : l'Afrique du Sud était 86e chez nous mais 66e FIFA avant la CAN 2023, la Côte d'Ivoire 72e contre 49e. Diaby l'a relevé (« l'Afrique du Sud, c'est du top »). Quand on parle de niveau ou de rang à des supporters, c'est le rang FIFA du dernier classement avant le match (`fifa.rang_le_jour`) ; l'Elo sert seulement au calcul « à adversaires égaux ».
+- **Une médiane peut cacher une moyenne qui bouge** : le rang Elo médian des adversaires était stable (122e, 125e) mais leur Elo moyen a baissé (1565 → 1522) et le rang FIFA médian aussi (91e → 106e). Vérifier plusieurs mesures avant d'écrire « même niveau ».
 - un arrondi machine qui change un rang (59,999… contre 60,0) ;
 - des tirs colorés différemment sans légende ;
 - une étiquette plus près de la pastille d'un autre joueur ;
