@@ -27,3 +27,4 @@ __pycache__/
 .pytest_cache/
 .venv/
 outils/rapport_api_football.json
+visuels/planche_bt.html
