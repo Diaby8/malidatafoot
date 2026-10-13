@@ -87,7 +87,7 @@ Toujours livrer la version X **et** la version TikTok d'un visuel retenu.
 - Diaby aime choisir. Proposer des options numérotées, puis donner un avis franc (deux ou trois préférées, et pourquoi).
 - Ne jamais changer un texte, un chiffre ou un son d'une vidéo déjà validée sans lui montrer d'abord les plans modifiés.
 
-## 5. Bannière X (état au 8 octobre 2026)
+## 5. Bannière X (état au 13 octobre 2026)
 
 - Ce qu'il a aimé : la composition « terrain derrière, cartes penchées ».
 - Ses retours :
@@ -98,6 +98,13 @@ Toujours livrer la version X **et** la version TikTok d'un visuel retenu.
   - pas de cartes vides.
 - Les cartes se font depuis les vrais gabarits allégés (`reel_cartes.py`, `banniere_reel.py`, `python taches.py bannieres`). Les essais redessinés sont rangés dans `visuels/archives/`.
 - Il avait aussi dit (6–7 octobre) « pas besoin d'écriture sur la bannière, on écrira dans la bio » : reconfirmer avant d'y mettre l'accroche.
+- **13 octobre 2026** : la bannière en place « fait trop copier l'ancienne DA ». Retour au « terrain derrière » dans la nouvelle DA, petits points autorisés. Série `banniere_terrain.py` (données : `banniere_donnees.py`) :
+  - la trame de points peut porter la donnée (points en quinconce qui grossissent selon la densité des actions du Mali, sur un vrai terrain à l'échelle) : c'est notre motif et une vraie data viz à la fois ; points pleins, sans transparence (des points à moitié transparents virent à l'olive sale) ;
+  - les traits de passes en masse font « grain » : ne pas les utiliser en fond ;
+  - sur un fond nuit, mettre les cartes jaunes (cadre blanc) : les cartes nuit s'y perdent ;
+  - sur téléphone, X pose ses boutons en haut à gauche et à droite : aucun titre de carte sous ces zones (environ x 30–155 et x 1170–1450, y 40–160) ;
+  - le crédit StatsBomb reste en bas à droite dès qu'il y a de la donnée ;
+  - aperçus de contrôle : `apercu_profil.py` (photo de profil posée dessus) et `apercu_tel.py` (taille téléphone avec les boutons).
 
 ## 6. Audit visuel (toujours, avant d'envoyer)
 
