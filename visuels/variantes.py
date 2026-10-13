@@ -41,7 +41,7 @@ def page(ctx, hero, body, note, css=''):
 #note{{color:{T['note']}}}#note b{{color:{T['sig']}}}
 #in{{position:absolute;left:36px;top:28px;width:896px;height:874px}}#in.nu{{left:56px;top:312px;width:968px;height:930px}}
 .hd{{position:absolute;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center}}#in.nu .hd{{padding-bottom:16px;border-bottom:1.5px solid {T['trait']}}}
-.hd h3{{font:700 23px/1 "IN";color:{T['ink']}}}.lg{{display:flex;gap:20px;align-items:center;font:500 17.5px/1 "IN";color:{T['doux']}}}.lg span{{display:flex;align-items:center;gap:8px}}.lg i{{display:block;border-radius:50%}}
+.hd h3{{font:700 23px/1 "IN";color:{T['ink']}}}.lg{{display:flex;gap:20px;align-items:center;font:500 17.5px/1 "IN";color:{T['doux']}}}.lg span{{display:flex;align-items:center;gap:8px;white-space:nowrap}}.lg i{{display:block;border-radius:50%}}
 .cap{{position:absolute;font:500 16.5px/1 "IN";color:{T['doux']};white-space:nowrap}}
 h4{{font:700 19px/1 "IN";color:{T['ink']}}}
 .th{{position:relative;height:22px;font:500 15px/1 "IN";color:{T['doux']}}}.th span{{position:absolute;top:0}}
@@ -449,6 +449,111 @@ def plan_competitions():
     h=hero('Les compétitions',f"{len(M)} matchs des Aigles, compétition par compétition",f"De {M[0]['date'][:4]} à {M[-1]['date'][:4]}",("Matchs en phase finale de CAN",str(ncan),f"dont {can['V']} victoires"))
     return page(CTX_H,h,body,("Autres tournois : Jeux africains, tournoi du Burkina Faso, Jeux de l'amitié africaine.",SRC_H),css)
 
-html={'tirs':plan_tirs,'but':plan_but,'fil':plan_fil,'reseau':plan_reseau,'fiche':plan_fiche,'accroche':plan_accroche,'fin':plan_fin,
+# ------------------------------------------------------------------ la défense des Aigles depuis 2020 (malidata/analyses.py)
+# Données : ../outputs/analyses/defense_aigles.json. Quatre mises en scène du même message (13 octobre 2026).
+def defense(): return json.load(open('../outputs/analyses/defense_aigles.json',encoding='utf-8'))
+CTX_DEF="Équipe du Mali, matchs officiels"
+NOTE_DEF=("Matchs officiels : CAN et éliminatoires. Rang : classement Elo du jour du match.","Données : résultats internationaux (martj42, CC0).")
+def hero_def(D):
+    r,n=D['reference'],D['depuis_2020']
+    return hero('La défense des Aigles','Buts encaissés en match officiel','CAN et éliminatoires' if TT else 'CAN et éliminatoires de la CAN et de la Coupe du monde',
+                ('Par match, depuis 2020',fr(n['par_match'],2),f"contre {fr(r['par_match'],2)} de 2000 à 2019"))
+def leg_def():
+    sq=lambda c,plein=True:f'<i style="width:15px;height:15px;border-radius:3px;{"background:"+c if plein else "box-shadow:inset 0 0 0 2px "+c}"></i>'
+    return f'<span>{sq(T["mute"])}2000-2019</span><span>{sq(T["sA"])}depuis 2020</span>'
+CSS_DEF=lambda: f'''.r .n{{left:0;top:10px;font:500 19px/1 "IN";color:{T['ink']}}}.r .c{{top:9px;width:120px;text-align:right;font:700 20px/1 "IN";color:{T['ink']}}}
+.r .v1{{top:11px;width:120px;text-align:right;font:400 18px/1 "IN";color:{T['doux']}}}.r.tot{{border-bottom:none}}.r.tot .n{{font-weight:700}}
+.th.e{{margin-top:14px;border-bottom:1.5px solid {T['trait']};padding-bottom:26px}}.th.g{{height:16px;margin-top:12px}}.th.g span{{font-weight:600;color:{T['ink']}}}
+.ax{{font:500 16px IN;fill:{T['doux']}}}.axt{{font:600 16px IN;fill:{T['doux']}}}
+#lire{{position:absolute;left:0;right:0}}#lire p{{margin-top:12px;font:500 18.5px/1.45 "IN";color:{T['ink']}}}'''
+def bilan_def(D, top):
+    """Le bilan des deux périodes, en tableau (les chiffres sont là, pas sur le graphique)."""
+    r,n=D['reference'],D['depuis_2020']; pc=lambda b:f"{b['sans_encaisser']} ({round(100*b['sans_encaisser']/b['matchs'])} %)"
+    rows=[('Matchs',r['matchs'],n['matchs']),('Buts encaissés',r['buts_encaisses'],n['buts_encaisses']),('Par match',fr(r['par_match'],2),fr(n['par_match'],2)),
+          ('Matchs sans encaisser',pc(r),pc(n)),("Rang médian de l'adversaire",f"{int(r['rang_median_adversaire'])}e",f"{int(n['rang_median_adversaire'])}e")]
+    li=''.join(f'<div class="r"><span class="n">{a}</span><span class="v1" style="right:170px;width:150px">{b}</span><span class="c" style="right:0;width:150px">{c}</span></div>' for a,b,c in rows)
+    return f'''<div style="position:absolute;left:0;right:0;top:{top}px"><h4>Le bilan</h4><div class="th e"><span style="right:170px;width:150px;text-align:right">2000-2019</span><span style="right:0;width:150px;text-align:right">depuis 2020</span></div>{li}</div>'''
+
+def plan_defense():
+    """1A : barres par niveau d'adversaire, puis le tableau par niveau."""
+    D=defense(); N=D['niveaux']; ref,rec=D['reference'],D['depuis_2020']
+    CH=290; ymax=1.5; x0=58; gw=(W-x0)/len(N); bw=min(78,gw*.26); sy=lambda v:CH-v/ymax*CH; g=''
+    for v in (0.5,1,1.5):
+        g+=f'<line x1="{x0}" y1="{sy(v):.1f}" x2="{W}" y2="{sy(v):.1f}" stroke="{T["trait2"]}" stroke-width="1.4"/><text x="0" y="{sy(v)+6:.1f}" class="ax">{fr(v)}</text>'
+    g+=f'<text x="0" y="{CH+6}" class="ax">0</text>'
+    for i,n in enumerate(N):
+        x=x0+(i+.5)*gw
+        for k,(v,c) in enumerate(((n['reference']['par_match'],T['mute']),(n['depuis_2020']['par_match'],T['sA']))):
+            xb=x-bw-5 if k==0 else x+5; g+=f'<rect x="{xb:.1f}" y="{sy(v):.1f}" width="{bw:.1f}" height="{CH-sy(v):.1f}" rx="4" fill="{c}"/>'
+        g+=f'<text x="{x:.1f}" y="{CH+30}" text-anchor="middle" class="axt">{n["niveau"]}</text>'
+    g+=f'<text x="{x0+(W-x0)/2:.0f}" y="{CH+58}" text-anchor="middle" class="ax">Rang Elo de l\'adversaire le jour du match</text>'
+    g+=f'<line x1="{x0}" y1="{CH}" x2="{W}" y2="{CH}" stroke="{T["mute"]}" stroke-width="2"/>'
+    top=Y0+44; yt=top+CH+84
+    cols=lambda a,b,c,d:f'<span class="v1" style="right:390px">{a}</span><span class="c" style="right:270px">{b}</span><span class="v1" style="right:120px">{c}</span><span class="c" style="right:0">{d}</span>'
+    li=''.join(f'<div class="r"><span class="n">{n["niveau"]}</span>{cols(n["reference"]["matchs"],fr(n["reference"]["par_match"],2),n["depuis_2020"]["matchs"],fr(n["depuis_2020"]["par_match"],2))}</div>' for n in N)
+    li+=f'<div class="r tot"><span class="n">Tous les adversaires</span>{cols(ref["matchs"],fr(ref["par_match"],2),rec["matchs"],fr(rec["par_match"],2))}</div>'
+    th=lambda: '<span style="right:390px;width:120px;text-align:right">matchs</span><span style="right:270px;width:120px;text-align:right">par match</span><span style="right:120px;width:120px;text-align:right">matchs</span><span style="right:0;width:120px;text-align:right">par match</span>'
+    nt=[n['depuis_2020']['matchs'] for n in N][0]
+    css=CSS_DEF()+f'''#tb{{position:absolute;left:0;right:0;top:{yt}px}}'''
+    body=f'''<div class="hd"><h3>Selon le niveau de l'adversaire</h3><div class="lg">{leg_def()}</div></div>
+<svg style="position:absolute;left:0;top:{top}px;overflow:visible" width="{W}" height="{CH+40}" viewBox="0 0 {W} {CH+40}">{g}</svg>
+<div id="tb"><div class="th g"><span style="right:270px;width:240px;text-align:right">2000-2019</span><span style="right:0;width:240px;text-align:right">depuis 2020</span></div>
+<div class="th e" style="margin-top:4px">{th()}</div>{li}</div>
+<div id="lire" style="top:{yt+276}px"><h4>À lire</h4><p>Les adversaires ne sont pas plus faibles : leur rang Elo médian est {int(ref["rang_median_adversaire"])}e de 2000 à 2019, {int(rec["rang_median_adversaire"])}e depuis 2020. Contre le top 60, l'échantillon reste petit : {nt} matchs depuis 2020.</p></div>'''
+    return page(CTX_DEF,hero_def(D),body,NOTE_DEF,css)
+
+def plan_defense_attendu():
+    """1B : ce que le Mali d'avant aurait encaissé face aux mêmes adversaires, contre ce qu'il a encaissé."""
+    D=defense(); A=D['a_adversaires_egaux']; att,reel=A['buts_attendus'],A['buts_reels']; n=D['depuis_2020']['matchs']
+    BW=W-190; sx=lambda v:v/max(att,reel)*BW; top=Y0+70; g=''
+    for i,(lab,v,c) in enumerate(((f"Le Mali de 2000-2019 aurait encaissé",att,T['mute']),(f"Le Mali depuis 2020 a encaissé",reel,T['sA']))):
+        y=top+i*150
+        g+=f'<div style="position:absolute;left:0;top:{y}px;font:600 20px/1 IN;color:{T["ink"]}">{lab}</div>'
+        g+=f'<div style="position:absolute;left:0;top:{y+34}px;width:{sx(v):.0f}px;height:62px;border-radius:6px;background:{c}"></div>'
+        g+=f'<div style="position:absolute;left:{sx(v)+18:.0f}px;top:{y+30}px;font:italic 900 72px/1 BC;color:{T["titre"]};white-space:nowrap">{round(v)}<small style="font:600 22px IN;color:{T["doux"]};margin-left:10px;font-style:normal">buts</small></div>'
+    css=CSS_DEF()
+    body=f'''<div class="hd"><h3>Face aux mêmes adversaires, aux mêmes endroits</h3></div>{g}
+<div class="cap" style="left:0;top:{top+300}px">Sur les {n} matchs officiels joués depuis le 1er janvier 2020</div>{bilan_def(D,top+370)}'''
+    note=("Aurait encaissé : selon la force de l'adversaire (Elo) et le lieu, d'après 2000-2019.",NOTE_DEF[1])
+    return page(CTX_DEF,hero_def(D),body,note,css)
+
+def plan_defense_matchs():
+    """1C : chaque match est un point, placé selon le rang de l'adversaire et les buts encaissés."""
+    D=defense(); M=D['matchs']; ymax=max(m['buts_contre'] for m in M); rmax=max(m['rang_adversaire'] for m in M)
+    x0=40; CW=W-x0-10; CH=330; top=Y0+44; lane=CH/(ymax+1); sx=lambda r:x0+(r-1)/(rmax-1)*CW; sy=lambda b,k:top*0+CH-(b+.5)*lane+(-.17 if k else .17)*lane; g=''
+    for b in range(ymax+1):
+        y=CH-(b+.5)*lane; g+=f'<line x1="{x0}" y1="{y+lane/2:.1f}" x2="{W}" y2="{y+lane/2:.1f}" stroke="{T["trait2"]}" stroke-width="1.2"/><text x="0" y="{y+6:.1f}" class="ax">{b}</text>'
+    for r in (1,50,100,150,200):
+        if r<=rmax: g+=f'<text x="{sx(r):.1f}" y="{CH+26}" text-anchor="middle" class="ax">{"1er" if r == 1 else str(r) + "e"}</text>'
+    for k in (0,1):
+        for m in M:
+            if (m['periode']=='depuis_2020')!=bool(k): continue
+            x,y=sx(m['rang_adversaire']),sy(m['buts_contre'],k)
+            g+=(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="6.5" fill="{T["sA"]}" stroke="{T["fond"]}" stroke-width="1.5"/>' if k else
+                f'<circle cx="{x:.1f}" cy="{y:.1f}" r="6" fill="none" stroke="{T["mute"]}" stroke-width="1.8"/>')
+    g+=f'<text x="{x0+CW/2:.0f}" y="{CH+54}" text-anchor="middle" class="axt">Rang Elo de l\'adversaire le jour du match (à gauche, les plus forts)</text>'
+    g+=f'<text transform="translate(-26 {CH/2:.0f}) rotate(-90)" text-anchor="middle" class="axt">Buts encaissés</text>'
+    lg=f'<span><i style="width:14px;height:14px;box-shadow:inset 0 0 0 2px {T["mute"]}"></i>2000-2019</span><span><i style="width:14px;height:14px;background:{T["sA"]}"></i>depuis 2020</span>'
+    css=CSS_DEF()
+    body=f'''<div class="hd"><h3>Chaque rond est un match officiel</h3><div class="lg">{lg}</div></div>
+<svg style="position:absolute;left:26px;top:{top}px;overflow:visible" width="{W-26}" height="{CH+60}" viewBox="0 0 {W-26} {CH+60}">{g}</svg>{bilan_def(D,top+CH+96)}'''
+    return page(CTX_DEF,hero_def(D),body,NOTE_DEF,css)
+
+def plan_defense_sans():
+    """1D : chaque case est un match ; pleine quand le Mali n'a pas encaissé de but."""
+    D=defense(); M=D['matchs']; cols=20; pas=W/cols; cote=pas-8; top=Y0+44; g=''; y=top
+    for per,lab in (('reference','2000-2019'),('depuis_2020','Depuis 2020')):
+        L=[m for m in M if m['periode']==per]; b=D[per]; ns=b['sans_encaisser']
+        g+=f'<div style="position:absolute;left:0;top:{y}px;font:700 20px/1 IN;color:{T["ink"]}">{lab}<span style="font-weight:500;color:{T["doux"]};margin-left:12px">{ns} matchs sans encaisser sur {b["matchs"]} ({round(100*ns/b["matchs"])} %)</span></div>'
+        y+=36
+        for i,m in enumerate(L):
+            cx,cy=(i%cols)*pas,y+(i//cols)*pas; plein=m['buts_contre']==0; c=T['sA'] if per=='depuis_2020' else T['mute']
+            g+=f'<i style="position:absolute;left:{cx:.1f}px;top:{cy:.1f}px;width:{cote:.1f}px;height:{cote:.1f}px;border-radius:5px;{"background:"+c if plein else "box-shadow:inset 0 0 0 2px "+T["trait"]}"></i>'
+        y+=math.ceil(len(L)/cols)*pas+30
+    css=CSS_DEF()
+    body=f'''<div class="hd"><h3>Chaque case est un match ; pleine, le Mali n'a pas encaissé</h3></div>{g}{bilan_def(D,y+6)}'''
+    return page(CTX_DEF,hero_def(D),body,NOTE_DEF,css)
+
+html={'tirs':plan_tirs,'defense':plan_defense,'defense_attendu':plan_defense_attendu,'defense_matchs':plan_defense_matchs,'defense_sans':plan_defense_sans,'but':plan_but,'fil':plan_fil,'reseau':plan_reseau,'fiche':plan_fiche,'accroche':plan_accroche,'fin':plan_fin,
       'histoire':plan_histoire,'scores':plan_scores,'decennies':plan_decennies,'competitions':plan_competitions}[PLAN]()
 open(OUT,'w',encoding='utf-8').write(html); print('ok',PLAN,TH_,OUT)

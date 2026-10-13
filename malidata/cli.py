@@ -4,7 +4,7 @@ from __future__ import annotations
 import argparse
 import time
 
-from . import aigles, charts, export, gold, ingest, profils, quality, silver
+from . import aigles, analyses, charts, elo, export, gold, ingest, profils, quality, silver
 from .config import get_logger, load_config
 
 log = get_logger("pipeline")
@@ -12,6 +12,8 @@ STEPS = {
     "ingest": lambda cfg, a: ingest.run(cfg, force=a.force),
     "silver": lambda cfg, a: silver.run(cfg),
     "aigles": lambda cfg, a: aigles.run(cfg, force=a.force),
+    "elo": lambda cfg, a: elo.run(cfg),
+    "analyses": lambda cfg, a: analyses.run(cfg),
     "gold": lambda cfg, a: gold.run(cfg),
     "profils": lambda cfg, a: profils.run(cfg),
     "quality": lambda cfg, a: quality.run(cfg),

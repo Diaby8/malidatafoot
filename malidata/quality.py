@@ -97,6 +97,25 @@ def run(cfg: Config) -> dict:
         from sb join gold.aigles_matchs a using (date)""").fetchone()
     n_sb = one(f"select count(*) from silver.matches where home_team = '{cfg.team}' or away_team = '{cfg.team}'")
     check("aigles_recoupe_statsbomb", ecarts == 0 and communs == n_sb, f"{communs}/{n_sb} matchs retrouvés, {ecarts} écart(s) de score")
+
+    # --- l'Elo maison : ce que l'un gagne, l'autre le perd ; chaque match du Mali a son Elo et le rang de l'adversaire
+    if one("select count(*) from information_schema.tables where table_name = 'elo_matchs'"):
+        derive = one("select max(abs((elo_home_apres - elo_home_avant) + (elo_away_apres - elo_away_avant))) from gold.elo_matchs")
+        n_elo = one("select count(*) from gold.elo_matchs") - one("select count(*) from silver.intl_matches")
+        check("elo_somme_constante", derive < 1e-6 and n_elo == 0, f"écart maximal {derive:.1e} par match ; {n_elo} match(s) manquant(s)")
+        trous = one("select count(*) from gold.aigles_elo where rang_adversaire_avant is null") + n_mali - one("select count(*) from gold.aigles_elo")
+        check("elo_aigles_complet", trous == 0, f"{trous} match(s) du Mali sans Elo ou sans rang d'adversaire")
+    # --- les analyses publiées : leurs totaux doivent se retrouver par un calcul direct dans l'entrepôt
+    f_def = cfg.path("outputs") / "analyses" / "defense_aigles.json"
+    if f_def.exists():
+        res = json.loads(f_def.read_text(encoding="utf-8"))
+        off = "('African Cup of Nations', 'African Cup of Nations qualification', 'FIFA World Cup qualification')"
+        direct = con.execute(f"""select count(*) filter (annee >= 2020), sum(buts_contre) filter (annee >= 2020),
+                                        count(*) filter (annee between 2000 and 2019), sum(buts_contre) filter (annee between 2000 and 2019)
+                                 from gold.aigles_matchs where competition in {off}""").fetchone()
+        publie = (res["depuis_2020"]["matchs"], res["depuis_2020"]["buts_encaisses"], res["reference"]["matchs"], res["reference"]["buts_encaisses"])
+        somme_niv = tuple(sum(n[p][k] for n in res["niveaux"]) for p, k in (("depuis_2020", "matchs"), ("depuis_2020", "buts"), ("reference", "matchs"), ("reference", "buts")))
+        check("analyse_defense_recomptee", tuple(direct) == publie == somme_niv, f"publié {publie}, recompté {tuple(direct)}, par niveaux {somme_niv}")
     con.close()
 
     report = {"checks": [{"name": n, "ok": ok, "detail": d} for n, ok, d in checks],

@@ -180,3 +180,37 @@ def test_aigles_vus_du_cote_du_mali():
     assert (tun.resultat, tun.lieu, bool(tun.tirs_au_but), bool(tun.tab_gagnes)) == ("N", "neutre", True, True)
     bilan = con.execute("select * from gold.aigles_bilan_annuel").df().iloc[0]
     assert (bilan.matchs, bilan.victoires, bilan.nuls, bilan.defaites, bilan.buts_pour) == (3, 2, 1, 0, 5)
+
+
+def test_elo_methode_eloratings():
+    """Deux équipes à 1500. Victoire 1-0 à domicile en amical : We = 1/(10^-0,25 + 1), K = 20, G = 1.
+    Puis 3-0 sur terrain neutre en Coupe du monde : We = 0,5, K = 60, G = (11 + 3) / 8."""
+    from malidata.elo import calculer, multiplicateur, poids
+    assert (poids("FIFA World Cup"), poids("African Cup of Nations"), poids("FIFA World Cup qualification"),
+            poids("UEFA Nations League"), poids("Friendly"), poids("COSAFA Cup")) == (60, 50, 40, 40, 20, 30)
+    assert (multiplicateur(0), multiplicateur(-1), multiplicateur(2), multiplicateur(-4)) == (1, 1, 1.5, 15 / 8)
+    m = pd.DataFrame([("2020-01-01", "A", "B", 1, 0, "Friendly", False), ("2020-02-01", "C", "D", 3, 0, "FIFA World Cup", True),
+                      ("2020-03-01", "A", "C", 2, 2, "Friendly", True)],
+                     columns=["date", "home_team", "away_team", "home_score", "away_score", "tournament", "neutral"])
+    e = calculer(m, suivie="A")
+    d1 = 20 * (1 - 1 / (10 ** (-100 / 400) + 1))
+    assert e.loc[0, "elo_home_apres"] == pytest.approx(1500 + d1) and e.loc[0, "elo_away_apres"] == pytest.approx(1500 - d1)
+    assert e.loc[1, "elo_home_apres"] - 1500 == pytest.approx(60 * 1.75 * 0.5)
+    # nul : le moins bien classé gagne des points ; la somme ne bouge pas
+    assert e.loc[2, "elo_home_apres"] > e.loc[2, "elo_home_avant"]
+    assert (e.elo_home_apres + e.elo_away_apres - e.elo_home_avant - e.elo_away_avant).abs().max() < 1e-9
+    # rang avant le match : C (1552,5) est devant A (1507,2) le 1er mars
+    assert (e.loc[2, "rang_home_avant"], e.loc[2, "rang_away_avant"]) == (2, 1)
+    assert pd.isna(e.loc[1, "rang_home_avant"])     # match sans l'équipe suivie : pas de rang
+
+
+def test_poisson_irls_retrouve_les_coefficients():
+    import numpy as np
+    from malidata.analyses import poisson_cdf, poisson_irls
+    rng = np.random.default_rng(1)
+    x = rng.normal(size=20000)
+    X = np.column_stack([np.ones_like(x), x])
+    y = rng.poisson(np.exp(-0.3 + 0.25 * x))
+    b = poisson_irls(X, y.astype(float))
+    assert b == pytest.approx([-0.3, 0.25], abs=0.02)
+    assert poisson_cdf(0, 2.0) == pytest.approx(np.exp(-2.0)) and poisson_cdf(50, 2.0) == pytest.approx(1.0)
