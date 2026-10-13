@@ -76,7 +76,7 @@ Un logo à ce niveau ne se bricole pas en SVG : discuter d'abord le symbole avec
 |---|---|---|
 | X | 1080 × 1350 (capture ×2) | marges 56 px ; le plus petit texte reste lisible sur téléphone |
 | TikTok | 1080 × 1920 (capture ×2) | rien d'important au-dessus de 150 px ni dans les 340 px du bas ; à droite, rester sous x = 946 en dessous de y = 880 |
-| Bannière X | 1500 × 500 (exporter en 3000 × 1000) | la photo de profil couvre environ x 40–395, y 287–500 sur ordinateur ; sur téléphone, X pose des boutons en haut ; texte éventuel à partir de x = 432 |
+| Bannière X | 1500 × 500 (exporter en 3000 × 1000) | **zone sûre x 560–1230, y 210–448** (mesurée le 13 octobre sur l'iPhone de Diaby : l'appli ne montre que x 338–1393, y 79–500, l'heure couvre le haut, les boutons retour et recherche sont à mi-hauteur sur les côtés, la photo couvre x 360–575 dès y = 455 ; sur ordinateur, la photo couvre x 40–395, y 287–500). Contrôle : `apercu_iphone.py` et `apercu_profil.py` |
 
 Toujours livrer la version X **et** la version TikTok d'un visuel retenu.
 
