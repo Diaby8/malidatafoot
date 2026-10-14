@@ -193,3 +193,5 @@ des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliD
 - 2026-10-14 : modèle de menace (xT) construit et validé (poc/xt) ; 3 plans clés : carte de la menace, menace créée/concédée, action la plus dangereuse.
 - 2026-10-14 : vidéo « le compte expliqué » (vision de Diaby : le foot compris avec la data) : planche numérotée des plans 1A/1B (vraie action Namibie-Mali en 3D, jaune ou nuit), 2A/2B (zoom data), 3 (fiches réelles qui défilent), 4 (dézoom sur la base).
 - 2026-10-14 : vidéo « explique le compte », plan 2 (le zoom) en version nuit 2B (choix de Diaby). Plan 1 à confirmer.
+- 2026-10-14 : plans 1 et 2 en version nuit (1B + 2B), validé par Diaby ; les fiches (plan 3) restent en jaune.
+- 2026-10-14 : fiche joueur TikTok corrigée : libellés du radar droits et coupés en deux lignes (plus de chevauchement), « Courses » remplacé par « Conduites progressives » pour coller au tableau, colonnes du tableau équilibrées et bas de fiche placé sous le tableau. Nouvelle carte « profil » (visuels/fiche_profil.py) pour les joueurs sans données de match (Sangaré, Dorgeles). Reste à faire : mêmes corrections sur la fiche X.
