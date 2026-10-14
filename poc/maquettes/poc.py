@@ -37,7 +37,7 @@ for v in (1400, 1600, 1800): g += txt(x0 - 14, Y(v) + 9, v, 24, 700, '#064A25', 
 g += '<path d="M' + 'L'.join(f'{X(d):.1f} {Y(v):.1f}' for d, v in el) + '" fill="none" stroke="#0B7A3B" stroke-width="5" stroke-linejoin="round"/>'
 for d, v, lab, dy in ((dt.date(2024, 1, 30), 1772, '2024 · 1772', -30), (dt.date(2004, 2, 7), 1760, '2004 · 1760', -30)):
     g += f'<circle cx="{X(d):.0f}" cy="{Y(v):.0f}" r="12" fill="#D4252A"/>' + txt(X(d), Y(v) + dy, lab, 28, 800, '#D4252A', 'middle')
-b = sv(g) + '<div class="bigR" style="top:1290px"><b>2024</b><span>LE MALI LE PLUS FORT DE L\'HISTOIRE<br>SELON LA FORCE CALCULÉE (<em>ELO</em>)</span></div>'
+b = sv(g) + '<div class="bigR" style="top:1290px"><b>2024</b><span>LE PLUS HAUT NIVEAU DU MALI, DEVANT 2022 ET 2004<br>SELON NOTRE INDICE DE FORCE (<em>ELO</em>)</span></div>'
 out['b3'] = pageT('QUESTION 3 · <b>LA GÉNÉRATION LA PLUS FORTE ?</b>', 'QUESTION 3', 'LA PLUS FORTE ?', '', b, 'Force Elo du Mali après chaque match depuis 1990 · Calcul MaliDataFoot · Données : martj42')
 
 # ---------------- C : la boîte à outils
@@ -113,8 +113,8 @@ out['e1'] = pageT('CAN 2023 · <b>LES 10 SECONDES APRÈS LA RÉCUPÉRATION</b>',
 b = '<div style="position:absolute;left:64px;top:620px;font:800 30px SC;letter-spacing:.05em">TIRS DANS LES 10 SECONDES</div>'
 b += '<div style="position:absolute;left:64px;top:680px;display:flex;gap:60px;align-items:flex-end"><div><div style="font:italic 900 200px/.9 BC;color:#FFF3C4;-webkit-text-stroke:3px #064A25">6,7</div><div style="font:800 28px SC">ATTENDUS VU SA HAUTEUR</div></div><div><div style="font:italic 900 200px/.9 BC;color:#0B7A3B">5</div><div style="font:800 28px SC">RÉELS</div></div></div>'
 b += '<div style="position:absolute;left:64px;top:1030px;font:800 30px SC;letter-spacing:.05em">INTENSITÉ DU PRESSING</div><div style="position:absolute;left:64px;top:1080px;font:italic 900 130px/1 BC;color:#0B7A3B">2<span style="font-size:70px">e</span> <span style="font:800 30px SC;color:#04331A">SUR 24, DERRIÈRE L\'ALGÉRIE</span></div>'
-b += '<div style="position:absolute;left:64px;top:1300px;font:800 34px/1.25 SC;letter-spacing:.04em">IL PRESSE ET RÉCUPÈRE HAUT,<br><span style="color:#D4252A">MAIS IL EN TIRE PEU.</span></div>'
-out['e2'] = pageT('CAN 2023 · <b>CE QUE LE MALI FAIT DU BALLON RÉCUPÉRÉ</b>', 'LE PRESSING', 'SANS LA FIN', '', b, f'Attendu = taux de tir du tournoi selon la zone de récupération · Données {SB}')
+b += '<div style="position:absolute;left:64px;top:1300px;font:800 34px/1.25 SC;letter-spacing:.04em">IL PRESSE ET RÉCUPÈRE HAUT.<br><span style="color:#D4252A">5 TIRS POUR 6,7 ATTENDUS : PAS D\'ÉCART NET.</span></div>'
+out['e2'] = pageT('CAN 2023 · <b>CE QUE LE MALI FAIT DU BALLON RÉCUPÉRÉ</b>', 'LE PRESSING', 'QUI MARCHE', '', b, f'Attendu = taux de tir du tournoi selon la zone de récupération · Données {SB}')
 
 # ---------------- F : les styles vus par la machine
 co = S['pca']['coordinates']

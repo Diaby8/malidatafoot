@@ -6,6 +6,9 @@ Les idées d'inspiration plus anciennes restent dans `docs/banque_idees.md` ; qu
 
 Statuts : **publié** · **prêt** (vérifié, à poster) · **POC** (calcul fait + maquettes, à améliorer et auditer) · **à faire** · **bloqué** (il manque une source).
 
+## 0. Versions réelles (14/10/2026)
+Tous les sujets 1 à 19 (sauf 8, en pause) existent en version réelle à tester : images X en HD et vidéo TikTok animée sans voix, dans `livrables/vrais/`. Motion design : `visuels/animer.py` + `visuels/capture_video.mjs`. Corrections de l'audit indépendant appliquées. Le 20 attend une source.
+
 ## 1. Déjà publié
 | Sujet | Où | Date |
 |---|---|---|
@@ -33,7 +36,7 @@ Statuts : **publié** · **prêt** (vérifié, à poster) · **POC** (calcul fai
 | 12 | **Le Mali, roi du nul ?** | 21 nuls en poules pour environ 14 attendus, sans perte de points | martj42 + modèle | `poc/maudit/` |
 | 13 | **Tout passe par Sinayoko (en sélection)** | 6 des 9 buts du Mali sur les deux dernières CAN, les 3 de 2025 | martj42 (à recouper) | `poc/maquettes/poc_joueurs.py` |
 
-## 4. À faire (données disponibles)
+## 4. POC faits le 14/10 (analyses + maquettes ; textes dans `poc/textes.md`)
 | # | Sujet | Ce que ça fait comprendre | Données |
 |---|---|---|---|
 | 14 | **Sinayoko, le premier défenseur** | son pressing comparé à tous les attaquants de la CAN 2023 | StatsBomb |

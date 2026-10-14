@@ -1,0 +1,526 @@
+{
+ "liste": {
+  "joueurs": 26,
+  "par_poste": {
+   "G": 4,
+   "D": 8,
+   "M": 7,
+   "A": 7
+  },
+  "source": "registre/joueurs.csv, liste_sept_2026 = oui (liste Da Silva du 10/09/2026)"
+ },
+ "age": {
+  "reference": "2026-09-25",
+  "connus": 21,
+  "inconnus": [
+   "Émile Doucouré",
+   "Adama Camara",
+   "Modibo Sagnan",
+   "Alimami Gory",
+   "Ange Martial Tia"
+  ],
+  "mediane": 25,
+  "moyenne": 26.1,
+  "min": 22,
+  "max": 36,
+  "moins_de_23_strict": 1,
+  "23_ou_moins": 7,
+  "30_ou_plus": 4,
+  "plus_de_30_strict": 3,
+  "repartition": {
+   "22": 1,
+   "23": 6,
+   "24": 2,
+   "25": 2,
+   "26": 4,
+   "28": 2,
+   "30": 1,
+   "31": 1,
+   "34": 1,
+   "36": 1
+  },
+  "detail": {
+   "Djigui Diarra": 31,
+   "Mamadou Samassa": 36,
+   "N'Golo Traoré": 26,
+   "Amadou Danté": 25,
+   "Cheick Keita": 23,
+   "Daouda Guindo": 23,
+   "Hamari Traoré": 34,
+   "Nathan Gassama": 25,
+   "Ousmane Camara": 23,
+   "Aliou Dieng": 28,
+   "Amadou Haïdara": 28,
+   "Issa Djiguiba": 22,
+   "Kamory Doumbia": 23,
+   "Lassana Coulibaly": 30,
+   "Mamadou Sangaré": 24,
+   "Ousmane Diakité": 26,
+   "El Bilal Touré": 24,
+   "Gaoussou Diarra": 23,
+   "Lassine Sinayoko": 26,
+   "Moussa Sylla": 26,
+   "Nene Dorgeles": 23
+  },
+  "nes_2002_2003": [
+   "Cheick Keita",
+   "Daouda Guindo",
+   "Gaoussou Diarra",
+   "Kamory Doumbia",
+   "Mamadou Sangaré",
+   "Nene Dorgeles",
+   "Ousmane Camara"
+  ]
+ },
+ "selections": {
+  "date": "2026-03-31",
+  "connues": 21,
+  "inconnues": [
+   "Émile Doucouré",
+   "Adama Camara",
+   "Modibo Sagnan",
+   "Alimami Gory",
+   "Ange Martial Tia"
+  ],
+  "premiere_convocation": [
+   "Émile Doucouré",
+   "Adama Camara",
+   "Ange Martial Tia"
+  ],
+  "zero_au_31_mars": [
+   "Issa Djiguiba",
+   "N'Golo Traoré"
+  ],
+  "mediane": 19,
+  "total_connu": 491,
+  "colonnes": {
+   "0": [
+    {
+     "nom": "N'Golo Traoré",
+     "can2023": false
+    },
+    {
+     "nom": "Émile Doucouré",
+     "can2023": false
+    },
+    {
+     "nom": "Adama Camara",
+     "can2023": false
+    },
+    {
+     "nom": "Issa Djiguiba",
+     "can2023": false
+    },
+    {
+     "nom": "Ange Martial Tia",
+     "can2023": false
+    }
+   ],
+   "1-9": [
+    {
+     "nom": "Cheick Keita",
+     "can2023": false
+    },
+    {
+     "nom": "Daouda Guindo",
+     "can2023": false
+    },
+    {
+     "nom": "Nathan Gassama",
+     "can2023": false
+    },
+    {
+     "nom": "Ousmane Camara",
+     "can2023": false
+    },
+    {
+     "nom": "Ousmane Diakité",
+     "can2023": false
+    },
+    {
+     "nom": "Moussa Sylla",
+     "can2023": false
+    }
+   ],
+   "10-29": [
+    {
+     "nom": "Mamadou Samassa",
+     "can2023": false
+    },
+    {
+     "nom": "Amadou Danté",
+     "can2023": true
+    },
+    {
+     "nom": "Mamadou Sangaré",
+     "can2023": false
+    },
+    {
+     "nom": "Gaoussou Diarra",
+     "can2023": false
+    },
+    {
+     "nom": "Lassine Sinayoko",
+     "can2023": true
+    }
+   ],
+   "30-49": [
+    {
+     "nom": "Aliou Dieng",
+     "can2023": true
+    },
+    {
+     "nom": "Kamory Doumbia",
+     "can2023": true
+    },
+    {
+     "nom": "El Bilal Touré",
+     "can2023": false
+    },
+    {
+     "nom": "Nene Dorgeles",
+     "can2023": true
+    }
+   ],
+   "50+": [
+    {
+     "nom": "Djigui Diarra",
+     "can2023": true
+    },
+    {
+     "nom": "Hamari Traoré",
+     "can2023": true
+    },
+    {
+     "nom": "Amadou Haïdara",
+     "can2023": true
+    },
+    {
+     "nom": "Lassana Coulibaly",
+     "can2023": true
+    }
+   ],
+   "inconnu": [
+    {
+     "nom": "Modibo Sagnan",
+     "can2023": false
+    },
+    {
+     "nom": "Alimami Gory",
+     "can2023": false
+    }
+   ]
+  },
+  "detail": {
+   "Djigui Diarra": 76,
+   "Mamadou Samassa": 19,
+   "N'Golo Traoré": 0,
+   "Amadou Danté": 19,
+   "Cheick Keita": 1,
+   "Daouda Guindo": 4,
+   "Hamari Traoré": 61,
+   "Nathan Gassama": 5,
+   "Ousmane Camara": 7,
+   "Aliou Dieng": 47,
+   "Amadou Haïdara": 50,
+   "Issa Djiguiba": 0,
+   "Kamory Doumbia": 30,
+   "Lassana Coulibaly": 54,
+   "Mamadou Sangaré": 14,
+   "Ousmane Diakité": 1,
+   "El Bilal Touré": 30,
+   "Gaoussou Diarra": 10,
+   "Lassine Sinayoko": 25,
+   "Moussa Sylla": 6,
+   "Nene Dorgeles": 32
+  },
+  "attention": "Le Mali a joué Iran 2-0 Mali (amical, 4 juin 2026) après le 31 mars : les sélections du registre ne le comptent pas."
+ },
+ "can2023": {
+  "effectif": 27,
+  "source": "feuilles de match StatsBomb, 5 matchs du Mali (3920391, 3920404, 3920417, 3922244, 3922659)",
+  "rescapes": [
+   "Djigui Diarra",
+   "Amadou Danté",
+   "Hamari Traoré",
+   "Aliou Dieng",
+   "Amadou Haïdara",
+   "Kamory Doumbia",
+   "Lassana Coulibaly",
+   "Lassine Sinayoko",
+   "Nene Dorgeles"
+  ],
+  "nb_rescapes": 9,
+  "selections_des_rescapes": 394,
+  "part_des_selections_connues": 0.802,
+  "dates_naissance_connues": 14,
+  "dates_inconnues": [
+   "Aboubacar Doumbia",
+   "Aboubacar Traoré",
+   "Adama Traoré",
+   "Boubacar Traore",
+   "Boubakar Kouyate",
+   "Diadie Samassekou",
+   "Falaye Sacko",
+   "Fousseni Diabaté",
+   "Ibrahim Sissoko",
+   "Ismael Diarra Diawara",
+   "Moussa Doumbia",
+   "Sekou Koita",
+   "Youssoufou Niakaté"
+  ],
+  "comparaison_age": "impossible avec le dépôt : dates de naissance connues pour une partie seulement de l'effectif 2023 (registre)"
+ },
+ "clubs": {
+  "detail": [
+   {
+    "nom": "Djigui Diarra",
+    "club": "Young Africans",
+    "pays": "Tanzanie",
+    "zone": "Afrique",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Mamadou Samassa",
+    "club": "Stade Lavallois",
+    "pays": "France",
+    "zone": "Europe (hors top 5)",
+    "a_confirmer": false
+   },
+   {
+    "nom": "N'Golo Traoré",
+    "club": "Stade Malien",
+    "pays": "Mali",
+    "zone": "Afrique",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Émile Doucouré",
+    "club": "Genk",
+    "pays": "Belgique",
+    "zone": "Europe (hors top 5)",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Adama Camara",
+    "club": "Paris FC",
+    "pays": "France",
+    "zone": "top5",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Amadou Danté",
+    "club": "Zbrojovka Brno",
+    "pays": "Tchéquie",
+    "zone": "Europe (hors top 5)",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Cheick Keita",
+    "club": "Charleroi ou Latina",
+    "pays": "Belgique ou Italie",
+    "zone": "Europe (hors top 5)",
+    "a_confirmer": true
+   },
+   {
+    "nom": "Daouda Guindo",
+    "club": "Reims",
+    "pays": "France",
+    "zone": "Europe (hors top 5)",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Hamari Traoré",
+    "club": "Paris FC",
+    "pays": "France",
+    "zone": "top5",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Modibo Sagnan",
+    "club": "Çaykur Rizespor",
+    "pays": "Turquie",
+    "zone": "Europe (hors top 5)",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Nathan Gassama",
+    "club": "Baltika Kaliningrad",
+    "pays": "Russie",
+    "zone": "Europe (hors top 5)",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Ousmane Camara",
+    "club": "Angers",
+    "pays": "France",
+    "zone": "top5",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Aliou Dieng",
+    "club": "Valence",
+    "pays": "Espagne",
+    "zone": "top5",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Amadou Haïdara",
+    "club": "Lens ou RB Leipzig",
+    "pays": "France ou Allemagne",
+    "zone": "top5",
+    "a_confirmer": true
+   },
+   {
+    "nom": "Issa Djiguiba",
+    "club": "Rayon Sports",
+    "pays": "Rwanda",
+    "zone": "Afrique",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Kamory Doumbia",
+    "club": "Brest",
+    "pays": "France",
+    "zone": "top5",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Lassana Coulibaly",
+    "club": "Lecce",
+    "pays": "Italie",
+    "zone": "top5",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Mamadou Sangaré",
+    "club": "Brentford",
+    "pays": "Angleterre",
+    "zone": "top5",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Ousmane Diakité",
+    "club": "West Bromwich Albion",
+    "pays": "Angleterre",
+    "zone": "Europe (hors top 5)",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Alimami Gory",
+    "club": "Abha",
+    "pays": "Arabie saoudite",
+    "zone": "Asie",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Ange Martial Tia",
+    "club": "Reims",
+    "pays": "France",
+    "zone": "Europe (hors top 5)",
+    "a_confirmer": false
+   },
+   {
+    "nom": "El Bilal Touré",
+    "club": "Parme",
+    "pays": "Italie",
+    "zone": "top5",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Gaoussou Diarra",
+    "club": "Feyenoord",
+    "pays": "Pays-Bas",
+    "zone": "Europe (hors top 5)",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Lassine Sinayoko",
+    "club": "Paris FC",
+    "pays": "France",
+    "zone": "top5",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Moussa Sylla",
+    "club": "Schalke 04",
+    "pays": "Allemagne",
+    "zone": "top5",
+    "a_confirmer": false
+   },
+   {
+    "nom": "Nene Dorgeles",
+    "club": "Fenerbahçe",
+    "pays": "Turquie",
+    "zone": "Europe (hors top 5)",
+    "a_confirmer": false
+   }
+  ],
+  "zones": {
+   "Afrique": 3,
+   "Europe (hors top 5)": 11,
+   "top5": 11,
+   "Asie": 1
+  },
+  "pays_distincts_surs": 14,
+  "pays": [
+   "Allemagne",
+   "Angleterre",
+   "Arabie saoudite",
+   "Belgique",
+   "Espagne",
+   "France",
+   "Italie",
+   "Mali",
+   "Pays-Bas",
+   "Russie",
+   "Rwanda",
+   "Tanzanie",
+   "Tchéquie",
+   "Turquie"
+  ],
+  "au_mali": [
+   "N'Golo Traoré"
+  ],
+  "a_confirmer": [
+   "Cheick Keita (Charleroi ou Latina)",
+   "Amadou Haïdara (Lens ou RB Leipzig)"
+  ],
+  "sources_championnats": {
+   "Ligue 1 2026-27 (Paris FC, Angers, Brest, Lens oui ; Reims, Laval non)": "en.wikipedia.org/wiki/2026–27_Ligue_1 (lu le 14/10/2026)",
+   "Schalke 04 promu en Bundesliga": "en.wikipedia.org/wiki/2025–26_2._Bundesliga",
+   "Serie A : relégués Pisa, Verona, Cremonese ; Lecce sauvé": "fantamaster.it, verdetti 38e journée 2025-26",
+   "Premier League : relégués West Ham, Burnley, Wolves ; WBA en Championship 2026-27": "news.williamhill.com",
+   "LaLiga : relégués Mallorca, Girona, Oviedo": "lafm.com.co",
+   "RB Leipzig en Bundesliga": "non revérifié (Haïdara est dans un top 5 que ce soit Lens ou Leipzig)"
+  }
+ },
+ "matchs": {
+  "resultats_martj42": [
+   "2026-09-25 Mali 3-1 Cape Verde (African Cup of Nations qualification, Bamako)",
+   "2026-09-29 Liberia 0-1 Mali (African Cup of Nations qualification, Monrovia)",
+   "2026-10-04 Morocco 1-1 Mali (Friendly, Tangier)"
+  ],
+  "buteurs_dans_goalscorers_csv": 0,
+  "goalscorers_csv_s_arrete_au": "2026-07-19",
+  "buteurs_web": {
+   "Mali 3-1 Cap-Vert (25/09, Bamako)": "Ange Martial Tia 5e ; Sidny (Lopes) Cabral 10e pour le Cap-Vert ; Nene Dorgeles 39e et 50e (Africa Top Sports) ou 51e (11v11). Sources : africatopsports.com, 11v11.com, fr.apanews.net. Africa Top Sports écrit « Mamady Tia » et « Steven Lopes Cabral » : erreurs de nom probables.",
+   "Liberia 0-1 Mali (29/09, Monrovia)": "Ange Martial Tia, seul but (APA News) ; 79e selon le skill (état du 8/10), minute non recoupée ici (page 11v11 non lue).",
+   "Maroc 1-1 Mali (4/10, Tanger)": "Ezzalzouli 35e, Gaoussou Diarra 77e (skill, état du 8/10 ; non recoupé ici)"
+  }
+ },
+ "plans": {
+  "s19_1.png": "7 jeunes, et 4 anciens : âge en blocs (21 joueurs), médiane 25 ans (_a19_1.html)",
+  "s19_2.png": "9 rescapés de la CAN 2023 : sélections au 31/03 par tranche, vert = CAN 2023, Tia en rouge ; 80 % des sélections recensées (_a19_2.html)",
+  "s19_3.png": "14 pays pour 26 Aigles : un drapeau par joueur, 11 top 5 / 11 ailleurs en Europe / 3 Afrique / 1 Asie ; 1 seul au Mali (_a19_3.html)"
+ },
+ "a_confirmer_avant_publication": [
+  "5 dates de naissance (Doucouré, A. Camara, Sagnan, Gory, Tia) : le « 7 jeunes » est un minimum",
+  "sélections de Sagnan et Gory",
+  "club de Haïdara (Lens ou Leipzig) et de Keita (Charleroi ou Latina)",
+  "club de Djiguiba (Rayon Sports selon la liste, Real Bamako selon Wikipédia) : conditionne « 1 seul joue au Mali »",
+  "minute du 2e but de Dorgeles (50e ou 51e) et minute de Tia au Liberia (79e, non recoupée)",
+  "sélections après le 31/03/2026 (Iran-Mali du 4 juin non compté)",
+  "RB Leipzig en Bundesliga 2026-27 non revérifié"
+ ]
+}

@@ -21,13 +21,13 @@ b=f'''<div style="position:absolute;left:64px;right:134px;top:640px;display:flex
 <div style="text-align:center">{D("Morocco")}<div style="font:800 34px SC;letter-spacing:.05em;margin-top:14px">MAROC</div></div>
 <div style="font:italic 900 260px/1 BC;color:#064A25">1-1</div>
 <div style="text-align:center">{D("Mali")}<div style="font:800 34px SC;letter-spacing:.05em;margin-top:14px;color:#0B7A3B">MALI</div></div></div>
-<div style="position:absolute;left:64px;top:1080px;font:800 40px/1.25 SC;letter-spacing:.04em">POUR TOUT LE MONDE :<br><span style="color:#D4252A">UN SIMPLE NUL.</span></div>'''
+<div style="position:absolute;left:64px;top:1080px;font:800 40px/1.25 SC;letter-spacing:.04em">SUR LE PAPIER :<br><span style="color:#D4252A">UN SIMPLE NUL.</span></div>'''
 open('_va_1.html','w',encoding='utf-8').write(pageT('AMICAL · TANGER · <b>4 OCTOBRE 2026</b>','CE QUE LE 1-1','NE DIT PAS','',b,'Score : FRMF, ESPN'))
 # 2 : la force
-b=f'''<div style="position:absolute;left:64px;top:620px;display:flex;align-items:center;gap:28px">{D("Morocco",120)}<div><div style="font:italic 900 210px/.86 BC;color:#064A25">7<span style="font-size:110px">e</span></div><div style="font:800 32px SC;letter-spacing:.05em">MAROC · MONDIAL</div></div></div>
-<div style="position:absolute;left:64px;top:930px;display:flex;align-items:center;gap:28px">{D("Mali",120)}<div><div style="font:italic 900 210px/.86 BC;color:#0B7A3B">47<span style="font-size:110px">e</span></div><div style="font:800 32px SC;letter-spacing:.05em">MALI · MONDIAL</div></div></div>
-<div style="position:absolute;left:64px;top:1260px;font:800 36px/1.25 SC;letter-spacing:.04em">40 PLACES D'ÉCART<br>AU CLASSEMENT FIFA</div>'''
-open('_va_2.html','w',encoding='utf-8').write(pageT('COUCHE 1 · <b>LA FORCE DES DEUX ÉQUIPES</b>','LA FORCE','40 PLACES','',b,'Classement FIFA du 7 octobre 2026'))
+b=f'''<div style="position:absolute;left:64px;top:620px;display:flex;align-items:center;gap:28px">{D("Morocco",120)}<div><div style="font:italic 900 210px/.86 BC;color:#064A25">6<span style="font-size:110px">e</span></div><div style="font:800 32px SC;letter-spacing:.05em">MAROC · MONDIAL</div></div></div>
+<div style="position:absolute;left:64px;top:930px;display:flex;align-items:center;gap:28px">{D("Mali",120)}<div><div style="font:italic 900 210px/.86 BC;color:#0B7A3B">53<span style="font-size:110px">e</span></div><div style="font:800 32px SC;letter-spacing:.05em">MALI · MONDIAL</div></div></div>
+<div style="position:absolute;left:64px;top:1260px;font:800 36px/1.25 SC;letter-spacing:.04em">47 PLACES D'ÉCART AU CLASSEMENT FIFA<br>AU COUP D'ENVOI</div>'''
+open('_va_2.html','w',encoding='utf-8').write(pageT('COUCHE 1 · <b>LA FORCE DES DEUX ÉQUIPES</b>','LA FORCE','47 PLACES','',b,'Classement FIFA du 20 juillet 2026, le dernier avant le match'))
 # 3 : le terrain
 Z=[('AMÉRIQUE DU SUD',411),('AFRIQUE',317),('ASIE',217),('EUROPE',169)]
 b=''

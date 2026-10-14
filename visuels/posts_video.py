@@ -128,7 +128,7 @@ rows=[('VICTOIRE + VICTOIRE','VV'),('VICTOIRE + NUL','VN'),('NUL + VICTOIRE','NV
 for i,(lab,k) in enumerate(rows):
     y=444+i*70; v=S[k]; c='#0B7A3B' if v>0 else '#D4252A'
     b+=f'<div style="position:absolute;left:600px;top:{y}px;width:416px;border-top:3px solid #064A25"></div><div style="position:absolute;left:600px;top:{y+20}px;font:800 24px/1 SC;letter-spacing:.04em;color:#04331A">{lab}</div><div style="position:absolute;right:64px;top:{y+12}px;font:italic 900 46px/1 BC;color:{c}">{sg(v)}</div>'
-b+=f'<div class="bigR" style="top:1030px"><b>{round(100*F["attendu_mali"])}<span style="font:italic 900 70px BC;color:#064A25;letter-spacing:0"> %</span></b><span>LA FIFA ATTEND UNE VICTOIRE DU MALI :<br>GAGNER RAPPORTE PEU, NE PAS GAGNER <em>COÛTE CHER</em></span></div>'
+b+=f'<div class="bigR" style="top:1030px"><b>{fr(F["attendu_mali"],2)}<span style="font:italic 900 70px BC;color:#064A25;letter-spacing:0"> /1</span></b><span>RÉSULTAT ATTENDU PAR LA FIFA (1 = VICTOIRE) :<br>GAGNER RAPPORTE PEU, NE PAS GAGNER <em>COÛTE CHER</em></span></div>'
 ecrire(3,page('CAN 2027 · CONTRE LE RWANDA EN NOVEMBRE · <b>POINTS FIFA DU MALI</b>','GAGNER','DEUX FOIS',sg(S['VV']),b,
      'Points du 7 octobre 2026 : Mali 1474,14, Rwanda 1156,16 · Formule officielle de la FIFA · Calcul MaliDataFoot'))
 print('ok')

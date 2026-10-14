@@ -14,15 +14,15 @@ b += ''.join(ballon(l, s, 64 + i * 140, 960) for i, (l, s) in enumerate(B25))
 b += '<div class="bigR" style="top:1250px"><b>6/9</b><span>BUTS DU MALI MARQUÉS PAR SINAYOKO<br>SUR LES DEUX DERNIÈRES CAN, <em>DONT LES 3 DE 2025</em></span></div>'
 out['s1'] = pageT('CAN 2023 ET CAN 2025 · <b>QUI MARQUE POUR LE MALI ?</b>', 'TOUT PASSE', 'PAR SINAYOKO', '', b, 'Buteurs : martj42 (à recouper) · C.S.C. = contre son camp')
 # S2 : part du meilleur buteur dans les buts de son équipe, CAN 2025
-R = [('MALI · SINAYOKO', 3, 3, 1), ('ÉGYPTE · SALAH', 4, 9, 0), ('MAROC · BRAHIM DÍAZ', 5, 12, 0), ('RD CONGO · KAKUTA', 2, 5, 0)]
+R = [('MALI · SINAYOKO', 3, 3, 1), ('ÉGYPTE · SALAH', 4, 9, 0), ('MAROC · BRAHIM DÍAZ', 5, 9, 0), ('RD CONGO · KAKUTA', 2, 5, 0)]
 b = ''
 for i, (n, x, t, m) in enumerate(R):
     y = 620 + i * 150
     b += f'<div style="position:absolute;left:64px;top:{y}px;font:800 30px SC;letter-spacing:.04em;color:{"#0B7A3B" if m else "#04331A"}">{n}</div>'
     b += f'<div style="position:absolute;left:64px;top:{y+46}px;width:700px;height:40px;border-radius:4px;background:#FFF3C4"></div><div style="position:absolute;left:64px;top:{y+46}px;width:{700*x/t:.0f}px;height:40px;border-radius:4px;background:{"#0B7A3B" if m else "#064A25"}"></div>'
     b += f'<div style="position:absolute;left:790px;top:{y+36}px;font:italic 900 56px/1 BC;color:#064A25">{x}/{t}</div>'
-b += '<div class="bigR" style="top:1250px"><b>3</b><span>BUTS EN 5 MATCHS À LA CAN 2025 :<br>LE MALI <em>NE MARQUE PAS SANS LUI</em></span></div>'
-out['s2'] = pageT('CAN 2025 · <b>PART DES BUTS DE L\'ÉQUIPE</b>', 'LE SEUL', 'BUTEUR ?', '', b, 'Buts du meilleur buteur / buts de son équipe · Données : martj42 (à recouper)')
+b += '<div class="bigR" style="top:1250px"><b>3</b><span>BUTS EN 5 MATCHS À LA CAN 2025 :<br>LE MALI <em>DÉPEND DE LUI À LA CAN</em></span></div>'
+out['s2'] = pageT('CAN 2025 · <b>PART DES BUTS DE L\'ÉQUIPE</b>', 'LE SEUL', 'BUTEUR ?', '', b, 'Buts du meilleur buteur / buts de son équipe (Maroc : buts marqués sur le terrain, hors finale donnée 3-0) · Données : martj42 (à recouper)')
 def attente(top, h, txt): return f'<div style="position:absolute;left:64px;right:134px;top:{top}px;height:{h}px;border:4px dashed #064A25;border-radius:8px;display:flex;align-items:center;justify-content:center;text-align:center;font:800 30px/1.3 SC;letter-spacing:.05em;color:#064A25">{txt}</div>'
 b = attente(600, 560, 'CARTE DE SES TIRS EN LIGUE 1 CETTE SAISON<br>TAILLE = CHANCE DE BUT<br><br>DONNÉES UNDERSTAT À VENIR')
 b += '<div class="bigR" style="top:1250px"><b>? / ?</b><span>BUTS / BUTS ATTENDUS AVEC LE PARIS FC<br>TALENT OU RÉUSSITE : <em>À MESURER</em></span></div>'
