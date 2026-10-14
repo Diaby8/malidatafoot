@@ -9,7 +9,7 @@ Statuts : **publié** · **prêt** (vérifié, à poster) · **POC** (calcul fai
 ## 0. Versions réelles (14/10/2026)
 Tous les sujets 1 à 19 (sauf 8, en pause) existent en version réelle à tester : images X en HD et vidéo TikTok animée sans voix, dans `livrables/vrais/`. Motion design : `visuels/animer.py` + `visuels/capture_video.mjs`. Corrections de l'audit indépendant appliquées. Le 20 attend une source.
 
-## Projet « waouh » (14/10/2026) : notre modèle de menace (xT)
+## Projet « waouh » (14/10/2026) : notre modèle de menace (xT) — en réserve, rangé avec les autres (Diaby)
 Appris sur 2 564 matchs StatsBomb libres (3,35 millions d'actions), validé (AUC 0,85 tir, 0,91 but sur matchs mis de côté ; 0,86 / 0,89 sur la CAN 2023) et recompté par un second programme. Le Mali à la CAN 2023 : 1er pour la menace concédée, 21e sur 24 pour la menace créée (entre 14e et 22e selon les matchs tirés). Meilleure action : Namibie-Mali, 27e, centre de Y. Niakaté (+0,25), tête de Sinayoko. Code et résultats : `poc/xt/`. Maquettes : `poc/maquettes/xt_maq.py`. Suite : notre propre modèle de buts attendus.
 
 ## 1. Déjà publié
