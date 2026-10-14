@@ -53,6 +53,11 @@ for j in range(16):
                 if d2 < 200: lisse[b][a] += v * math.exp(-d2 / 32)
 mx = max(max(r) for r in lisse); lisse = [[round(v / mx, 3) for v in r] for r in lisse]
 R['presence'] = {'lisse': lisse, 'definition': 'actions du Mali avec le ballon (passes, conduites, réceptions, tirs, dribbles, récupérations, interceptions, dégagements, contres), cases de 6 x 5 yards', 'n': n_act, 'grille': grille}
+# tous les événements de Namibie-Mali qui ont une position, dans l'ordre du match, ramenés dans le sens d'attaque du Mali (vers x = 120)
+E = json.load(open(os.path.join(D, 'ev_3920417.json')))
+R['evenements'] = {'n_total': len(E), 'points': [[round(e['location'][0] if e['team']['name'] == 'Mali' else 120 - e['location'][0], 1),
+                    round(e['location'][1] if e['team']['name'] == 'Mali' else 80 - e['location'][1], 1), 1 if e['team']['name'] == 'Mali' else 0]
+                   for e in E if 'location' in e and e['period'] <= 2]}
 xt = json.load(open(os.path.join(ICI, '..', 'xt', 'xt_grid.json')))
 R['xt'] = {'grille': xt['grille'], 'valeurs': xt['valeurs']}
 np_ = [t for t in R['tirs'] if not t['penalty']]

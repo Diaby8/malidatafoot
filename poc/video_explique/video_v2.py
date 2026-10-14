@@ -43,7 +43,7 @@ imgs += ''.join(f'<img id="fp{i}" src="_vx/full_{f}.png" class="cache">' for i, 
 
 DATA = {'gestes': GESTES, 'recep': RECEP, 'reel': DUREE_REELLE, 'tir': DV['action']['tir'], 'joueurs': DV['action']['joueurs'],
         'xt': DV['xt']['valeurs'], 'tirs': DV['tirs'], 'recup': DV['recuperations'], 'presence': DV['presence']['lisse'], 'reseau': DV['reseau'], 'resume': DV['resume'],
-        'cases': CASES, 'cols': COLS, 'rows': ROWS, 'rc': rc, 'cc': cc0}
+        'evts': DV['evenements']['points'], 'cases': CASES, 'cols': COLS, 'rows': ROWS, 'rc': rc, 'cc': cc0}
 
 HTML = '''<!doctype html><html><head><meta charset="utf-8"><style>@@FONTS@@
 *{margin:0;padding:0;box-sizing:border-box}html,body{width:1080px;height:1920px;overflow:hidden;background:#021A0D}
@@ -57,7 +57,6 @@ canvas{position:absolute;left:0;top:0}.cache{display:none}
 .lab span{color:#FFFFFF}
 .big{font:italic 900 120px/1 "BC"}
 .sm{font:800 24px/1.2 "SC";letter-spacing:.04em;color:#FFFFFF}
-#zero{position:absolute;left:0;right:0;top:620px;text-align:center;font:italic 900 430px/1 "BC";color:#FFFFFF;opacity:0}
 #foot{position:absolute;left:64px;right:134px;top:1472px;display:flex;align-items:center;gap:16px;opacity:0}
 #foot img.lg{width:64px;height:64px;border-radius:50%}
 #foot .wm{font:italic 400 46px/1 "BCS";color:#FFFFFF}#foot .wm i{font-weight:600}
@@ -73,10 +72,17 @@ canvas{position:absolute;left:0;top:0}.cache{display:none}
 </style></head><body><div id="c">
 <canvas id="cv" width="1080" height="1920"></canvas>
 <div id="jaune"></div><canvas id="cv2" width="1080" height="1920"></canvas>
-<div id="zero">0-0</div>
-<div class="t kick" id="k0" style="top:470px">NAMIBIE · MALI · <b>CAN 2023</b></div>
-<div class="t h2" id="q0" style="top:1110px;left:0;right:0;text-align:center">SUR LA FEUILLE DE MATCH : <span style="color:#FFFFFF">RIEN.</span></div>
-<div class="t kick" id="q1" style="top:1230px;left:0;right:0;text-align:center;font-size:40px"><b style="color:#F6C41C;font:italic 900 96px/1 BC;vertical-align:-14px" id="q1v">0</b> ÉVÉNEMENTS ENREGISTRÉS</div>
+<div id="ouv" style="position:absolute;left:0;right:0;top:0;opacity:0">
+<div style="position:absolute;left:0;right:0;top:170px;text-align:center;font:800 32px/1 SC;letter-spacing:.07em;color:#F6C41C">CAN 2023 · PHASE DE GROUPES · 3<sup style="font-size:20px">E</sup> JOURNÉE</div>
+<div style="position:absolute;left:0;right:0;top:220px;text-align:center;font:600 27px/1 SC;letter-spacing:.05em;color:rgba(255,255,255,.8)">MERCREDI 24 JANVIER 2024 · STADE LAURENT-POKOU, SAN-PÉDRO</div>
+<div style="position:absolute;left:70px;width:300px;top:310px;text-align:center"><svg width="210" height="210" viewBox="-1 -1 22 22" style="display:block;margin:0 auto"><clipPath id="dn"><circle cx="10" cy="10" r="10"/></clipPath><g clip-path="url(#dn)"><rect width="20" height="20" fill="#009543"/><polygon points="0,0 20,0 0,20" fill="#003580"/><polygon points="-2,17 17,-2 23,4 4,23" fill="#FFFFFF"/><polygon points="-1,18.6 18.6,-1 21.4,1.4 1.4,21.4" fill="#D21034"/><polygon points="5.2,5.2 8.27,4.80 8.27,5.60" fill="#FFCE00"/><polygon points="5.2,5.2 8.06,6.39 7.66,7.08" fill="#FFCE00"/><polygon points="5.2,5.2 7.08,7.66 6.39,8.06" fill="#FFCE00"/><polygon points="5.2,5.2 5.60,8.27 4.80,8.27" fill="#FFCE00"/><polygon points="5.2,5.2 4.01,8.06 3.32,7.66" fill="#FFCE00"/><polygon points="5.2,5.2 2.74,7.08 2.34,6.39" fill="#FFCE00"/><polygon points="5.2,5.2 2.13,5.60 2.13,4.80" fill="#FFCE00"/><polygon points="5.2,5.2 2.34,4.01 2.74,3.32" fill="#FFCE00"/><polygon points="5.2,5.2 3.32,2.74 4.01,2.34" fill="#FFCE00"/><polygon points="5.2,5.2 4.80,2.13 5.60,2.13" fill="#FFCE00"/><polygon points="5.2,5.2 6.39,2.34 7.08,2.74" fill="#FFCE00"/><polygon points="5.2,5.2 7.66,3.32 8.06,4.01" fill="#FFCE00"/><circle cx="5.2" cy="5.2" r="1.6" fill="#FFCE00" stroke="#003580" stroke-width=".35"/></g><circle cx="10" cy="10" r="10" fill="none" stroke="#fff" stroke-width=".9"/></svg><div style="margin-top:22px;font:italic 900 64px/1 BC;color:#FFFFFF">NAMIBIE</div></div>
+<div style="position:absolute;right:70px;width:300px;top:310px;text-align:center"><svg width="210" height="210" viewBox="-1 -1 22 22" style="display:block;margin:0 auto"><clipPath id="dm"><circle cx="10" cy="10" r="10"/></clipPath><g clip-path="url(#dm)"><rect x="0" y="0" width="7" height="20" fill="#14B53A"/><rect x="6.6" y="0" width="7" height="20" fill="#FCD116"/><rect x="13.3" y="0" width="7" height="20" fill="#CE1126"/></g><circle cx="10" cy="10" r="10" fill="none" stroke="#fff" stroke-width=".9"/></svg><div style="margin-top:22px;font:italic 900 64px/1 BC;color:#F6C41C">MALI</div></div>
+<div id="zero" style="position:absolute;left:0;right:0;top:330px;text-align:center;font:italic 900 220px/1 BC;color:#FFFFFF">0-0</div>
+</div>
+<div class="t h2" id="q0" style="top:690px;left:0;right:0;text-align:center">SUR LA FEUILLE DE MATCH : <span style="color:#FFFFFF">RIEN.</span></div>
+<div class="t" id="q2" style="top:790px;left:0;right:0;text-align:center;font:700 28px/1.5 SC;letter-spacing:.06em;color:rgba(255,255,255,.55)">BUTS : — &nbsp;·&nbsp; CARTONS ROUGES : —</div>
+<div class="t" id="q3" style="top:1520px;left:0;right:0;text-align:center;font:700 26px/1 SC;letter-spacing:.06em;color:rgba(255,255,255,.75)"><span style="color:#F6C41C">■</span> MALI &nbsp;&nbsp; <span style="color:rgba(255,255,255,.7)">■</span> NAMIBIE &nbsp;·&nbsp; CHAQUE POINT : PASSE, TIR, DUEL, CONDUITE…</div>
+<div class="t kick" id="q1" style="top:1420px;left:0;right:0;text-align:center;font-size:40px"><b style="color:#F6C41C;font:italic 900 96px/1 BC;vertical-align:-14px" id="q1v">0</b> ÉVÉNEMENTS ENREGISTRÉS</div>
 <div class="t kick" id="k1" style="top:166px">NAMIBIE 0-0 MALI · CAN 2023 · <b>27e MINUTE</b></div>
 <div class="t h1" id="h1" style="top:206px">AUX RAYONS X</div>
 <div class="t lab" id="L1" style="top:372px">COUCHE 1 · <span>LE BALLON · 22 SECONDES · 9 PASSES · 8 MALIENS</span></div>
@@ -213,6 +219,15 @@ function mur(m){ const S=lerp(.78,.10,m), rx=lerp(0,28,m)*Math.PI/180, rz=lerp(0
   for(const [z,sx,sy,k2,k,centre] of L){X2.save();X2.translate(sx,sy);X2.rotate(rz);X2.scale(k2,k2*co);
     if(centre&&k2>.3)X2.drawImage($('fp5'),0,120,1080,1460,-540,-730,1080,1460); else X2.drawImage($('ti'+k),-540,-730,1080,1460); X2.restore();}}
 D.rr=D.rc;
+function feuille(t){ // terrain vu du dessus, chaque événement du match apparaît à sa vraie place, dans l'ordre du match
+  const x0=165,y0=890,w=750,h=500, A=cl((t-T.evts+.3)/.3)*(1-cl((t-T.plonge)/.45)); if(A<=0)return;
+  X.save(); X.globalAlpha=A; X.fillStyle='#0B5E30'; X.fillRect(x0-10,y0-10,w+20,h+20);
+  X.strokeStyle='rgba(255,246,208,.7)'; X.lineWidth=2; X.strokeRect(x0,y0,w,h); X.beginPath(); X.moveTo(x0+w/2,y0); X.lineTo(x0+w/2,y0+h); X.stroke();
+  X.beginPath(); X.arc(x0+w/2,y0+h/2,9.15*w/120,0,7); X.stroke(); const sx=w/120, sy=h/80;
+  X.strokeRect(x0,y0+18*sy,18*sx,44*sy); X.strokeRect(x0+102*sx,y0+18*sy,18*sx,44*sy);
+  const n=Math.floor(D.evts.length*oc(cl((t-T.evts)/1.6)));
+  for(let i=0;i<n;i++){const e=D.evts[i]; X.fillStyle=e[2]?'rgba(246,196,28,.85)':'rgba(255,255,255,.55)'; X.fillRect(x0+e[0]*sx-2.5,y0+e[1]*sy-2.5,5,5);}
+  X.restore();}
 function carrousel(t){ // les fiches entrent par la gauche une par une, chacune s'arrête au centre le temps d'être lue ; la dernière (Dorgeles) reste
   const N=6, S=.78, PAS=880, SL=.3, a0=T.carrousel+.35, a5=T.dor-SL, P=(a5-a0)/(N-1);
   let idx=-1; for(let j=0;j<N;j++) idx+=io(cl((t-(a0+j*P))/SL));
@@ -230,8 +245,10 @@ function camAt(t){let i=0; while(i<K.length-2&&t>K[i+1][0])i++; const a=K[i], b=
 window.seek=function(t){
   X.clearRect(0,0,W,H); X2.clearRect(0,0,W,H);
   // 1. l'accroche
-  const z=$('zero'); const zu=oc(cl((t-T.zero+.15)/.35)), zo=cl((t-T.plonge)/.45); z.style.opacity=(zu*(1-zo)).toFixed(3); z.style.transform=`scale(${(1+.6*io(zo)).toFixed(3)})`;
-  vis('k0',t,.05,T.plonge); vis('q0',t,T.rien,T.plonge); vis('q1',t,T.evts,T.plonge); $('q1v').textContent=Math.round(2685*oc(cl((t-T.evts)/1.6))).toLocaleString('fr-FR').replace(/\u202f|\u00a0/g,' ');
+  {const u=oc(cl((t-.05)/.4)), o=cl((t-T.plonge)/.45); $('ouv').style.opacity=(u*(1-o)).toFixed(3); $('ouv').style.transform=`translateY(${((1-u)*30).toFixed(1)}px)`;
+   $('zero').style.transform=`scale(${(.6+.4*oc(cl((t-T.zero+.2)/.35))).toFixed(3)})`; $('zero').style.opacity=cl((t-T.zero+.2)/.2);}
+  vis('q0',t,T.rien,T.plonge); vis('q2',t,T.rien+.4,T.plonge); vis('q1',t,T.evts,T.plonge); vis('q3',t,T.evts+.6,T.plonge,0); $('q1v').textContent=Math.round(2685*oc(cl((t-T.evts)/1.6))).toLocaleString('fr-FR').replace(/\u202f|\u00a0/g,' ');
+  if(t>=T.evts-.3&&t<T.plonge+.5) feuille(t);
   // 2. le terrain
   if(t<T.carrousel+.6){ camAt(t); const sa=cl((t-T.plonge)/.6); X.globalAlpha=1; stade(X,sa);
     const reel=cl((t-T.actA)/(T.actB-T.actA))*D.reel;
