@@ -230,3 +230,4 @@ des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliD
 - 2026-10-14 : post 1, tweet 2 et description TikTok : « on attendait environ 44 buts encaissés depuis 2020 » au lieu du « Mali de 2000-2019 », pour coller à l'image 2 (depuis 2020).
 - 2026-10-15 : post 1, ligne des compétitions ajoutée sous le titre des deux images (CAN, éliminatoires CAN et Mondial, sans les amicaux), demande de Diaby ; en attente de validation.
 - 2026-10-15 : post 1 final : ligne des compétitions sur les images, tweets 1 et 4 précisent les 50 matchs (14 CAN, 36 éliminatoires), description TikTok idem (validé par Diaby).
+- 14/10/2026 · Post 2 vidéo v3e : classement xT affiché ~4,5 s au lieu de ~2 s (pause de 2,5 s ajoutée dans la voix après « …à ses adversaires », suite décalée de 2,5 s, durée 53,8 s) ; valeurs du classement en PAR MATCH (comme le titre et la voix) ; tuile Osimhen retirée du mur. v3d gardée.

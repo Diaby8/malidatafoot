@@ -5,7 +5,7 @@ import json, os, sys, wave
 import numpy as np
 ICI = os.path.dirname(os.path.abspath(__file__)); RACINE = os.path.dirname(os.path.dirname(ICI))
 SR = 48000
-T = dict(hook=0, zero=1.38, rien=2.45, evts=5.28, plonge=7.9, couche1=9.27, actA=10.62, actB=15.6, couche2=15.86, couche3=18.97, couche4=21.32, cote=23.5, f1=26.11, f2=27.18, f3=28.45, f4=30.72, carrousel=32.9, dor=36.38, mur=37.93, mot1=41.63, mot2=42.45, fin=44.22, quest=47.51, duree=51.3)
+T = dict(hook=0, zero=1.38, rien=2.45, evts=5.28, plonge=7.9, couche1=9.27, actA=10.62, actB=15.6, couche2=15.86, couche3=18.97, couche4=21.32, cote=23.5, f1=26.11, f2=27.18, f3=28.45, f4=30.72, carrousel=35.4, dor=38.88, mur=40.43, mot1=44.13, mot2=44.95, fin=46.72, quest=50.01, duree=53.8)
 P = json.load(open(os.path.join(RACINE, 'poc/xt/top_possession.json')))['meilleure']
 def ts(e):
     h, m, s = e['timestamp'].split(':'); return int(h) * 3600 + int(m) * 60 + float(s)

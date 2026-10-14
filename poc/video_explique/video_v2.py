@@ -29,7 +29,7 @@ DUREE_REELLE = P['fin']['t_relatif_s']
 
 # ---- le mur et les fiches
 SIX = ['hamari-traore_poste', 'lassine-sinayoko_poste', 'amadou-haidara_poste', 'kamory-doumbia_poste', 'mamadou-sangare-2002_FICTIF', 'nene-dorgeles-2002_FICTIF']
-TUILES = sorted(f for f in os.listdir(FICHES) if f.startswith('tile_'))
+TUILES = sorted(f for f in os.listdir(FICHES) if f.startswith('tile_') and 'osimhen' not in f)  # que des Maliens sur le mur
 os.makedirs('_vx', exist_ok=True)
 for f in os.listdir(FICHES):
     if f.startswith(('full_', 'tile_')) and not os.path.exists(os.path.join('_vx', f)): os.symlink(os.path.join(FICHES, f), os.path.join('_vx', f))
@@ -209,7 +209,7 @@ function chaleur(g,a){ if(a<=0)return; const G=D.presence;   // carte lissée, c
 function recup(g,a){ if(a<=0)return; let sx=0; for(const r of D.recup){sx+=r.x; ring(g,r.x,r.y,.75*a,'#F6C41C',.16,'rgba(246,196,28,.55)');}
   const m=sx/D.recup.length; if(a>.5) seg(g,[m,-3,.02],[m,83,.02],'#FF6B5E',.35,[1.4,1]);}
 // ---------------------------------------------------------------- le carrousel et le mur (canevas 2)
-const T={hook:0, zero:1.38, rien:2.45, evts:5.28, plonge:7.9, couche1:9.27, actA:10.62, actB:15.6, couche2:15.86, couche3:18.97, couche4:21.32, cote:23.5, tournoi:26.11, f1:26.11, f2:27.18, f3:28.45, f4:30.72, carrousel:32.9, dor:36.38, mur:37.93, mot1:41.63, mot2:42.45, fin:44.22, fin2:45.77, quest:47.51, duree:51.3};
+const T={hook:0, zero:1.38, rien:2.45, evts:5.28, plonge:7.9, couche1:9.27, actA:10.62, actB:15.6, couche2:15.86, couche3:18.97, couche4:21.32, cote:23.5, tournoi:26.11, f1:26.11, f2:27.18, f3:28.45, f4:30.72, carrousel:35.4, dor:38.88, mur:40.43, mot1:44.13, mot2:44.95, fin:46.72, fin2:48.27, quest:50.01, duree:53.8};
 window.DUREE=T.duree;
 function mur(m){ const S=lerp(.78,.10,m), rx=lerp(0,28,m)*Math.PI/180, rz=lerp(0,-14,m)*Math.PI/180, yc=lerp(960,960,m), co=Math.cos(rx), GX=1180, GY=1580, DD=2400;
   const L=[]; for(const [r,c,k] of D.cases){const x0=(c-D.cc)*GX, y0=(r-D.rr)*GY; const Xr=x0*Math.cos(rz)-y0*Math.sin(rz), Yr=x0*Math.sin(rz)+y0*Math.cos(rz);
@@ -284,9 +284,12 @@ FR = {'Algeria': 'Algérie', 'Angola': 'Angola', 'Burkina Faso': 'Burkina Faso',
       "Côte d'Ivoire": "Côte d'Ivoire", 'Egypt': 'Égypte', 'Equatorial Guinea': 'Guinée équatoriale', 'Gambia': 'Gambie', 'Ghana': 'Ghana', 'Guinea': 'Guinée',
       'Guinea-Bissau': 'Guinée-Bissau', 'Mali': 'Mali', 'Mauritania': 'Mauritanie', 'Morocco': 'Maroc', 'Mozambique': 'Mozambique', 'Namibia': 'Namibie',
       'Nigeria': 'Nigeria', 'Senegal': 'Sénégal', 'South Africa': 'Afrique du Sud', 'Tanzania': 'Tanzanie', 'Tunisia': 'Tunisie', 'Zambia': 'Zambie'}
-EQ = sorted(json.load(open(os.path.join(RACINE, 'poc/xt/teams.json')))['equipes'], key=lambda e: e['xt_concede_p90'])
-mxc = max(e['xt_concede_p90'] for e in EQ)
-CLAS = ''.join(f'<div class="br" style="display:flex;align-items:center;height:34px;gap:14px"><span style="width:300px;font:800 {26 if e["equipe"]=="Mali" else 21}px/1 SC;letter-spacing:.03em;color:{"#F6C41C" if e["equipe"]=="Mali" else "rgba(255,255,255,.8)"};text-align:right;white-space:nowrap">{i+1}. {FR.get(e["equipe"], e["equipe"]).upper()}</span><span style="flex:1;height:{22 if e["equipe"]=="Mali" else 14}px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden"><i data-w="{100*e["xt_concede_p90"]/mxc:.2f}" style="display:block;height:100%;width:0;background:{"#F6C41C" if e["equipe"]=="Mali" else "rgba(255,255,255,.55)"}"></i></span><span style="width:70px;font:700 20px/1 SC;color:rgba(255,255,255,.8)">{format(e["xt_concede_p90"], ".2f").replace(".", ",")}</span></div>' for i, e in enumerate(EQ))
+# menace laissée PAR MATCH (comme le dit la voix) : xT par 90 min × minutes jouées / 90 / matchs
+EQ = json.load(open(os.path.join(RACINE, 'poc/xt/teams.json')))['equipes']
+for e in EQ: e['xt_match'] = e['xt_concede_p90'] * e['minutes'] / 90 / e['matchs']
+EQ.sort(key=lambda e: e['xt_match'])
+mxc = max(e['xt_match'] for e in EQ)
+CLAS = ''.join(f'<div class="br" style="display:flex;align-items:center;height:34px;gap:14px"><span style="width:300px;font:800 {26 if e["equipe"]=="Mali" else 21}px/1 SC;letter-spacing:.03em;color:{"#F6C41C" if e["equipe"]=="Mali" else "rgba(255,255,255,.8)"};text-align:right;white-space:nowrap">{i+1}. {FR.get(e["equipe"], e["equipe"]).upper()}</span><span style="flex:1;height:{22 if e["equipe"]=="Mali" else 14}px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden"><i data-w="{100*e["xt_match"]/mxc:.2f}" style="display:block;height:100%;width:0;background:{"#F6C41C" if e["equipe"]=="Mali" else "rgba(255,255,255,.55)"}"></i></span><span style="width:70px;font:700 20px/1 SC;color:rgba(255,255,255,.8)">{format(e["xt_match"], ".2f").replace(".", ",")}</span></div>' for i, e in enumerate(EQ))
 CLAS = CLAS.replace('><span style="width:70px;font:700 20px/1 SC;color:rgba(255,255,255,.8)">', '><span style="width:70px;font:700 20px/1 SC;color:rgba(255,255,255,.8)" class="v">')
 h = HTML.replace('@@CLAS@@', CLAS).replace('@@FONTS@@', FONTS).replace('@@DATA@@', json.dumps(DATA, ensure_ascii=False)).replace('@@JS@@', JS).replace('@@IMGS@@', imgs)
 h = h.replace('@@TIRS@@', str(DV['resume']['tirs'])).replace('@@RECUP@@', str(DV['resume']['recuperations'])).replace('@@LIENS@@', str(len(DV['reseau']['liens']))).replace('@@ACT@@', f"{DV['presence']['n']:,}".replace(',', ' '))
