@@ -215,8 +215,57 @@ def run(cfg: Config, n: int = 100_000) -> dict:
     }
     dossier = cfg.path("outputs") / "analyses"
     dossier.mkdir(parents=True, exist_ok=True)
+    con = duckdb.connect(str(cfg.path("warehouse")), read_only=True)
+    terrain = avantage_terrain(con)
+    con.close()
+    (dossier / "avantage_terrain.json").write_text(json.dumps(terrain, ensure_ascii=False, indent=1), encoding="utf-8")
+    log.info("avantage du terrain (points d'Elo) : %s", ", ".join(f"{z} {v['ecart_domicile_exterieur_en_points_elo']:.0f}" for z, v in terrain.items()))
     (dossier / "simulation_groupe_k.json").write_text(json.dumps(sortie, ensure_ascii=False, indent=1, default=float), encoding="utf-8")
     t = sortie["equipes"][equipe]
     log.info("groupe K, %d simulations : %s qualifié %.1f %%, premier %.1f %% ; test du modèle : Brier %.3f (Poisson simple %.3f, naïf %.3f)",
              n, equipe, 100 * t["qualifie"], 100 * t["premier"], test["dixon_coles"]["brier"], test["poisson_simple"]["brier"], test["naif"]["brier"])
+    return sortie
+
+
+# ------------------------------------------------------------------------------------------------ l'avantage du terrain
+CONMEBOL = ("Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Ecuador", "Paraguay", "Peru", "Uruguay", "Venezuela")
+ZONES = {  # continent : (compétitions officielles, définition des équipes du continent)
+    "Afrique": (("African Cup of Nations", "African Cup of Nations qualification", "FIFA World Cup qualification"), "African Cup of Nations%"),
+    "Europe": (("UEFA Euro", "UEFA Euro qualification", "FIFA World Cup qualification"), "UEFA Euro%"),
+    "Amérique du Sud": (("Copa América", "FIFA World Cup qualification"), None),
+    "Asie": (("AFC Asian Cup", "AFC Asian Cup qualification", "FIFA World Cup qualification"), "AFC Asian Cup%"),
+}
+
+
+def matchs_zone(con, zone: str, depuis: str = "2000-01-01") -> pd.DataFrame:
+    comps, motif = ZONES[zone]
+    if motif:
+        equipes = f"""(select home_team from silver.intl_matches where tournament like '{motif}' and date >= '{depuis}'
+                       union select away_team from silver.intl_matches where tournament like '{motif}' and date >= '{depuis}')"""
+    else:
+        equipes = "(" + ", ".join("'" + e + "'" for e in CONMEBOL) + ")"
+    return con.execute(f"""select date, home_team, away_team, home_score, away_score, neutral, elo_home_avant, elo_away_avant
+        from gold.elo_matchs where tournament in {comps} and date >= '{depuis}'
+          and home_team in {equipes} and away_team in {equipes} order by date""").df()
+
+
+def avantage_terrain(con, tirages: int = 300, graine: int = 1) -> dict:
+    """Combien vaut le fait de jouer chez soi plutôt que chez l'adversaire, continent par continent ?
+    Même modèle de buts que pour la simulation. L'écart domicile / extérieur est traduit en points d'Elo :
+    (effet domicile − effet extérieur) / effet de 100 points d'Elo × 100. Intervalle à 95 % par rééchantillonnage des matchs."""
+    rng = np.random.default_rng(graine)
+    sortie = {}
+    for zone in ZONES:
+        m = matchs_zone(con, zone)
+        mod = ajuster(m); b = mod["b"]
+        ecart = lambda b: (b[2] - b[3]) / b[1] * 100  # noqa: E731
+        boot = []
+        for _ in range(tirages):
+            s = m.iloc[rng.integers(0, len(m), len(m))]
+            boot.append(ecart(ajuster(s)["b"]))
+        v, n, d = vnd(matrice(mod, 1600, 1600))
+        sortie[zone] = {"matchs": int(len(m)), "matchs_sur_terrain_neutre": int(m.neutral.astype(bool).sum()),
+                        "ecart_domicile_exterieur_en_points_elo": float(ecart(b)),
+                        "intervalle_95": [float(np.percentile(boot, 2.5)), float(np.percentile(boot, 97.5))],
+                        "equipes_egales": {"victoire_de_celle_qui_recoit": v, "nul": n, "victoire_de_celle_qui_se_deplace": d}}
     return sortie
