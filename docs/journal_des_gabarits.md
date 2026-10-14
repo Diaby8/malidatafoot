@@ -219,3 +219,4 @@ des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliD
 - 2026-10-14 : post 1, piège trouvé à la contre-vérification : le rang africain du Mali dépend de l'année de départ (2e depuis 2020, 3e depuis 2018, 4e depuis 2022, toujours top 4). Tweets 1 et 3 et description TikTok corrigés (validé par Diaby). Règle : pour tout classement, tester l'année de départ et le périmètre avant de publier un rang.
 - 2026-10-14 : post 1, tweet 6 « Les sources » essayé puis retiré (voir ligne suivante).
 - 2026-10-14 : correction : pas de tweet ni de ligne « sources » dans le texte. La source figure une seule fois, en bas de chaque image, ça suffit (Diaby).
+- 2026-10-14 : drapeau de la RD Congo qui dépassait du rond (identifiant de découpage avec une espace) : corrigé dans posts_video.py, images du post 1 refaites, seuls les pixels du drapeau changent.

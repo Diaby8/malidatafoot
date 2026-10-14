@@ -85,7 +85,9 @@ DR={'Morocco':'<rect width="20" height="20" fill="#C1272D"/><polygon points="10,
  'Algeria':'<rect width="10" height="20" fill="#006233"/><rect x="10" width="10" height="20" fill="#fff"/><circle cx="10" cy="10" r="4.6" fill="#D21034"/><circle cx="11.3" cy="10" r="3.8" fill="#fff"/>'+et(12,10,1.8,'#D21034'),
  'Cameroon':v3('#007A5E','#CE1126','#FCD116')+et(10,10,2.6,'#FCD116')}
 FRN={'Morocco':'Maroc','Mali':'Mali','Senegal':'Sénégal','Egypt':'Égypte','Tunisia':'Tunisie','Ivory Coast':"Côte d'Ivoire",'DR Congo':'RD Congo','Nigeria':'Nigeria','Angola':'Angola','Algeria':'Algérie','Cameroon':'Cameroun'}
-def drap(p,t=38): return f'<svg width="{t}" height="{t}" viewBox="-1 -1 22 22" style="display:block"><clipPath id="k{p[:3]}"><circle cx="10" cy="10" r="10"/></clipPath><g clip-path="url(#k{p[:3]})">{DR[p]}</g><circle cx="10" cy="10" r="10" fill="none" stroke="#fff" stroke-width="1.4"/></svg>'
+def drap(p,t=38):
+    k='k'+''.join(c for c in p if c.isalnum())  # identifiant sans espace (« DR Congo » cassait le découpage rond)
+    return f'<svg width="{t}" height="{t}" viewBox="-1 -1 22 22" style="display:block"><clipPath id="{k}"><circle cx="10" cy="10" r="10"/></clipPath><g clip-path="url(#{k})">{DR[p]}</g><circle cx="10" cy="10" r="10" fill="none" stroke="#fff" stroke-width="1.4"/></svg>'
 
 # ---------- post 1, image 1 : le classement des défenses africaines
 A=json.load(open(ICI/'../outputs/analyses/defense_afrique.json',encoding='utf-8')); D=json.load(open(ICI/'../outputs/analyses/defense_aigles.json',encoding='utf-8'))
