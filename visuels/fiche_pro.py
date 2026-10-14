@@ -7,7 +7,7 @@ SRC=sys.argv[1] if len(sys.argv)>1 else '../outputs/fiches/hamari-traore_poste.j
 OUT=sys.argv[2] if len(sys.argv)>2 else 'fiche_pro.html'
 FMT=sys.argv[3] if len(sys.argv)>3 else 'x'
 F=json.load(open(SRC,encoding='utf-8')); B=F['bassin']
-# FLOU=1 : chiffres, barres, forme du radar et listes floutés (effet vidéo, illisibles).
+# FLOU=1 : chiffres, barres et listes floutés (effet vidéo, illisibles) ; radar remplacé par une forme neutre identique pour tous.
 # Une fiche marquée « fictif » (chiffres d'illustration) ne sort JAMAIS sans flou.
 FLOU=os.environ.get('FLOU')=='1'
 if F.get('fictif') and not FLOU: sys.exit('fiche fictive : rendu refusé sans FLOU=1')
@@ -32,7 +32,8 @@ g+=f'<circle cx="{cx}" cy="{cy}" r="{R*.5:.1f}" fill="none" stroke="#8E9A91" str
 for i in range(N):
     x,y=pol(R,i); g+=f'<line x1="{cx}" y1="{cy}" x2="{x:.1f}" y2="{y:.1f}" stroke="#E4E8E3" stroke-width="1.3"/>'
 pts=[pol(R*max(PCT[k],2)/100,i) for i,(k,_,_,_) in enumerate(CRIT)]
-g+='<defs><filter id="bl" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter></defs><g'+(' filter="url(#bl)"' if FLOU else '')+'>'
+if os.environ.get('FLOU')=='1': pts=[pol(R*.62,i) for i in range(N)]   # vidéo floutée : forme neutre, la même pour tous, aucune donnée
+g+='<defs><filter id="bl" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="22"/></filter></defs><g'+'>'
 g+='<polygon points="'+' '.join(f'{x:.1f},{y:.1f}' for x,y in pts)+'" fill="#19A552" fill-opacity=".2" stroke="#0B7A3B" stroke-width="3" stroke-linejoin="round"/>'
 g+=''.join(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="5.5" fill="#fff" stroke="#0B7A3B" stroke-width="3"/>' for x,y in pts)+'</g>'
 HORIZ=(len(sys.argv)>3 and sys.argv[3]=='tiktok')   # en vertical, place sur les côtés : libellés droits, sans chevauchement
