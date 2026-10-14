@@ -22,6 +22,7 @@ ne jamais redessiner « dans l'esprit ».
 - En bas du graphique : le chiffre clé en très gros + deux lignes de texte en capitales (un mot en rouge au plus).
 - Pied : logo, Mali*Data*Foot, logos X et TikTok + @MaliDataFoot, puis la ligne de source en petit.
 - **Aucun effet** : ni grain, ni craie, ni ombre, ni lueur, ni cadre ou carte blanche arrondie, ni dégradé sur les barres.
+- **Être créatif dans la DA** (Diaby, 14 octobre 2026) : des mises en scène inventives, mais avec nos couleurs, nos polices et sans effet. Exemple validé (« j'aime bien ») : le terrain vu en perspective (vert, lignes crème, posé sur le jaune) qui **penche** proportionnellement à l'avantage du terrain, et des **flèches sur le terrain** dont l'épaisseur suit les buts attendus. Inspiration acceptée : les visuels de terrain avec données posées dessus, mais sans photo réaliste et sans fausses actions : tout ce qui est dessiné correspond à une vraie donnée.
 - **Une idée, deux formats** (Diaby, 13 octobre 2026) : sur TikTok, le sujet devient un **motion design** (les visuels animés, comme la vidéo de lancement) ; sur X, un **thread** (une image par tweet, chaque image porte un message).
 - **Versions de couleurs** : Diaby est d'accord pour en proposer (autres fonds), mais la mise en page et les éléments ci-dessus ne bougent pas.
 

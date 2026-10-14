@@ -180,3 +180,4 @@ des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliD
 - 2026-10-14 : post 1 (défense) prêt pour X en jaune : 1-classement-afrique, 2-courbe-depuis-2000, thread de 4 tweets (livrables/post1-defense). Gabarit posts_video.py : versions vert et blanc ajoutées (choix des couleurs à confirmer avec Diaby).
 - 2026-10-14 : simulation du groupe K (Dixon-Coles, 100 000 tirages, test 2020-2026, recompté indépendamment : identique au bruit près). Sujet de la vidéo TikTok avec voix off.
 - 2026-10-14 : pas de date exacte des matchs Mali-Rwanda dans les contenus tant que les sources divergent (dire « en novembre »).
+- 2026-10-14 : vidéo A « Ce que le 1-1 ne dit pas » : plans terrain qui penche + flèches de buts attendus validés (« j'aime bien ») ; voix off dans livrables/video-A ; Maroc 6e (et non 5e) au classement officiel de juillet 2026.
