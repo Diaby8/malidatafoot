@@ -66,7 +66,7 @@ description: Comment produire un post ou une vidéo MaliDataFoot avec Diaby : fa
 - **Toujours être à jour** : avant de proposer des idées, vérifier sur le web la dernière actu des Aigles (matchs joués, listes, résultats, prochains rendez-vous). Une idée qui ignore le dernier match fait perdre toute crédibilité.
 
 - Chaque fois qu'on cherche des idées : en proposer dans **plusieurs catégories** (actu des Aigles, Maliens en club, rétro, lien hier / aujourd'hui, phénomènes, sujets poussés et curieux, formats légers). Pas de stats « bateau » : des sujets qui font comprendre un phénomène.
-- La banque d'exemples est dans `docs/banque_idees.md`. Ce sont des exemples, pas une liste fermée : on continue d'en proposer de nouveaux au même niveau, et on y ajoute ceux qui plaisent.
+- **Le suivi de tous les sujets (statut, données, formats) est dans `docs/boite_a_idees.md`** : le mettre à jour à chaque idée nouvelle, POC ou publication. La banque d'exemples est dans `docs/banque_idees.md`. Ce sont des exemples, pas une liste fermée : on continue d'en proposer de nouveaux au même niveau, et on y ajoute ceux qui plaisent.
 - Formats : posts, threads sur X, TikTok en motion design avec voix off (scripts écrits avec les règles de texte ci-dessus).
 
 ## 7. Prochains contenus (proposition du 7 octobre, à décider avec lui)
