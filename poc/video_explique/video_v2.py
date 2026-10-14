@@ -42,7 +42,7 @@ imgs = ''.join(f'<img id="ti{i}" src="_vx/{f}" class="cache">' for i, f in enume
 imgs += ''.join(f'<img id="fp{i}" src="_vx/full_{f}.png" class="cache">' for i, f in enumerate(SIX))
 
 DATA = {'gestes': GESTES, 'recep': RECEP, 'reel': DUREE_REELLE, 'tir': DV['action']['tir'], 'joueurs': DV['action']['joueurs'],
-        'xt': DV['xt']['valeurs'], 'tirs': DV['tirs'], 'recup': DV['recuperations'], 'reseau': DV['reseau'], 'resume': DV['resume'],
+        'xt': DV['xt']['valeurs'], 'tirs': DV['tirs'], 'recup': DV['recuperations'], 'presence': DV['presence']['lisse'], 'reseau': DV['reseau'], 'resume': DV['resume'],
         'cases': CASES, 'cols': COLS, 'rows': ROWS, 'rc': rc, 'cc': cc0}
 
 HTML = '''<!doctype html><html><head><meta charset="utf-8"><style>@@FONTS@@
@@ -92,6 +92,8 @@ canvas{position:absolute;left:0;top:0}.cache{display:none}
 <div class="t h1" id="h5c" style="top:206px">@@RECUP@@ BALLONS</div>
 <div class="t lab" id="l5a" style="top:372px">TAILLE DU POINT = <span>QUALITÉ DE L'OCCASION (xG)</span></div>
 <div class="t lab" id="l5b" style="top:372px">QUI JOUE AVEC QUI · <span>@@LIENS@@ LIENS DE 12 PASSES ET PLUS</span></div>
+<div class="t h1" id="h5d" style="top:206px">@@ACT@@ ACTIONS</div>
+<div class="t lab" id="l5d" style="top:372px">OÙ JOUE LE MALI · <span>PLUS C'EST CHAUD, PLUS IL Y A LE BALLON</span></div>
 <div class="t lab" id="l5c" style="top:372px">RÉCUPÉRÉS · <span>LIGNE = HAUTEUR MOYENNE</span></div>
 <div id="foot"><img class="lg" src="logo-verte.png"><div class="wm">Mali<i>Data</i>Foot</div><div class="soc"><img src="logo_x.png" style="height:28px;filter:brightness(0) invert(1)"><img src="logo_tt.png" style="height:36px;filter:brightness(0) invert(1)">@MaliDataFoot</div></div>
 <div id="src">Positions et trajectoires réelles · Menace : modèle MaliDataFoot (xT) · Données <img src="logo_statsbomb.png" style="height:22px;vertical-align:-5px"></div>
@@ -135,15 +137,17 @@ function fleche(g,x1,y1,x2,y2,col,w,dash,u){   // flèche au sol qui se dessine 
     poly(g,[[x2,y2,.03],[x2-ux*h-uy*h*.55,y2-uy*h+ux*h*.55,.03],[x2-ux*h+uy*h*.55,y2-uy*h-ux*h*.55,.03]],col);}}
 function texte(g,x,y,z,txt,col,px,align){const s=P(x,y,z); if(!s)return; g.font=`800 ${px}px SC`; g.textAlign=align||'center'; const w=g.measureText(txt).width, x0=align=='left'?s[0]:(align=='right'?s[0]-w:s[0]-w/2); if(x0<16||x0+w>1064)return; g.fillStyle=col; g.fillText(txt,s[0],s[1]);}   // un nom coupé par le bord n'est pas affiché
 // ---------------------------------------------------------------- le stade
-function stade(g,alpha){
+function stade(g,alpha,lignesSeules){
   g.globalAlpha=alpha;
   const T='#031A0D', T2='#05261A';
+  if(!lignesSeules){
   poly(g,[[-6,-14,0],[126,-14,0],[136,-26,16],[-16,-26,16]],T2); poly(g,[[-6,94,0],[126,94,0],[136,106,16],[-16,106,16]],T2);
   poly(g,[[122.5,-14,0],[122.5,94,0],[140,106,18],[140,-26,18]],T); poly(g,[[-6,-14,0],[-6,94,0],[-20,106,18],[-20,-26,18]],T);
   poly(g,[[-6,-6,0],[122.5,-6,0],[122.5,86,0],[-6,86,0]],'#0B5E30');
   for(let i=0;i<12;i++) if(i%2) poly(g,[[i*10,-6,0],[Math.min(i*10+10,122.5),-6,0],[Math.min(i*10+10,122.5),86,0],[i*10,86,0]],'#0E6935');
   // panneaux au bord du terrain
-  poly(g,[[-2,-9,0],[122,-9,0],[122,-9,1.1],[-2,-9,1.1]],'#0A4A26'); 
+  poly(g,[[-2,-9,0],[122,-9,0],[122,-9,1.1],[-2,-9,1.1]],'#0A4A26'); }
+
   const L='#FFF6D0', w=.18;
   const rect=(a,b,c,d)=>{seg(g,[a,b,0],[c,b,0],L,w);seg(g,[c,b,0],[c,d,0],L,w);seg(g,[c,d,0],[a,d,0],L,w);seg(g,[a,d,0],[a,b,0],L,w)};
   rect(0,0,120,80); seg(g,[60,0,0],[60,80,0],L,w); rect(0,18,18,62); rect(102,18,120,62); rect(0,30,6,50); rect(114,30,120,50);
@@ -184,10 +188,16 @@ function reseau(g,a){ if(a<=0)return; const N=D.reseau.noeuds; let mx=0; D.resea
   for(const p in N){const v=N[p]; ring(g,v[0],v[1],1.2+v[2]/220*a,'#F6C41C',.2,'#063D20');}
   const NOMS={'Boubakar Kouyate':'KOUYATÉ','Sikou Niakate':'S. NIAKATÉ','Hamari Traoré':'HAMARI'}; g.globalAlpha=cl(a*2-.6);
   for(const p in NOMS) if(N[p]) texte(g,N[p][0],N[p][1],3.2,NOMS[p],'#FFFFFF',30); g.globalAlpha=1;}
+function chaleur(g,a){ if(a<=0)return; const G=D.presence;   // carte lissée, cases de 2 yards, couleur mêlée à l'herbe (pas de transparence, donc pas de joints)
+  const mix=(c1,c2,u)=>c1.map((v,i)=>Math.round(v+(c2[i]-v)*u));
+  for(let r=0;r<40;r++)for(let c=0;c<60;c++){const v=G[r][c]; if(v<.1)continue; const u=cl((v-.1)/.9);
+    const herbe=(Math.floor(c*2/10)%2)?[14,105,53]:[11,94,48], col=mix([246,196,28],[255,80,70],cl((v-.3)/.7)), m=mix(herbe,col,a*.88*Math.pow(u,.7));
+    poly(g,[[c*2,r*2,.01],[c*2+2.06,r*2,.01],[c*2+2.06,r*2+2.06,.01],[c*2,r*2+2.06,.01]],`rgb(${m[0]},${m[1]},${m[2]})`);}
+  stade(g,1,true);}
 function recup(g,a){ if(a<=0)return; let sx=0; for(const r of D.recup){sx+=r.x; ring(g,r.x,r.y,.75*a,'#F6C41C',.16,'rgba(246,196,28,.55)');}
   const m=sx/D.recup.length; if(a>.5) seg(g,[m,-3,.02],[m,83,.02],'#FF6B5E',.35,[1.4,1]);}
 // ---------------------------------------------------------------- le carrousel et le mur (canevas 2)
-const T={hook:0, plonge:2.0, couche1:3.2, couche2:6.7, couche3:8.0, couche4:9.3, tournoi:11.2, flash:1.15, carrousel:15.0, mur:17.1, fin:20.9, duree:25.0};
+const T={hook:0, plonge:2.0, couche1:3.2, couche2:6.7, couche3:8.0, couche4:9.3, tournoi:11.2, flash:1.15, carrousel:16.15, mur:18.25, fin:22.05, duree:26.15};
 window.DUREE=T.duree;
 function mur(m){ const S=lerp(.78,.10,m), rx=lerp(0,28,m)*Math.PI/180, rz=lerp(0,-14,m)*Math.PI/180, yc=lerp(960,960,m), co=Math.cos(rx), GX=1180, GY=1580, DD=2400;
   const L=[]; for(const [r,c,k] of D.cases){const x0=(c-D.cc)*GX, y0=(r-D.rr)*GY; const Xr=x0*Math.cos(rz)-y0*Math.sin(rz), Yr=x0*Math.sin(rz)+y0*Math.cos(rz);
@@ -208,7 +218,7 @@ function vis(id,t,a,b,dy=30){const e=$(id); const u=oc(cl((t-a)/.4)), v=b==null?
 const K=[ // images clés de la caméra : temps, position, cible, focale, centre vertical (caméra derrière le but que le Mali attaque)
  [0,[88,40,200],[88.5,40,0],1250,1000],[T.plonge,[88,40,200],[88.5,40,0],1250,1000],[T.couche1,[150,40,36],[84,40,0],1250,950],
  [T.couche2-.2,[146,40,30],[92,40,0],1350,950],[T.couche2+.9,[143,43,28],[100,43,0],1220,960],[T.couche4+1.6,[141,43,26],[102,43,0],1220,960],
- [T.tournoi+.5,[152,40,72],[70,40,0],1300,920],[T.carrousel,[152,40,72],[70,40,0],1300,920]];
+ [T.tournoi+.5,[152,40,72],[70,40,0],1300,870],[T.carrousel,[152,40,72],[70,40,0],1300,870]];
 function camAt(t){let i=0; while(i<K.length-2&&t>K[i+1][0])i++; const a=K[i], b=K[i+1]; const u=io(cl((t-a[0])/(b[0]-a[0])));
   camera(a[1].map((v,j)=>lerp(v,b[1][j],u)),a[2].map((v,j)=>lerp(v,b[2][j],u)),lerp(a[3],b[3],u),lerp(a[4],b[4],u));}
 window.seek=function(t){
@@ -224,7 +234,8 @@ window.seek=function(t){
     if(act>0){X.globalAlpha=act; action(X,t>=T.couche1?reel:-1, Math.sin(Math.PI*cl((t-T.couche3)/.9)) ); joueurs(X,cl((t-T.couche2)/.5)*act, cl((t-T.couche4-.2)/.5), cl((t-T.couche3-.2)/.6)*act); X.globalAlpha=1;}
     const f=T.flash, t5=T.tournoi;
     const fa=cl((t-t5)/.35)*(1-cl((t-t5-f)/.15)), fb=cl((t-t5-f)/.35)*(1-cl((t-t5-2*f)/.15)), fc=cl((t-t5-2*f)/.35)*(1-cl((t-T.carrousel)/.3));
-    tirs(X,fa); reseau(X,fb); recup(X,fc);
+    const fd=cl((t-t5-3*f)/.35)*(1-cl((t-T.carrousel)/.3)); const fc2=fc*(1-cl((t-t5-3*f)/.15));
+    tirs(X,fa); reseau(X,fb); recup(X,fc2); chaleur(X,fd);
     // le terrain s'efface vers la droite quand le jaune entre
   }
   vis('k1',t,T.plonge+.5,T.tournoi); vis('h1',t,T.plonge+.65,T.tournoi);
@@ -232,7 +243,7 @@ window.seek=function(t){
   {const r=cl((t-T.couche1)/(T.couche2-T.couche1-.3))*D.reel, sec=1600+r; $('clkv').textContent=Math.floor(sec/60)+"'"+String(Math.floor(sec%60)).padStart(2,'0'); $('clkl').textContent=t>=T.couche2?'ARRÊT SUR IMAGE · LA TÊTE':'TEMPS DE JEU RÉEL';} vis('L2',t,T.couche2,T.couche3); vis('L3',t,T.couche3,T.couche4); vis('L4',t,T.couche4,T.tournoi);
   $('s1').style.opacity=0; $('n3').style.opacity=0; $('n4').style.opacity=0;
   $('v3').textContent='+'+(.25*oc(cl((t-T.couche3-.2)/.7))).toFixed(2).replace('.',','); $('v4').textContent=Math.round(32*oc(cl((t-T.couche4-.25)/.7)));
-  const f=T.flash, t5=T.tournoi; vis('k5',t,t5,T.carrousel); vis('h5a',t,t5,t5+f); vis('l5a',t,t5+.1,t5+f); vis('h5b',t,t5+f,t5+2*f); vis('l5b',t,t5+f+.1,t5+2*f); vis('h5c',t,t5+2*f,T.carrousel); vis('l5c',t,t5+2*f+.1,T.carrousel);
+  const f=T.flash, t5=T.tournoi; vis('k5',t,t5,T.carrousel); vis('h5a',t,t5,t5+f); vis('l5a',t,t5+.1,t5+f); vis('h5b',t,t5+f,t5+2*f); vis('l5b',t,t5+f+.1,t5+2*f); vis('h5c',t,t5+2*f,t5+3*f); vis('l5c',t,t5+2*f+.1,t5+3*f); vis('h5d',t,t5+3*f,T.carrousel); vis('l5d',t,t5+3*f+.1,T.carrousel);
   vis('foot',t,T.plonge+.4,T.carrousel,0); vis('src',t,T.plonge+.6,T.carrousel,0);
   // 3. le jaune entre par la gauche, puis le carrousel
   const j=io(cl((t-T.carrousel)/.45)); $('jaune').style.opacity=j>0?1:0; $('jaune').style.clipPath=`inset(0 ${(100-100*j).toFixed(2)}% 0 0)`;
@@ -246,5 +257,5 @@ window.seek=function(t){
 Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{}))]).then(()=>{window.seek(0);window.READY=true});
 '''
 h = HTML.replace('@@FONTS@@', FONTS).replace('@@DATA@@', json.dumps(DATA, ensure_ascii=False)).replace('@@JS@@', JS).replace('@@IMGS@@', imgs)
-h = h.replace('@@TIRS@@', str(DV['resume']['tirs'])).replace('@@RECUP@@', str(DV['resume']['recuperations'])).replace('@@LIENS@@', str(len(DV['reseau']['liens'])))
+h = h.replace('@@TIRS@@', str(DV['resume']['tirs'])).replace('@@RECUP@@', str(DV['resume']['recuperations'])).replace('@@LIENS@@', str(len(DV['reseau']['liens']))).replace('@@ACT@@', f"{DV['presence']['n']:,}".replace(',', ' '))
 open(OUT, 'w', encoding='utf-8').write(h); print('ok', OUT)

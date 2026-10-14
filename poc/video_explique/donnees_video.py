@@ -31,11 +31,33 @@ E = json.load(open(os.path.join(D, 'ev_3920417.json'))); s = next(e for e in E i
 R['action'] = {'tir': {'x': s['location'][0], 'y': s['location'][1], 'joueur': s['player']['name'], 'xg': round(s['shot']['statsbomb_xg'], 4), 'resultat': s['shot']['outcome']['name'],
                'fin': s['shot']['end_location']},
                'joueurs': [{'x': p['location'][0], 'y': p['location'][1], 'mali': p['teammate'], 'nom': p['player']['name'], 'poste': p['position']['name']} for p in s['shot']['freeze_frame']]}
+# présence : toutes les actions du Mali avec le ballon (passes, conduites, réceptions, tirs, dribbles, récupérations), 5 matchs, en cases de 6 x 5 yards
+TYPES = ('Pass', 'Carry', 'Ball Receipt*', 'Shot', 'Dribble', 'Ball Recovery', 'Interception', 'Clearance', 'Block')
+grille = [[0] * 20 for _ in range(16)]; n_act = 0
+for m in MATCHS:
+    for e in json.load(open(os.path.join(D, f'ev_{m}.json'))):
+        if e.get('team', {}).get('name') == 'Mali' and e['type']['name'] in TYPES and 'location' in e:
+            x, y = e['location'][:2]; grille[min(15, int(y // 5))][min(19, int(x // 6))] += 1; n_act += 1
+# carte lissée (noyau gaussien, écart-type 4 yards) sur une grille de 2 x 2 yards, pour l'affichage
+import math
+K = [[math.exp(-((i * 6 + 3 - x) ** 2 + (j * 5 + 2.5 - y) ** 2) / (2 * 4 ** 2)) for i in range(20) for j in range(16)] for x, y in [(0, 0)]]
+lisse = [[0.0] * 60 for _ in range(40)]
+for j in range(16):
+    for i in range(20):
+        v = grille[j][i]
+        if not v: continue
+        cx, cy = i * 6 + 3, j * 5 + 2.5
+        for b in range(40):
+            for a in range(60):
+                d2 = (a * 2 + 1 - cx) ** 2 + (b * 2 + 1 - cy) ** 2
+                if d2 < 200: lisse[b][a] += v * math.exp(-d2 / 32)
+mx = max(max(r) for r in lisse); lisse = [[round(v / mx, 3) for v in r] for r in lisse]
+R['presence'] = {'lisse': lisse, 'definition': 'actions du Mali avec le ballon (passes, conduites, réceptions, tirs, dribbles, récupérations, interceptions, dégagements, contres), cases de 6 x 5 yards', 'n': n_act, 'grille': grille}
 xt = json.load(open(os.path.join(ICI, '..', 'xt', 'xt_grid.json')))
 R['xt'] = {'grille': xt['grille'], 'valeurs': xt['valeurs']}
 np_ = [t for t in R['tirs'] if not t['penalty']]
 R['resume'] = {'tirs': len(R['tirs']), 'tirs_hors_penalty': len(np_), 'buts': sum(t['but'] for t in R['tirs']), 'xg_total': round(sum(t['xg'] for t in R['tirs']), 2),
                'npxg': round(sum(t['xg'] for t in np_), 2), 'recuperations': len(R['recuperations']), 'hauteur_moyenne_recup_yards': round(sum(r['x'] for r in R['recuperations']) / len(R['recuperations']), 1),
-               'noeuds': len(noeuds), 'liens': len(R['reseau']['liens'])}
+               'noeuds': len(noeuds), 'liens': len(R['reseau']['liens']), 'actions_presence': n_act}
 json.dump(R, open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
 print(json.dumps(R['resume'], ensure_ascii=False)); print(sorted(noeuds, key=lambda p: -noeuds[p][2]))
