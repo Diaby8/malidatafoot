@@ -20,5 +20,6 @@ crédibilité : uniquement des faits vérifiés, et un audit avant chaque envoi.
   - `python taches.py tests` est vert ;
   - le rendu a été regardé à taille réelle et à taille téléphone ;
   - les polices sont chargées (les scripts de capture s'arrêtent sinon).
+- **Avant toute idée de visuel, de sujet ou de source** : relire `docs/sources_de_donnees.md`, `docs/boite_a_idees.md`, `docs/journal_des_gabarits.md` et les skills, puis proposer en s'appuyant dessus (règle de Diaby du 14/10/2026). Ne jamais proposer de payer une source non vérifiée.
 - **Idées de contenus** : le suivi de tous les sujets dans `docs/boite_a_idees.md`, l'inspiration dans `docs/banque_idees.md` (des exemples, pas une liste fermée ; toujours proposer plusieurs catégories).
 - **Décisions** : chaque décision de forme ou de fond est notée en une ligne datée dans `docs/journal_des_gabarits.md`.

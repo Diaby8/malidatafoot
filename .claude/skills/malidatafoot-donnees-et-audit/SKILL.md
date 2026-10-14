@@ -8,6 +8,14 @@ description: Règles de fond de MaliDataFoot : sources de données, pipeline, d�
 **Règle d'or : uniquement des faits vérifiés.** Une page data se juge sur sa crédibilité. Un chiffre faux publié coûte plus
 cher que dix posts réussis. Il faut être strict, vouloir réussir, et donc vérifier plus que ce qui paraît nécessaire.
 
+**Relire avant de proposer (Diaby, 14 octobre 2026 : « faut pas jeter des trucs comme ça en pâture, c'est un projet pro »).**
+À chaque nouvelle idée de visuel, de data visualisation ou de sujet, et avant toute proposition de source, relire d'abord :
+- `docs/sources_de_donnees.md` : quelles sources on a déjà trouvées, testées, autorisées ou écartées (ex. martj42 = scores sans compos ; API-Football gratuit = 2022-2024 seulement ; FotMob = accord écrit à archiver) ;
+- `docs/boite_a_idees.md` et `docs/banque_idees.md` : ce qui est déjà fait, en cours ou rejeté ;
+- `docs/journal_des_gabarits.md` : les décisions de forme et de fond déjà prises ;
+- les sections utiles des trois skills (DA, données, production).
+Puis proposer en s'appuyant dessus : dire ce qu'on a déjà, ce qui manque, et d'où viendrait le manque, vérifié. Ne jamais proposer une solution (surtout payante) qu'on n'a pas vérifiée.
+
 ## 1. Avant de publier un chiffre
 
 1. **Le recompter** depuis les fichiers bruts (pas depuis un résumé, pas de mémoire).

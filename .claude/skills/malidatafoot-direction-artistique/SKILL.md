@@ -10,6 +10,14 @@ C'est un projet pro. Chaque visuel doit avoir l'air d'une vraie interface de dat
 les applis et institutions du foot), jamais « IA », « débutant » ou « enfantin ». Viser la réussite et la crédibilité :
 mieux vaut un visuel de moins qu'un visuel approximatif.
 
+**Relire avant de proposer (Diaby, 14 octobre 2026 : « faut pas jeter des trucs comme ça en pâture, c'est un projet pro »).**
+À chaque nouvelle idée de visuel, de data visualisation ou de sujet, et avant toute proposition de source, relire d'abord :
+- `docs/sources_de_donnees.md` : quelles sources on a déjà trouvées, testées, autorisées ou écartées (ex. martj42 = scores sans compos ; API-Football gratuit = 2022-2024 seulement ; FotMob = accord écrit à archiver) ;
+- `docs/boite_a_idees.md` et `docs/banque_idees.md` : ce qui est déjà fait, en cours ou rejeté ;
+- `docs/journal_des_gabarits.md` : les décisions de forme et de fond déjà prises ;
+- les sections utiles des trois skills (DA, données, production).
+Puis proposer en s'appuyant dessus : dire ce qu'on a déjà, ce qui manque, et d'où viendrait le manque, vérifié. Ne jamais proposer une solution (surtout payante) qu'on n'a pas vérifiée.
+
 ## 0. LA DA DES POSTS : le style de la vidéo (validé le 13 octobre 2026, « la DA, elle est parfaite, c'est ça que je veux »)
 
 C'est la référence pour **tout post** (X, TikTok) et tout nouveau visuel de données. Gabarit : `visuels/posts_video.py`
