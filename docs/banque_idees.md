@@ -124,3 +124,6 @@ Le 1 et le 4 sont plus longs à préparer mais peuvent faire connaître la page 
 - Seydou Dembélé à Reims : 8 buts dans 3 catégories depuis son arrivée en septembre. Idée de post : suivre la progression d'un jeune, de la CAN U17 aux équipes de Reims.
 - Les Aigles Dames contre le Bénin (éliminatoires JO 2028) et les U20 au tournoi UFOA-A : élargir la page aux autres sélections du Mali.
 - Ange-Martial Tia raconte sa trêve avec le Mali au micro de son club : à reprendre pour un post sur ses débuts.
+
+## Demande de Diaby (14 octobre 2026) : aller plus loin que les stats
+« Ce qu'il y a derrière les faits de jeu, dans la data. » Des analyses de jeu (aspects tactiques, styles, enchaînements), de la modélisation et des simulations, pas des stats que toutes les pages peuvent sortir. Premier exemple : la simulation du groupe K (`malidata/simulation.py`). Pistes : styles de jeu par apprentissage automatique (StatsBomb CAN 2023), chaînes de possession qui mènent aux tirs, « le Mali est-il maudit à la CAN ? » (résultats réels contre attendus depuis 1994). Limite à régler : pas de données d'événements légales pour les matchs récents.

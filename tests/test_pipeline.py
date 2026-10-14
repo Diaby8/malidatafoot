@@ -227,3 +227,22 @@ def test_calcul_fifa():
     assert fifa.match(1500, 1500, "TAB_V", 40)[0] == pytest.approx(1510)
     s = {x["resultats"]: x["ecart"] for x in fifa.scenarios(1474.14, 1156.16, 25)}
     assert len(s) == 9 and [k for k, v in s.items() if v > 0] == ["VV"]
+
+
+def test_simulation_classement_et_modele():
+    import numpy as np
+    from malidata import simulation as s
+    # A et B finissent à 7 points ; B a une bien meilleure différence de buts (+11 contre +1),
+    # mais A a pris 4 points sur 6 contre B : la règle CAF met A devant
+    ms = [("A", "B", 1, 0), ("B", "A", 0, 0), ("A", "C", 1, 0), ("C", "A", 1, 0), ("B", "C", 6, 0), ("C", "B", 0, 6)]
+    assert s.classer(["A", "B", "C"], ms) == ["A", "B", "C"]
+    # la matrice des scores est une vraie loi de probabilité, et le favori est bien favori
+    mod = {"b": [0.06, 0.19, 0.29, -0.30], "rho": -0.03}
+    p = s.matrice(mod, 1750, 1500)
+    assert abs(p.sum() - 1) < 1e-9 and (p >= 0).all()
+    v, n, d = s.vnd(p)
+    assert v > d and abs(v + n + d - 1) < 1e-9
+    # la simulation est reproductible et chaque simulation a exactement deux qualifiés
+    sim = s.simuler(mod, {"A": 1700, "B": 1500, "C": 1400}, [("A", "B", 1, 0)], [("B", "A"), ("A", "C"), ("C", "A"), ("B", "C"), ("C", "B")], n=500)
+    assert ((sim["rangs"] <= 2).sum(axis=1) == 2).all()
+    assert sim["rangs"].equals(s.simuler(mod, {"A": 1700, "B": 1500, "C": 1400}, [("A", "B", 1, 0)], [("B", "A"), ("A", "C"), ("C", "A"), ("B", "C"), ("C", "B")], n=500)["rangs"])
