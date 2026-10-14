@@ -61,6 +61,12 @@ def teinte(html, nom, rouge_sur_vert='#FF7A6E'):
                      ('rgba(4,51,26,.75)', 'rgba(255,255,255,.75)'), ('rgba(4,51,26,.8)', 'rgba(255,255,255,.8)')):
             h = h.replace(a, b)
         return h.replace('@@F@@', FOND_VERT)
-    for a, b in (('#FFF3C4', '#E3E8E3'), ('#FDEBA6', '#EEF2EC'), ('#FFF6D0', '#DDE3DD'), ('#FCE38A', '#E3E8E3')):
+    # Blanc = la scène « Hamari Traoré » de la vidéo de lancement : fond jaune et trame gardés, les données posées
+    # dans un grand panneau blanc aux coins arrondis (sans ombre), entre le titre et le pied de page.
+    for a, b in (('#FFF3C4', '#E3E8E3'), ('#FFF6D0', '#FFF6D0'), ('#FCE38A', '#E3E8E3')):
         h = h.replace(a, b)
-    return h.replace('@@F@@', '#FFFFFF')
+    grand = 'height:1920px' in h
+    t, bas = (488, 1448) if grand else (352, 1166)
+    panneau = f'<div style="position:absolute;left:36px;right:36px;top:{t}px;height:{bas-t}px;background:#FFFFFF;border-radius:22px"></div>'
+    h = _re.sub(r'(<div id="c">\s*<svg[^>]*>.*?</svg>)', lambda m: m.group(1) + panneau, h, count=1, flags=_re.S)
+    return h.replace('@@F@@', GRAD)
