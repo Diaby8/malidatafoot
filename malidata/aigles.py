@@ -82,11 +82,18 @@ def silver(cfg: Config) -> dict:
     return {"matchs": len(matchs), "buts": len(buts), "tab": len(tab), "forfaits": forfaits}
 
 
-def appliquer_forfaits(matchs: pd.DataFrame) -> tuple[pd.DataFrame, int]:
-    """Règle MaliDataFoot (14/10/2026) : seulement les matchs joués, avec le score du terrain.
-    martj42 garde le score officiel des matchs gagnés sur tapis vert ; `registre/forfaits.csv` liste ces matchs avec la source.
-    Un match jamais joué (ou dont le score du terrain n'est pas confirmé) est retiré ; sinon on remet le score du terrain.
-    Chaque ligne du registre doit retrouver exactement un match avec le score officiel attendu : sinon on arrête tout."""
+# Règle des tapis verts. Décision de Diaby (14/10/2026, soir) : « des tapis verts, c'est officiel, donc autant les compter ».
+# "officiel" garde le score officiel (celui de martj42) ; "terrain" retire les matchs non joués et remet le score du terrain.
+# Dans les deux cas, le registre est vérifié, et le post doit dire quelle règle est utilisée.
+REGLE_TAPIS_VERT = "officiel"
+
+
+def appliquer_forfaits(matchs: pd.DataFrame, regle: str | None = None) -> tuple[pd.DataFrame, int]:
+    """`registre/forfaits.csv` liste les matchs gagnés sur tapis vert, avec la source.
+    Règle "terrain" : un match jamais joué (ou dont le score du terrain n'est pas confirmé) est retiré ; sinon on remet le score du terrain.
+    Règle "officiel" : on garde le score officiel. Dans les deux cas, chaque ligne du registre doit retrouver exactement un match
+    avec le score officiel attendu : sinon on arrête tout."""
+    regle = regle or REGLE_TAPIS_VERT
     f = pd.read_csv(ROOT / "registre" / "forfaits.csv", dtype=str)
     matchs = matchs.copy()
     for r in f.itertuples():
@@ -98,13 +105,15 @@ def appliquer_forfaits(matchs: pd.DataFrame) -> tuple[pd.DataFrame, int]:
         officiel = f"{matchs.at[i, 'home_score']}-{matchs.at[i, 'away_score']}"
         if officiel != r.score_officiel:
             raise ValueError(f"score inattendu pour {r.date} {r.home_team}-{r.away_team} : {officiel} au lieu de {r.score_officiel}")
+        if regle == "officiel":
+            continue
         if r.decision == "exclure":
             matchs = matchs.drop(index=i)
         elif r.decision == "score_terrain":
             matchs.at[i, "home_score"], matchs.at[i, "away_score"] = int(r.home_score_terrain), int(r.away_score_terrain)
         else:
             raise ValueError(f"décision inconnue : {r.decision}")
-    log.info("forfaits et tapis verts : %d matchs corrigés ou retirés (registre/forfaits.csv)", len(f))
+    log.info("tapis verts : %d matchs au registre, règle « %s »", len(f), regle)
     return matchs, len(f)
 
 

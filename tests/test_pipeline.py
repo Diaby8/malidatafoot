@@ -262,11 +262,13 @@ def test_forfaits_retires_ou_score_du_terrain():
         {"date": d("2026-01-18"), "home_team": "Morocco", "away_team": "Senegal", "home_score": 3, "away_score": 0},
         {"date": d("2026-09-29"), "home_team": "Liberia", "away_team": "Mali", "home_score": 0, "away_score": 1},
     ])
-    out, n = appliquer_forfaits(m)
+    off, _ = appliquer_forfaits(m, "officiel")
+    assert off.equals(m)
+    out, n = appliquer_forfaits(m, "terrain")
     assert n == 6 and len(out) == 3
     assert not ((out["home_team"] == "Mali") & (out["away_team"] == "Chad")).any()
     finale = out[(out["home_team"] == "Morocco") & (out["away_team"] == "Senegal")].iloc[0]
     assert (finale["home_score"], finale["away_score"]) == (0, 1)
     m.loc[5, "home_score"] = 2  # le score officiel ne colle plus au registre : on doit s'arrêter
     with pytest.raises(ValueError):
-        appliquer_forfaits(m)
+        appliquer_forfaits(m, "officiel")

@@ -46,3 +46,8 @@ Code indépendant `poc/audits/verif_rang_post1.py` sur le fichier martj42 retél
 - **Nouveaux chiffres** : Mali 22 buts en 49 matchs (0,45), **3e** derrière le Sénégal (0,39) et le Maroc (0,44) ; 2000-2019 : 0,99 ; attendus 43,4 ; part du calendrier 0,20 ; 29 matchs sans encaisser ; rang selon l'année de départ : 4e (2014-2017, 2023), 3e (2018-2022, 2024) ; rapport réel/attendu 0,50 à 0,64 (2014-2023) ; 10 derniers : 7 pour 12,7 ; sans le match au Maroc : 21 pour 39,6.
 - **Non audité** : les tapis verts d'avant 2020 (hors Mali, dont les 3-0 de 2000-2019 ont été relus et sont plausibles) ; ils ne touchent que les rangs « depuis 2014-2019 ».
 - **Courbe** : moyenne sur 20 matchs (2B), choisie après rejet de la 2A (fausses chutes) et de la 2D (le cumul fait croire que ça empire). Classement des 10 premiers, mise en page inchangée (9e Angola 0,786 et 10e Afrique du Sud 0,791 affichés tous deux 0,79 : question posée à Diaby).
+
+## Décision finale (14/10/2026, soir) : résultats officiels, tapis verts compris
+Diaby : « des tapis verts, c'est officiel, donc autant les compter ». `REGLE_TAPIS_VERT = "officiel"` ; le registre reste vérifié.
+Chiffres : Mali 22 en 50 (0,44), 2e (Maroc 0,42, Sénégal 0,44) ; attendus 43,7 ; calendrier 0,21 ; 30 sans encaisser ; rapports 0,50 à 0,64 ; 10 derniers 7 pour 12,7 ; sans le Maroc 21 pour 40,0.
+Dit dans le post : tweet 4 « Résultats officiels, tapis verts compris : pour le Mali, un seul, Mali-Tchad (3-0, 28/03/2021) ». Pour mémoire, au score du terrain le Mali serait 3e (Sénégal 0,39, Maroc 0,44, Mali 0,45) : un supporter sénégalais peut le relever (finale CAN 2025, TAS en cours) ; réponse prête dans ce fichier.
