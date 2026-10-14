@@ -179,3 +179,4 @@ des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliD
 - 2026-10-13 : DA des posts = style de la vidéo de lancement, sans aucun effet (maquettes défenses africaines, courbe depuis 2000, points FIFA validées : « la DA, elle est parfaite »). Gabarit visuels/posts_video.py. Le cadre blanc « fiche » n'est plus utilisé pour les posts. Chaque sujet : motion design sur TikTok, thread sur X.
 - 2026-10-14 : post 1 (défense) prêt pour X en jaune : 1-classement-afrique, 2-courbe-depuis-2000, thread de 4 tweets (livrables/post1-defense). Gabarit posts_video.py : versions vert et blanc ajoutées (choix des couleurs à confirmer avec Diaby).
 - 2026-10-14 : simulation du groupe K (Dixon-Coles, 100 000 tirages, test 2020-2026, recompté indépendamment : identique au bruit près). Sujet de la vidéo TikTok avec voix off.
+- 2026-10-14 : pas de date exacte des matchs Mali-Rwanda dans les contenus tant que les sources divergent (dire « en novembre »).
