@@ -31,7 +31,7 @@ Tout est dans un seul fichier, `data/warehouse.duckdb`, qu'on interroge en SQL.
 |---|---|---|---|
 | Chaque action de la CAN 2023 (passes, tirs, duels…), avec la position sur le terrain | 52 matchs, 162 903 actions | StatsBomb Open Data (gratuit, logo obligatoire) | fiches joueurs, cartes de tirs, réseaux de passes, rayons X d'une action |
 | Les compos de départ de la CAN 2023 | 1 144 lignes | StatsBomb | onze type de Chelle (période CAN) |
-| Tous les matchs internationaux depuis 1872 | 49 945 matchs, dont 572 du Mali | martj42 (GitHub, domaine public, mis à jour en continu) | historique, bilans par année, séries |
+| Tous les matchs internationaux depuis 1872 (sans les tapis verts : `registre/forfaits.csv`) | 49 945 matchs, dont 572 du Mali | martj42 (GitHub, domaine public, mis à jour en continu) | historique, bilans par année, séries |
 | Notre classement Elo de toutes les sélections | 337 équipes | calculé par nous à partir des 49 945 matchs | force des adversaires, « à adversaires égaux » |
 | Le classement FIFA | historique + octobre 2026 | fichiers FIFA + `registre/classement_fifa.csv` | rang affiché aux supporters (jamais notre Elo) |
 | Notre modèle de menace (xT) | 1 grille de 192 cases | appris sur 2 564 matchs StatsBomb | « +0,25 de menace », menace créée et concédée |
@@ -85,7 +85,7 @@ Détail et historique : `docs/sources_de_donnees.md`.
 
 | # | Post | Format | État | Ce qu'il reste |
 |---|---|---|---|---|
-| 1 | La défense des Aigles depuis 2020 | thread X (5 tweets, images sur les tweets 1 et 2) + carrousel TikTok (2 images + description) | prêt, dans `livrables/post1-defense/` | à poster le 15/10 au soir (thread et description validés) ; revérifier martj42 avant |
+| 1 | La défense des Aigles depuis 2020 | thread X (5 tweets, images sur les tweets 1 et 2) + carrousel TikTok (2 images + description) | refait le 14/10 au soir : matchs joués seulement (Mali 3e) | ta validation ; croiser les matchs du Mali avec la page Wikipédia que tu copies ; revérifier martj42 avant de poster |
 | 2 | Le compte expliqué : « Namibie-Mali aux rayons X » | vidéo TikTok 51 s + version X | presque prêt | refaire les sons (règle : aucune note qui tinte), ranger les calculs dans le pipeline |
 | 3 | On a joué le groupe 100 000 fois | vidéo ou carrousel + thread | POC | à sortir avant les matchs contre le Rwanda (novembre) ; visuels à refaire au niveau de la vidéo explicative |
 | 4 | Le onze type de chaque coach (Chelle, Saintfiet, Da Silva) | carrousel + thread | données en cours | 29 compos à copier (liste dans `poc/onze_type/`) |

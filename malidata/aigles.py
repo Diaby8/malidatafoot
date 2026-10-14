@@ -71,6 +71,7 @@ def silver(cfg: Config) -> dict:
         df["date"] = pd.to_datetime(df["date"]).dt.date
     matchs = matchs.dropna(subset=["home_score", "away_score"])  # matchs annoncés mais pas encore joués
     matchs[["home_score", "away_score"]] = matchs[["home_score", "away_score"]].astype(int)
+    matchs, forfaits = appliquer_forfaits(matchs)
     con = duckdb.connect(str(cfg.path("warehouse")))
     con.execute("create schema if not exists silver")
     for nom, df in (("intl_matches", matchs), ("intl_goals", buts), ("intl_shootouts", tab)):
@@ -78,7 +79,33 @@ def silver(cfg: Config) -> dict:
         con.execute(f"create or replace table silver.{nom} as select * from df")
         con.unregister("df")
     con.close()
-    return {"matchs": len(matchs), "buts": len(buts), "tab": len(tab)}
+    return {"matchs": len(matchs), "buts": len(buts), "tab": len(tab), "forfaits": forfaits}
+
+
+def appliquer_forfaits(matchs: pd.DataFrame) -> tuple[pd.DataFrame, int]:
+    """Règle MaliDataFoot (14/10/2026) : seulement les matchs joués, avec le score du terrain.
+    martj42 garde le score officiel des matchs gagnés sur tapis vert ; `registre/forfaits.csv` liste ces matchs avec la source.
+    Un match jamais joué (ou dont le score du terrain n'est pas confirmé) est retiré ; sinon on remet le score du terrain.
+    Chaque ligne du registre doit retrouver exactement un match avec le score officiel attendu : sinon on arrête tout."""
+    f = pd.read_csv(ROOT / "registre" / "forfaits.csv", dtype=str)
+    matchs = matchs.copy()
+    for r in f.itertuples():
+        d = pd.to_datetime(r.date).date()
+        m = (matchs["date"] == d) & (matchs["home_team"] == r.home_team) & (matchs["away_team"] == r.away_team)
+        if m.sum() != 1:
+            raise ValueError(f"forfait introuvable dans martj42 : {r.date} {r.home_team}-{r.away_team}")
+        i = matchs.index[m][0]
+        officiel = f"{matchs.at[i, 'home_score']}-{matchs.at[i, 'away_score']}"
+        if officiel != r.score_officiel:
+            raise ValueError(f"score inattendu pour {r.date} {r.home_team}-{r.away_team} : {officiel} au lieu de {r.score_officiel}")
+        if r.decision == "exclure":
+            matchs = matchs.drop(index=i)
+        elif r.decision == "score_terrain":
+            matchs.at[i, "home_score"], matchs.at[i, "away_score"] = int(r.home_score_terrain), int(r.away_score_terrain)
+        else:
+            raise ValueError(f"décision inconnue : {r.decision}")
+    log.info("forfaits et tapis verts : %d matchs corrigés ou retirés (registre/forfaits.csv)", len(f))
+    return matchs, len(f)
 
 
 def gold(cfg: Config) -> dict:
