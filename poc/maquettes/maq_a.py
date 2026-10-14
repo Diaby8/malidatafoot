@@ -22,21 +22,21 @@ b=f'''<div style="position:absolute;left:64px;right:134px;top:640px;display:flex
 <div style="font:italic 900 260px/1 BC;color:#064A25">1-1</div>
 <div style="text-align:center">{D("Mali")}<div style="font:800 34px SC;letter-spacing:.05em;margin-top:14px;color:#0B7A3B">MALI</div></div></div>
 <div style="position:absolute;left:64px;top:1080px;font:800 40px/1.25 SC;letter-spacing:.04em">POUR TOUT LE MONDE :<br><span style="color:#D4252A">UN SIMPLE NUL.</span></div>'''
-open('_va_1.html','w',encoding='utf-8').write(pageT('AMICAL · TANGER · <b>4 OCTOBRE 2026</b>','CE QUE LE 1-1','NE DIT PAS','1-1',b,'Score : FRMF, ESPN'))
+open('_va_1.html','w',encoding='utf-8').write(pageT('AMICAL · TANGER · <b>4 OCTOBRE 2026</b>','CE QUE LE 1-1','NE DIT PAS','',b,'Score : FRMF, ESPN'))
 # 2 : la force
 b=f'''<div style="position:absolute;left:64px;top:620px;display:flex;align-items:center;gap:28px">{D("Morocco",120)}<div><div style="font:italic 900 210px/.86 BC;color:#064A25">7<span style="font-size:110px">e</span></div><div style="font:800 32px SC;letter-spacing:.05em">MAROC · MONDIAL</div></div></div>
 <div style="position:absolute;left:64px;top:930px;display:flex;align-items:center;gap:28px">{D("Mali",120)}<div><div style="font:italic 900 210px/.86 BC;color:#0B7A3B">47<span style="font-size:110px">e</span></div><div style="font:800 32px SC;letter-spacing:.05em">MALI · MONDIAL</div></div></div>
 <div style="position:absolute;left:64px;top:1260px;font:800 36px/1.25 SC;letter-spacing:.04em">40 PLACES D'ÉCART<br>AU CLASSEMENT FIFA</div>'''
-open('_va_2.html','w',encoding='utf-8').write(pageT('COUCHE 1 · <b>LA FORCE DES DEUX ÉQUIPES</b>','LA FORCE','40 PLACES','7e',b,'Classement FIFA du 7 octobre 2026'))
+open('_va_2.html','w',encoding='utf-8').write(pageT('COUCHE 1 · <b>LA FORCE DES DEUX ÉQUIPES</b>','LA FORCE','40 PLACES','',b,'Classement FIFA du 7 octobre 2026'))
 # 3 : le terrain
-Z=[('AMÉRIQUE DU SUD',380),('AFRIQUE',320),('ASIE',220),('EUROPE',160)]
+Z=[('AMÉRIQUE DU SUD',411),('AFRIQUE',317),('ASIE',217),('EUROPE',169)]
 b=''
 for i,(z,v) in enumerate(Z):
     y=640+i*150; af=z=='AFRIQUE'
     b+=f'<div style="position:absolute;left:64px;top:{y}px;font:800 32px SC;letter-spacing:.05em;color:{"#0B7A3B" if af else "#04331A"}">{z}</div><div style="position:absolute;left:64px;top:{y+48}px;width:{v*1.9:.0f}px;height:46px;border-radius:4px;background:{"#0B7A3B" if af else "#FFF3C4"}"></div><div style="position:absolute;left:{64+v*1.9+18:.0f}px;top:{y+38}px;font:italic 900 64px/1 BC;color:{"#0B7A3B" if af else "#064A25"}">{v}</div>'
-b+='<div style="position:absolute;left:64px;top:1250px;font:800 34px/1.25 SC;letter-spacing:.04em">JOUER À L\'EXTÉRIEUR EN AFRIQUE,<br>C\'EST <span style="color:#D4252A">DEUX FOIS PLUS DUR</span> QU\'EN EUROPE</div>'
+b+='<div style="position:absolute;left:64px;top:1250px;font:800 34px/1.25 SC;letter-spacing:.04em">JOUER À L\'EXTÉRIEUR EN AFRIQUE,<br>LE TERRAIN VAUT <span style="color:#D4252A">PRESQUE DEUX FOIS PLUS</span> QU\'EN EUROPE</div>'
 b+='<div style="position:absolute;left:64px;top:1360px;font:600 24px SC;letter-spacing:.03em;color:rgba(4,51,26,.8)">ÉCART DOMICILE / EXTÉRIEUR, EN POINTS DE FORCE (ELO)</div>'
-open('_va_3.html','w',encoding='utf-8').write(pageT('COUCHE 2 · <b>LE TERRAIN</b>','LE TERRAIN','PÈSE DOUBLE','×2',b,'Matchs officiels depuis 2000 · Modèle MaliDataFoot · Données : martj42'))
+open('_va_3.html','w',encoding='utf-8').write(pageT('COUCHE 2 · <b>LE TERRAIN</b>','LE TERRAIN','PÈSE PRESQUE DOUBLE','',b,'Matchs officiels depuis 2000 · Modèle MaliDataFoot · Données : martj42'))
 # 4 : l'attendu
 P=[('MAROC GAGNE',81,'#D4252A'),('NUL',14,'#FFF3C4'),('MALI GAGNE',5,'#0B7A3B')]
 b='<div style="position:absolute;left:64px;top:700px;width:882px;height:90px;display:flex;border-radius:6px;overflow:hidden">'+''.join(f'<div style="width:{p}%;background:{c}"></div>' for _,p,c in P)+'</div>'

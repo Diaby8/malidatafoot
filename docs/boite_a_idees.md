@@ -17,7 +17,7 @@ Statuts : **publié** · **prêt** (vérifié, à poster) · **POC** (calcul fai
 |---|---|---|---|---|
 | 1 | **La défense des Aigles depuis 2020** | 2e défense d'Afrique, et même face aux mêmes adversaires le Mali encaisse deux fois moins | prêt (2 images + 4 tweets, `livrables/post1-defense`) | à faire |
 
-## 3. POC faits (maquettes + calculs, à améliorer au cas par cas)
+## 3. POC faits (maquettes X et TikTok + textes des threads et voix off dans `poc/textes.md`, images dans `livrables/poc/` ; à améliorer au cas par cas)
 | # | Sujet | Ce que ça fait comprendre | Données | Fichiers |
 |---|---|---|---|---|
 | 2 | **Points FIFA contre le Rwanda** | ce que rapporte une victoire, un nul, une défaite ; « il faut gagner deux fois » | formule FIFA, registre | `outputs/analyses/fifa_rwanda.json` |

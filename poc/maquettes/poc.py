@@ -46,7 +46,7 @@ b = f'''<div style="position:absolute;left:64px;top:620px;display:flex;align-ite
 <div style="position:absolute;left:64px;top:1120px;font:800 36px/1.3 SC;letter-spacing:.04em">CHAQUE ÉQUIPE A DES POINTS DE FORCE.<br>UN NUL CONTRE PLUS FORT QUE SOI,<br><span style="color:#D4252A">ÇA RAPPORTE DES POINTS.</span></div>'''
 out['c1'] = pageT('OUTIL 1 · <b>LA FORCE D\'UNE ÉQUIPE</b>', 'OUTIL 1', 'LA FORCE (ELO)', '', b, 'Maroc 1-1 Mali, 4 octobre 2026 · Force avant le match et points échangés · Calcul MaliDataFoot')
 # C2 : deux tirs réels, taille = chance de but
-pen = [s for s in P['civ_tirs'] if s['type'] == 'Penalty'][0]; gol = [s for s in P['civ_tirs'] if s['joueur'] == 'Nene Dorgeles' and s['out'] == 'Goal'][0]
+pen = {'loc': [107.5, 33.8], 'xg': 0.442}; gol = {'loc': [113.4, 49.7], 'xg': 0.231}  # Mali 2-0 Afrique du Sud, CAN 2023 : Haïdara 48e (à côté), Sinayoko 65e (but)
 def demi(extra):  # demi-terrain vu de face, attaque vers le haut ; x StatsBomb 60-120 -> vertical, y 0-80 -> horizontal
     L = 'stroke="#FFF6D0" stroke-width="0.6" fill="none"'
     return f'''<svg viewBox="-2 -2 84 64" width="100%" height="100%"><rect x="0" y="0" width="80" height="60" fill="#0B7A3B"/><rect x="0" y="0" width="80" height="60" {L}/>
@@ -55,8 +55,8 @@ pt = lambda s: (s['loc'][1], 120 - s['loc'][0])
 (px, py), (gx, gy) = pt(pen), pt(gol)
 ex = f'<circle cx="{px}" cy="{py}" r="{1+7*pen["xg"]**.5:.1f}" fill="#D4252A" stroke="#04331A" stroke-width=".4"/><circle cx="{gx}" cy="{gy}" r="{1+7*gol["xg"]**.5:.1f}" fill="#FFFFFF" stroke="#04331A" stroke-width=".4"/>'
 b = f'<div style="position:absolute;left:64px;top:600px;width:882px;height:662px">{demi(ex)}</div>'
-b += f'''<div style="position:absolute;left:64px;top:1250px;font:800 30px/1.35 SC;letter-spacing:.04em"><span style="font:italic 900 64px BC;color:#D4252A">{round(100*pen["xg"])} %</span> LE PENALTY D'ADAMA TRAORÉ · ARRÊTÉ<br><span style="font:italic 900 64px BC;color:#064A25">{round(100*gol["xg"])} %</span> LA FRAPPE DE NENE DORGELES · BUT<br><span style="font:600 22px SC;color:rgba(4,51,26,.8)">TAILLE DU ROND = CHANCE DE BUT</span></div>'''
-out['c2'] = pageT('OUTIL 2 · <b>LA QUALITÉ D\'UNE OCCASION</b>', 'OUTIL 2', 'BUTS ATTENDUS', '', b, f'Mali-Côte d\'Ivoire, CAN 2023 · Chance de but de chaque tir · Données {SB}')
+b += f'''<div style="position:absolute;left:64px;top:1250px;font:800 30px/1.35 SC;letter-spacing:.04em"><span style="font:italic 900 64px BC;color:#D4252A">{round(100*pen["xg"])} %</span> LA FRAPPE D'AMADOU HAÏDARA · À CÔTÉ<br><span style="font:italic 900 64px BC;color:#064A25">{round(100*gol["xg"])} %</span> LA FRAPPE DE LASSINE SINAYOKO · BUT<br><span style="font:600 22px SC;color:rgba(4,51,26,.8)">TAILLE DU ROND = CHANCE DE BUT</span></div>'''
+out['c2'] = pageT('OUTIL 2 · <b>LA QUALITÉ D\'UNE OCCASION</b>', 'OUTIL 2', 'BUTS ATTENDUS', '', b, f'Mali 2-0 Afrique du Sud, CAN 2023 · Chance de but de chaque tir · Données {SB}')
 # C3 : la simulation
 d = {int(k): v for k, v in SIM['points_mali'].items()}; q = {int(k): v for k, v in SIM['qualifie_selon_points'].items()}
 ks = list(range(7, 19)); g = ''; w = 840 / len(ks); mx = max(d.values())
@@ -65,7 +65,7 @@ for i, k in enumerate(ks):
     g += f'<rect x="{x:.0f}" y="{1180-h:.0f}" width="{w-12:.0f}" height="{h:.0f}" rx="3" fill="{"#0B7A3B" if (q.get(k) or 0) >= .99 else "#FFF3C4"}"/>' + txt(x + (w - 12) / 2, 1220, k, 26, 700, '#064A25', 'middle')
 g += f'<line class="ax" x1="100" y1="1180" x2="944" y2="1180"/>'
 b = sv(g) + '<div style="position:absolute;left:64px;top:600px;font:italic 900 120px/1 BC;color:#064A25">100 000</div><div style="position:absolute;left:64px;top:720px;font:800 30px SC;letter-spacing:.05em">FOIS LE GROUPE DU MALI, MATCH PAR MATCH</div>'
-b += '<div class="bigR" style="top:1290px"><b>98 %</b><span>DE CHANCES D\'ALLER À LA CAN 2027<br>POINTS DU MALI À LA FIN · <em>VERT = QUALIFIÉ</em></span></div>'
+b += '<div class="bigR" style="top:1290px"><b>+98 %</b><span>DE CHANCES D\'ALLER À LA CAN 2027<br>POINTS DU MALI À LA FIN · <em>VERT = QUALIFIÉ</em></span></div>'
 out['c3'] = pageT('OUTIL 3 · <b>LA SIMULATION</b>', 'OUTIL 3', 'LA SIMULATION', '', b, 'Éliminatoires CAN 2027, groupe K · Modèle de buts selon la force et le lieu · Calcul MaliDataFoot')
 
 # ---------------- D : Mali - Côte d'Ivoire décodé
