@@ -96,7 +96,8 @@ def p1_image1(tt=False):
     # TikTok : barres plus courtes, pour que les chiffres des rangs 6 à 10 restent avant x = 946
     E=A['equipes'][:10]; mx=max(e['par_match'] for e in E); x0,x1=470,(830 if tt else 880); top=380; rh=58; b=''
     for e in E:
-        y=top+(e['rang']-1)*rh; mali=e['equipe']=='Mali'; c='#0B7A3B' if mali else '#FFF3C4'; L=e['par_match']/mx*(x1-x0)
+        # barres des autres pays : 1C, vert foncé atténué (choix de Diaby, 14/10/2026)
+        y=top+(e['rang']-1)*rh; mali=e['equipe']=='Mali'; c='#0B7A3B' if mali else 'rgba(6,74,37,.35)'; L=e['par_match']/mx*(x1-x0)
         b+=(f'<div style="position:absolute;left:64px;top:{y}px;width:44px;text-align:right;font:italic 900 40px/1 BC;color:#064A25">{e["rang"]}</div>'
             f'<div style="position:absolute;left:126px;top:{y}px">{drap(e["equipe"])}</div>'
             f'<div style="position:absolute;left:180px;top:{y+6}px;font:800 30px/1 SC;letter-spacing:.03em;text-transform:uppercase;color:{"#0B7A3B" if mali else "#04331A"}">{FRN[e["equipe"]]}</div>'
