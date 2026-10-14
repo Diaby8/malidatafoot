@@ -40,3 +40,27 @@ def x_vers_tt(src, nom):
 if __name__ == '__main__':
     sens, src, nom = sys.argv[1:4]
     (tt_vers_x if sens == 'x' else x_vers_tt)(src, nom)
+
+
+# ---------------------------------------------------------------- les trois couleurs de la DA (jaune, vert, blanc)
+import re as _re
+FOND_VERT = 'radial-gradient(120% 70% at 30% 26%, #128F47 0%, #0B7A3B 30%, #064A25 62%, #04331A 100%)'
+def teinte(html, nom, rouge_sur_vert='#FF7A6E'):
+    """Même plan, autre couleur de fond. Jaune = original. Vert : fond de l'accroche de la vidéo, textes blancs, Mali en jaune,
+    rouge éclairci pour rester lisible. Blanc : fond blanc, gris clairs à la place des crèmes."""
+    if nom == 'jaune': return html
+    h = html.replace(GRAD, '@@F@@').replace('linear-gradient(180deg,#FBD134 0%,#F6C41C 45%,#EFA40A 100%)', '@@F@@')
+    if nom == 'vert':
+        h = _re.sub(r'(\.h2\{[^}]*?color:)#D4252A', r'\1#F6C41C', h)
+        h = _re.sub(r'(\.bigR em\{[^}]*?color:)#D4252A', r'\1#F6C41C', h)
+        h = h.replace('fill-opacity="0.85"', 'fill-opacity="0.45"')
+        for img in ('logo_x.png', 'logo_tt.png'):
+            h = h.replace(f'src="{img}" style="', f'src="{img}" style="filter:brightness(0) invert(1);')
+        for a, b in (('#0B7A3B', '#F6C41C'), ('#064A25', '#FFFFFF'), ('#04331A', '#FFFFFF'), ('#FFF3C4', '#CFE6D6'), ('#FDEBA6', '#19A552'),
+                     ('#FFF6D0', '#19A552'), ('#FCE38A', '#19A552'), ('#D4252A', rouge_sur_vert),
+                     ('rgba(4,51,26,.75)', 'rgba(255,255,255,.75)'), ('rgba(4,51,26,.8)', 'rgba(255,255,255,.8)')):
+            h = h.replace(a, b)
+        return h.replace('@@F@@', FOND_VERT)
+    for a, b in (('#FFF3C4', '#E3E8E3'), ('#FDEBA6', '#EEF2EC'), ('#FFF6D0', '#DDE3DD'), ('#FCE38A', '#E3E8E3')):
+        h = h.replace(a, b)
+    return h.replace('@@F@@', '#FFFFFF')
