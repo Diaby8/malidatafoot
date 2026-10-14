@@ -28,3 +28,4 @@ __pycache__/
 .venv/
 outils/rapport_api_football.json
 visuels/planche_bt.html
+visuels/_vx/
