@@ -85,8 +85,8 @@ Détail et historique : `docs/sources_de_donnees.md`.
 
 | # | Post | Format | État | Ce qu'il reste |
 |---|---|---|---|---|
-| 1 | La défense des Aigles depuis 2020 | thread X (5 tweets, images sur les tweets 1 et 2) + carrousel TikTok (2 images + description) | prêt (résultats officiels, tapis verts compris et cités) | poster ; revérifier martj42 juste avant |
-| 2 | Le compte expliqué : « Namibie-Mali aux rayons X » | vidéo TikTok 51 s + version X | presque prêt | refaire les sons (règle : aucune note qui tinte), ranger les calculs dans le pipeline |
+| 1 | La défense des Aigles depuis 2020 | thread X (6 tweets) + carrousel TikTok (2 images) | fini le 15/10 (livrables/post1-defense), posté par Diaby | — |
+| 2 | Le compte expliqué : « Namibie-Mali aux rayons X » | vidéo TikTok 51 s + version X | en cours (15/10) : audit complet, sons | refaire les sons (règle : aucune note qui tinte), ranger les calculs dans le pipeline |
 | 3 | On a joué le groupe 100 000 fois | vidéo ou carrousel + thread | POC | à sortir avant les matchs contre le Rwanda (novembre) ; visuels à refaire au niveau de la vidéo explicative |
 | 4 | Le onze type de chaque coach (Chelle, Saintfiet, Da Silva) | carrousel + thread | données en cours | 29 compos à copier (liste dans `poc/onze_type/`) |
 
