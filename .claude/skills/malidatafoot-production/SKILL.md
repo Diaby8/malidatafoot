@@ -14,6 +14,9 @@ description: Comment produire un post ou une vidéo MaliDataFoot avec Diaby : fa
 - Ne jamais changer un texte, un chiffre ou un son d'un visuel validé sans le lui montrer d'abord.
 - Si une commande ou un rendu est refusé, s'arrêter et attendre son instruction.
 - Ne jamais saisir de mot de passe ou de clé, ne jamais créer de compte ni accepter de cookies à sa place.
+- **Être force de proposition, sans attendre qu'il demande** (Diaby, 14 octobre 2026) : à chaque session, suggérer de soi-même des sujets, des améliorations, des sources, des formats. Ne pas seulement exécuter.
+- **Être exigeant et critique sur tout** : la qualité visuelle, le respect de la DA, la pertinence du sujet, la profondeur de l'analyse. « On est une page data, pas une simple page stats » : un classement ou un pourcentage seul ne suffit pas. Il faut au moins une partie des contenus avec de la vraie profondeur (modèle, attendu contre réel, simulation, analyse de jeu, comparaison au bon groupe de référence).
+- **Ne pas se bloquer sur un seul sujet ou une seule source** (reproche du 14 octobre : « trop bloqué sur la CAN 2023 »). Varier : actu, joueurs en club, histoire, phénomènes.
 - C'est un vrai projet de data engineering, d'analyse et de data science. Il se travaille dans le dépôt `malidatafoot` (VS Code + git), pas dans un espace temporaire. Ce qui est fait dans une session doit finir dans le dépôt : code, docs, décisions.
 
 ## 2. Règles de texte (visuels, vidéos, posts)
@@ -34,6 +37,7 @@ description: Comment produire un post ou une vidéo MaliDataFoot avec Diaby : fa
 
 ## 3. Workflow d'un post
 
+0. **Le POC d'abord** (14 octobre 2026) : pour un nouveau sujet, d'abord le calcul sur les vraies données et 2 ou 3 plans clés en maquette (les visuels avant les voix off), montrés à Diaby. On améliore ensuite au cas par cas.
 1. **L'idée.** Quelle question de foot on éclaire. Il y a plein de phénomènes à comprendre avec la data, et le but est d'apporter quelque chose de nouveau sur les réseaux.
 2. **Les données.** Source autorisée, pipeline à jour, tests verts (`python taches.py donnees`, puis `tests`).
 3. **L'analyse.** Calcul dans le pipeline (SQL / Python versionné), pas « à la main ».
@@ -64,16 +68,14 @@ description: Comment produire un post ou une vidéo MaliDataFoot avec Diaby : fa
 ## 6. Idées de contenus
 
 - **Toujours être à jour** : avant de proposer des idées, vérifier sur le web la dernière actu des Aigles (matchs joués, listes, résultats, prochains rendez-vous). Une idée qui ignore le dernier match fait perdre toute crédibilité.
+- **Veille régulière des pages maliennes** : regarder l'actu et les derniers posts de @equipesdumali, @AiglesDuMali_, @malicomps et @femafoot (X), pour être à la page et ne pas refaire ce qu'elles viennent de poster. Si on ne peut pas les lire directement, demander à Diaby une capture ou chercher les reprises dans la presse.
+- **Veille des grosses pages data** (Data'Scout, DataFoot et les autres) : ce qu'elles publient, leurs formats, et surtout **leurs sources de données** (étude de marché à refaire régulièrement, résultats dans `docs/sources_de_donnees.md`). Objectif : faire mieux, avec plus de contexte et de profondeur, pas les copier.
+- **Poster souvent** : plusieurs publications variées par semaine. Proposer un planning à Diaby et tenir un stock d'avance (les sujets « prêts » de la boîte à idées).
 
 - Chaque fois qu'on cherche des idées : en proposer dans **plusieurs catégories** (actu des Aigles, Maliens en club, rétro, lien hier / aujourd'hui, phénomènes, sujets poussés et curieux, formats légers). Pas de stats « bateau » : des sujets qui font comprendre un phénomène.
 - **Le suivi de tous les sujets (statut, données, formats) est dans `docs/boite_a_idees.md`** : le mettre à jour à chaque idée nouvelle, POC ou publication. La banque d'exemples est dans `docs/banque_idees.md`. Ce sont des exemples, pas une liste fermée : on continue d'en proposer de nouveaux au même niveau, et on y ajoute ceux qui plaisent.
 - Formats : posts, threads sur X, TikTok en motion design avec voix off (scripts écrits avec les règles de texte ci-dessus).
 
-## 7. Prochains contenus (proposition du 7 octobre, à décider avec lui)
+## 7. Prochains contenus
 
-- le début de saison de Sinayoko ;
-- les Aigles avant la double confrontation contre le Rwanda (novembre 2026) ;
-- une série « rétro » sur la CAN 2023 ;
-- d'autres types de visualisations au fil des idées, chacune avec sa grille de variantes.
-
-Tout ça vient après le choix de la source de données pour la saison en cours.
+Voir `docs/boite_a_idees.md` (statut de chaque sujet : publié, prêt, POC, à faire, en attente de source). À relire en début de session pour proposer la suite.

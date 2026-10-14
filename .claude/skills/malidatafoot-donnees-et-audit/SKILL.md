@@ -54,6 +54,7 @@ rouge.
 
 ## 4. Sources (état au 7 octobre 2026, détail dans `docs/sources_de_donnees.md`)
 
+- **Toujours chercher les meilleures sources** (Diaby, 14 octobre 2026) : refaire régulièrement le tour des sources (open data sur GitHub, API, accords avec les sites, licences), regarder d'où viennent les données des grosses pages, et proposer à Diaby les sources qui débloquent de nouveaux sujets. Le statut de chaque source (autorisée, à confirmer, interdite) est dans `docs/sources_de_donnees.md` ; une source ne passe « autorisée » qu'avec une trace écrite (mail, conditions lues), archivée dans le dépôt.
 - **StatsBomb Open Data.** C'est la seule source gratuite d'événements récents pour l'Afrique : la CAN 2023 (et la Ligue 1 jusqu'en 2022/23). Leur logo est obligatoire et l'exploitation commerciale est interdite (clause 1.2.2).
 - **API-Football.** Gratuit à 100 requêtes par jour, puis 19, 29 ou 39 $ par mois. La clé reste dans la variable d'environnement `API_FOOTBALL_KEY`, jamais dans la conversation ni dans un fichier suivi par git. Diaby lance lui-même `outils/test_api_football.py` et transmet `rapport_api_football.json`.
 - **Sportmonks.** Environ 29 € par mois pour 5 championnats, plus une option xG à 24–29 € (Ligue 1 et phases finales de la CAN, pas les éliminatoires).
