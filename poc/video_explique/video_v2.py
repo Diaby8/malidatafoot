@@ -64,18 +64,19 @@ canvas{position:absolute;left:0;top:0}.cache{display:none}
 #foot .soc{margin-left:auto;display:flex;align-items:center;gap:12px;font:700 28px/1 "SC";color:#FFFFFF}
 #src{position:absolute;left:64px;top:1557px;font:600 22px/1 "SC";color:rgba(255,255,255,.75);white-space:nowrap;opacity:0}
 #jaune{position:absolute;left:0;top:0;width:1080px;height:1920px;background:#F6C41C;opacity:0}
-#fin{position:absolute;left:0;right:0;top:700px;text-align:center;color:#064A25;opacity:0}
+#fin{position:absolute;left:0;right:0;top:500px;text-align:center;color:#064A25;opacity:0}
 #fin img.lg{width:190px;height:190px;border-radius:50%;display:block;margin:0 auto}
 #fin .wm{font:italic 400 128px/1 "BCS";margin-top:34px}#fin .wm i{font-weight:600}
 #fin .so{display:flex;justify-content:center;align-items:center;gap:20px;margin-top:34px;font:700 40px/1 "IN"}
+.chip{display:inline-block;background:#064A25;color:#FFFFFF;font:italic 900 120px/1 BC;padding:14px 40px 10px;border-radius:14px;text-transform:uppercase}
 #voile{position:absolute;left:0;top:0;width:1080px;height:1920px;background:linear-gradient(180deg,#FBD134 0%,#F6C41C 45%,#EFA40A 100%);opacity:0}
 </style></head><body><div id="c">
 <canvas id="cv" width="1080" height="1920"></canvas>
 <div id="jaune"></div><canvas id="cv2" width="1080" height="1920"></canvas>
 <div id="zero">0-0</div>
 <div class="t kick" id="k0" style="top:470px">NAMIBIE · MALI · <b>CAN 2023</b></div>
-<div class="t h2" id="q0" style="top:1110px;left:0;right:0;text-align:center">RIEN À VOIR ?</div>
-<div class="t kick" id="q1" style="top:1230px;left:0;right:0;text-align:center;font-size:40px"><b style="color:#F6C41C">2 685</b> ÉVÉNEMENTS ENREGISTRÉS</div>
+<div class="t h2" id="q0" style="top:1110px;left:0;right:0;text-align:center">SUR LA FEUILLE DE MATCH : <span style="color:#FFFFFF">RIEN.</span></div>
+<div class="t kick" id="q1" style="top:1230px;left:0;right:0;text-align:center;font-size:40px"><b style="color:#F6C41C;font:italic 900 96px/1 BC;vertical-align:-14px" id="q1v">0</b> ÉVÉNEMENTS ENREGISTRÉS</div>
 <div class="t kick" id="k1" style="top:166px">NAMIBIE 0-0 MALI · CAN 2023 · <b>27e MINUTE</b></div>
 <div class="t h1" id="h1" style="top:206px">AUX RAYONS X</div>
 <div class="t lab" id="L1" style="top:372px">COUCHE 1 · <span>LE BALLON · 22 SECONDES · 9 PASSES · 8 MALIENS</span></div>
@@ -94,12 +95,17 @@ canvas{position:absolute;left:0;top:0}.cache{display:none}
 <div class="t lab" id="l5b" style="top:372px">QUI JOUE AVEC QUI · <span>@@LIENS@@ LIENS DE 12 PASSES ET PLUS</span></div>
 <div class="t h1" id="h5d" style="top:206px">@@ACT@@ ACTIONS</div>
 <div class="t lab" id="l5d" style="top:372px">OÙ JOUE LE MALI · <span>PLUS C'EST CHAUD, PLUS IL Y A LE BALLON</span></div>
+<div class="t h1" id="h5e" style="top:206px">1<span style="font-size:90px;text-transform:none">er</span> SUR 24</div>
+<div class="t lab" id="l5e" style="top:372px">MENACE LAISSÉE PAR MATCH · <span>SELON NOTRE MODÈLE (xT)</span></div>
+<div id="clas" style="position:absolute;left:40px;right:40px;top:455px;padding:18px 24px;background:rgba(2,26,13,.88);border-radius:16px;opacity:0">@@CLAS@@</div>
 <div class="t lab" id="l5c" style="top:372px">RÉCUPÉRÉS · <span>LIGNE = HAUTEUR MOYENNE</span></div>
 <div id="foot"><img class="lg" src="logo-verte.png"><div class="wm">Mali<i>Data</i>Foot</div><div class="soc"><img src="logo_x.png" style="height:28px;filter:brightness(0) invert(1)"><img src="logo_tt.png" style="height:36px;filter:brightness(0) invert(1)">@MaliDataFoot</div></div>
 <div id="src">Positions et trajectoires réelles · Menace : modèle MaliDataFoot (xT) · Données <img src="logo_statsbomb.png" style="height:22px;vertical-align:-5px"></div>
 <div class="t h2" id="dor" style="top:1560px;left:0;right:0;text-align:center;color:#064A25">LUI, <span style="color:#D4252A">IL ÉTAIT DANS L'ACTION.</span></div>
+<div class="t" id="m1" style="top:780px;left:0;right:0;text-align:center"><span class="chip">EN SÉLECTION</span></div>
+<div class="t" id="m2" style="top:930px;left:0;right:0;text-align:center"><span class="chip">EN CLUB</span></div>
 <div id="voile"></div>
-<div id="fin"><img class="lg" src="logo-verte.png"><div class="wm">Mali<i>Data</i>Foot</div><div class="so"><img src="logo_x.png" style="height:40px"><img src="logo_tt.png" style="height:52px"><span>@MaliDataFoot</span></div><div id="qq" style="margin-top:70px;font:italic 800 64px/1.1 BC;color:#064A25;text-transform:uppercase">Quel joueur on passe<br><span style="color:#D4252A">aux rayons X ensuite ?</span></div></div>
+<div id="fin"><img class="lg" src="logo-verte.png"><div class="wm">Mali<i>Data</i>Foot</div><div class="so"><img src="logo_x.png" style="height:40px"><img src="logo_tt.png" style="height:52px"><span>@MaliDataFoot</span></div><div id="tg" style="margin-top:64px;font:italic 900 66px/1.1 BC;color:#064A25;text-transform:uppercase;opacity:0">Le score te donne le résultat.<br><span id="tg2" style="color:#D4252A;opacity:0">Nous, on te montre le match.</span></div><div id="qq" style="opacity:0;margin-top:46px;font:italic 800 64px/1.1 BC;color:#064A25;text-transform:uppercase">Quel joueur on passe<br><span style="color:#D4252A">aux rayons X ensuite ?</span></div></div>
 @@IMGS@@
 </div><script>
 const D=@@DATA@@;
@@ -179,8 +185,8 @@ function joueurs(g,a,tir,lab3){ if(a<=0)return; g.globalAlpha=a;
   g.globalAlpha=1;
   if(lab3>0){const c=D.gestes.find(e=>e.xt>.1); X.globalAlpha=lab3*a; ring(g,c.x1,c.y1,1.5,'#F6C41C',.26); seg(g,[c.x1,c.y1,0],[c.x1,c.y1,2.1],'#F6C41C',.16); texte(g,c.x1,c.y1,3.7,'Y. NIAKATÉ','#F6C41C',34,'left'); X.globalAlpha=a;}
   if(lab3>0){const c=D.gestes.find(e=>e.xt>.1); const mx=(c.x1+c.x2)/2, my=(c.y1+c.y2)/2; X.globalAlpha=lab3; texteBig(g,mx,my,4.2,'+'+(.25*oc(lab3)).toFixed(2).replace('.',','),'#FF6B5E',96); X.globalAlpha=a;}
-  if(tir>0){X.globalAlpha=cl(tir*2); texteBig(g,D.tir.x,D.tir.y,6.2,Math.round(32*oc(cl(tir)))+' %','#F6C41C',110); X.globalAlpha=1;}
-  if(tir>.6){X.globalAlpha=cl((tir-.6)*3); texte(g,D.tir.fin[0],D.tir.fin[1]-1.5,3.4,'À CÔTÉ','#FFFFFF',34); X.globalAlpha=1;}
+  if(tir>0){X.globalAlpha=cl(tir*2)*a; texteBig(g,D.tir.x,D.tir.y,6.2,Math.round(32*oc(cl(tir)))+' %','#F6C41C',110); X.globalAlpha=1;}
+  if(tir>.6){X.globalAlpha=cl((tir-.6)*3)*a; texte(g,D.tir.fin[0],D.tir.fin[1]-1.5,3.4,'À CÔTÉ','#FFFFFF',34); X.globalAlpha=1;}
   if(tir>0){const e=D.tir.fin; const u=io(cl(tir)); seg(g,[D.tir.x,D.tir.y,1.9],[lerp(D.tir.x,e[0],u),lerp(D.tir.y,e[1],u),lerp(1.9,e[2]||.9,u)],'#FFFFFF',.16,[.5,.5]);}}
 function tirs(g,a){ if(a<=0)return; for(const s of D.tirs){const r=.6+Math.sqrt(s.xg)*3.6; ring(g,s.x,s.y,r*a,s.but?'#F6C41C':'#FFFFFF',.18,s.but?'rgba(246,196,28,.85)':'rgba(255,255,255,.12)');}}
 function reseau(g,a){ if(a<=0)return; const N=D.reseau.noeuds; let mx=0; D.reseau.liens.forEach(l=>mx=Math.max(mx,l[2]));
@@ -197,7 +203,7 @@ function chaleur(g,a){ if(a<=0)return; const G=D.presence;   // carte lissée, c
 function recup(g,a){ if(a<=0)return; let sx=0; for(const r of D.recup){sx+=r.x; ring(g,r.x,r.y,.75*a,'#F6C41C',.16,'rgba(246,196,28,.55)');}
   const m=sx/D.recup.length; if(a>.5) seg(g,[m,-3,.02],[m,83,.02],'#FF6B5E',.35,[1.4,1]);}
 // ---------------------------------------------------------------- le carrousel et le mur (canevas 2)
-const T={hook:0, plonge:2.0, couche1:3.2, couche2:6.7, couche3:8.0, couche4:9.3, tournoi:11.2, flash:1.15, carrousel:16.15, mur:18.25, fin:22.05, duree:26.15};
+const T={hook:0, zero:1.38, rien:2.45, evts:5.28, plonge:7.9, couche1:9.27, actA:10.62, actB:15.6, couche2:15.86, couche3:18.97, couche4:21.32, cote:23.5, tournoi:26.11, f1:26.11, f2:27.18, f3:28.45, f4:30.72, carrousel:34.31, dor:36.38, mur:37.93, mot1:41.63, mot2:42.45, fin:44.22, fin2:45.77, quest:47.51, duree:51.3};
 window.DUREE=T.duree;
 function mur(m){ const S=lerp(.78,.10,m), rx=lerp(0,28,m)*Math.PI/180, rz=lerp(0,-14,m)*Math.PI/180, yc=lerp(960,960,m), co=Math.cos(rx), GX=1180, GY=1580, DD=2400;
   const L=[]; for(const [r,c,k] of D.cases){const x0=(c-D.cc)*GX, y0=(r-D.rr)*GY; const Xr=x0*Math.cos(rz)-y0*Math.sin(rz), Yr=x0*Math.sin(rz)+y0*Math.cos(rz);
@@ -218,44 +224,53 @@ function vis(id,t,a,b,dy=30){const e=$(id); const u=oc(cl((t-a)/.4)), v=b==null?
 const K=[ // images clés de la caméra : temps, position, cible, focale, centre vertical (caméra derrière le but que le Mali attaque)
  [0,[88,40,200],[88.5,40,0],1250,1000],[T.plonge,[88,40,200],[88.5,40,0],1250,1000],[T.couche1,[150,40,36],[84,40,0],1250,950],
  [T.couche2-.2,[146,40,30],[92,40,0],1350,950],[T.couche2+.9,[143,43,28],[100,43,0],1220,960],[T.couche4+1.6,[141,43,26],[102,43,0],1220,960],
- [T.tournoi+.5,[152,40,72],[70,40,0],1300,870],[T.carrousel,[152,40,72],[70,40,0],1300,870]];
+ [T.tournoi+.6,[152,40,72],[70,40,0],1300,870],[T.carrousel,[152,40,72],[70,40,0],1300,870]];
 function camAt(t){let i=0; while(i<K.length-2&&t>K[i+1][0])i++; const a=K[i], b=K[i+1]; const u=io(cl((t-a[0])/(b[0]-a[0])));
   camera(a[1].map((v,j)=>lerp(v,b[1][j],u)),a[2].map((v,j)=>lerp(v,b[2][j],u)),lerp(a[3],b[3],u),lerp(a[4],b[4],u));}
 window.seek=function(t){
   X.clearRect(0,0,W,H); X2.clearRect(0,0,W,H);
   // 1. l'accroche
-  const z=$('zero'); const zu=oc(cl(t/.35)), zo=cl((t-T.plonge)/.45); z.style.opacity=(zu*(1-zo)).toFixed(3); z.style.transform=`scale(${(1+.6*io(zo)).toFixed(3)})`;
-  vis('k0',t,.15,T.plonge); vis('q0',t,.75,T.plonge); vis('q1',t,1.35,T.plonge);
+  const z=$('zero'); const zu=oc(cl((t-T.zero+.15)/.35)), zo=cl((t-T.plonge)/.45); z.style.opacity=(zu*(1-zo)).toFixed(3); z.style.transform=`scale(${(1+.6*io(zo)).toFixed(3)})`;
+  vis('k0',t,.05,T.plonge); vis('q0',t,T.rien,T.plonge); vis('q1',t,T.evts,T.plonge); $('q1v').textContent=Math.round(2685*oc(cl((t-T.evts)/1.6))).toLocaleString('fr-FR').replace(/\u202f|\u00a0/g,' ');
   // 2. le terrain
   if(t<T.carrousel+.6){ camAt(t); const sa=cl((t-T.plonge)/.6); X.globalAlpha=1; stade(X,sa);
-    const reel=cl((t-T.couche1)/(T.couche2-T.couche1-.3))*D.reel;
+    const reel=cl((t-T.actA)/(T.actB-T.actA))*D.reel;
     const mena=cl((t-T.couche3)/.6)*(1-cl((t-T.tournoi)/.4)), act=1-cl((t-T.tournoi)/.4);
     menace(X,mena*sa);
-    if(act>0){X.globalAlpha=act; action(X,t>=T.couche1?reel:-1, Math.sin(Math.PI*cl((t-T.couche3)/.9)) ); joueurs(X,cl((t-T.couche2)/.5)*act, cl((t-T.couche4-.2)/.5), cl((t-T.couche3-.2)/.6)*act); X.globalAlpha=1;}
-    const f=T.flash, t5=T.tournoi;
-    const fa=cl((t-t5)/.35)*(1-cl((t-t5-f)/.15)), fb=cl((t-t5-f)/.35)*(1-cl((t-t5-2*f)/.15)), fc=cl((t-t5-2*f)/.35)*(1-cl((t-T.carrousel)/.3));
-    const fd=cl((t-t5-3*f)/.35)*(1-cl((t-T.carrousel)/.3)); const fc2=fc*(1-cl((t-t5-3*f)/.15));
-    tirs(X,fa); reseau(X,fb); recup(X,fc2); chaleur(X,fd);
+    if(act>0){X.globalAlpha=act; action(X,t>=T.couche1?reel:-1, Math.sin(Math.PI*cl((t-T.couche3)/.9)) ); joueurs(X,cl((t-T.couche2)/.5)*act, cl((t-T.cote+.6)/.6), cl((t-T.couche3-.2)/.6)*act); X.globalAlpha=1;}
+    const W=(a,b)=>cl((t-a)/.3)*(1-cl((t-b)/.2));
+    const fb=W(T.f1,T.f2), fa=W(T.f2,T.f3), fd=W(T.f3,T.f4)+.35*W(T.f4,T.carrousel);
+    tirs(X,fa); reseau(X,fb); chaleur(X,fd);
     // le terrain s'efface vers la droite quand le jaune entre
   }
   vis('k1',t,T.plonge+.5,T.tournoi); vis('h1',t,T.plonge+.65,T.tournoi);
   vis('L1',t,T.couche1,T.couche2); vis('clk',t,T.couche1,T.couche3);
-  {const r=cl((t-T.couche1)/(T.couche2-T.couche1-.3))*D.reel, sec=1600+r; $('clkv').textContent=Math.floor(sec/60)+"'"+String(Math.floor(sec%60)).padStart(2,'0'); $('clkl').textContent=t>=T.couche2?'ARRÊT SUR IMAGE · LA TÊTE':'TEMPS DE JEU RÉEL';} vis('L2',t,T.couche2,T.couche3); vis('L3',t,T.couche3,T.couche4); vis('L4',t,T.couche4,T.tournoi);
+  {const r=cl((t-T.actA)/(T.actB-T.actA))*D.reel, sec=1600+r; $('clkv').textContent=Math.floor(sec/60)+"'"+String(Math.floor(sec%60)).padStart(2,'0'); $('clkl').textContent=t>=T.couche2?'ARRÊT SUR IMAGE · LA TÊTE':'TEMPS DE JEU RÉEL';} vis('L2',t,T.couche2,T.couche3); vis('L3',t,T.couche3,T.couche4); vis('L4',t,T.couche4,T.tournoi);
   $('s1').style.opacity=0; $('n3').style.opacity=0; $('n4').style.opacity=0;
   $('v3').textContent='+'+(.25*oc(cl((t-T.couche3-.2)/.7))).toFixed(2).replace('.',','); $('v4').textContent=Math.round(32*oc(cl((t-T.couche4-.25)/.7)));
-  const f=T.flash, t5=T.tournoi; vis('k5',t,t5,T.carrousel); vis('h5a',t,t5,t5+f); vis('l5a',t,t5+.1,t5+f); vis('h5b',t,t5+f,t5+2*f); vis('l5b',t,t5+f+.1,t5+2*f); vis('h5c',t,t5+2*f,t5+3*f); vis('l5c',t,t5+2*f+.1,t5+3*f); vis('h5d',t,t5+3*f,T.carrousel); vis('l5d',t,t5+3*f+.1,T.carrousel);
+  vis('k5',t,T.f1,T.carrousel); vis('h5b',t,T.f1,T.f2); vis('l5b',t,T.f1+.1,T.f2); vis('h5a',t,T.f2,T.f3); vis('l5a',t,T.f2+.1,T.f3); vis('h5d',t,T.f3,T.f4); vis('l5d',t,T.f3+.1,T.f4); vis('h5e',t,T.f4,T.carrousel); vis('l5e',t,T.f4+.1,T.carrousel); vis('clas',t,T.f4+.2,T.carrousel,0);
+  {const u=io(cl((t-T.f4-.25)/1.2)); document.querySelectorAll('#clas .br i').forEach(e=>e.style.width=(parseFloat(e.dataset.w)*u).toFixed(2)+'%');}
   vis('foot',t,T.plonge+.4,T.carrousel,0); vis('src',t,T.plonge+.6,T.carrousel,0);
   // 3. le jaune entre par la gauche, puis le carrousel
   const j=io(cl((t-T.carrousel)/.45)); $('jaune').style.opacity=j>0?1:0; $('jaune').style.clipPath=`inset(0 ${(100-100*j).toFixed(2)}% 0 0)`;
   if(t>=T.carrousel&&t<T.mur) carrousel(t);
-  vis('dor',t,T.carrousel+1.3,T.mur+.2,20);
+  vis('dor',t,T.dor,T.mur+.2,20);
   // 4. le mur
   if(t>=T.mur) mur(io(cl((t-T.mur)/2.6)));
   // 5. la fin
-  const fi=oc(cl((t-T.fin)/.6)); $('voile').style.opacity=(fi*.94).toFixed(3); vis('fin',t,T.fin+.25,null,40);
+  vis('m1',t,T.mot1,T.fin,20); vis('m2',t,T.mot2,T.fin,20);
+  const fi=oc(cl((t-T.fin)/.5)); $('voile').style.opacity=(fi*.94).toFixed(3); vis('fin',t,T.fin+.1,null,40); vis('tg',t,T.fin+.2,null,0); vis('tg2',t,T.fin2,null,0); vis('qq',t,T.quest,null,20);
 };
 Promise.all([document.fonts.ready,...[...document.images].map(i=>i.decode().catch(()=>{}))]).then(()=>{window.seek(0);window.READY=true});
 '''
-h = HTML.replace('@@FONTS@@', FONTS).replace('@@DATA@@', json.dumps(DATA, ensure_ascii=False)).replace('@@JS@@', JS).replace('@@IMGS@@', imgs)
+FR = {'Algeria': 'Algérie', 'Angola': 'Angola', 'Burkina Faso': 'Burkina Faso', 'Cameroon': 'Cameroun', 'Cape Verde Islands': 'Cap-Vert', 'Congo DR': 'RD Congo',
+      "Côte d'Ivoire": "Côte d'Ivoire", 'Egypt': 'Égypte', 'Equatorial Guinea': 'Guinée équatoriale', 'Gambia': 'Gambie', 'Ghana': 'Ghana', 'Guinea': 'Guinée',
+      'Guinea-Bissau': 'Guinée-Bissau', 'Mali': 'Mali', 'Mauritania': 'Mauritanie', 'Morocco': 'Maroc', 'Mozambique': 'Mozambique', 'Namibia': 'Namibie',
+      'Nigeria': 'Nigeria', 'Senegal': 'Sénégal', 'South Africa': 'Afrique du Sud', 'Tanzania': 'Tanzanie', 'Tunisia': 'Tunisie', 'Zambia': 'Zambie'}
+EQ = sorted(json.load(open(os.path.join(RACINE, 'poc/xt/teams.json')))['equipes'], key=lambda e: e['xt_concede_p90'])
+mxc = max(e['xt_concede_p90'] for e in EQ)
+CLAS = ''.join(f'<div class="br" style="display:flex;align-items:center;height:34px;gap:14px"><span style="width:300px;font:800 {26 if e["equipe"]=="Mali" else 21}px/1 SC;letter-spacing:.03em;color:{"#F6C41C" if e["equipe"]=="Mali" else "rgba(255,255,255,.8)"};text-align:right;white-space:nowrap">{i+1}. {FR.get(e["equipe"], e["equipe"]).upper()}</span><span style="flex:1;height:{22 if e["equipe"]=="Mali" else 14}px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden"><i data-w="{100*e["xt_concede_p90"]/mxc:.2f}" style="display:block;height:100%;width:0;background:{"#F6C41C" if e["equipe"]=="Mali" else "rgba(255,255,255,.55)"}"></i></span><span style="width:70px;font:700 20px/1 SC;color:rgba(255,255,255,.8)">{format(e["xt_concede_p90"], ".2f").replace(".", ",")}</span></div>' for i, e in enumerate(EQ))
+CLAS = CLAS.replace('><span style="width:70px;font:700 20px/1 SC;color:rgba(255,255,255,.8)">', '><span style="width:70px;font:700 20px/1 SC;color:rgba(255,255,255,.8)" class="v">')
+h = HTML.replace('@@CLAS@@', CLAS).replace('@@FONTS@@', FONTS).replace('@@DATA@@', json.dumps(DATA, ensure_ascii=False)).replace('@@JS@@', JS).replace('@@IMGS@@', imgs)
 h = h.replace('@@TIRS@@', str(DV['resume']['tirs'])).replace('@@RECUP@@', str(DV['resume']['recuperations'])).replace('@@LIENS@@', str(len(DV['reseau']['liens']))).replace('@@ACT@@', f"{DV['presence']['n']:,}".replace(',', ' '))
 open(OUT, 'w', encoding='utf-8').write(h); print('ok', OUT)

@@ -5,8 +5,8 @@ Mais ce match, c'est deux mille six cent quatre-vingt-cinq événements enregist
 Prenons une seule action. Vingt-septième minute : vingt-deux secondes, neuf passes, huit Maliens, chaque position mesurée.
 Au moment de la tête, Sinayoko et Dorgeles, côte à côte.
 Le centre de Niakaté fait bondir la menace.
-La tête : une chance sur trois. À côté. Ça, le score ne le dira jamais.
-Sur tout le tournoi : soixante-quatre tirs, deux cent onze ballons récupérés.
+La tête : une chance sur trois de marquer. À côté. Ça, le score ne le dira jamais.
+Sur tout le tournoi : soixante-quatre tirs, plus de sept mille sept cents actions avec le ballon. Et par match, aucune équipe n'a laissé moins de danger à ses adversaires.
 Et derrière chaque joueur, une fiche. Lui, il était dans l'action.
 Et ça, c'est une seule action. Ici, on fait pareil avec les joueurs, en sélection ou en club, et les jeunes qui arrivent. Le score te donne le résultat. Nous, on te montre le match.
 Et toi, quel joueur on passe aux rayons X ? Dis-le en commentaire.
@@ -22,3 +22,6 @@ Vérification (événements StatsBomb, recomptés le 14/10/2026) :
 - Tournoi : 64 tirs (dont 1 penalty), 211 récupérations réussies (récupérations sans échec + interceptions gagnées).
 
 À l'écran pendant le dézoom (au rythme de la voix) : EN SÉLECTION · EN CLUB (pas « la relève », Diaby, 14/10/2026).
+- 7 712 actions du Mali avec le ballon (5 matchs). Menace laissée aux adversaires : 0,66 par match, 1re sur 24 (Guinée 0,73, Maroc 0,73), notre modèle xT.
+- 211 récupérations (20e sur 24) et 64 tirs seuls (8e sur 24) jugés trop faibles pour être mis en avant (Diaby).
+Voix enregistrée : ElevenLabs, voix « Nicolas Petit – Deep Narrator », eleven_v4, 50,8 s (livrables/video-explique/voix_nicolas_petit.mp3).
