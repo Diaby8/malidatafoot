@@ -192,3 +192,4 @@ des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliD
 - 2026-10-14 : les versions de couleur suivent la vidéo de lancement : blanc = panneau blanc sur fond jaune (scène Hamari Traoré), vert = vert nuit du duel. Projet « waouh » lancé : modèle de menace (xT) appris sur les données StatsBomb libres.
 - 2026-10-14 : modèle de menace (xT) construit et validé (poc/xt) ; 3 plans clés : carte de la menace, menace créée/concédée, action la plus dangereuse.
 - 2026-10-14 : vidéo « le compte expliqué » (vision de Diaby : le foot compris avec la data) : planche numérotée des plans 1A/1B (vraie action Namibie-Mali en 3D, jaune ou nuit), 2A/2B (zoom data), 3 (fiches réelles qui défilent), 4 (dézoom sur la base).
+- 2026-10-14 : vidéo « explique le compte », plan 2 (le zoom) en version nuit 2B (choix de Diaby). Plan 1 à confirmer.
