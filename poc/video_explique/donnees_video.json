@@ -1,0 +1,2333 @@
+{
+ "source": "StatsBomb Open Data, CAN 2023 (competition 1267, saison 107), événements des 5 matchs du Mali",
+ "tirs": [
+  {
+   "x": 95.2,
+   "y": 28.0,
+   "xg": 0.0191,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 88.5,
+   "y": 25.8,
+   "xg": 0.0058,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 108.3,
+   "y": 19.1,
+   "xg": 0.0071,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 107.0,
+   "y": 37.9,
+   "xg": 0.0643,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 90.5,
+   "y": 39.5,
+   "xg": 0.0154,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 111.3,
+   "y": 44.8,
+   "xg": 0.4041,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 108.2,
+   "y": 26.1,
+   "xg": 0.0625,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 107.5,
+   "y": 33.8,
+   "xg": 0.442,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 111.7,
+   "y": 45.4,
+   "xg": 0.0778,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 100.6,
+   "y": 24.3,
+   "xg": 0.052,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 117.2,
+   "y": 41.1,
+   "xg": 0.885,
+   "but": true,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 113.4,
+   "y": 49.7,
+   "xg": 0.2311,
+   "but": true,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 98.1,
+   "y": 51.3,
+   "xg": 0.0256,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 93.4,
+   "y": 39.6,
+   "xg": 0.0358,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 85.1,
+   "y": 20.9,
+   "xg": 0.0078,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 84.6,
+   "y": 53.2,
+   "xg": 0.0065,
+   "but": false,
+   "penalty": false,
+   "match": 3920391
+  },
+  {
+   "x": 107.8,
+   "y": 25.2,
+   "xg": 0.0572,
+   "but": true,
+   "penalty": false,
+   "match": 3920404
+  },
+  {
+   "x": 96.1,
+   "y": 38.7,
+   "xg": 0.0777,
+   "but": false,
+   "penalty": false,
+   "match": 3920404
+  },
+  {
+   "x": 94.4,
+   "y": 37.1,
+   "xg": 0.0473,
+   "but": false,
+   "penalty": false,
+   "match": 3920404
+  },
+  {
+   "x": 95.6,
+   "y": 27.9,
+   "xg": 0.032,
+   "but": false,
+   "penalty": false,
+   "match": 3920404
+  },
+  {
+   "x": 102.7,
+   "y": 45.1,
+   "xg": 0.1366,
+   "but": false,
+   "penalty": false,
+   "match": 3920404
+  },
+  {
+   "x": 113.6,
+   "y": 55.3,
+   "xg": 0.014,
+   "but": false,
+   "penalty": false,
+   "match": 3920404
+  },
+  {
+   "x": 93.3,
+   "y": 43.1,
+   "xg": 0.0379,
+   "but": false,
+   "penalty": false,
+   "match": 3920404
+  },
+  {
+   "x": 112.7,
+   "y": 47.9,
+   "xg": 0.1049,
+   "but": false,
+   "penalty": false,
+   "match": 3920404
+  },
+  {
+   "x": 110.8,
+   "y": 41.8,
+   "xg": 0.1879,
+   "but": false,
+   "penalty": false,
+   "match": 3920404
+  },
+  {
+   "x": 98.5,
+   "y": 36.6,
+   "xg": 0.0476,
+   "but": false,
+   "penalty": false,
+   "match": 3920404
+  },
+  {
+   "x": 102.8,
+   "y": 45.2,
+   "xg": 0.0576,
+   "but": false,
+   "penalty": false,
+   "match": 3920404
+  },
+  {
+   "x": 100.6,
+   "y": 56.7,
+   "xg": 0.0449,
+   "but": false,
+   "penalty": false,
+   "match": 3920404
+  },
+  {
+   "x": 98.1,
+   "y": 40.5,
+   "xg": 0.0367,
+   "but": false,
+   "penalty": false,
+   "match": 3920417
+  },
+  {
+   "x": 108.4,
+   "y": 58.3,
+   "xg": 0.0116,
+   "but": false,
+   "penalty": false,
+   "match": 3920417
+  },
+  {
+   "x": 113.9,
+   "y": 37.7,
+   "xg": 0.3237,
+   "but": false,
+   "penalty": false,
+   "match": 3920417
+  },
+  {
+   "x": 101.8,
+   "y": 40.1,
+   "xg": 0.123,
+   "but": false,
+   "penalty": false,
+   "match": 3920417
+  },
+  {
+   "x": 86.8,
+   "y": 51.9,
+   "xg": 0.0081,
+   "but": false,
+   "penalty": false,
+   "match": 3920417
+  },
+  {
+   "x": 102.9,
+   "y": 20.6,
+   "xg": 0.008,
+   "but": false,
+   "penalty": false,
+   "match": 3920417
+  },
+  {
+   "x": 99.5,
+   "y": 56.8,
+   "xg": 0.0224,
+   "but": false,
+   "penalty": false,
+   "match": 3920417
+  },
+  {
+   "x": 89.5,
+   "y": 29.4,
+   "xg": 0.0292,
+   "but": false,
+   "penalty": false,
+   "match": 3920417
+  },
+  {
+   "x": 101.3,
+   "y": 44.5,
+   "xg": 0.0357,
+   "but": false,
+   "penalty": false,
+   "match": 3920417
+  },
+  {
+   "x": 97.6,
+   "y": 45.3,
+   "xg": 0.041,
+   "but": false,
+   "penalty": false,
+   "match": 3920417
+  },
+  {
+   "x": 90.1,
+   "y": 47.2,
+   "xg": 0.0419,
+   "but": false,
+   "penalty": false,
+   "match": 3920417
+  },
+  {
+   "x": 107.5,
+   "y": 41.8,
+   "xg": 0.066,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 98.7,
+   "y": 39.3,
+   "xg": 0.0401,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 110.3,
+   "y": 21.8,
+   "xg": 0.0163,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 103.5,
+   "y": 25.9,
+   "xg": 0.0238,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 100.6,
+   "y": 44.5,
+   "xg": 0.0578,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 105.5,
+   "y": 32.3,
+   "xg": 0.0773,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 83.9,
+   "y": 35.4,
+   "xg": 0.0069,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 87.2,
+   "y": 37.1,
+   "xg": 0.026,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 115.5,
+   "y": 51.1,
+   "xg": 0.123,
+   "but": true,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 84.0,
+   "y": 32.3,
+   "xg": 0.0079,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 99.3,
+   "y": 43.6,
+   "xg": 0.1009,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 99.1,
+   "y": 25.4,
+   "xg": 0.03,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 85.1,
+   "y": 36.6,
+   "xg": 0.0186,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 107.0,
+   "y": 32.4,
+   "xg": 0.071,
+   "but": false,
+   "penalty": false,
+   "match": 3922244
+  },
+  {
+   "x": 98.2,
+   "y": 36.1,
+   "xg": 0.0384,
+   "but": false,
+   "penalty": false,
+   "match": 3922659
+  },
+  {
+   "x": 108.1,
+   "y": 40.1,
+   "xg": 0.7835,
+   "but": false,
+   "penalty": true,
+   "match": 3922659
+  },
+  {
+   "x": 98.1,
+   "y": 38.3,
+   "xg": 0.0778,
+   "but": false,
+   "penalty": false,
+   "match": 3922659
+  },
+  {
+   "x": 96.6,
+   "y": 49.5,
+   "xg": 0.0303,
+   "but": false,
+   "penalty": false,
+   "match": 3922659
+  },
+  {
+   "x": 116.5,
+   "y": 32.9,
+   "xg": 0.082,
+   "but": false,
+   "penalty": false,
+   "match": 3922659
+  },
+  {
+   "x": 86.9,
+   "y": 37.2,
+   "xg": 0.0197,
+   "but": false,
+   "penalty": false,
+   "match": 3922659
+  },
+  {
+   "x": 93.2,
+   "y": 34.1,
+   "xg": 0.0289,
+   "but": true,
+   "penalty": false,
+   "match": 3922659
+  },
+  {
+   "x": 114.7,
+   "y": 41.6,
+   "xg": 0.1774,
+   "but": false,
+   "penalty": false,
+   "match": 3922659
+  },
+  {
+   "x": 107.1,
+   "y": 24.4,
+   "xg": 0.0347,
+   "but": false,
+   "penalty": false,
+   "match": 3922659
+  },
+  {
+   "x": 84.9,
+   "y": 35.5,
+   "xg": 0.0146,
+   "but": false,
+   "penalty": false,
+   "match": 3922659
+  },
+  {
+   "x": 97.8,
+   "y": 23.2,
+   "xg": 0.0298,
+   "but": false,
+   "penalty": false,
+   "match": 3922659
+  }
+ ],
+ "recuperations": [
+  {
+   "x": 72.1,
+   "y": 51.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 113.5,
+   "y": 74.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 43.5,
+   "y": 14.7,
+   "type": "Interception"
+  },
+  {
+   "x": 26.3,
+   "y": 19.9,
+   "type": "Interception"
+  },
+  {
+   "x": 61.2,
+   "y": 68.8,
+   "type": "Interception"
+  },
+  {
+   "x": 49.9,
+   "y": 54.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 72.1,
+   "y": 26.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 77.9,
+   "y": 3.1,
+   "type": "Interception"
+  },
+  {
+   "x": 52.2,
+   "y": 9.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 55.3,
+   "y": 72.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 87.7,
+   "y": 69.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 108.5,
+   "y": 2.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 41.4,
+   "y": 69.0,
+   "type": "Interception"
+  },
+  {
+   "x": 57.5,
+   "y": 68.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 26.2,
+   "y": 40.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 39.5,
+   "y": 59.6,
+   "type": "Interception"
+  },
+  {
+   "x": 4.9,
+   "y": 71.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 26.7,
+   "y": 34.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 63.4,
+   "y": 40.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 73.1,
+   "y": 20.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 34.1,
+   "y": 72.9,
+   "type": "Interception"
+  },
+  {
+   "x": 111.2,
+   "y": 41.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 78.1,
+   "y": 4.7,
+   "type": "Interception"
+  },
+  {
+   "x": 95.2,
+   "y": 6.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 83.9,
+   "y": 67.0,
+   "type": "Interception"
+  },
+  {
+   "x": 119.1,
+   "y": 79.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 107.4,
+   "y": 28.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 65.7,
+   "y": 12.9,
+   "type": "Interception"
+  },
+  {
+   "x": 13.2,
+   "y": 15.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 69.5,
+   "y": 20.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 36.7,
+   "y": 66.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 14.1,
+   "y": 59.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 118.1,
+   "y": 42.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 0.8,
+   "y": 56.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 70.0,
+   "y": 73.5,
+   "type": "Interception"
+  },
+  {
+   "x": 52.3,
+   "y": 61.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 56.4,
+   "y": 33.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 51.1,
+   "y": 27.6,
+   "type": "Interception"
+  },
+  {
+   "x": 63.5,
+   "y": 34.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 25.9,
+   "y": 28.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 63.9,
+   "y": 24.5,
+   "type": "Interception"
+  },
+  {
+   "x": 62.9,
+   "y": 13.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 9.4,
+   "y": 77.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 30.2,
+   "y": 53.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 36.4,
+   "y": 64.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 97.2,
+   "y": 51.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 29.1,
+   "y": 21.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 37.5,
+   "y": 12.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 67.1,
+   "y": 37.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 47.0,
+   "y": 29.4,
+   "type": "Interception"
+  },
+  {
+   "x": 7.2,
+   "y": 51.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 52.9,
+   "y": 3.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 8.6,
+   "y": 5.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 31.7,
+   "y": 32.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 84.1,
+   "y": 21.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 11.6,
+   "y": 2.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 31.2,
+   "y": 54.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 97.3,
+   "y": 10.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 80.4,
+   "y": 48.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 65.8,
+   "y": 41.2,
+   "type": "Interception"
+  },
+  {
+   "x": 26.9,
+   "y": 31.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 53.6,
+   "y": 68.3,
+   "type": "Interception"
+  },
+  {
+   "x": 12.8,
+   "y": 49.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 109.8,
+   "y": 53.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 83.5,
+   "y": 9.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 53.1,
+   "y": 65.5,
+   "type": "Interception"
+  },
+  {
+   "x": 74.4,
+   "y": 74.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 55.6,
+   "y": 52.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 91.9,
+   "y": 18.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 14.5,
+   "y": 52.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 45.4,
+   "y": 73.0,
+   "type": "Interception"
+  },
+  {
+   "x": 43.2,
+   "y": 5.6,
+   "type": "Interception"
+  },
+  {
+   "x": 1.8,
+   "y": 33.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 62.7,
+   "y": 66.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 59.7,
+   "y": 7.0,
+   "type": "Interception"
+  },
+  {
+   "x": 56.2,
+   "y": 57.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 13.7,
+   "y": 64.4,
+   "type": "Interception"
+  },
+  {
+   "x": 10.2,
+   "y": 67.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 61.4,
+   "y": 47.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 49.0,
+   "y": 22.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 49.0,
+   "y": 25.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 52.1,
+   "y": 31.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 63.3,
+   "y": 23.4,
+   "type": "Interception"
+  },
+  {
+   "x": 23.6,
+   "y": 45.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 20.4,
+   "y": 60.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 81.8,
+   "y": 58.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 72.6,
+   "y": 28.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 48.7,
+   "y": 44.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 27.6,
+   "y": 16.6,
+   "type": "Interception"
+  },
+  {
+   "x": 44.4,
+   "y": 68.8,
+   "type": "Interception"
+  },
+  {
+   "x": 54.2,
+   "y": 72.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 107.9,
+   "y": 75.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 10.3,
+   "y": 59.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 8.7,
+   "y": 33.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 23.4,
+   "y": 28.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 47.5,
+   "y": 46.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 77.9,
+   "y": 9.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 9.7,
+   "y": 23.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 3.3,
+   "y": 21.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 6.5,
+   "y": 20.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 114.2,
+   "y": 72.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 41.5,
+   "y": 64.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 13.3,
+   "y": 32.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 43.0,
+   "y": 11.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 16.2,
+   "y": 72.3,
+   "type": "Interception"
+  },
+  {
+   "x": 35.6,
+   "y": 9.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 6.2,
+   "y": 41.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 56.7,
+   "y": 68.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 67.5,
+   "y": 13.2,
+   "type": "Interception"
+  },
+  {
+   "x": 33.7,
+   "y": 72.0,
+   "type": "Interception"
+  },
+  {
+   "x": 15.3,
+   "y": 56.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 21.5,
+   "y": 45.3,
+   "type": "Interception"
+  },
+  {
+   "x": 16.1,
+   "y": 38.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 7.3,
+   "y": 72.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 71.5,
+   "y": 73.0,
+   "type": "Interception"
+  },
+  {
+   "x": 38.7,
+   "y": 69.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 49.2,
+   "y": 74.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 13.1,
+   "y": 22.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 23.7,
+   "y": 6.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 87.5,
+   "y": 2.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 48.2,
+   "y": 75.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 28.1,
+   "y": 20.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 47.7,
+   "y": 11.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 71.7,
+   "y": 35.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 104.7,
+   "y": 22.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 6.1,
+   "y": 75.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 22.1,
+   "y": 71.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 49.6,
+   "y": 71.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 55.6,
+   "y": 30.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 114.5,
+   "y": 68.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 91.8,
+   "y": 48.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 4.4,
+   "y": 73.5,
+   "type": "Interception"
+  },
+  {
+   "x": 63.7,
+   "y": 15.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 25.5,
+   "y": 16.0,
+   "type": "Interception"
+  },
+  {
+   "x": 62.1,
+   "y": 77.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 98.6,
+   "y": 39.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 32.4,
+   "y": 11.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 71.2,
+   "y": 28.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 38.9,
+   "y": 18.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 42.9,
+   "y": 5.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 63.5,
+   "y": 76.3,
+   "type": "Interception"
+  },
+  {
+   "x": 29.3,
+   "y": 75.2,
+   "type": "Interception"
+  },
+  {
+   "x": 78.3,
+   "y": 55.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 63.1,
+   "y": 74.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 104.1,
+   "y": 25.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 91.1,
+   "y": 17.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 104.2,
+   "y": 24.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 55.3,
+   "y": 21.4,
+   "type": "Interception"
+  },
+  {
+   "x": 92.5,
+   "y": 35.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 71.4,
+   "y": 49.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 93.1,
+   "y": 18.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 47.0,
+   "y": 53.1,
+   "type": "Interception"
+  },
+  {
+   "x": 49.6,
+   "y": 21.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 53.0,
+   "y": 16.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 58.5,
+   "y": 9.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 85.3,
+   "y": 34.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 70.5,
+   "y": 61.3,
+   "type": "Interception"
+  },
+  {
+   "x": 63.8,
+   "y": 54.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 38.9,
+   "y": 54.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 25.3,
+   "y": 20.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 40.6,
+   "y": 39.9,
+   "type": "Interception"
+  },
+  {
+   "x": 33.5,
+   "y": 49.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 45.7,
+   "y": 42.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 22.6,
+   "y": 44.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 52.3,
+   "y": 2.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 57.1,
+   "y": 29.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 57.3,
+   "y": 14.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 16.1,
+   "y": 63.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 48.2,
+   "y": 51.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 26.9,
+   "y": 58.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 35.9,
+   "y": 49.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 84.1,
+   "y": 68.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 52.0,
+   "y": 19.1,
+   "type": "Interception"
+  },
+  {
+   "x": 64.3,
+   "y": 62.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 77.3,
+   "y": 8.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 36.8,
+   "y": 29.1,
+   "type": "Interception"
+  },
+  {
+   "x": 23.3,
+   "y": 32.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 25.1,
+   "y": 22.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 77.8,
+   "y": 7.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 9.2,
+   "y": 23.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 26.7,
+   "y": 68.0,
+   "type": "Interception"
+  },
+  {
+   "x": 58.7,
+   "y": 53.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 19.2,
+   "y": 11.6,
+   "type": "Interception"
+  },
+  {
+   "x": 14.7,
+   "y": 13.7,
+   "type": "Interception"
+  },
+  {
+   "x": 48.0,
+   "y": 11.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 20.6,
+   "y": 30.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 45.8,
+   "y": 49.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 50.4,
+   "y": 40.9,
+   "type": "Interception"
+  },
+  {
+   "x": 55.3,
+   "y": 22.1,
+   "type": "Interception"
+  },
+  {
+   "x": 75.8,
+   "y": 41.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 95.4,
+   "y": 72.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 23.7,
+   "y": 36.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 45.0,
+   "y": 10.0,
+   "type": "Interception"
+  },
+  {
+   "x": 56.8,
+   "y": 4.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 47.8,
+   "y": 62.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 18.2,
+   "y": 18.6,
+   "type": "Interception"
+  },
+  {
+   "x": 55.9,
+   "y": 39.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 76.4,
+   "y": 6.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 20.8,
+   "y": 33.8,
+   "type": "Interception"
+  },
+  {
+   "x": 22.5,
+   "y": 25.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 12.7,
+   "y": 12.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 78.3,
+   "y": 36.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 49.7,
+   "y": 33.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 85.8,
+   "y": 20.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 84.5,
+   "y": 26.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 56.5,
+   "y": 14.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 105.5,
+   "y": 55.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 43.8,
+   "y": 50.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 84.5,
+   "y": 64.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 24.0,
+   "y": 2.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 84.5,
+   "y": 15.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 70.3,
+   "y": 62.4,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 97.6,
+   "y": 13.8,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 4.4,
+   "y": 3.7,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 18.9,
+   "y": 57.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 36.6,
+   "y": 10.3,
+   "type": "Interception"
+  },
+  {
+   "x": 22.4,
+   "y": 2.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 64.8,
+   "y": 76.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 77.2,
+   "y": 24.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 56.9,
+   "y": 59.7,
+   "type": "Interception"
+  },
+  {
+   "x": 78.8,
+   "y": 54.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 8.3,
+   "y": 48.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 90.2,
+   "y": 61.3,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 106.1,
+   "y": 66.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 29.5,
+   "y": 20.5,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 4.2,
+   "y": 20.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 105.9,
+   "y": 31.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 15.7,
+   "y": 68.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 54.6,
+   "y": 7.9,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 71.3,
+   "y": 10.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 9.2,
+   "y": 9.8,
+   "type": "Interception"
+  },
+  {
+   "x": 50.7,
+   "y": 6.4,
+   "type": "Interception"
+  },
+  {
+   "x": 10.7,
+   "y": 11.1,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 52.2,
+   "y": 62.0,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 63.4,
+   "y": 42.2,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 61.4,
+   "y": 5.6,
+   "type": "Ball Recovery"
+  },
+  {
+   "x": 43.7,
+   "y": 9.7,
+   "type": "Ball Recovery"
+  }
+ ],
+ "reseau": {
+  "definition": "passes réussies dans le jeu (hors coups de pied arrêtés) ; position = moyenne des points de départ des passes du joueur ; joueurs avec au moins 60 passes, liens d'au moins 12 passes",
+  "noeuds": {
+   "Yves Bissouma": [
+    60.36,
+    38.4,
+    82
+   ],
+   "Falaye Sacko": [
+    57.67,
+    12.85,
+    164
+   ],
+   "Sikou Niakate": [
+    43.41,
+    27.82,
+    265
+   ],
+   "Hamari Traoré": [
+    60.14,
+    71.15,
+    233
+   ],
+   "Kamory Doumbia": [
+    70.2,
+    38.68,
+    119
+   ],
+   "Lassine Sinayoko": [
+    82.58,
+    34.57,
+    72
+   ],
+   "Aliou Dieng": [
+    53.99,
+    51.69,
+    76
+   ],
+   "Boubakar Kouyate": [
+    44.54,
+    56.87,
+    280
+   ],
+   "Amadou Haïdara": [
+    65.49,
+    26.21,
+    100
+   ],
+   "Djigui Diarra": [
+    16.95,
+    42.98,
+    64
+   ],
+   "Lassana Coulibaly": [
+    64.72,
+    54.23,
+    116
+   ],
+   "Fousseni Diabaté": [
+    70.35,
+    55.05,
+    77
+   ],
+   "Diadie Samassekou": [
+    59.41,
+    41.59,
+    83
+   ],
+   "Mohamed Camara": [
+    56.16,
+    43.63,
+    68
+   ]
+  },
+  "liens": [
+   [
+    "Falaye Sacko",
+    "Sikou Niakate",
+    94
+   ],
+   [
+    "Boubakar Kouyate",
+    "Sikou Niakate",
+    165
+   ],
+   [
+    "Kamory Doumbia",
+    "Lassine Sinayoko",
+    31
+   ],
+   [
+    "Amadou Haïdara",
+    "Lassine Sinayoko",
+    28
+   ],
+   [
+    "Aliou Dieng",
+    "Yves Bissouma",
+    20
+   ],
+   [
+    "Boubakar Kouyate",
+    "Yves Bissouma",
+    30
+   ],
+   [
+    "Aliou Dieng",
+    "Hamari Traoré",
+    34
+   ],
+   [
+    "Amadou Haïdara",
+    "Sikou Niakate",
+    22
+   ],
+   [
+    "Aliou Dieng",
+    "Amadou Haïdara",
+    12
+   ],
+   [
+    "Boubakar Kouyate",
+    "Hamari Traoré",
+    131
+   ],
+   [
+    "Hamari Traoré",
+    "Sikou Niakate",
+    23
+   ],
+   [
+    "Falaye Sacko",
+    "Lassine Sinayoko",
+    29
+   ],
+   [
+    "Amadou Haïdara",
+    "Falaye Sacko",
+    29
+   ],
+   [
+    "Hamari Traoré",
+    "Yves Bissouma",
+    18
+   ],
+   [
+    "Djigui Diarra",
+    "Hamari Traoré",
+    13
+   ],
+   [
+    "Djigui Diarra",
+    "Sikou Niakate",
+    45
+   ],
+   [
+    "Amadou Haïdara",
+    "Kamory Doumbia",
+    25
+   ],
+   [
+    "Boubakar Kouyate",
+    "Kamory Doumbia",
+    13
+   ],
+   [
+    "Hamari Traoré",
+    "Kamory Doumbia",
+    28
+   ],
+   [
+    "Aliou Dieng",
+    "Boubakar Kouyate",
+    23
+   ],
+   [
+    "Sikou Niakate",
+    "Yves Bissouma",
+    15
+   ],
+   [
+    "Amadou Haïdara",
+    "Hamari Traoré",
+    12
+   ],
+   [
+    "Boubakar Kouyate",
+    "Falaye Sacko",
+    25
+   ],
+   [
+    "Djigui Diarra",
+    "Falaye Sacko",
+    23
+   ],
+   [
+    "Falaye Sacko",
+    "Kamory Doumbia",
+    18
+   ],
+   [
+    "Boubakar Kouyate",
+    "Djigui Diarra",
+    26
+   ],
+   [
+    "Hamari Traoré",
+    "Lassine Sinayoko",
+    18
+   ],
+   [
+    "Kamory Doumbia",
+    "Sikou Niakate",
+    15
+   ],
+   [
+    "Boubakar Kouyate",
+    "Lassana Coulibaly",
+    30
+   ],
+   [
+    "Amadou Haïdara",
+    "Lassana Coulibaly",
+    19
+   ],
+   [
+    "Lassana Coulibaly",
+    "Sikou Niakate",
+    21
+   ],
+   [
+    "Falaye Sacko",
+    "Lassana Coulibaly",
+    19
+   ],
+   [
+    "Fousseni Diabaté",
+    "Hamari Traoré",
+    48
+   ],
+   [
+    "Fousseni Diabaté",
+    "Kamory Doumbia",
+    18
+   ],
+   [
+    "Kamory Doumbia",
+    "Lassana Coulibaly",
+    19
+   ],
+   [
+    "Hamari Traoré",
+    "Lassana Coulibaly",
+    60
+   ],
+   [
+    "Diadie Samassekou",
+    "Sikou Niakate",
+    19
+   ],
+   [
+    "Diadie Samassekou",
+    "Falaye Sacko",
+    27
+   ],
+   [
+    "Diadie Samassekou",
+    "Lassana Coulibaly",
+    17
+   ],
+   [
+    "Boubakar Kouyate",
+    "Diadie Samassekou",
+    12
+   ],
+   [
+    "Diadie Samassekou",
+    "Kamory Doumbia",
+    13
+   ],
+   [
+    "Diadie Samassekou",
+    "Hamari Traoré",
+    24
+   ],
+   [
+    "Boubakar Kouyate",
+    "Mohamed Camara",
+    12
+   ],
+   [
+    "Hamari Traoré",
+    "Mohamed Camara",
+    23
+   ],
+   [
+    "Mohamed Camara",
+    "Sikou Niakate",
+    14
+   ],
+   [
+    "Kamory Doumbia",
+    "Mohamed Camara",
+    13
+   ]
+  ]
+ },
+ "action": {
+  "tir": {
+   "x": 113.9,
+   "y": 37.7,
+   "joueur": "Lassine Sinayoko",
+   "xg": 0.3237,
+   "resultat": "Off T",
+   "fin": [
+    120.0,
+    34.7,
+    0.9
+   ]
+  },
+  "joueurs": [
+   {
+    "x": 111.5,
+    "y": 59.8,
+    "mali": true,
+    "nom": "Fousseni Diabaté",
+    "poste": "Right Midfield"
+   },
+   {
+    "x": 115.0,
+    "y": 34.3,
+    "mali": true,
+    "nom": "Nene Dorgeles",
+    "poste": "Left Midfield"
+   },
+   {
+    "x": 101.9,
+    "y": 33.1,
+    "mali": false,
+    "nom": "Deon Hotto Kavendji",
+    "poste": "Left Midfield"
+   },
+   {
+    "x": 110.7,
+    "y": 51.7,
+    "mali": false,
+    "nom": "Aprocious Petrus",
+    "poste": "Center Defensive Midfield"
+   },
+   {
+    "x": 113.5,
+    "y": 60.7,
+    "mali": false,
+    "nom": "Lubeni Haukongo",
+    "poste": "Left Center Back"
+   },
+   {
+    "x": 107.1,
+    "y": 53.9,
+    "mali": false,
+    "nom": "Riaan Hanamub",
+    "poste": "Left Back"
+   },
+   {
+    "x": 109.5,
+    "y": 42.1,
+    "mali": false,
+    "nom": "Kennedy Amutenya",
+    "poste": "Right Center Back"
+   },
+   {
+    "x": 113.0,
+    "y": 36.7,
+    "mali": false,
+    "nom": "Ivan Kamberipa",
+    "poste": "Right Back"
+   },
+   {
+    "x": 118.4,
+    "y": 40.7,
+    "mali": false,
+    "nom": "Lloyd Junior Kazapua",
+    "poste": "Goalkeeper"
+   }
+  ]
+ },
+ "xt": {
+  "grille": {
+   "nx": 16,
+   "ny": 12,
+   "terrain": [
+    120,
+    80
+   ],
+   "case_x": 7.5,
+   "case_y": 6.666666666666667,
+   "orientation": "l'équipe qui attaque va vers x = 120 ; valeurs[cy][cx], cy = 0 en y = 0 (côté gauche de l'attaquant dans les coordonnées StatsBomb), cx = 0 près de son propre but",
+   "indice_case": "z = cy * 16 + cx, cx = floor(x / 7.5), cy = floor(y / 6.667), bornés"
+  },
+  "valeurs": [
+   [
+    0.002012,
+    0.002848,
+    0.003612,
+    0.004332,
+    0.005112,
+    0.006059,
+    0.007059,
+    0.008167,
+    0.009662,
+    0.011418,
+    0.013531,
+    0.015749,
+    0.017684,
+    0.019279,
+    0.019704,
+    0.017741
+   ],
+   [
+    0.002544,
+    0.003415,
+    0.004209,
+    0.005002,
+    0.0059,
+    0.006741,
+    0.007741,
+    0.008953,
+    0.010361,
+    0.012174,
+    0.014432,
+    0.016925,
+    0.019728,
+    0.021744,
+    0.022423,
+    0.022538
+   ],
+   [
+    0.002941,
+    0.003896,
+    0.004702,
+    0.005526,
+    0.006318,
+    0.007164,
+    0.008187,
+    0.009376,
+    0.010877,
+    0.012632,
+    0.015058,
+    0.017994,
+    0.021448,
+    0.024949,
+    0.027568,
+    0.027245
+   ],
+   [
+    0.003412,
+    0.004268,
+    0.005016,
+    0.005785,
+    0.006619,
+    0.007486,
+    0.00843,
+    0.009727,
+    0.011273,
+    0.013082,
+    0.015689,
+    0.018817,
+    0.02345,
+    0.030925,
+    0.038879,
+    0.033119
+   ],
+   [
+    0.00383,
+    0.004598,
+    0.005226,
+    0.00593,
+    0.006716,
+    0.007591,
+    0.008615,
+    0.009915,
+    0.011508,
+    0.013419,
+    0.01604,
+    0.019766,
+    0.026629,
+    0.04633,
+    0.0891,
+    0.084137
+   ],
+   [
+    0.004278,
+    0.004751,
+    0.005265,
+    0.005946,
+    0.006752,
+    0.007612,
+    0.008559,
+    0.009819,
+    0.011581,
+    0.013495,
+    0.016243,
+    0.020459,
+    0.030095,
+    0.065618,
+    0.127439,
+    0.281539
+   ],
+   [
+    0.004292,
+    0.004671,
+    0.005153,
+    0.005969,
+    0.006747,
+    0.007532,
+    0.008474,
+    0.009717,
+    0.011434,
+    0.0135,
+    0.01615,
+    0.020386,
+    0.030151,
+    0.065456,
+    0.128369,
+    0.282487
+   ],
+   [
+    0.003794,
+    0.004541,
+    0.005133,
+    0.005858,
+    0.006621,
+    0.007503,
+    0.008514,
+    0.009721,
+    0.011404,
+    0.01323,
+    0.015895,
+    0.019839,
+    0.026657,
+    0.046853,
+    0.090884,
+    0.089113
+   ],
+   [
+    0.003309,
+    0.00418,
+    0.00487,
+    0.005688,
+    0.006484,
+    0.007325,
+    0.008297,
+    0.009499,
+    0.010993,
+    0.012816,
+    0.015353,
+    0.0187,
+    0.023339,
+    0.030969,
+    0.038001,
+    0.032959
+   ],
+   [
+    0.002858,
+    0.003746,
+    0.004555,
+    0.005369,
+    0.006156,
+    0.007033,
+    0.008015,
+    0.009139,
+    0.010574,
+    0.012321,
+    0.014697,
+    0.01765,
+    0.021199,
+    0.024273,
+    0.027686,
+    0.026037
+   ],
+   [
+    0.002505,
+    0.003279,
+    0.004042,
+    0.004855,
+    0.005669,
+    0.006554,
+    0.007532,
+    0.008641,
+    0.010075,
+    0.011759,
+    0.013924,
+    0.016461,
+    0.019213,
+    0.02147,
+    0.022912,
+    0.020779
+   ],
+   [
+    0.001934,
+    0.002623,
+    0.00344,
+    0.004204,
+    0.004986,
+    0.005844,
+    0.006835,
+    0.007885,
+    0.009363,
+    0.011007,
+    0.013058,
+    0.015241,
+    0.017535,
+    0.01892,
+    0.019325,
+    0.017504
+   ]
+  ]
+ },
+ "resume": {
+  "tirs": 64,
+  "tirs_hors_penalty": 63,
+  "buts": 5,
+  "xg_total": 5.85,
+  "npxg": 5.07,
+  "recuperations": 237,
+  "hauteur_moyenne_recup_yards": 51.3,
+  "noeuds": 14,
+  "liens": 46
+ }
+}
