@@ -128,39 +128,6 @@ def p1_image2(tt=False):
          'Attendus : selon la force de l\'adversaire (classement Elo) et le lieu · Données : résultats internationaux (martj42)',tt)
 ecrire(2,p1_image2()); ecrire('2_tt',p1_image2(True))
 
-# ---------- post 1, image 3 : les limites (règle de Diaby du 14/10/2026 : toujours dire les points faibles)
-# Chaque chiffre vient des sorties du pipeline ou du recompte de docs/audits/post1-defense.md.
-def p1_image3(tt=False):
-    eq={e['equipe']:e for e in A['equipes']}; ml=eq['Mali']; s20=[m for m in D['matchs'] if m['periode']=='depuis_2020']
-    rang_plus_un=1+sum(e['par_match']<(ml['buts_encaisses']+1)/ml['matchs'] for e in A['equipes'] if e['equipe']!='Mali')
-    assert rang_plus_un==3, rang_plus_un  # le texte dit « troisième »
-    der=s20[-10:]; mar=[m for m in s20 if m['adversaire']=='Morocco'][0]; sans=[m for m in s20 if m is not mar]
-    rob=[r['rapport'] for r in D['robustesse_annee_de_coupure']]
-    # matchs à domicile depuis 2020 (même périmètre que le classement), recomptés dans le fichier brut martj42
-    import csv; dom={}
-    for r in csv.DictReader(open(ICI/'../data/bronze/international_results/results.csv',encoding='utf-8')):
-        if r['date']>=A['depuis'] and r['tournament'] in ('African Cup of Nations','African Cup of Nations qualification','FIFA World Cup qualification') and r['home_score'] not in ('','NA'):
-            for t in ('Morocco','Mali'):
-                if t in (r['home_team'],r['away_team']):
-                    n,h=dom.get(t,(0,0)); dom[t]=(n+1,h+((r['home_team']==t and r['neutral']=='FALSE') or r['country']==t))
-    assert dom['Morocco'][0]==eq['Morocco']['matchs'] and dom['Mali'][0]==ml['matchs'], dom
-    lignes=[(str(ml['matchs']),'MATCHS DEPUIS 2020, C\'EST PEU : UN SEUL BUT DE PLUS ET LE MALI SERAIT TROISIÈME.'),
-            (f'{dom["Morocco"][1]}/{dom["Morocco"][0]}',f'MATCHS DU MAROC, PREMIER, JOUÉS À DOMICILE. LE MALI : {dom["Mali"][1]} SUR {dom["Mali"][0]}. LE CLASSEMENT NE TIENT PAS COMPTE DU LIEU.'),
-            (str(sum(m['buts_contre'] for m in der)),f'BUTS PRIS SUR LES 10 DERNIERS MATCHS, CAN 2025 COMPRISE : PLUS QU\'AVANT, MAIS POUR {round(sum(m["attendu"] for m in der))} ATTENDUS.'),
-            (fr(mar['attendu']),f'BUTS ATTENDUS CONTRE LE MAROC, CHEZ LUI : SANS DOUTE TROP. SANS CE MATCH, {sum(m["buts_contre"] for m in sans)} PRIS POUR {round(sum(m["attendu"] for m in sans))} ATTENDUS.')]
-    b=''
-    for i,(n,t) in enumerate(lignes):
-        y=392+i*158
-        b+=(f'<div style="position:absolute;left:64px;top:{y}px;width:{870 if tt else 952}px;border-top:3px solid #064A25"></div>'
-            f'<div style="position:absolute;left:58px;top:{y+22}px;font:italic 900 104px/.86 BC;color:#064A25;white-space:nowrap">{n}</div>'
-            f'<div style="position:absolute;left:330px;top:{y+24}px;width:600px;font:800 28px/1.22 SC;letter-spacing:.03em;color:#04331A">{t}</div>')
-    lo,hi=round((1-max(rob))*100),round((1-min(rob))*100)
-    b+=(f'<div style="position:absolute;left:64px;top:{392+4*158}px;width:{870 if tt else 952}px;border-top:3px solid #064A25"></div>'
-        f'<div style="position:absolute;left:64px;top:{392+4*158+30}px;width:870px;font:800 30px/1.2 SC;letter-spacing:.04em;color:#04331A">LA CONCLUSION TIENT. PEU IMPORTE L\'ANNÉE DE DÉPART (2014 À 2023), LE MALI ENCAISSE <em style="font-style:normal;color:#D4252A">{lo} À {hi} % DE MOINS</em> QU\'ATTENDU.</div>')
-    return page('DEPUIS 2020 · MATCHS OFFICIELS · <b>CE QUE NOS CHIFFRES NE DISENT PAS</b>','LES LIMITES','POUR ÊTRE CLAIRS','?',b,
-         'Attendus : modèle appris sur 2000-2019 (force de l\'adversaire et lieu) · Données : résultats internationaux (martj42)',tt)
-ecrire(4,p1_image3()); ecrire('4_tt',p1_image3(True))
-
 # ---------- post 2 : le classement FIFA, gros chiffres empilés comme « L'anatomie d'un but »
 F=json.load(open(ICI/'../outputs/analyses/fifa_rwanda.json',encoding='utf-8')); u=F['un_match']; S={s['resultats']:s['ecart'] for s in F['deux_matchs']}
 sg=lambda v:('+' if v>0 else '−')+fr(abs(v),1)
