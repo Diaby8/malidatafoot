@@ -32,3 +32,10 @@ Points de vigilance trouvés :
 | 7 buts sur les 10 derniers, pour 13 attendus | 7 et 12,67 (du 08/09/2025 au 29/09/2026) | juste |
 | 3,78 attendus contre le Maroc chez lui ; sans ce match 21 pour 40 | 3,781 ; 21 et 39,95 | juste |
 | 36 à 50 % de moins qu'attendu selon l'année de départ | rapports 0,498 à 0,637 sur 2014-2023 | juste |
+
+## Contre-vérification du rang (14/10/2026 au soir, demande de Diaby : « aucun piège »)
+Code indépendant `poc/audits/verif_rang_post1.py` sur le fichier martj42 retéléchargé (identique à celui du pipeline).
+- Autres équipes : même fichier, même règle pour les 53 sélections africaines (CAN ou éliminatoires depuis 2020).
+- Périmètre : avec les amicaux, Mali 2e ; avec la phase finale du Mondial, Mali 1er (le Maroc et le Sénégal y encaissent) ; tout sauf amicaux, Mali 1er. L'exclusion du Mondial ne nous avantage pas.
+- **Piège trouvé : le rang dépend de l'année de départ.** 2e depuis 2020 et 2021, 3e depuis 2017 à 2019 et 2024, 4e depuis 2014 à 2016 et 2022-2023. Toujours dans le top 4 (avec Maroc, Sénégal, Égypte). Corrigé : tweet 1 « au coude-à-coude », tweet 3 donne les rangs selon l'année, description TikTok idem.
+- Fichier de contrôle match par match (Mali, Maroc, Sénégal) : `livrables/post1-defense/controle_matchs_mali_maroc_senegal.csv`.
