@@ -107,6 +107,7 @@ Critique faite à Diaby, et qu'il a validée (« améliore tout ») : nos visuel
 - **Pas le même bloc partout** : un tableau « Le bilan » répété en bas de chaque variante rend tout pareil.
 - **Couleurs franches** : pas de dégradés pastel (« mise en forme Excel »). Le code des niveaux de la DA (vert, jaune, rouge, rouge foncé) en classes nettes.
 - **Étiquettes courtes** et placées de la même façon pour toutes les barres.
+- **Le type de graphique ne doit pas tromper l'œil** (Diaby, 14/10/2026 : « faut pas se tromper sur les data, même sur le choix de la visualisation »). Pas de moyenne glissante courte qui fait de fausses grosses chutes, pas de cumul qui donne l'impression que ça empire, pas deux façons de compter sur la même image. Écrire en une phrase ce que l'œil retient en 2 secondes et vérifier que c'est vrai. Détail : skill données, angle 6.
 - **Le ton** : un chiffre qui peut se lire comme négatif pour le Mali se cadre sur ce qu'il faut faire (« il faut gagner deux fois »), pas sur la peur (« plus à perdre qu'à gagner »).
 
 ## 3. Formats

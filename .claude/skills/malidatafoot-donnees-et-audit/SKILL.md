@@ -23,7 +23,7 @@ Puis proposer en s'appuyant dessus : dire ce qu'on a déjà, ce qui manque, et d
 3. **Pour un visuel important**, le faire recompter par un contrôle indépendant qui n'a pas vu le code de calcul. Le recomptage du 7 octobre a trouvé un rang faux (12e au lieu de 11e) que tout le reste avait laissé passer.
 4. **Pour tout ce qui décrit le présent** (club actuel, buts de la saison, sélection, calendrier des Aigles), revérifier sur le web à la date du post et citer la source. Aucune anecdote inventée.
 
-## 2. Les quatre angles de l'audit (aussi sévère que Diaby)
+## 2. Les angles de l'audit (aussi sévère que Diaby)
 
 1. **Données.** Chaque chiffre affiché est recompté.
 2. **Logique.** Volume ou réussite ? Rang ou vraie valeur ? Poids d'un penalty, sens d'une passe ? Le titre ou la phrase ne doit pas faire dire au chiffre plus qu'il ne dit. On n'écrit pas une conclusion qui dépend d'un seuil choisi par nous : « aucune passe vers l'avant » était faux sans notre seuil de 10 yards.
@@ -31,6 +31,13 @@ Puis proposer en s'appuyant dessus : dire ce qu'on a déjà, ce qui manque, et d
 4. **Visuel.** Voir le skill `malidatafoot-direction-artistique`.
 
 5. **Les limites.** Chercher soi-même ce qu'un contradicteur attaquerait (année de départ choisie, match qui pèse trop, modèle qui extrapole, petit échantillon), le tester, et l'écrire dans le post avec le résultat du test. Exemple (post défense, 14/10/2026) : le modèle attendait 3,78 buts au Maroc, hors de ce qu'il a appris (2,51 au plus) ; sans ce match, la conclusion tient (21 encaissés pour 40 attendus).
+
+6. **Le choix du graphique.** Un graphique juste peut mentir à l'œil. Se demander ce qu'un lecteur pressé comprend en 2 secondes, sans lire la légende, et vérifier que c'est vrai. Exemples (post défense, 14/10/2026, relevés par Diaby) :
+   - une moyenne sur 10 matchs qui glisse fait de grosses chutes à l'écran pour un petit changement réel (un 3-0 qui sort de la fenêtre = −0,3) : on a l'impression de chutes énormes ;
+   - un cumul qui monte avec le temps donne l'impression que ça empire (« on dirait qu'on prend de plus en plus de buts »), alors que la défense s'améliore ;
+   - deux logiques sur la même image (une courbe sur 10 matchs, un chiffre sur tous les matchs) embrouillent. Une image = une seule façon de compter.
+   Avant de proposer un type de graphique, écrire en une phrase ce que l'œil va retenir, et le confronter au chiffre.
+7. **Les matchs comptés.** Seulement les matchs réellement joués, avec le score du terrain : pas de victoire sur tapis vert, pas de forfait (registre `registre/forfaits.csv`, avec la source de chaque ligne). Le dire dans la méthode du post. Leçon du 14/10/2026 : notre « 2e défense d'Afrique » tenait sur un Mali-Tchad jamais joué (3-0 sur tapis vert, 2021) et sur la finale CAN 2025 donnée 3-0 au Maroc alors que le Sénégal l'a gagnée 1-0 sur le terrain ; sur le terrain, le Mali était 3e. Et toujours croiser les scores avec au moins une autre source que martj42.
 
 **Pièges déjà rencontrés** :
 - **« Top 60 » doit vouloir dire top 60 FIFA** (13 octobre 2026). Notre rang Elo classe aussi des sélections non membres de la FIFA et ne colle pas au rang FIFA : l'Afrique du Sud était 86e chez nous mais 66e FIFA avant la CAN 2023, la Côte d'Ivoire 72e contre 49e. Diaby l'a relevé (« l'Afrique du Sud, c'est du top »). Quand on parle de niveau ou de rang à des supporters, c'est le rang FIFA du dernier classement avant le match (`fifa.rang_le_jour`) ; l'Elo sert seulement au calcul « à adversaires égaux ».
