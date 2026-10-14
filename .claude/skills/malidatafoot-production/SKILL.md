@@ -43,6 +43,8 @@ Puis proposer en s'appuyant dessus : dire ce qu'on a déjà, ce qui manque, et d
 - **Bio TikTok** : « Le football malien par la data 📊🇲🇱 / Aigles • Maliens & binationaux en club • Page indépendante ».
 - **Nom affiché sur X** : à passer de « MLdata » à « MaliDataFoot ».
 
+- **Toujours dire les limites** (Diaby, 14 octobre 2026 : « les points de faiblesse, faut toujours en parler, pour pas qu'un petit malin essaie de debunk, et ça rend le truc encore plus crédible »). Chaque post d'analyse finit par ses limites, en clair : taille de l'échantillon, choix qu'on a faits (année de départ, compétitions retenues), là où le modèle force, ce qui va contre notre conclusion. Et à chaque fois, dire si la conclusion tient quand même (tester l'autre choix, enlever le match qui pose problème).
+
 ## 3. Workflow d'un post
 
 0. **Le POC d'abord** (14 octobre 2026) : pour un nouveau sujet, d'abord le calcul sur les vraies données et 2 ou 3 plans clés en maquette (les visuels avant les voix off), montrés à Diaby. On améliore ensuite au cas par cas.

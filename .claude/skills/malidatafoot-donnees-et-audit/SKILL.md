@@ -30,6 +30,8 @@ Puis proposer en s'appuyant dessus : dire ce qu'on a déjà, ce qui manque, et d
 3. **Sémantique.** Les mots, les unités, les définitions. Les termes sont en français : buts attendus, passes décisives attendues, conduites progressives, possession.
 4. **Visuel.** Voir le skill `malidatafoot-direction-artistique`.
 
+5. **Les limites.** Chercher soi-même ce qu'un contradicteur attaquerait (année de départ choisie, match qui pèse trop, modèle qui extrapole, petit échantillon), le tester, et l'écrire dans le post avec le résultat du test. Exemple (post défense, 14/10/2026) : le modèle attendait 3,78 buts au Maroc, hors de ce qu'il a appris (2,51 au plus) ; sans ce match, la conclusion tient (21 encaissés pour 40 attendus).
+
 **Pièges déjà rencontrés** :
 - **« Top 60 » doit vouloir dire top 60 FIFA** (13 octobre 2026). Notre rang Elo classe aussi des sélections non membres de la FIFA et ne colle pas au rang FIFA : l'Afrique du Sud était 86e chez nous mais 66e FIFA avant la CAN 2023, la Côte d'Ivoire 72e contre 49e. Diaby l'a relevé (« l'Afrique du Sud, c'est du top »). Quand on parle de niveau ou de rang à des supporters, c'est le rang FIFA du dernier classement avant le match (`fifa.rang_le_jour`) ; l'Elo sert seulement au calcul « à adversaires égaux ».
 - **Une médiane peut cacher une moyenne qui bouge** : le rang Elo médian des adversaires était stable (122e, 125e) mais leur Elo moyen a baissé (1565 → 1522) et le rang FIFA médian aussi (91e → 106e). Vérifier plusieurs mesures avant d'écrire « même niveau ».
