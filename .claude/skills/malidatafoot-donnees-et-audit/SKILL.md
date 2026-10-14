@@ -71,7 +71,7 @@ rouge.
 - **RSSSF** : archives des sélections (capes, buteurs), copie libre en citant l'auteur.
 - **Opta** : objectif d'obtenir un accès légal (par FotMob, ou une licence Stats Perform) ; voir `docs/feuille_de_route.md`. Opta est derrière presque tout le grand public (FotMob, WhoScored, Flashscore…) : on ne prend jamais ces données sans accord écrit. Cartographie complète dans `docs/sources_de_donnees.md`.
 - **FBref.** A perdu les données avancées Opta le 20 janvier 2026.
-- **FotMob.** Interdit l'extraction automatique : ne pas l'utiliser.
+- **FotMob, Transfermarkt, Wikipédia, FEMAFOOT** : jamais d'extraction automatique. Diaby copie lui-même le contenu des pages et me le transmet ; je saisis avec la source de chaque ligne et je recoupe (décision de Diaby du 14/10/2026).
 - **Wyscout.** Environ 299 € par an en licence personnelle.
 
 **Scraping et collecte automatique** : ils sont prévus, mais seulement sur des sources dont les conditions le permettent. Il

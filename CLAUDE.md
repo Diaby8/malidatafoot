@@ -4,6 +4,7 @@ Projet de Diaby : le football malien expliqué par la data (@MaliDataFoot sur X,
 C'est un projet pro de data engineering, d'analyse et de data science. Il faut être strict sur la réussite et la
 crédibilité : uniquement des faits vérifiés, et un audit avant chaque envoi.
 
+- **À lire en premier, toujours** : `docs/etat_du_projet.md` (où est quoi, la base de données, les sources, le workflow, les posts en cours). Le mettre à jour à chaque post et à chaque décision.
 - **Langue** : français, réponses courtes et simples, peu de listes. Discuter l'objectif avant de produire quand c'est ambigu.
 - **Règles** : les trois skills de `.claude/skills/` font foi. Les lire selon la tâche :
   - `malidatafoot-direction-artistique` pour tout visuel ;
