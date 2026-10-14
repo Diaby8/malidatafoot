@@ -53,6 +53,53 @@ Statuts : **publié** · **prêt** (vérifié, à poster) · **POC** (calcul fai
 | 24 | **Qui mérite sa place ?** | temps de jeu et forme en club des appelés, avant la liste de novembre | pages Understat (et une autre source hors grands championnats) |
 | 25 | **Les Maliens du week-end** (rendez-vous) | qui a joué, marqué, brillé | source de la saison en cours |
 
-## 6. Plus tard (réserve)
-Seydou Dembélé à Reims ; les Aigles Dames et les U20 ; Hamari Traoré, le latéral créateur ; le Mali du nouveau coach match après match ;
-le meilleur XI selon la data ; le prochain Seydou Keita (profils semblables) ; contenus en bambara, soninké, anglais ; et tout le reste de `docs/banque_idees.md`.
+## 6. Toutes les autres idées dont on a parlé (statut : idée)
+Reprises des échanges d'août, septembre et octobre 2026 et de `docs/banque_idees.md`. Chacune deviendra un sujet numéroté quand on la lance.
+
+**Séries et rendez-vous**
+- « La data dit quoi ? » : un joueur, une analyse de 45 secondes (« on parle de ses buts, mais est-ce son meilleur atout ? »).
+- « Mali Next Gen » : les jeunes Maliens à suivre, série numérotée.
+- « Qui est le meilleur ? » : duels entre Maliens du même poste.
+- « La Data sélection » : le XI que la data choisirait, à chaque rassemblement.
+- Le classement hebdo des Maliens d'Europe (Mali Data Ranking, avec un score maison transparent sur sa méthode).
+- Les Maliens du week-end ; le joueur malien de la semaine ; l'analyse d'avant-match et d'après-match des Aigles.
+- Les joueurs proposés par les abonnés (« analyse mon joueur »).
+- Binationaux et joueurs à suivre : ce que dit la data sur un joueur éligible, comparé aux titulaires du poste (sensible : seulement des origines publiques et sourcées).
+- Carrousels TikTok (plusieurs images à faire défiler) pour les fiches et les classements.
+- Storytelling de parcours (format à la MARA) : Sinayoko, de la CAN 2024 au triplé au Vélodrome (septembre 2026), avec des faits vérifiés.
+
+**Aigles : actu et rassemblements**
+- La liste de septembre en data : où jouent les appelés, âge, nouveaux, rescapés de la CAN 2023.
+- Les débuts d'Ange Martial Tia (but de la victoire au Liberia).
+- Maroc 1-1 Mali : l'égalisation de Gaoussou Diarra (déjà dans la vidéo A).
+- Hier et aujourd'hui : le groupe de septembre comparé à celui d'Abidjan.
+- Avant le Rwanda, qui est en forme ; le Mali du nouveau coach, match après match (jeu, nouveaux appelés, âge du groupe, ce qui coince aussi).
+- Le classement FIFA : ce qui fait monter ou descendre une équipe (fait : sujet 2).
+
+**Phénomènes et analyses**
+- Pourquoi le Mali bute sur les quarts ? (éliminations récentes une par une).
+- Le Mali domine souvent, pourquoi marque-t-il si peu ?
+- La dépendance à un joueur (lié au sujet 13).
+- Quand le Mali encaisse-t-il ? Première ou deuxième mi-temps ?
+- Qui fait avancer le ballon ; les sorties de balle ; les coups de pied arrêtés.
+- Notre propre xG des éliminatoires (« comment on calcule »), si les matchs complets sont disponibles en vidéo.
+- Le quart contre la Côte d'Ivoire rejoué 10 000 fois (simulation à partir des occasions).
+- Valeur marchande contre performance réelle.
+- « Il ne marque pas beaucoup, mais regardez où il joue » (carte de chaleur d'un joueur).
+
+**Histoire et curiosités**
+- L'historique complet des Aigles : matchs, compos, buteurs, sélectionneurs ; rétrospectives et records.
+- Hamari Traoré, le latéral qui créait comme un attaquant (à vérifier).
+- D'où viennent les Aigles : carte des clubs, kilomètres jusqu'à Bamako.
+- La génération des Mondiaux jeunes (U17, U20), dix ans après.
+- Seydou Dembélé à Reims, de la CAN U17 aux équipes de Reims.
+- Les Aigles Dames et les U20 (élargir aux autres sélections).
+
+**Outils et grands projets**
+- La base de tous les joueurs maliens et binationaux dans le monde, mise à jour automatiquement ; alertes (but, transfert, blessure).
+- Un tableau de bord des sélectionnables (minutes, blessures, forme), utile aussi pour la FEMAFOOT.
+- Le championnat malien reconstitué à partir de sources publiques.
+- Profils de jeu (regroupement de joueurs), joueurs semblables (« le prochain Seydou Keita »), repérage des jeunes à fort potentiel.
+- Prédictions des matchs des Aigles (la simulation du groupe K en est le premier pas).
+- Brouillons de visuels générés automatiquement après chaque match ; un chatbot sur le foot malien ; des contenus en bambara, soninké et anglais.
+- Formats légers : devine le joueur à partir de son radar, quiz, le onze de la CAN 2023 selon la data.
