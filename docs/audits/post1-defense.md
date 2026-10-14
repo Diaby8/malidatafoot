@@ -23,3 +23,12 @@ Points de vigilance trouvés :
 - 50 matchs : petit échantillon.
 - Les 10 derniers matchs (CAN 2025 comprise) : 7 encaissés, contre 12,7 attendus (adversaires forts). La courbe remonte, mais reste sous l'attendu.
 - Maroc-Mali (26/12/2025) : le modèle attend 3,78 buts, au-delà de tout ce qu'il a vu en 2000-2019 (2,51 au plus) : extrapolation. Sans ce match : 21 encaissés pour 40,0 attendus. Avec un plafond à 2 buts par match : 41,9 attendus. La conclusion tient.
+
+## Image « Les limites » (carrousel TikTok, et image possible du tweet 5) : recompte du 14/10/2026
+| Affirmation | Recompte | Verdict |
+|---|---|---|
+| Un seul but de plus et le Mali serait 3e | 23/50 = 0,46 : derrière le Sénégal (0,444), devant l'Égypte (0,519). Calculé dans `posts_video.py` (assert) | juste |
+| Maroc 31 matchs à domicile sur 48, Mali 14 sur 50 | recompté dans le fichier brut martj42 par `posts_video.py` (domicile hors terrain neutre, ou match dans le pays) | juste |
+| 7 buts sur les 10 derniers, pour 13 attendus | 7 et 12,67 (du 08/09/2025 au 29/09/2026) | juste |
+| 3,78 attendus contre le Maroc chez lui ; sans ce match 21 pour 40 | 3,781 ; 21 et 39,95 | juste |
+| 36 à 50 % de moins qu'attendu selon l'année de départ | rapports 0,498 à 0,637 sur 2014-2023 | juste |

@@ -27,18 +27,25 @@ CSS=FONTS+'''*{box-sizing:border-box;margin:0;padding:0}html,body{width:1080px;h
 .ax{stroke:#064A25;stroke-width:4;fill:none}.pl{stroke:#FCE38A;stroke-width:3}
 .t{font:700 26px "SC";fill:#064A25}
 .leg{position:absolute;left:64px;display:flex;gap:26px;align-items:center;font:800 25px/1 "SC";letter-spacing:.04em;color:#04331A;white-space:nowrap}.leg span{display:flex;align-items:center;gap:10px}'''
-def trame(fx=1080,fy=0,col='#FDEBA6',op='0.85'):
+def trame(fx=1080,fy=0,col='#FDEBA6',op='0.85',H=H):
     g='';st=30;y=st/2;row=0
     while y<H:
         x=st/2+(st/2 if row%2 else 0)
         while x<W: d=math.hypot(x-fx,y-fy)/1500; g+=f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{1.2+9*max(0,1-d)**2.6:.2f}"/>'; x+=st
         y+=st;row+=1
     return f'<svg style="position:absolute;left:0;top:0" width="{W}" height="{H}"><g fill="{col}" fill-opacity="{op}">{g}</g></svg>'
-def page(kick,h1,h2,ghost,body,src):
-    return f'''<!doctype html><html><head><meta charset="utf-8"><style>{CSS}</style></head><body><div id="c">{trame()}
+# TikTok (1080 x 1920) : la même page X (1350 de haut), en taille réelle, descendue de DY_TT. Elle tient dans la zone sûre
+# (rien au-dessus de 150 px ni dans les 340 px du bas). À droite, sous y = 880, rester avant x = 946 (boutons TikTok).
+DY_TT=200
+def page(kick,h1,h2,ghost,body,src,tt=False):
+    css,tr,z0,z1=CSS,trame(),'',''
+    if tt:
+        css=CSS.replace('html,body{width:1080px;height:1350px','html,body{width:1080px;height:1920px').replace('#c{position:relative;width:1080px;height:1350px','#c{position:relative;width:1080px;height:1920px')+'#foot{right:134px}'
+        tr=trame(H=1920); z0=f'<div style="position:absolute;left:0;top:{DY_TT}px;width:1080px;height:1350px">'; z1='</div>'
+    return f'''<!doctype html><html><head><meta charset="utf-8"><style>{css}</style></head><body><div id="c">{tr}{z0}
 <div class="ghost">{ghost}</div><div class="kick">{kick}</div><div class="h1">{h1}</div><div class="h2">{h2}</div>{body}
 <div id="foot"><img src="logo-verte.png"><div class="wm">Mali<i>Data</i>Foot</div><div class="soc"><img src="logo_x.png" style="height:28px"><img src="logo_tt.png" style="height:36px">@MaliDataFoot</div></div>
-<div id="src">{src}</div></div><script>document.fonts.ready.then(()=>{{window.READY=true}})</script></body></html>'''
+<div id="src">{src}</div>{z1}</div><script>document.fonts.ready.then(()=>{{window.READY=true}})</script></body></html>'''
 # Les trois couleurs de la DA (comme dans la vidéo : scènes jaunes, scènes vertes, éléments blancs).
 # Même mise en page ; seules les couleurs changent.
 FOND_JAUNE='linear-gradient(180deg,#FBD134 0%,#F6C41C 45%,#EFA40A 100%)'
@@ -82,39 +89,77 @@ def drap(p,t=38): return f'<svg width="{t}" height="{t}" viewBox="-1 -1 22 22" s
 
 # ---------- post 1, image 1 : le classement des défenses africaines
 A=json.load(open(ICI/'../outputs/analyses/defense_afrique.json',encoding='utf-8')); D=json.load(open(ICI/'../outputs/analyses/defense_aigles.json',encoding='utf-8'))
-E=A['equipes'][:10]; mx=max(e['par_match'] for e in E); x0,x1=470,880; top=380; rh=58; b=''
-for e in E:
-    y=top+(e['rang']-1)*rh; mali=e['equipe']=='Mali'; c='#0B7A3B' if mali else '#FFF3C4'; L=e['par_match']/mx*(x1-x0)
-    b+=(f'<div style="position:absolute;left:64px;top:{y}px;width:44px;text-align:right;font:italic 900 40px/1 BC;color:#064A25">{e["rang"]}</div>'
-        f'<div style="position:absolute;left:126px;top:{y}px">{drap(e["equipe"])}</div>'
-        f'<div style="position:absolute;left:180px;top:{y+6}px;font:800 30px/1 SC;letter-spacing:.03em;text-transform:uppercase;color:{"#0B7A3B" if mali else "#04331A"}">{FRN[e["equipe"]]}</div>'
-        f'<div style="position:absolute;left:{x0}px;top:{y+8}px;width:{L:.0f}px;height:24px;border-radius:3px;background:{c}"></div>'
-        f'<div style="position:absolute;left:{x0+L+14:.0f}px;top:{y+1}px;font:italic 900 40px/1 BC;color:{"#0B7A3B" if mali else "#064A25"}">{fr(e["par_match"])}</div>')
-r=D['reference']['par_match']
-b+=f'<div class="bigR" style="top:{top+10*rh+44}px"><b>2<span style="font:italic 900 70px BC;color:#064A25;letter-spacing:0">e</span></b><span>DÉFENSE D\'AFRIQUE DEPUIS 2020<br>CONTRE <em>{fr(r)}</em> BUT PAR MATCH DE 2000 À 2019</span></div>'
-ecrire(1,page('DEPUIS 2020 · MATCHS OFFICIELS · <b>BUTS ENCAISSÉS PAR MATCH</b>','LA DÉFENSE','DES AIGLES',fr(A['mali']['par_match']),b,
-     'Matchs officiels : CAN et éliminatoires (CAN, Coupe du monde) · Données : résultats internationaux (martj42)'))
+def p1_image1(tt=False):
+    # TikTok : barres plus courtes, pour que les chiffres des rangs 6 à 10 restent avant x = 946
+    E=A['equipes'][:10]; mx=max(e['par_match'] for e in E); x0,x1=470,(830 if tt else 880); top=380; rh=58; b=''
+    for e in E:
+        y=top+(e['rang']-1)*rh; mali=e['equipe']=='Mali'; c='#0B7A3B' if mali else '#FFF3C4'; L=e['par_match']/mx*(x1-x0)
+        b+=(f'<div style="position:absolute;left:64px;top:{y}px;width:44px;text-align:right;font:italic 900 40px/1 BC;color:#064A25">{e["rang"]}</div>'
+            f'<div style="position:absolute;left:126px;top:{y}px">{drap(e["equipe"])}</div>'
+            f'<div style="position:absolute;left:180px;top:{y+6}px;font:800 30px/1 SC;letter-spacing:.03em;text-transform:uppercase;color:{"#0B7A3B" if mali else "#04331A"}">{FRN[e["equipe"]]}</div>'
+            f'<div style="position:absolute;left:{x0}px;top:{y+8}px;width:{L:.0f}px;height:24px;border-radius:3px;background:{c}"></div>'
+            f'<div style="position:absolute;left:{x0+L+14:.0f}px;top:{y+1}px;font:italic 900 40px/1 BC;color:{"#0B7A3B" if mali else "#064A25"}">{fr(e["par_match"])}</div>')
+    r=D['reference']['par_match']
+    b+=f'<div class="bigR" style="top:{top+10*rh+44}px"><b>2<span style="font:italic 900 70px BC;color:#064A25;letter-spacing:0">e</span></b><span>DÉFENSE D\'AFRIQUE DEPUIS 2020<br>CONTRE <em>{fr(r)}</em> BUT PAR MATCH DE 2000 À 2019</span></div>'
+    return page('DEPUIS 2020 · MATCHS OFFICIELS · <b>BUTS ENCAISSÉS PAR MATCH</b>','LA DÉFENSE','DES AIGLES',fr(A['mali']['par_match']),b,
+         'Matchs officiels : CAN et éliminatoires (CAN, Coupe du monde) · Données : résultats internationaux (martj42)',tt)
+ecrire(1,p1_image1()); ecrire('1_tt',p1_image1(True))
 
 # ---------- post 1, image 2 : la courbe depuis 2000, avec ce que le Mali d'avant aurait encaissé
 import datetime as dt
-M=D['matchs']; n=10
-roll=lambda k:[sum(m[k] for m in M[i-n+1:i+1])/n for i in range(n-1,len(M))]
-re_,at_=roll('buts_contre'),roll('attendu'); ds=[dt.date.fromisoformat(m['date']) for m in M][n-1:]
-cx0,cx1,cy0,cy1=110,900,390,880; t0,t1=dt.date(2001,1,1),dt.date(2026,12,31); ymax=2.0
-sx=lambda d:cx0+(d-t0).days/(t1-t0).days*(cx1-cx0); sy=lambda v:cy1-v/ymax*(cy1-cy0)
-g=f'<line class="ax" x1="{cx0}" y1="{cy0}" x2="{cx0}" y2="{cy1}"/><line class="ax" x1="{cx0}" y1="{cy1}" x2="{cx1}" y2="{cy1}"/>'
-for v in (0.5,1,1.5,2): g+=f'<text class="t" x="{cx0-14}" y="{sy(v)+9:.0f}" text-anchor="end">{fr(v,1).replace(",0","")}</text>'
-for a in (2005,2010,2015,2020,2025): g+=f'<text class="t" x="{sx(dt.date(a,1,1)):.0f}" y="{cy1+38}" text-anchor="middle">{a}</text>'
-x20=sx(dt.date(2020,1,1)); g+=f'<line class="pl" x1="{x20:.0f}" y1="{cy0}" x2="{x20:.0f}" y2="{cy1}"/>'
-pa=lambda vs:'M'+'L'.join(f'{sx(d):.1f} {sy(v):.1f}' for d,v in zip(ds,vs))
-g+=f'<path d="{pa(at_)}" fill="none" stroke="#D4252A" stroke-width="4" stroke-dasharray="11 9"/><path d="{pa(re_)}" fill="none" stroke="#0B7A3B" stroke-width="6" stroke-linejoin="round"/>'
-body=f'<svg style="position:absolute;left:0;top:0" width="{W}" height="{H}">{g}</svg>'
-body+=f'<div class="leg" style="top:{cy1+70}px"><span><i style="display:block;width:34px;height:9px;border-radius:5px;background:#0B7A3B"></i>BUTS ENCAISSÉS</span><span><svg width="36" height="9"><line x1="0" y1="4.5" x2="36" y2="4.5" stroke="#D4252A" stroke-width="5" stroke-dasharray="11 7"/></svg>LE MALI DE 2000-2019, FACE AUX MÊMES ADVERSAIRES</span></div>'
-body+=f'<div style="position:absolute;left:64px;top:{cy1+104}px;font:600 22px/1 SC;letter-spacing:.03em;color:rgba(4,51,26,.8)">PAR MATCH, EN MOYENNE SUR LES 10 DERNIERS MATCHS OFFICIELS</div>'
-AE=D['a_adversaires_egaux']
-body+=f'<div class="bigR" style="top:{cy1+160}px"><b>{AE["buts_reels"]}</b><span>BUTS ENCAISSÉS EN {D["depuis_2020"]["matchs"]} MATCHS DEPUIS 2020<br>POUR <em>{round(AE["buts_attendus"])}</em> ATTENDUS FACE AUX MÊMES ADVERSAIRES</span></div>'
-ecrire(2,page('2000-2026 · MATCHS OFFICIELS · <b>DEUX FOIS MOINS DE BUTS ENCAISSÉS</b>','LA DÉFENSE','DEPUIS 2000','22',body,
-     'Attendus : selon la force de l\'adversaire (classement Elo) et le lieu · Données : résultats internationaux (martj42)'))
+def p1_image2(tt=False):
+    M=D['matchs']; n=10
+    roll=lambda k:[sum(m[k] for m in M[i-n+1:i+1])/n for i in range(n-1,len(M))]
+    re_,at_=roll('buts_contre'),roll('attendu'); ds=[dt.date.fromisoformat(m['date']) for m in M][n-1:]
+    cx0,cx1,cy0,cy1=110,900,390,880; t0,t1=dt.date(2001,1,1),dt.date(2026,12,31); ymax=2.0
+    sx=lambda d:cx0+(d-t0).days/(t1-t0).days*(cx1-cx0); sy=lambda v:cy1-v/ymax*(cy1-cy0)
+    g=f'<line class="ax" x1="{cx0}" y1="{cy0}" x2="{cx0}" y2="{cy1}"/><line class="ax" x1="{cx0}" y1="{cy1}" x2="{cx1}" y2="{cy1}"/>'
+    for v in (0.5,1,1.5,2): g+=f'<text class="t" x="{cx0-14}" y="{sy(v)+9:.0f}" text-anchor="end">{fr(v,1).replace(",0","")}</text>'
+    for a in (2005,2010,2015,2020,2025): g+=f'<text class="t" x="{sx(dt.date(a,1,1)):.0f}" y="{cy1+38}" text-anchor="middle">{a}</text>'
+    x20=sx(dt.date(2020,1,1)); g+=f'<line class="pl" x1="{x20:.0f}" y1="{cy0}" x2="{x20:.0f}" y2="{cy1}"/>'
+    pa=lambda vs:'M'+'L'.join(f'{sx(d):.1f} {sy(v):.1f}' for d,v in zip(ds,vs))
+    g+=f'<path d="{pa(at_)}" fill="none" stroke="#D4252A" stroke-width="4" stroke-dasharray="11 9"/><path d="{pa(re_)}" fill="none" stroke="#0B7A3B" stroke-width="6" stroke-linejoin="round"/>'
+    body=f'<svg style="position:absolute;left:0;top:0" width="{W}" height="{H}">{g}</svg>'
+    body+=f'<div class="leg" style="top:{cy1+70}px{";font-size:23px;gap:20px" if tt else ""}"><span><i style="display:block;width:34px;height:9px;border-radius:5px;background:#0B7A3B"></i>BUTS ENCAISSÉS</span><span><svg width="36" height="9"><line x1="0" y1="4.5" x2="36" y2="4.5" stroke="#D4252A" stroke-width="5" stroke-dasharray="11 7"/></svg>LE MALI DE 2000-2019, FACE AUX MÊMES ADVERSAIRES</span></div>'
+    body+=f'<div style="position:absolute;left:64px;top:{cy1+104}px;font:600 22px/1 SC;letter-spacing:.03em;color:rgba(4,51,26,.8)">PAR MATCH, EN MOYENNE SUR LES 10 DERNIERS MATCHS OFFICIELS</div>'
+    AE=D['a_adversaires_egaux']
+    body+=f'<div class="bigR" style="top:{cy1+160}px"><b>{AE["buts_reels"]}</b><span>BUTS ENCAISSÉS EN {D["depuis_2020"]["matchs"]} MATCHS DEPUIS 2020<br>POUR <em>{round(AE["buts_attendus"])}</em> ATTENDUS FACE AUX MÊMES ADVERSAIRES</span></div>'
+    return page('2000-2026 · MATCHS OFFICIELS · <b>DEUX FOIS MOINS DE BUTS ENCAISSÉS</b>','LA DÉFENSE','DEPUIS 2000','22',body,
+         'Attendus : selon la force de l\'adversaire (classement Elo) et le lieu · Données : résultats internationaux (martj42)',tt)
+ecrire(2,p1_image2()); ecrire('2_tt',p1_image2(True))
+
+# ---------- post 1, image 3 : les limites (règle de Diaby du 14/10/2026 : toujours dire les points faibles)
+# Chaque chiffre vient des sorties du pipeline ou du recompte de docs/audits/post1-defense.md.
+def p1_image3(tt=False):
+    eq={e['equipe']:e for e in A['equipes']}; ml=eq['Mali']; s20=[m for m in D['matchs'] if m['periode']=='depuis_2020']
+    rang_plus_un=1+sum(e['par_match']<(ml['buts_encaisses']+1)/ml['matchs'] for e in A['equipes'] if e['equipe']!='Mali')
+    assert rang_plus_un==3, rang_plus_un  # le texte dit « troisième »
+    der=s20[-10:]; mar=[m for m in s20 if m['adversaire']=='Morocco'][0]; sans=[m for m in s20 if m is not mar]
+    rob=[r['rapport'] for r in D['robustesse_annee_de_coupure']]
+    # matchs à domicile depuis 2020 (même périmètre que le classement), recomptés dans le fichier brut martj42
+    import csv; dom={}
+    for r in csv.DictReader(open(ICI/'../data/bronze/international_results/results.csv',encoding='utf-8')):
+        if r['date']>=A['depuis'] and r['tournament'] in ('African Cup of Nations','African Cup of Nations qualification','FIFA World Cup qualification') and r['home_score'] not in ('','NA'):
+            for t in ('Morocco','Mali'):
+                if t in (r['home_team'],r['away_team']):
+                    n,h=dom.get(t,(0,0)); dom[t]=(n+1,h+((r['home_team']==t and r['neutral']=='FALSE') or r['country']==t))
+    assert dom['Morocco'][0]==eq['Morocco']['matchs'] and dom['Mali'][0]==ml['matchs'], dom
+    lignes=[(str(ml['matchs']),'MATCHS DEPUIS 2020, C\'EST PEU : UN SEUL BUT DE PLUS ET LE MALI SERAIT TROISIÈME.'),
+            (f'{dom["Morocco"][1]}/{dom["Morocco"][0]}',f'MATCHS DU MAROC, PREMIER, JOUÉS À DOMICILE. LE MALI : {dom["Mali"][1]} SUR {dom["Mali"][0]}. LE CLASSEMENT NE TIENT PAS COMPTE DU LIEU.'),
+            (str(sum(m['buts_contre'] for m in der)),f'BUTS PRIS SUR LES 10 DERNIERS MATCHS, CAN 2025 COMPRISE : PLUS QU\'AVANT, MAIS POUR {round(sum(m["attendu"] for m in der))} ATTENDUS.'),
+            (fr(mar['attendu']),f'BUTS ATTENDUS CONTRE LE MAROC, CHEZ LUI : SANS DOUTE TROP. SANS CE MATCH, {sum(m["buts_contre"] for m in sans)} PRIS POUR {round(sum(m["attendu"] for m in sans))} ATTENDUS.')]
+    b=''
+    for i,(n,t) in enumerate(lignes):
+        y=392+i*158
+        b+=(f'<div style="position:absolute;left:64px;top:{y}px;width:{870 if tt else 952}px;border-top:3px solid #064A25"></div>'
+            f'<div style="position:absolute;left:58px;top:{y+22}px;font:italic 900 104px/.86 BC;color:#064A25;white-space:nowrap">{n}</div>'
+            f'<div style="position:absolute;left:330px;top:{y+24}px;width:600px;font:800 28px/1.22 SC;letter-spacing:.03em;color:#04331A">{t}</div>')
+    lo,hi=round((1-max(rob))*100),round((1-min(rob))*100)
+    b+=(f'<div style="position:absolute;left:64px;top:{392+4*158}px;width:{870 if tt else 952}px;border-top:3px solid #064A25"></div>'
+        f'<div style="position:absolute;left:64px;top:{392+4*158+30}px;width:870px;font:800 30px/1.2 SC;letter-spacing:.04em;color:#04331A">LA CONCLUSION TIENT. PEU IMPORTE L\'ANNÉE DE DÉPART (2014 À 2023), LE MALI ENCAISSE <em style="font-style:normal;color:#D4252A">{lo} À {hi} % DE MOINS</em> QU\'ATTENDU.</div>')
+    return page('DEPUIS 2020 · MATCHS OFFICIELS · <b>CE QUE NOS CHIFFRES NE DISENT PAS</b>','LES LIMITES','POUR ÊTRE CLAIRS','?',b,
+         'Attendus : modèle appris sur 2000-2019 (force de l\'adversaire et lieu) · Données : résultats internationaux (martj42)',tt)
+ecrire(4,p1_image3()); ecrire('4_tt',p1_image3(True))
 
 # ---------- post 2 : le classement FIFA, gros chiffres empilés comme « L'anatomie d'un but »
 F=json.load(open(ICI/'../outputs/analyses/fifa_rwanda.json',encoding='utf-8')); u=F['un_match']; S={s['resultats']:s['ecart'] for s in F['deux_matchs']}
