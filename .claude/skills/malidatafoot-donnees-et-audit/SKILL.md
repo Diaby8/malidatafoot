@@ -74,6 +74,8 @@ débit, mettre en cache, et ne jamais dépendre d'une source dont on n'a pas le 
 
 **Bibliothèques possibles** : soccerdata, worldfootballR, ScraperFC, statsbombpy, mplsoccer.
 
+**Règle (Diaby, 14 octobre 2026) : jamais proposer une source payante sans preuve.** Avant de suggérer de payer quoi que ce soit, vérifier sur un échantillon de nos propres matchs (ex. 5 matchs du Mali, dont éliminatoires et amicaux) que la source les couvre, avec des données justes (comparées à une autre source) et mises à jour après chaque match, et savoir d'où viennent ses données. Toujours épuiser d'abord les sources gratuites (FotMob, FBref, Transfermarkt, Wikipédia, FEMAFOOT), copiées à la main par Diaby si besoin.
+
 ## 5. Chiffres de référence (CAN 2023, après audit)
 
 - **Mali** : 64 tirs, 5 buts + 1 contre son camp.
