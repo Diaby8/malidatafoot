@@ -181,3 +181,4 @@ des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliD
 - 2026-10-14 : simulation du groupe K (Dixon-Coles, 100 000 tirages, test 2020-2026, recompté indépendamment : identique au bruit près). Sujet de la vidéo TikTok avec voix off.
 - 2026-10-14 : pas de date exacte des matchs Mali-Rwanda dans les contenus tant que les sources divergent (dire « en novembre »).
 - 2026-10-14 : vidéo A « Ce que le 1-1 ne dit pas » : plans terrain qui penche + flèches de buts attendus validés (« j'aime bien ») ; voix off dans livrables/video-A ; Maroc 6e (et non 5e) au classement officiel de juillet 2026.
+- 2026-10-14 : POC de tous les sujets (vidéos A, B, C ; Mali-Côte d'Ivoire ; récupération haute ; styles ; maudit ; simulation) dans poc/. Joueurs (Sinayoko, Mamadou Sangaré, Kamissoko) en attente de source (Understat à lire).
