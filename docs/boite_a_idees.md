@@ -26,7 +26,7 @@ Statuts : **publié** · **prêt** (vérifié, à poster) · **POC** (calcul fai
 | 5 | **Vidéo B : trois questions, trois réponses** | défense, avantage du terrain, génération la plus forte (pic 2024) | analyses + Elo | `poc/maquettes/poc.py` |
 | 6 | **Vidéo C : la boîte à outils** | la force (Elo), la qualité d'une occasion (xG), la simulation | Elo, StatsBomb, simulation | `poc/maquettes/poc.py` |
 | 7 | **L'avantage du terrain pèse presque double en Afrique** | 317 points d'Elo en Afrique contre 169 en Europe | martj42 + Elo (recompté) | `outputs/analyses/avantage_terrain.json` |
-| 8 | **Mali - Côte d'Ivoire décodé** | le ballon, pas les occasions : 90 passes dans le dernier tiers, 8 dans la surface | StatsBomb | `poc/maquettes/poc.py` |
+| 8 | **Mali - Côte d'Ivoire décodé** (en pause : « pas Mali-Côte d'Ivoire », Diaby, 14/10) | le ballon, pas les occasions : 90 passes dans le dernier tiers, 8 dans la surface | StatsBomb | `poc/maquettes/poc.py` |
 | 9 | **Récupérer haut, mais en tirer peu** | 1er pour la hauteur de récupération, 2e pressing, 5 tirs pour 6,7 attendus | StatsBomb | `poc/jeu_can2023/` |
 | 10 | **Les styles de jeu vus par la machine** | le Mali a le ballon mais ne va pas vers l'avant (23e sur 24) | StatsBomb, ACP | `poc/jeu_can2023/` |
 | 11 | **Le Mali est-il maudit à la CAN ?** | pas maudit, pas encore assez fort : 62 % de chances de n'avoir aucun titre | martj42 + modèle | `poc/maudit/` |
