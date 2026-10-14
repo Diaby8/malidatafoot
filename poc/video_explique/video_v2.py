@@ -93,7 +93,7 @@ canvas{position:absolute;left:0;top:0}.cache{display:none}
 <div class="t lab" id="l5c" style="top:372px">RÉCUPÉRÉS · <span>LIGNE = HAUTEUR MOYENNE</span></div>
 <div id="foot"><img class="lg" src="logo-verte.png"><div class="wm">Mali<i>Data</i>Foot</div><div class="soc"><img src="logo_x.png" style="height:28px;filter:brightness(0) invert(1)"><img src="logo_tt.png" style="height:36px;filter:brightness(0) invert(1)">@MaliDataFoot</div></div>
 <div id="src">Positions et trajectoires réelles · Menace : modèle MaliDataFoot (xT) · Données <img src="logo_statsbomb.png" style="height:22px;vertical-align:-5px"></div>
-<div class="t h2" id="dor" style="top:1430px;left:0;right:0;text-align:center;color:#064A25">LUI, <span style="color:#D4252A">IL ÉTAIT DANS L'ACTION.</span></div>
+<div class="t h2" id="dor" style="top:1560px;left:0;right:0;text-align:center;color:#064A25">LUI, <span style="color:#D4252A">IL ÉTAIT DANS L'ACTION.</span></div>
 <div id="voile"></div>
 <div id="fin"><img class="lg" src="logo-verte.png"><div class="wm">Mali<i>Data</i>Foot</div><div class="so"><img src="logo_x.png" style="height:40px"><img src="logo_tt.png" style="height:52px"><span>@MaliDataFoot</span></div></div>
 @@IMGS@@
@@ -169,7 +169,7 @@ function joueurs(g,a,tir,lab3){ if(a<=0)return; g.globalAlpha=a;
   J.sort((p,q)=>q.x-p.x);
   for(const j of J){const col=j.tireur?'#FF6B5E':(j.mali?'#F6C41C':'#FFFFFF'); ring(g,j.x,j.y,1.5,col,.26);}
   for(const j of J){const col=j.tireur?'#FF6B5E':(j.mali?'#F6C41C':'#FFFFFF'); seg(g,[j.x,j.y,0],[j.x,j.y,2.1],col,.16); const s=P(j.x,j.y,2.35); if(s){g.fillStyle=col;g.beginPath();g.arc(s[0],s[1],Math.max(4,.42*kz(j.x,j.y,2.35)),0,7);g.fill();}}
-  for(const j of J){ if(!j.mali)continue; const n=j.nom=='Nene Dorgeles'?'DORGELES':j.nom.split(' ').slice(-1)[0].toUpperCase(); texte(g,j.x,j.y,3.7,n,j.tireur?'#FF6B5E':'#F6C41C',Math.round(lerp(26,40,cl((kz(j.x,j.y)-20)/40))));}
+  for(const j of J){ if(!j.mali)continue; const n=j.nom=='Nene Dorgeles'?'DORGELES':j.nom.split(' ').slice(-1)[0].toUpperCase(); const al=j.tireur?'right':(j.nom=='Nene Dorgeles'?'left':'center'); texte(g,j.x,j.y,3.7,n,j.tireur?'#FF6B5E':'#F6C41C',Math.round(lerp(26,40,cl((kz(j.x,j.y)-20)/40))),al);}
   g.globalAlpha=1;
   if(lab3>0){const c=D.gestes.find(e=>e.xt>.1); const mx=(c.x1+c.x2)/2, my=(c.y1+c.y2)/2; X.globalAlpha=lab3; texteBig(g,mx,my,4.2,'+'+(.25*oc(lab3)).toFixed(2).replace('.',','),'#FF6B5E',96); X.globalAlpha=a;}
   if(tir>0){X.globalAlpha=cl(tir*2); texteBig(g,D.tir.x,D.tir.y,6.2,Math.round(32*oc(cl(tir)))+' %','#F6C41C',110); X.globalAlpha=1;}
@@ -184,7 +184,7 @@ function recup(g,a){ if(a<=0)return; let sx=0; for(const r of D.recup){sx+=r.x; 
 // ---------------------------------------------------------------- le carrousel et le mur (canevas 2)
 const T={hook:0, plonge:2.0, couche1:3.2, couche2:6.7, couche3:8.0, couche4:9.3, tournoi:11.2, flash:1.15, carrousel:15.0, mur:17.8, fin:20.9, duree:23.6};
 window.DUREE=T.duree;
-function mur(m){ const S=lerp(.62,.10,m), rx=lerp(0,28,m)*Math.PI/180, rz=lerp(0,-14,m)*Math.PI/180, yc=lerp(960,960,m), co=Math.cos(rx), GX=1180, GY=1580, DD=2400;
+function mur(m){ const S=lerp(.78,.10,m), rx=lerp(0,28,m)*Math.PI/180, rz=lerp(0,-14,m)*Math.PI/180, yc=lerp(960,960,m), co=Math.cos(rx), GX=1180, GY=1580, DD=2400;
   const L=[]; for(const [r,c,k] of D.cases){const x0=(c-D.cc)*GX, y0=(r-D.rr)*GY; const Xr=x0*Math.cos(rz)-y0*Math.sin(rz), Yr=x0*Math.sin(rz)+y0*Math.cos(rz);
     const Xs=Xr*S, Ys=Yr*S, z=-Ys*Math.sin(rx), f=DD/(DD+z), sx=540+Xs*f, sy=yc+Ys*co*f, k2=S*f;
     if(sx<-700*k2||sx>1080+700*k2||sy<-800*k2||sy>1920+800*k2)continue; L.push([z,sx,sy,k2,k,r==D.rc&&c==D.cc]);}
@@ -193,9 +193,9 @@ function mur(m){ const S=lerp(.62,.10,m), rx=lerp(0,28,m)*Math.PI/180, rz=lerp(0
     if(centre&&k2>.3)X2.drawImage($('fp5'),0,120,1080,1460,-540,-730,1080,1460); else X2.drawImage($('ti'+k),-540,-730,1080,1460); X2.restore();}}
 D.rr=D.rc;
 function carrousel(t){ // un train de fiches côte à côte qui file de gauche à droite et s'arrête sur Dorgeles (la dernière)
-  const N=6, S=.62, PAS=710, u=cl((t-T.carrousel-.2)/2.3), e=1-Math.pow(1-u,4);
-  const tete=lerp(-380,540+(N-1)*PAS,e);   // position de la 1re fiche (Hamari), en tête du train
-  for(let i=0;i<N;i++){const x=tete-i*PAS; if(x<-380||x>1460)continue; X2.save(); X2.translate(x,960); X2.scale(S,S); X2.drawImage($('fp'+i),0,120,1080,1460,-540,-730,1080,1460); X2.restore();}}
+  const N=6, S=.78, PAS=880, u=cl((t-T.carrousel-.2)/2.3), e=1-Math.pow(1-u,4);
+  const tete=lerp(-460,540+(N-1)*PAS,e);   // position de la 1re fiche (Hamari), en tête du train
+  for(let i=0;i<N;i++){const x=tete-i*PAS; if(x<-460||x>1540)continue; X2.save(); X2.translate(x,960); X2.scale(S,S); X2.drawImage($('fp'+i),0,120,1080,1460,-540,-730,1080,1460); X2.restore();}}
 // ---------------------------------------------------------------- le temps
 function vis(id,t,a,b,dy=30){const e=$(id); const u=oc(cl((t-a)/.4)), v=b==null?0:cl((t-b)/.3); e.style.opacity=(u*(1-v)).toFixed(3); e.style.transform=`translateY(${((1-u)*dy).toFixed(1)}px)`;}
 const K=[ // images clés de la caméra : temps, position, cible, focale, centre vertical (caméra derrière le but que le Mali attaque)
