@@ -199,3 +199,4 @@ des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliD
 - 2026-10-14 : vidéo explicative : radar des fiches floutées remplacé par une forme régulière à dix côtés, la même pour les six joueurs (idée de Diaby) : aucune forme de données, vraie ou fictive, n'apparaît ; cette forme est floutée elle aussi (Diaby).
 - 2026-10-14 : forme neutre des fiches floutées = hexagone régulier, légèrement flouté (le décagone flouté faisait un rond, « moche », Diaby).
 - 2026-10-14 : fiches floutées : radar en zigzag (vraie forme pour les quatre vrais joueurs, forme tirée au hasard pour Sangaré et Dorgeles), flou plus fort (12) ; l'hexagone net se voyait trop (Diaby).
+- 2026-10-14 : fiches floutées de la vidéo : radar = forme décorative ample en zigzag, différente par joueur, sans lien avec les données (les vraies formes floutées faisaient paraître les joueurs « nuls », Diaby) ; flou 7, remplissage plus marqué. Les fiches publiées gardent leur vrai radar.
