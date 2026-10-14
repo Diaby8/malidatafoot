@@ -27,7 +27,7 @@ CSS=FONTS+'''*{box-sizing:border-box;margin:0;padding:0}html,body{width:1080px;h
 .ax{stroke:#064A25;stroke-width:4;fill:none}.pl{stroke:#FCE38A;stroke-width:3}
 .t{font:700 26px "SC";fill:#064A25}
 .leg{position:absolute;left:64px;display:flex;gap:26px;align-items:center;font:800 25px/1 "SC";letter-spacing:.04em;color:#04331A;white-space:nowrap}.leg span{display:flex;align-items:center;gap:10px}'''
-def trame(fx=1080,fy=0,col='#FDEBA6',op=.85):
+def trame(fx=1080,fy=0,col='#FDEBA6',op='0.85'):
     g='';st=30;y=st/2;row=0
     while y<H:
         x=st/2+(st/2 if row%2 else 0)
@@ -39,6 +39,29 @@ def page(kick,h1,h2,ghost,body,src):
 <div class="ghost">{ghost}</div><div class="kick">{kick}</div><div class="h1">{h1}</div><div class="h2">{h2}</div>{body}
 <div id="foot"><img src="logo-verte.png"><div class="wm">Mali<i>Data</i>Foot</div><div class="soc"><img src="logo_x.png" style="height:28px"><img src="logo_tt.png" style="height:36px">@MaliDataFoot</div></div>
 <div id="src">{src}</div></div><script>document.fonts.ready.then(()=>{{window.READY=true}})</script></body></html>'''
+# Les trois couleurs de la DA (comme dans la vidéo : scènes jaunes, scènes vertes, éléments blancs).
+# Même mise en page ; seules les couleurs changent.
+FOND_JAUNE='linear-gradient(180deg,#FBD134 0%,#F6C41C 45%,#EFA40A 100%)'
+TEINTES={
+ 'vert':{'fond':'radial-gradient(120% 70% at 30% 26%, #128F47 0%, #0B7A3B 30%, #064A25 62%, #04331A 100%)',
+         'cible':{'.h2{position:absolute;left:64px;top:244px;font:italic 800 76px/1 "BC";color:#D4252A':'.h2{position:absolute;left:64px;top:244px;font:italic 800 76px/1 "BC";color:#F6C41C',
+                  '.bigR em{font-style:normal;color:#D4252A}':'.bigR em{font-style:normal;color:#F6C41C}',
+                  '<img src="logo_x.png" style="height:28px">':'<img src="logo_x.png" style="height:28px;filter:brightness(0) invert(1)">',
+                  '<img src="logo_tt.png" style="height:36px">':'<img src="logo_tt.png" style="height:36px;filter:brightness(0) invert(1)">',
+                  'fill-opacity="0.85"':'fill-opacity="0.5"'},
+         'couleurs':{'#0B7A3B':'#F6C41C','#064A25':'#FFFFFF','#04331A':'#FFFFFF','#FFF3C4':'#CFE6D6','#FDEBA6':'#19A552',
+                     '#FFF6D0':'#19A552','#FCE38A':'#19A552','rgba(4,51,26,.75)':'rgba(255,255,255,.75)','rgba(4,51,26,.8)':'rgba(255,255,255,.8)'}},
+ 'blanc':{'fond':'#FFFFFF','cible':{},
+          'couleurs':{'#FFF3C4':'#E3E8E3','#FDEBA6':'#EEF2EC','#FFF6D0':'#DDE3DD','#FCE38A':'#E3E8E3'}}}
+def teinte(html,nom):
+    if nom=='jaune': return html
+    T=TEINTES[nom]; html=html.replace(FOND_JAUNE,'@@FOND@@')
+    for a,b in T['cible'].items(): html=html.replace(a,b)
+    for a,b in T['couleurs'].items(): html=html.replace(a,b)
+    return html.replace('@@FOND@@',T['fond'])
+def ecrire(k,html):
+    for nom in ('jaune','vert','blanc'):
+        open(ICI/f'_pv_{k}{"" if nom=="jaune" else "_"+nom}.html','w',encoding='utf-8').write(teinte(html,nom))
 fr=lambda v,d=2:f'{v:.{d}f}'.replace('.',',')
 # drapeaux ronds (dessinés sur 20 x 20)
 v3=lambda a,b,c:f'<rect width="6.7" height="20" fill="{a}"/><rect x="6.7" width="6.7" height="20" fill="{b}"/><rect x="13.3" width="6.7" height="20" fill="{c}"/>'
@@ -69,7 +92,7 @@ for e in E:
         f'<div style="position:absolute;left:{x0+L+14:.0f}px;top:{y+1}px;font:italic 900 40px/1 BC;color:{"#0B7A3B" if mali else "#064A25"}">{fr(e["par_match"])}</div>')
 r=D['reference']['par_match']
 b+=f'<div class="bigR" style="top:{top+10*rh+44}px"><b>2<span style="font:italic 900 70px BC;color:#064A25;letter-spacing:0">e</span></b><span>DÉFENSE D\'AFRIQUE DEPUIS 2020<br>CONTRE <em>{fr(r)}</em> BUT PAR MATCH DE 2000 À 2019</span></div>'
-open(ICI/'_pv_1.html','w',encoding='utf-8').write(page('DEPUIS 2020 · MATCHS OFFICIELS · <b>BUTS ENCAISSÉS PAR MATCH</b>','LA DÉFENSE','DES AIGLES',fr(A['mali']['par_match']),b,
+ecrire(1,page('DEPUIS 2020 · MATCHS OFFICIELS · <b>BUTS ENCAISSÉS PAR MATCH</b>','LA DÉFENSE','DES AIGLES',fr(A['mali']['par_match']),b,
      'Matchs officiels : CAN et éliminatoires (CAN, Coupe du monde) · Données : résultats internationaux (martj42)'))
 
 # ---------- post 1, image 2 : la courbe depuis 2000, avec ce que le Mali d'avant aurait encaissé
@@ -90,7 +113,7 @@ body+=f'<div class="leg" style="top:{cy1+70}px"><span><i style="display:block;wi
 body+=f'<div style="position:absolute;left:64px;top:{cy1+104}px;font:600 22px/1 SC;letter-spacing:.03em;color:rgba(4,51,26,.8)">PAR MATCH, EN MOYENNE SUR LES 10 DERNIERS MATCHS OFFICIELS</div>'
 AE=D['a_adversaires_egaux']
 body+=f'<div class="bigR" style="top:{cy1+160}px"><b>{AE["buts_reels"]}</b><span>BUTS ENCAISSÉS EN {D["depuis_2020"]["matchs"]} MATCHS DEPUIS 2020<br>POUR <em>{round(AE["buts_attendus"])}</em> ATTENDUS FACE AUX MÊMES ADVERSAIRES</span></div>'
-open(ICI/'_pv_2.html','w',encoding='utf-8').write(page('2000-2026 · MATCHS OFFICIELS · <b>DEUX FOIS MOINS DE BUTS ENCAISSÉS</b>','LA DÉFENSE','DEPUIS 2000','22',body,
+ecrire(2,page('2000-2026 · MATCHS OFFICIELS · <b>DEUX FOIS MOINS DE BUTS ENCAISSÉS</b>','LA DÉFENSE','DEPUIS 2000','22',body,
      'Attendus : selon la force de l\'adversaire (classement Elo) et le lieu · Données : résultats internationaux (martj42)'))
 
 # ---------- post 2 : le classement FIFA, gros chiffres empilés comme « L'anatomie d'un but »
@@ -106,6 +129,6 @@ for i,(lab,k) in enumerate(rows):
     y=444+i*70; v=S[k]; c='#0B7A3B' if v>0 else '#D4252A'
     b+=f'<div style="position:absolute;left:600px;top:{y}px;width:416px;border-top:3px solid #064A25"></div><div style="position:absolute;left:600px;top:{y+20}px;font:800 24px/1 SC;letter-spacing:.04em;color:#04331A">{lab}</div><div style="position:absolute;right:64px;top:{y+12}px;font:italic 900 46px/1 BC;color:{c}">{sg(v)}</div>'
 b+=f'<div class="bigR" style="top:1030px"><b>{round(100*F["attendu_mali"])}<span style="font:italic 900 70px BC;color:#064A25;letter-spacing:0"> %</span></b><span>LA FIFA ATTEND UNE VICTOIRE DU MALI :<br>GAGNER RAPPORTE PEU, NE PAS GAGNER <em>COÛTE CHER</em></span></div>'
-open(ICI/'_pv_3.html','w',encoding='utf-8').write(page('CAN 2027 · CONTRE LE RWANDA EN NOVEMBRE · <b>POINTS FIFA DU MALI</b>','GAGNER','DEUX FOIS',sg(S['VV']),b,
+ecrire(3,page('CAN 2027 · CONTRE LE RWANDA EN NOVEMBRE · <b>POINTS FIFA DU MALI</b>','GAGNER','DEUX FOIS',sg(S['VV']),b,
      'Points du 7 octobre 2026 : Mali 1474,14, Rwanda 1156,16 · Formule officielle de la FIFA · Calcul MaliDataFoot'))
 print('ok')
