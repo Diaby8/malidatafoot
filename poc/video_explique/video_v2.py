@@ -105,7 +105,7 @@ canvas{position:absolute;left:0;top:0}.cache{display:none}
 <div class="t" id="m1" style="top:780px;left:0;right:0;text-align:center"><span class="chip">EN SÉLECTION</span></div>
 <div class="t" id="m2" style="top:930px;left:0;right:0;text-align:center"><span class="chip">EN CLUB</span></div>
 <div id="voile"></div>
-<div id="fin"><img class="lg" src="logo-verte.png"><div class="wm">Mali<i>Data</i>Foot</div><div class="so"><img src="logo_x.png" style="height:40px"><img src="logo_tt.png" style="height:52px"><span>@MaliDataFoot</span></div><div id="tg" style="margin-top:64px;font:italic 900 66px/1.1 BC;color:#064A25;text-transform:uppercase;opacity:0">Le score te donne le résultat.<br><span id="tg2" style="color:#D4252A;opacity:0">Nous, on te montre le match.</span></div><div id="qq" style="opacity:0;margin-top:46px;font:italic 800 64px/1.1 BC;color:#064A25;text-transform:uppercase">Quel joueur on passe<br><span style="color:#D4252A">aux rayons X ensuite ?</span></div></div>
+<div id="fin"><img class="lg" src="logo-verte.png"><div class="wm">Mali<i>Data</i>Foot</div><div class="so"><img src="logo_x.png" style="height:40px"><img src="logo_tt.png" style="height:52px"><span>@MaliDataFoot</span></div><div id="tg" style="margin-top:64px;font:italic 900 66px/1.1 BC;color:#064A25;text-transform:uppercase;opacity:0">Le score te donne le résultat.<br><span id="tg2" style="color:#D4252A;opacity:0">Nous, on te montre le match.</span></div><div id="qq" style="opacity:0;margin-top:46px;font:italic 800 64px/1.1 BC;color:#064A25;text-transform:uppercase">Quel joueur on passe<br><span style="color:#D4252A">aux rayons X pour commencer ?</span></div></div>
 @@IMGS@@
 </div><script>
 const D=@@DATA@@;
@@ -203,7 +203,7 @@ function chaleur(g,a){ if(a<=0)return; const G=D.presence;   // carte lissée, c
 function recup(g,a){ if(a<=0)return; let sx=0; for(const r of D.recup){sx+=r.x; ring(g,r.x,r.y,.75*a,'#F6C41C',.16,'rgba(246,196,28,.55)');}
   const m=sx/D.recup.length; if(a>.5) seg(g,[m,-3,.02],[m,83,.02],'#FF6B5E',.35,[1.4,1]);}
 // ---------------------------------------------------------------- le carrousel et le mur (canevas 2)
-const T={hook:0, zero:1.38, rien:2.45, evts:5.28, plonge:7.9, couche1:9.27, actA:10.62, actB:15.6, couche2:15.86, couche3:18.97, couche4:21.32, cote:23.5, tournoi:26.11, f1:26.11, f2:27.18, f3:28.45, f4:30.72, carrousel:34.31, dor:36.38, mur:37.93, mot1:41.63, mot2:42.45, fin:44.22, fin2:45.77, quest:47.51, duree:51.3};
+const T={hook:0, zero:1.38, rien:2.45, evts:5.28, plonge:7.9, couche1:9.27, actA:10.62, actB:15.6, couche2:15.86, couche3:18.97, couche4:21.32, cote:23.5, tournoi:26.11, f1:26.11, f2:27.18, f3:28.45, f4:30.72, carrousel:32.9, dor:36.38, mur:37.93, mot1:41.63, mot2:42.45, fin:44.22, fin2:45.77, quest:47.51, duree:51.3};
 window.DUREE=T.duree;
 function mur(m){ const S=lerp(.78,.10,m), rx=lerp(0,28,m)*Math.PI/180, rz=lerp(0,-14,m)*Math.PI/180, yc=lerp(960,960,m), co=Math.cos(rx), GX=1180, GY=1580, DD=2400;
   const L=[]; for(const [r,c,k] of D.cases){const x0=(c-D.cc)*GX, y0=(r-D.rr)*GY; const Xr=x0*Math.cos(rz)-y0*Math.sin(rz), Yr=x0*Math.sin(rz)+y0*Math.cos(rz);
@@ -213,10 +213,10 @@ function mur(m){ const S=lerp(.78,.10,m), rx=lerp(0,28,m)*Math.PI/180, rz=lerp(0
   for(const [z,sx,sy,k2,k,centre] of L){X2.save();X2.translate(sx,sy);X2.rotate(rz);X2.scale(k2,k2*co);
     if(centre&&k2>.3)X2.drawImage($('fp5'),0,120,1080,1460,-540,-730,1080,1460); else X2.drawImage($('ti'+k),-540,-730,1080,1460); X2.restore();}}
 D.rr=D.rc;
-function carrousel(t){ // un train de fiches côte à côte qui file de gauche à droite et s'arrête sur Dorgeles (la dernière)
-  const N=6, S=.78, PAS=880, u=cl((t-T.carrousel-.15)/1.55), e=1-Math.pow(1-u,4);
-  const tete=lerp(-460,540+(N-1)*PAS,e);   // position de la 1re fiche (Hamari), en tête du train
-  for(let i=0;i<N;i++){const x=tete-i*PAS; if(x<-460||x>1540)continue; X2.save(); X2.translate(x,960); X2.scale(S,S); X2.drawImage($('fp'+i),0,120,1080,1460,-540,-730,1080,1460);
+function carrousel(t){ // les fiches entrent par la gauche une par une, chacune s'arrête au centre le temps d'être lue ; la dernière (Dorgeles) reste
+  const N=6, S=.78, PAS=880, SL=.3, a0=T.carrousel+.35, a5=T.dor-SL, P=(a5-a0)/(N-1);
+  let idx=-1; for(let j=0;j<N;j++) idx+=io(cl((t-(a0+j*P))/SL));
+  for(let i=0;i<N;i++){const x=540+(idx-i)*PAS; if(x<-460||x>1540)continue; X2.save(); X2.translate(x,960); X2.scale(S,S); X2.drawImage($('fp'+i),0,120,1080,1460,-540,-730,1080,1460);
     if(i<2){X2.fillStyle='#D4252A'; X2.fillRect(-540,-830,560,84); X2.fillStyle='#FFFFFF'; X2.font='800 46px SC'; X2.textAlign='left'; X2.fillText("DANS L'ACTION",-512,-772);}
     X2.restore();}}
 // ---------------------------------------------------------------- le temps

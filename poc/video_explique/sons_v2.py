@@ -5,7 +5,7 @@ import json, os, sys, wave
 import numpy as np
 ICI = os.path.dirname(os.path.abspath(__file__)); RACINE = os.path.dirname(os.path.dirname(ICI))
 SR = 48000
-T = dict(hook=0, zero=1.38, rien=2.45, evts=5.28, plonge=7.9, couche1=9.27, actA=10.62, actB=15.6, couche2=15.86, couche3=18.97, couche4=21.32, cote=23.5, f1=26.11, f2=27.18, f3=28.45, f4=30.72, carrousel=34.31, dor=36.38, mur=37.93, mot1=41.63, mot2=42.45, fin=44.22, quest=47.51, duree=51.3)
+T = dict(hook=0, zero=1.38, rien=2.45, evts=5.28, plonge=7.9, couche1=9.27, actA=10.62, actB=15.6, couche2=15.86, couche3=18.97, couche4=21.32, cote=23.5, f1=26.11, f2=27.18, f3=28.45, f4=30.72, carrousel=32.9, dor=36.38, mur=37.93, mot1=41.63, mot2=42.45, fin=44.22, quest=47.51, duree=51.3)
 P = json.load(open(os.path.join(RACINE, 'poc/xt/top_possession.json')))['meilleure']
 def ts(e):
     h, m, s = e['timestamp'].split(':'); return int(h) * 3600 + int(m) * 60 + float(s)
@@ -43,8 +43,9 @@ poser(T['couche3'] + .2, note(1320, .18), .25)                           # +0,25
 poser(T['cote'] - .2, coup(90, .35), .7)                                 # la tête, à côté
 for k in ('f1', 'f2', 'f3', 'f4'): poser(T[k], souffle(.45, 600, 3000), .32); poser(T[k] + .05, note(880, .16), .25)
 poser(T['carrousel'] - .1, souffle(.9, 400, 2600), .45)                  # le jaune entre
-for i in range(6): poser(T['carrousel'] + .3 + i * .22, clic(1500, .03), .3, pan=-.5 + i * .2)
-poser(T['carrousel'] + 1.6, coup(120, .25), .45)                         # arrêt sur Dorgeles
+P = (T['dor'] - .3 - T['carrousel'] - .35) / 5
+for i in range(6): poser(T['carrousel'] + .35 + i * P, souffle(.3, 800, 3200), .22, pan=-.5 + i * .2)
+poser(T['dor'], coup(120, .25), .45)                         # arrêt sur Dorgeles
 poser(T['mur'], souffle(2.4, 1800, 150), .45)                            # le dézoom
 for k in ('mot1', 'mot2'): poser(T[k], note(740, .14), .25)
 poser(T['fin'], accord(), .6); poser(T['quest'], note(990, .2), .3)
