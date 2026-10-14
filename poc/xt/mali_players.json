@@ -1,0 +1,930 @@
+{
+ "source": "Hudl StatsBomb Open Data (licence non commerciale, attribution « Hudl StatsBomb »)",
+ "genere_le": "2026-10-14",
+ "definition": "xT ajouté = xT(case d'arrivée) − xT(case de départ) pour chaque passe réussie de jeu courant et chaque conduite d'au moins 3 unités ; crédité au joueur qui fait l'action. Les passes ratées ne retirent rien (choix de Karun Singh).",
+ "minutes": "chrono du match (90 ou 120 par match), table gold.player_tournament du pipeline",
+ "classement": "tous les joueurs de champ de la CAN 2023 avec au moins 180 minutes (243 joueurs), par xT ajouté par 90 minutes ; rang 1 = le plus haut ; ex aequo au même rang",
+ "poste": "rôle fin de la page (malidata/profils.py) : rôle où le joueur a fait au moins 50 % de ses actions",
+ "effectifs_par_role": {
+  "DC": 55,
+  "LAT": 49,
+  "MOF": 43,
+  "MDF": 38,
+  "MIL": 26,
+  "ATT": 22
+ },
+ "stabilite_sur_le_tournoi": {
+  "principe": "matchs de chaque joueur coupés en deux (1er, 3e, 5e… contre 2e, 4e…), au moins 90 minutes de chaque côté, gardiens exclus ; corrélation de rang du xT ajouté par 90 entre les deux moitiés",
+  "joueurs": 194,
+  "spearman": 0.2884
+ },
+ "rang_bootstrap": "intervalle à 90 % du rang sur 200 grilles xT refaites par bootstrap des matchs d'entraînement (incertitude du modèle seulement, pas du petit nombre de matchs)",
+ "joueurs": [
+  {
+   "player_id": 3248,
+   "joueur": "Hamari Traoré",
+   "nom_complet": "Hamari Traoré",
+   "poste_principal": "Right Back",
+   "role": "LAT",
+   "role_fr": "latéraux",
+   "part_actions_dans_le_role": 1.0,
+   "minutes": 480.0,
+   "matchs": 5,
+   "titularisations": 5,
+   "xt_ajoute": 0.651488,
+   "xt_ajoute_positif_seul": 0.93221,
+   "xt_p90": 0.122154,
+   "passes": {
+    "n": 233,
+    "xt": 0.55836,
+    "xt_p90": 0.104692,
+    "rang": 47
+   },
+   "conduites": {
+    "n": 93,
+    "xt": 0.093128,
+    "xt_p90": 0.017462,
+    "rang": 130
+   },
+   "eligible": true,
+   "rang": 68,
+   "sur": 243,
+   "rang_poste": 23,
+   "effectif_poste": 49,
+   "rang_bootstrap_ic90": [
+    66,
+    72
+   ],
+   "rang_bootstrap_median": 69.0
+  },
+  {
+   "player_id": 7295,
+   "joueur": "Sikou Niakaté",
+   "nom_complet": "Sikou Niakaté",
+   "poste_principal": "Left Center Back",
+   "role": "DC",
+   "role_fr": "défenseurs centraux",
+   "part_actions_dans_le_role": 1.0,
+   "minutes": 480.0,
+   "matchs": 5,
+   "titularisations": 5,
+   "xt_ajoute": 0.650878,
+   "xt_ajoute_positif_seul": 0.738062,
+   "xt_p90": 0.12204,
+   "passes": {
+    "n": 265,
+    "xt": 0.551436,
+    "xt_p90": 0.103394,
+    "rang": 48
+   },
+   "conduites": {
+    "n": 150,
+    "xt": 0.099442,
+    "xt_p90": 0.018645,
+    "rang": 118
+   },
+   "eligible": true,
+   "rang": 69,
+   "sur": 243,
+   "rang_poste": 9,
+   "effectif_poste": 55,
+   "rang_bootstrap_ic90": [
+    66,
+    72
+   ],
+   "rang_bootstrap_median": 69.5
+  },
+  {
+   "player_id": 12557,
+   "joueur": "Falaye Sacko",
+   "nom_complet": "Falaye Sacko",
+   "poste_principal": "Left Back",
+   "role": "LAT",
+   "role_fr": "latéraux",
+   "part_actions_dans_le_role": 1.0,
+   "minutes": 390.0,
+   "matchs": 4,
+   "titularisations": 4,
+   "xt_ajoute": 0.423316,
+   "xt_ajoute_positif_seul": 0.652756,
+   "xt_p90": 0.097688,
+   "passes": {
+    "n": 164,
+    "xt": 0.263572,
+    "xt_p90": 0.060824,
+    "rang": 104
+   },
+   "conduites": {
+    "n": 97,
+    "xt": 0.159745,
+    "xt_p90": 0.036864,
+    "rang": 62
+   },
+   "eligible": true,
+   "rang": 95,
+   "sur": 243,
+   "rang_poste": 33,
+   "effectif_poste": 49,
+   "rang_bootstrap_ic90": [
+    92,
+    97
+   ],
+   "rang_bootstrap_median": 95.0
+  },
+  {
+   "player_id": 162132,
+   "joueur": "Kamory Doumbia",
+   "nom_complet": "Kamory Doumbia",
+   "poste_principal": "Center Attacking Midfield",
+   "role": "MOF",
+   "role_fr": "milieux offensifs et ailiers",
+   "part_actions_dans_le_role": 0.954479,
+   "minutes": 390.6,
+   "matchs": 5,
+   "titularisations": 4,
+   "xt_ajoute": 0.411866,
+   "xt_ajoute_positif_seul": 0.702873,
+   "xt_p90": 0.094896,
+   "passes": {
+    "n": 119,
+    "xt": 0.059493,
+    "xt_p90": 0.013708,
+    "rang": 202
+   },
+   "conduites": {
+    "n": 77,
+    "xt": 0.352373,
+    "xt_p90": 0.081189,
+    "rang": 14
+   },
+   "eligible": true,
+   "rang": 98,
+   "sur": 243,
+   "rang_poste": 27,
+   "effectif_poste": 43,
+   "rang_bootstrap_ic90": [
+    96,
+    99
+   ],
+   "rang_bootstrap_median": 98.0
+  },
+  {
+   "player_id": 23331,
+   "joueur": "Kiki Kouyaté",
+   "nom_complet": "Kiki Kouyaté",
+   "poste_principal": "Right Center Back",
+   "role": "DC",
+   "role_fr": "défenseurs centraux",
+   "part_actions_dans_le_role": 1.0,
+   "minutes": 480.0,
+   "matchs": 5,
+   "titularisations": 5,
+   "xt_ajoute": 0.429769,
+   "xt_ajoute_positif_seul": 0.499379,
+   "xt_p90": 0.080582,
+   "passes": {
+    "n": 280,
+    "xt": 0.34244,
+    "xt_p90": 0.064207,
+    "rang": 99
+   },
+   "conduites": {
+    "n": 155,
+    "xt": 0.087329,
+    "xt_p90": 0.016374,
+    "rang": 134
+   },
+   "eligible": true,
+   "rang": 114,
+   "sur": 243,
+   "rang_poste": 18,
+   "effectif_poste": 55,
+   "rang_bootstrap_ic90": [
+    112,
+    115
+   ],
+   "rang_bootstrap_median": 114.0
+  },
+  {
+   "player_id": 3710,
+   "joueur": "Fousseni Diabaté",
+   "nom_complet": "Fousseni Diabaté",
+   "poste_principal": "Right Wing",
+   "role": "MOF",
+   "role_fr": "milieux offensifs et ailiers",
+   "part_actions_dans_le_role": 0.643216,
+   "minutes": 189.3,
+   "matchs": 5,
+   "titularisations": 1,
+   "xt_ajoute": 0.13351,
+   "xt_ajoute_positif_seul": 0.270853,
+   "xt_p90": 0.063484,
+   "passes": {
+    "n": 77,
+    "xt": 0.05188,
+    "xt_p90": 0.024669,
+    "rang": 180
+   },
+   "conduites": {
+    "n": 35,
+    "xt": 0.08163,
+    "xt_p90": 0.038815,
+    "rang": 59
+   },
+   "eligible": true,
+   "rang": 147,
+   "sur": 243,
+   "rang_poste": 36,
+   "effectif_poste": 43,
+   "rang_bootstrap_ic90": [
+    142,
+    147
+   ],
+   "rang_bootstrap_median": 146.0
+  },
+  {
+   "player_id": 8759,
+   "joueur": "Diadié Samassékou",
+   "nom_complet": "Diadié Samassékou",
+   "poste_principal": "Center Defensive Midfield",
+   "role": "MDF",
+   "role_fr": "milieux défensifs",
+   "part_actions_dans_le_role": 0.93586,
+   "minutes": 201.2,
+   "matchs": 3,
+   "titularisations": 2,
+   "xt_ajoute": 0.128774,
+   "xt_ajoute_positif_seul": 0.187695,
+   "xt_p90": 0.057598,
+   "passes": {
+    "n": 83,
+    "xt": 0.106159,
+    "xt_p90": 0.047482,
+    "rang": 130
+   },
+   "conduites": {
+    "n": 36,
+    "xt": 0.022616,
+    "xt_p90": 0.010115,
+    "rang": 180
+   },
+   "eligible": true,
+   "rang": 150,
+   "sur": 243,
+   "rang_poste": 18,
+   "effectif_poste": 38,
+   "rang_bootstrap_ic90": [
+    148,
+    152
+   ],
+   "rang_bootstrap_median": 150.0
+  },
+  {
+   "player_id": 8774,
+   "joueur": "Amadou Haïdara",
+   "nom_complet": "Amadou Haïdara",
+   "poste_principal": "Left Center Midfield",
+   "role": "MIL",
+   "role_fr": "milieux centraux",
+   "part_actions_dans_le_role": 0.846473,
+   "minutes": 289.5,
+   "matchs": 4,
+   "titularisations": 4,
+   "xt_ajoute": 0.179842,
+   "xt_ajoute_positif_seul": 0.307049,
+   "xt_p90": 0.055903,
+   "passes": {
+    "n": 100,
+    "xt": 0.157732,
+    "xt_p90": 0.04903,
+    "rang": 128
+   },
+   "conduites": {
+    "n": 50,
+    "xt": 0.022111,
+    "xt_p90": 0.006873,
+    "rang": 206
+   },
+   "eligible": true,
+   "rang": 153,
+   "sur": 243,
+   "rang_poste": 16,
+   "effectif_poste": 26,
+   "rang_bootstrap_ic90": [
+    151,
+    154
+   ],
+   "rang_bootstrap_median": 153.0
+  },
+  {
+   "player_id": 4385,
+   "joueur": "Yves Bissouma",
+   "nom_complet": "Yves Bissouma",
+   "poste_principal": "Left Defensive Midfield",
+   "role": "MDF",
+   "role_fr": "milieux défensifs",
+   "part_actions_dans_le_role": 0.814706,
+   "minutes": 184.3,
+   "matchs": 4,
+   "titularisations": 2,
+   "xt_ajoute": 0.024302,
+   "xt_ajoute_positif_seul": 0.146587,
+   "xt_p90": 0.011865,
+   "passes": {
+    "n": 82,
+    "xt": 0.028715,
+    "xt_p90": 0.01402,
+    "rang": 200
+   },
+   "conduites": {
+    "n": 45,
+    "xt": -0.004413,
+    "xt_p90": -0.002155,
+    "rang": 235
+   },
+   "eligible": true,
+   "rang": 226,
+   "sur": 243,
+   "rang_poste": 38,
+   "effectif_poste": 38,
+   "rang_bootstrap_ic90": [
+    226,
+    227
+   ],
+   "rang_bootstrap_median": 226.0
+  },
+  {
+   "player_id": 105182,
+   "joueur": "Lassine Sinayoko",
+   "nom_complet": "Lassine Sinayoko",
+   "poste_principal": "Left Center Forward",
+   "role": "ATT",
+   "role_fr": "attaquants",
+   "part_actions_dans_le_role": 1.0,
+   "minutes": 397.5,
+   "matchs": 5,
+   "titularisations": 5,
+   "xt_ajoute": 0.025898,
+   "xt_ajoute_positif_seul": 0.383401,
+   "xt_p90": 0.005863,
+   "passes": {
+    "n": 72,
+    "xt": -0.162758,
+    "xt_p90": -0.036849,
+    "rang": 243
+   },
+   "conduites": {
+    "n": 46,
+    "xt": 0.188656,
+    "xt_p90": 0.042712,
+    "rang": 53
+   },
+   "eligible": true,
+   "rang": 234,
+   "sur": 243,
+   "rang_poste": 15,
+   "effectif_poste": 22,
+   "rang_bootstrap_ic90": [
+    233,
+    234
+   ],
+   "rang_bootstrap_median": 234.0
+  },
+  {
+   "player_id": 3433,
+   "joueur": "Lassana Coulibaly",
+   "nom_complet": "Lassana Coulibaly",
+   "poste_principal": "Right Center Midfield",
+   "role": "MIL",
+   "role_fr": "milieux centraux",
+   "part_actions_dans_le_role": 0.810078,
+   "minutes": 284.8,
+   "matchs": 4,
+   "titularisations": 3,
+   "xt_ajoute": -0.058126,
+   "xt_ajoute_positif_seul": 0.174574,
+   "xt_p90": -0.01837,
+   "passes": {
+    "n": 116,
+    "xt": 0.006534,
+    "xt_p90": 0.002065,
+    "rang": 225
+   },
+   "conduites": {
+    "n": 60,
+    "xt": -0.06466,
+    "xt_p90": -0.020435,
+    "rang": 240
+   },
+   "eligible": true,
+   "rang": 241,
+   "sur": 243,
+   "rang_poste": 26,
+   "effectif_poste": 26,
+   "rang_bootstrap_ic90": [
+    241,
+    241
+   ],
+   "rang_bootstrap_median": 241.0
+  },
+  {
+   "player_id": 51750,
+   "joueur": "Youssoufou Niakaté",
+   "nom_complet": "Youssoufou Niakaté",
+   "poste_principal": "Right Center Forward",
+   "role": "ATT",
+   "role_fr": "attaquants",
+   "part_actions_dans_le_role": 1.0,
+   "minutes": 59.5,
+   "matchs": 2,
+   "titularisations": 1,
+   "xt_ajoute": 0.291222,
+   "xt_ajoute_positif_seul": 0.299471,
+   "xt_p90": 0.44033,
+   "passes": {
+    "n": 6,
+    "xt": 0.249436,
+    "xt_p90": 0.377149,
+    "rang": null
+   },
+   "conduites": {
+    "n": 7,
+    "xt": 0.041786,
+    "xt_p90": 0.063181,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "moins de 180 minutes : hors classement"
+  },
+  {
+   "player_id": 8992,
+   "joueur": "Ibrahim Sissoko",
+   "nom_complet": "Ibrahim Sissoko",
+   "poste_principal": "Center Forward",
+   "role": "ATT",
+   "role_fr": "attaquants",
+   "part_actions_dans_le_role": 1.0,
+   "minutes": 68.6,
+   "matchs": 4,
+   "titularisations": 0,
+   "xt_ajoute": 0.144524,
+   "xt_ajoute_positif_seul": 0.148143,
+   "xt_p90": 0.189547,
+   "passes": {
+    "n": 7,
+    "xt": 0.128229,
+    "xt_p90": 0.168175,
+    "rang": null
+   },
+   "conduites": {
+    "n": 5,
+    "xt": 0.016295,
+    "xt_p90": 0.021371,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "moins de 180 minutes : hors classement"
+  },
+  {
+   "player_id": 40868,
+   "joueur": "Amadou Dante",
+   "nom_complet": "Amadou Dante",
+   "poste_principal": "Left Back",
+   "role": "LAT",
+   "role_fr": "latéraux",
+   "part_actions_dans_le_role": 1.0,
+   "minutes": 22.8,
+   "matchs": 1,
+   "titularisations": 0,
+   "xt_ajoute": 0.033516,
+   "xt_ajoute_positif_seul": 0.036484,
+   "xt_p90": 0.132374,
+   "passes": {
+    "n": 10,
+    "xt": 0.024455,
+    "xt_p90": 0.096588,
+    "rang": null
+   },
+   "conduites": {
+    "n": 5,
+    "xt": 0.009061,
+    "xt_p90": 0.035786,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "moins de 180 minutes : hors classement"
+  },
+  {
+   "player_id": 58878,
+   "joueur": "Boubacar Traore",
+   "nom_complet": "Boubacar Traore",
+   "poste_principal": "Left Defensive Midfield",
+   "role": "MDF",
+   "role_fr": "milieux défensifs",
+   "part_actions_dans_le_role": 0.657895,
+   "minutes": 32.0,
+   "matchs": 2,
+   "titularisations": 0,
+   "xt_ajoute": 0.044239,
+   "xt_ajoute_positif_seul": 0.059688,
+   "xt_p90": 0.124325,
+   "passes": {
+    "n": 13,
+    "xt": 0.033161,
+    "xt_p90": 0.093193,
+    "rang": null
+   },
+   "conduites": {
+    "n": 11,
+    "xt": 0.011078,
+    "xt_p90": 0.031132,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "moins de 180 minutes : hors classement"
+  },
+  {
+   "player_id": 24806,
+   "joueur": "Mohamed Camara",
+   "nom_complet": "Mohamed Camara",
+   "poste_principal": "Center Defensive Midfield",
+   "role": "MDF",
+   "role_fr": "milieux défensifs",
+   "part_actions_dans_le_role": 1.0,
+   "minutes": 112.5,
+   "matchs": 2,
+   "titularisations": 1,
+   "xt_ajoute": 0.112246,
+   "xt_ajoute_positif_seul": 0.157459,
+   "xt_p90": 0.089813,
+   "passes": {
+    "n": 68,
+    "xt": 0.091936,
+    "xt_p90": 0.073562,
+    "rang": null
+   },
+   "conduites": {
+    "n": 25,
+    "xt": 0.02031,
+    "xt_p90": 0.016251,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "moins de 180 minutes : hors classement"
+  },
+  {
+   "player_id": 408674,
+   "joueur": "Aboubacar Traoré",
+   "nom_complet": "Aboubacar Traoré",
+   "poste_principal": "Left Defensive Midfield",
+   "role": "MDF",
+   "role_fr": "milieux défensifs",
+   "part_actions_dans_le_role": 1.0,
+   "minutes": 3.8,
+   "matchs": 1,
+   "titularisations": 0,
+   "xt_ajoute": 0.003288,
+   "xt_ajoute_positif_seul": 0.004392,
+   "xt_p90": 0.078225,
+   "passes": {
+    "n": 1,
+    "xt": -0.001105,
+    "xt_p90": -0.026284,
+    "rang": null
+   },
+   "conduites": {
+    "n": 2,
+    "xt": 0.004392,
+    "xt_p90": 0.104509,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "moins de 180 minutes : hors classement"
+  },
+  {
+   "player_id": 32952,
+   "joueur": "Moussa Diarra",
+   "nom_complet": "Moussa Diarra",
+   "poste_principal": "Left Back",
+   "role": "LAT",
+   "role_fr": "latéraux",
+   "part_actions_dans_le_role": 1.0,
+   "minutes": 67.2,
+   "matchs": 1,
+   "titularisations": 1,
+   "xt_ajoute": 0.052692,
+   "xt_ajoute_positif_seul": 0.06506,
+   "xt_p90": 0.070557,
+   "passes": {
+    "n": 31,
+    "xt": 0.044144,
+    "xt_p90": 0.059111,
+    "rang": null
+   },
+   "conduites": {
+    "n": 12,
+    "xt": 0.008548,
+    "xt_p90": 0.011446,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "moins de 180 minutes : hors classement"
+  },
+  {
+   "player_id": 199653,
+   "joueur": "Nene Dorgeles",
+   "nom_complet": "Nene Dorgeles",
+   "poste_principal": "Left Wing",
+   "role": "MOF",
+   "role_fr": "milieux offensifs et ailiers",
+   "part_actions_dans_le_role": 0.552817,
+   "minutes": 172.9,
+   "matchs": 4,
+   "titularisations": 1,
+   "xt_ajoute": 0.120913,
+   "xt_ajoute_positif_seul": 0.184141,
+   "xt_p90": 0.062924,
+   "passes": {
+    "n": 34,
+    "xt": 0.013212,
+    "xt_p90": 0.006875,
+    "rang": null
+   },
+   "conduites": {
+    "n": 34,
+    "xt": 0.107701,
+    "xt_p90": 0.056048,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "moins de 180 minutes : hors classement"
+  },
+  {
+   "player_id": 10705,
+   "joueur": "Mamadou Fofana",
+   "nom_complet": "Mamadou Fofana",
+   "poste_principal": "Right Defensive Midfield",
+   "role": "MDF",
+   "role_fr": "milieux défensifs",
+   "part_actions_dans_le_role": 0.847826,
+   "minutes": 32.4,
+   "matchs": 2,
+   "titularisations": 0,
+   "xt_ajoute": 0.009817,
+   "xt_ajoute_positif_seul": 0.011561,
+   "xt_p90": 0.027295,
+   "passes": {
+    "n": 12,
+    "xt": 0.008553,
+    "xt_p90": 0.02378,
+    "rang": null
+   },
+   "conduites": {
+    "n": 4,
+    "xt": 0.001264,
+    "xt_p90": 0.003515,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "moins de 180 minutes : hors classement"
+  },
+  {
+   "player_id": 102992,
+   "joueur": "Djigui Diarra",
+   "nom_complet": "Djigui Diarra",
+   "poste_principal": "Goalkeeper",
+   "role": "GAR",
+   "role_fr": "gardiens",
+   "part_actions_dans_le_role": 1.0,
+   "minutes": 480.0,
+   "matchs": 5,
+   "titularisations": 5,
+   "xt_ajoute": 0.075601,
+   "xt_ajoute_positif_seul": 0.082012,
+   "xt_p90": 0.014175,
+   "passes": {
+    "n": 64,
+    "xt": 0.067201,
+    "xt_p90": 0.0126,
+    "rang": null
+   },
+   "conduites": {
+    "n": 31,
+    "xt": 0.0084,
+    "xt_p90": 0.001575,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "gardien : hors classement"
+  },
+  {
+   "player_id": 67714,
+   "joueur": "Aliou Dieng",
+   "nom_complet": "Aliou Dieng",
+   "poste_principal": "Right Center Midfield",
+   "role": "MIL",
+   "role_fr": "milieux centraux",
+   "part_actions_dans_le_role": 0.532143,
+   "minutes": 144.9,
+   "matchs": 2,
+   "titularisations": 2,
+   "xt_ajoute": 0.017988,
+   "xt_ajoute_positif_seul": 0.110812,
+   "xt_p90": 0.011175,
+   "passes": {
+    "n": 76,
+    "xt": 0.018525,
+    "xt_p90": 0.011508,
+    "rang": null
+   },
+   "conduites": {
+    "n": 33,
+    "xt": -0.000537,
+    "xt_p90": -0.000333,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "moins de 180 minutes : hors classement"
+  },
+  {
+   "player_id": 4464,
+   "joueur": "Adama Traoré",
+   "nom_complet": "Adama Traoré",
+   "poste_principal": "Right Center Forward",
+   "role": "ATT",
+   "role_fr": "attaquants",
+   "part_actions_dans_le_role": 0.783784,
+   "minutes": 144.3,
+   "matchs": 3,
+   "titularisations": 2,
+   "xt_ajoute": 0.014924,
+   "xt_ajoute_positif_seul": 0.113951,
+   "xt_p90": 0.009307,
+   "passes": {
+    "n": 46,
+    "xt": 0.005729,
+    "xt_p90": 0.003572,
+    "rang": null
+   },
+   "conduites": {
+    "n": 30,
+    "xt": 0.009195,
+    "xt_p90": 0.005734,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "moins de 180 minutes : hors classement"
+  },
+  {
+   "player_id": 23623,
+   "joueur": "Sekou Koita",
+   "nom_complet": "Sekou Koita",
+   "poste_principal": "Left Center Forward",
+   "role": "ATT",
+   "role_fr": "attaquants",
+   "part_actions_dans_le_role": 0.735426,
+   "minutes": 171.8,
+   "matchs": 3,
+   "titularisations": 2,
+   "xt_ajoute": -0.09095,
+   "xt_ajoute_positif_seul": 0.175402,
+   "xt_p90": -0.047652,
+   "passes": {
+    "n": 17,
+    "xt": -0.13259,
+    "xt_p90": -0.069468,
+    "rang": null
+   },
+   "conduites": {
+    "n": 14,
+    "xt": 0.041639,
+    "xt_p90": 0.021816,
+    "rang": null
+   },
+   "eligible": false,
+   "note": "moins de 180 minutes : hors classement"
+  }
+ ],
+ "top15_can_2023": [
+  {
+   "rang": 1,
+   "joueur": "Hakim Ziyech",
+   "equipe": "Morocco",
+   "role": "MIL",
+   "minutes": 196.9,
+   "xt_p90": 0.452791
+  },
+  {
+   "rang": 2,
+   "joueur": "Simon Adingra",
+   "equipe": "Côte d'Ivoire",
+   "role": "MOF",
+   "minutes": 267.2,
+   "xt_p90": 0.395882
+  },
+  {
+   "rang": 3,
+   "joueur": "Mohamed Hany",
+   "equipe": "Egypt",
+   "role": "LAT",
+   "minutes": 275.1,
+   "xt_p90": 0.358209
+  },
+  {
+   "rang": 4,
+   "joueur": "Achraf Hakimi",
+   "equipe": "Morocco",
+   "role": "LAT",
+   "minutes": 360.0,
+   "xt_p90": 0.33942
+  },
+  {
+   "rang": 5,
+   "joueur": "Bright Samuel",
+   "equipe": "Nigeria",
+   "role": "LAT",
+   "minutes": 218.0,
+   "xt_p90": 0.280239
+  },
+  {
+   "rang": 6,
+   "joueur": "Meschak Elia",
+   "equipe": "Congo DR",
+   "role": "MOF",
+   "minutes": 394.5,
+   "xt_p90": 0.273656
+  },
+  {
+   "rang": 7,
+   "joueur": "Mohamed Hamdy",
+   "equipe": "Egypt",
+   "role": "LAT",
+   "minutes": 275.6,
+   "xt_p90": 0.235903
+  },
+  {
+   "rang": 8,
+   "joueur": "Absalom Iimbondi",
+   "equipe": "Namibia",
+   "role": "MIL",
+   "minutes": 218.9,
+   "xt_p90": 0.229551
+  },
+  {
+   "rang": 9,
+   "joueur": "Trézéguet",
+   "equipe": "Egypt",
+   "role": "MOF",
+   "minutes": 215.6,
+   "xt_p90": 0.226873
+  },
+  {
+   "rang": 10,
+   "joueur": "Jean-Charles Castelletto",
+   "equipe": "Cameroon",
+   "role": "DC",
+   "minutes": 360.0,
+   "xt_p90": 0.225831
+  },
+  {
+   "rang": 11,
+   "joueur": "Georges-Kevin N'Koudou",
+   "equipe": "Cameroon",
+   "role": "MOF",
+   "minutes": 360.0,
+   "xt_p90": 0.22561
+  },
+  {
+   "rang": 12,
+   "joueur": "Issa Kabore",
+   "equipe": "Burkina Faso",
+   "role": "LAT",
+   "minutes": 360.0,
+   "xt_p90": 0.220202
+  },
+  {
+   "rang": 13,
+   "joueur": "Wilfried Stephane Singo",
+   "equipe": "Côte d'Ivoire",
+   "role": "LAT",
+   "minutes": 349.9,
+   "xt_p90": 0.214527
+  },
+  {
+   "rang": 14,
+   "joueur": "Sadio Mané",
+   "equipe": "Senegal",
+   "role": "MOF",
+   "minutes": 390.0,
+   "xt_p90": 0.212358
+  },
+  {
+   "rang": 15,
+   "joueur": "Gaël Kakuta",
+   "equipe": "Congo DR",
+   "role": "MOF",
+   "minutes": 265.0,
+   "xt_p90": 0.209302
+  }
+ ]
+}

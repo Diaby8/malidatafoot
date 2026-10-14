@@ -1,0 +1,347 @@
+{
+ "source": "Hudl StatsBomb Open Data (licence non commerciale, attribution « Hudl StatsBomb »)",
+ "genere_le": "2026-10-14",
+ "definition": "xT généré = somme du xT ajouté par les passes réussies et conduites de l'équipe ; par 90 minutes de match (90 ou 120 selon prolongation). xT concédé = xT généré par l'adversaire.",
+ "equipes": [
+  {
+   "rang": 1,
+   "equipe": "Morocco",
+   "matchs": 4,
+   "minutes": 360,
+   "xt": 6.485621,
+   "xt_p90": 1.621405,
+   "xt_positif_p90": 1.995256,
+   "rang_positif": 1,
+   "xt_concede_p90": 0.725613,
+   "rang_concede": 3
+  },
+  {
+   "rang": 2,
+   "equipe": "Egypt",
+   "matchs": 4,
+   "minutes": 390,
+   "xt": 5.846845,
+   "xt_p90": 1.349272,
+   "xt_positif_p90": 1.797146,
+   "rang_positif": 2,
+   "xt_concede_p90": 0.731304,
+   "rang_concede": 4
+  },
+  {
+   "rang": 3,
+   "equipe": "Congo DR",
+   "matchs": 7,
+   "minutes": 660,
+   "xt": 9.264273,
+   "xt_p90": 1.26331,
+   "xt_positif_p90": 1.616762,
+   "rang_positif": 4,
+   "xt_concede_p90": 0.826281,
+   "rang_concede": 11
+  },
+  {
+   "rang": 4,
+   "equipe": "Algeria",
+   "matchs": 3,
+   "minutes": 270,
+   "xt": 3.677379,
+   "xt_p90": 1.225793,
+   "xt_positif_p90": 1.668121,
+   "rang_positif": 3,
+   "xt_concede_p90": 0.806081,
+   "rang_concede": 10
+  },
+  {
+   "rang": 5,
+   "equipe": "Senegal",
+   "matchs": 4,
+   "minutes": 390,
+   "xt": 4.870147,
+   "xt_p90": 1.12388,
+   "xt_positif_p90": 1.451869,
+   "rang_positif": 6,
+   "xt_concede_p90": 0.736672,
+   "rang_concede": 5
+  },
+  {
+   "rang": 6,
+   "equipe": "Côte d'Ivoire",
+   "matchs": 7,
+   "minutes": 690,
+   "xt": 8.43653,
+   "xt_p90": 1.100417,
+   "xt_positif_p90": 1.486717,
+   "rang_positif": 5,
+   "xt_concede_p90": 0.740155,
+   "rang_concede": 6
+  },
+  {
+   "rang": 7,
+   "equipe": "Nigeria",
+   "matchs": 7,
+   "minutes": 660,
+   "xt": 7.805234,
+   "xt_p90": 1.06435,
+   "xt_positif_p90": 1.412398,
+   "rang_positif": 7,
+   "xt_concede_p90": 0.754824,
+   "rang_concede": 8
+  },
+  {
+   "rang": 8,
+   "equipe": "Cameroon",
+   "matchs": 4,
+   "minutes": 360,
+   "xt": 4.042055,
+   "xt_p90": 1.010514,
+   "xt_positif_p90": 1.357911,
+   "rang_positif": 8,
+   "xt_concede_p90": 0.745843,
+   "rang_concede": 7
+  },
+  {
+   "rang": 9,
+   "equipe": "Tunisia",
+   "matchs": 3,
+   "minutes": 270,
+   "xt": 3.002727,
+   "xt_p90": 1.000909,
+   "xt_positif_p90": 1.350466,
+   "rang_positif": 9,
+   "xt_concede_p90": 0.953879,
+   "rang_concede": 14
+  },
+  {
+   "rang": 10,
+   "equipe": "Burkina Faso",
+   "matchs": 4,
+   "minutes": 360,
+   "xt": 3.830542,
+   "xt_p90": 0.957635,
+   "xt_positif_p90": 1.259013,
+   "rang_positif": 10,
+   "xt_concede_p90": 0.757911,
+   "rang_concede": 9
+  },
+  {
+   "rang": 11,
+   "equipe": "Mozambique",
+   "matchs": 3,
+   "minutes": 270,
+   "xt": 2.806077,
+   "xt_p90": 0.935359,
+   "xt_positif_p90": 1.216681,
+   "rang_positif": 12,
+   "xt_concede_p90": 0.924892,
+   "rang_concede": 13
+  },
+  {
+   "rang": 12,
+   "equipe": "Namibia",
+   "matchs": 4,
+   "minutes": 360,
+   "xt": 3.713055,
+   "xt_p90": 0.928264,
+   "xt_positif_p90": 1.231654,
+   "rang_positif": 11,
+   "xt_concede_p90": 0.970553,
+   "rang_concede": 16
+  },
+  {
+   "rang": 13,
+   "equipe": "Angola",
+   "matchs": 5,
+   "minutes": 450,
+   "xt": 4.148475,
+   "xt_p90": 0.829695,
+   "xt_positif_p90": 1.062309,
+   "rang_positif": 18,
+   "xt_concede_p90": 1.22787,
+   "rang_concede": 21
+  },
+  {
+   "rang": 14,
+   "equipe": "Zambia",
+   "matchs": 3,
+   "minutes": 270,
+   "xt": 2.419736,
+   "xt_p90": 0.806579,
+   "xt_positif_p90": 1.070892,
+   "rang_positif": 17,
+   "xt_concede_p90": 1.629334,
+   "rang_concede": 24
+  },
+  {
+   "rang": 15,
+   "equipe": "Gambia",
+   "matchs": 3,
+   "minutes": 270,
+   "xt": 2.385339,
+   "xt_p90": 0.795113,
+   "xt_positif_p90": 1.03214,
+   "rang_positif": 19,
+   "xt_concede_p90": 1.394419,
+   "rang_concede": 23
+  },
+  {
+   "rang": 16,
+   "equipe": "Ghana",
+   "matchs": 3,
+   "minutes": 270,
+   "xt": 2.36838,
+   "xt_p90": 0.78946,
+   "xt_positif_p90": 1.080521,
+   "rang_positif": 16,
+   "xt_concede_p90": 0.871245,
+   "rang_concede": 12
+  },
+  {
+   "rang": 17,
+   "equipe": "Mauritania",
+   "matchs": 4,
+   "minutes": 360,
+   "xt": 3.059155,
+   "xt_p90": 0.764789,
+   "xt_positif_p90": 0.96685,
+   "rang_positif": 21,
+   "xt_concede_p90": 0.966875,
+   "rang_concede": 15
+  },
+  {
+   "rang": 18,
+   "equipe": "Cape Verde Islands",
+   "matchs": 5,
+   "minutes": 480,
+   "xt": 4.075835,
+   "xt_p90": 0.764219,
+   "xt_positif_p90": 1.161834,
+   "rang_positif": 15,
+   "xt_concede_p90": 1.180349,
+   "rang_concede": 18
+  },
+  {
+   "rang": 19,
+   "equipe": "Guinea",
+   "matchs": 5,
+   "minutes": 450,
+   "xt": 3.786323,
+   "xt_p90": 0.757265,
+   "xt_positif_p90": 1.031649,
+   "rang_positif": 20,
+   "xt_concede_p90": 0.724869,
+   "rang_concede": 2
+  },
+  {
+   "rang": 20,
+   "equipe": "South Africa",
+   "matchs": 7,
+   "minutes": 690,
+   "xt": 5.719947,
+   "xt_p90": 0.74608,
+   "xt_positif_p90": 1.165956,
+   "rang_positif": 14,
+   "xt_concede_p90": 1.202049,
+   "rang_concede": 19
+  },
+  {
+   "rang": 21,
+   "equipe": "Mali",
+   "matchs": 5,
+   "minutes": 480,
+   "xt": 3.831536,
+   "xt_p90": 0.718413,
+   "xt_positif_p90": 1.208253,
+   "rang_positif": 13,
+   "xt_concede_p90": 0.658949,
+   "rang_concede": 1
+  },
+  {
+   "rang": 22,
+   "equipe": "Guinea-Bissau",
+   "matchs": 3,
+   "minutes": 270,
+   "xt": 1.948212,
+   "xt_p90": 0.649404,
+   "xt_positif_p90": 0.954787,
+   "rang_positif": 22,
+   "xt_concede_p90": 1.226593,
+   "rang_concede": 20
+  },
+  {
+   "rang": 23,
+   "equipe": "Equatorial Guinea",
+   "matchs": 4,
+   "minutes": 360,
+   "xt": 2.250185,
+   "xt_p90": 0.562546,
+   "xt_positif_p90": 0.862551,
+   "rang_positif": 23,
+   "xt_concede_p90": 1.3393,
+   "rang_concede": 22
+  },
+  {
+   "rang": 24,
+   "equipe": "Tanzania",
+   "matchs": 3,
+   "minutes": 270,
+   "xt": 1.180798,
+   "xt_p90": 0.393599,
+   "xt_positif_p90": 0.783494,
+   "rang_positif": 24,
+   "xt_concede_p90": 1.030394,
+   "rang_concede": 17
+  }
+ ],
+ "mali": {
+  "rang": 21,
+  "sur": 24,
+  "rang_bootstrap_modele_ic90": [
+   21,
+   21
+  ],
+  "rang_reechantillonnage_matchs_ic90": [
+   14,
+   22
+  ],
+  "lecture_incertitude": "le modèle est très stable (bootstrap de la grille) ; l'incertitude vient surtout du petit nombre de matchs (rééchantillonnage des matchs de chaque équipe, 2000 tirages)",
+  "rang_positif": 13,
+  "rang_concede": 1,
+  "par_match": [
+   {
+    "match_id": 3920391,
+    "adversaire": "South Africa",
+    "minutes": 90,
+    "xt": 0.885737,
+    "xt_concede": 0.895049
+   },
+   {
+    "match_id": 3920404,
+    "adversaire": "Tunisia",
+    "minutes": 90,
+    "xt": 0.618329,
+    "xt_concede": 0.731877
+   },
+   {
+    "match_id": 3920417,
+    "adversaire": "Namibia",
+    "minutes": 90,
+    "xt": 0.887055,
+    "xt_concede": 0.331536
+   },
+   {
+    "match_id": 3922244,
+    "adversaire": "Burkina Faso",
+    "minutes": 90,
+    "xt": 0.725545,
+    "xt_concede": 0.842836
+   },
+   {
+    "match_id": 3922659,
+    "adversaire": "Côte d'Ivoire",
+    "minutes": 120,
+    "xt": 0.71487,
+    "xt_concede": 0.713097
+   }
+  ]
+ }
+}

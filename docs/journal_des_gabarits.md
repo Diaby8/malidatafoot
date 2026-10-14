@@ -190,3 +190,4 @@ des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliD
 - 2026-10-14 : les 18 vidéos à animations génériques sont jugées « bateau, pas recherchées » : qualité avant quantité, une vidéo travaillée à la fois au niveau de la vidéo de lancement ; animer.py réservé aux brouillons.
 - 2026-10-14 : TikTok = carrousel de photos par défaut ; motion design seulement quand c'est utile.
 - 2026-10-14 : les versions de couleur suivent la vidéo de lancement : blanc = panneau blanc sur fond jaune (scène Hamari Traoré), vert = vert nuit du duel. Projet « waouh » lancé : modèle de menace (xT) appris sur les données StatsBomb libres.
+- 2026-10-14 : modèle de menace (xT) construit et validé (poc/xt) ; 3 plans clés : carte de la menace, menace créée/concédée, action la plus dangereuse.

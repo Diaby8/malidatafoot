@@ -1,0 +1,138 @@
+{
+ "source": "Hudl StatsBomb Open Data (licence non commerciale, attribution « Hudl StatsBomb »)",
+ "genere_le": "2026-10-14",
+ "matchs_mis_de_cote": {
+  "principe": "20 % des matchs d'entraînement tirés au hasard (graine 2026) ; modèle refait sur les 80 % restants, puis évalué sur les possessions des matchs mis de côté",
+  "matchs_test": 512,
+  "matchs_apprentissage": 2052,
+  "possessions": {
+   "possessions": 82496,
+   "part_avec_tir": 0.1155,
+   "part_avec_but": 0.0129,
+   "auc_shot": {
+    "xt_added": 0.8511,
+    "xt_pos": 0.8621,
+    "progress": 0.6822,
+    "n_moves": 0.6187
+   },
+   "auc_goal": {
+    "xt_added": 0.9105,
+    "xt_pos": 0.9104,
+    "progress": 0.7209,
+    "n_moves": 0.6158
+   },
+   "part_tir_par_decile_xt": [
+    0.0522,
+    0.0172,
+    0.0229,
+    0.0147,
+    0.0192,
+    0.0297,
+    0.0514,
+    0.0967,
+    0.2425,
+    0.6086
+   ]
+  },
+  "niveau_equipe_match": {
+   "equipes_matchs": 1024,
+   "spearman_xt_vs_xg_sans_penalty": 0.6872,
+   "pearson_xt_vs_xg_sans_penalty": 0.6993
+  },
+  "lecture": "AUC : probabilité qu'une possession avec tir (ou but) ait plus de xT ajouté qu'une possession sans. 0,5 = hasard, 1 = parfait. 'progress' = mètres gagnés vers le but par les passes et conduites réussies, 'n_moves' = nombre de passes et conduites : deux repères naïfs."
+ },
+ "can_2023_hors_domaine": {
+  "principe": "les 52 matchs de la CAN 2023 ne sont pas dans l'entraînement ; modèle complet",
+  "possessions": 7246,
+  "part_avec_tir": 0.1163,
+  "part_avec_but": 0.0102,
+  "auc_shot": {
+   "xt_added": 0.8611,
+   "xt_pos": 0.8744,
+   "progress": 0.6737,
+   "n_moves": 0.5991
+  },
+  "auc_goal": {
+   "xt_added": 0.8917,
+   "xt_pos": 0.8946,
+   "progress": 0.6769,
+   "n_moves": 0.5706
+  },
+  "part_tir_par_decile_xt": [
+   0.0524,
+   0.0166,
+   0.0083,
+   0.0152,
+   0.0249,
+   0.0414,
+   0.0539,
+   0.0841,
+   0.2196,
+   0.6469
+  ]
+ },
+ "stabilite": {
+  "moities": {
+   "tirages": 20,
+   "pearson_moyen": 0.9996,
+   "pearson_min": 0.9991,
+   "spearman_moyen": 0.9997,
+   "ecart_max_case_moyen": 0.0089,
+   "max_grille_moitie_a_b": [
+    0.2837,
+    0.2848
+   ]
+  },
+  "bootstrap": {
+   "tirages": 200,
+   "unite": "match",
+   "largeur_relative_ic95_mediane": 0.0424,
+   "largeur_relative_ic95_max": 0.1351,
+   "ic95_case_max": [
+    0.274586,
+    0.28912
+   ]
+  },
+  "sensibilite_echantillon": {
+   "la_liga_seule_vs_reste_pearson": 0.9993,
+   "la_liga_seule_max": 0.317828,
+   "sans_la_liga_max": 0.27029,
+   "selections_seules_vs_complet_pearson": 0.9995,
+   "selections_seules_matchs": 262,
+   "selections_seules_max": 0.266892,
+   "rang_mali_modele_selections_seules": 21,
+   "rang_mali_modele_sans_la_liga": 21
+  },
+  "sensibilite_methode": {
+   "g_taux_de_buts_reel_vs_xg_pearson": 0.9996,
+   "g_taux_de_buts_reel_max": 0.296012,
+   "toutes_conduites_vs_conduites_3u_pearson": 1.0,
+   "toutes_conduites_max": 0.280799,
+   "rang_mali_g_taux_reel": 21
+  }
+ },
+ "audit_independant": {
+  "principe": "second code, écrit à part (scripts/audit_independant.py), qui relit les fichiers bruts sans passer par le code du modèle",
+  "grille_ecart_max": 4.999183716436484e-07,
+  "iterations": 55,
+  "joueurs_mali_ecart_max": 2.7e-05,
+  "joueurs_recomptes": 24,
+  "mali_xt_total": [
+   3.831509,
+   3.831536
+  ],
+  "meilleure_possession": [
+   [
+    3920417,
+    55,
+    0.252783
+   ],
+   [
+    3920417,
+    55,
+    0.252783
+   ]
+  ],
+  "lecture": "les écarts viennent de l'arrondi à 6 décimales de la grille publiée"
+ }
+}

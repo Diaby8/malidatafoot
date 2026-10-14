@@ -1,0 +1,877 @@
+{
+ "source": "Hudl StatsBomb Open Data (licence non commerciale, attribution « Hudl StatsBomb »)",
+ "genere_le": "2026-10-14",
+ "definition": "possession du Mali dont la somme du xT ajouté (passes réussies et conduites) est la plus élevée sur les 5 matchs",
+ "animation": "garder les événements de l'équipe du Mali (Pass, Ball Receipt*, Carry, Dribble, Shot) pour la trajectoire du ballon ; t_relatif_s = secondes depuis le premier événement de la possession (horodatage StatsBomb dans la période) ; duree_s = durée de l'action",
+ "coordonnees": "StatsBomb 120 x 80 ; pour une passe ou une conduite, location = départ, end_location = arrivée ; chaque événement est orienté dans le sens d'attaque de l'équipe qui agit (les actions adverses sont donc en miroir : x' = 120 − x, y' = 80 − y pour les ramener au repère du Mali)",
+ "top5": [
+  {
+   "match_id": 3920417,
+   "adversaire": "Namibia",
+   "possession": 55,
+   "xt_ajoute": 0.252783,
+   "actions": 12
+  },
+  {
+   "match_id": 3920404,
+   "adversaire": "Tunisia",
+   "possession": 119,
+   "xt_ajoute": 0.119728,
+   "actions": 9
+  },
+  {
+   "match_id": 3920417,
+   "adversaire": "Namibia",
+   "possession": 153,
+   "xt_ajoute": 0.119495,
+   "actions": 5
+  },
+  {
+   "match_id": 3920391,
+   "adversaire": "South Africa",
+   "possession": 41,
+   "xt_ajoute": 0.114357,
+   "actions": 12
+  },
+  {
+   "match_id": 3922244,
+   "adversaire": "Burkina Faso",
+   "possession": 5,
+   "xt_ajoute": 0.110839,
+   "actions": 23
+  }
+ ],
+ "meilleure": {
+  "match_id": 3920417,
+  "match": "Namibia 0-0 Mali",
+  "date": "2024-01-24",
+  "phase": "Group Stage",
+  "possession": 55,
+  "rang_parmi_possessions_du_mali": 1,
+  "possessions_du_mali": 317,
+  "xt_ajoute_total": 0.252783,
+  "passes_et_conduites_creditees": 12,
+  "debut": {
+   "periode": 1,
+   "timestamp": "00:26:40.449",
+   "minute": 26,
+   "seconde": 40
+  },
+  "duree_s": 22.03,
+  "debut_de_possession": "From Throw In",
+  "joueurs_du_mali": [
+   "Moussa Diarra",
+   "Lassine Sinayoko",
+   "Yves Bissouma",
+   "Sikou Niakaté",
+   "Kiki Kouyaté",
+   "Hamari Traoré",
+   "Youssoufou Niakaté",
+   "Fousseni Diabaté"
+  ],
+  "fin": {
+   "index": 922,
+   "type": "Shot",
+   "periode": 1,
+   "timestamp": "00:27:01.771",
+   "minute": 27,
+   "seconde": 1,
+   "t_relatif_s": 21.322,
+   "duree_s": 0.706024,
+   "equipe": "Mali",
+   "joueur": "Lassine Sinayoko",
+   "player_id": 105182,
+   "location": [
+    113.9,
+    37.7
+   ],
+   "end_location": [
+    120.0,
+    34.7,
+    0.9
+   ],
+   "xg": 0.32371634,
+   "resultat": "Off T",
+   "surface": "Head",
+   "type_tir": "Open Play"
+  },
+  "sequence": [
+   {
+    "index": 889,
+    "type": "Pass",
+    "periode": 1,
+    "timestamp": "00:26:40.449",
+    "minute": 26,
+    "seconde": 40,
+    "t_relatif_s": 0.0,
+    "duree_s": 1.235063,
+    "equipe": "Mali",
+    "joueur": "Moussa Diarra",
+    "player_id": 32952,
+    "location": [
+     105.8,
+     0.1
+    ],
+    "end_location": [
+     113.4,
+     14.5
+    ],
+    "receveur": "Lassine Sinayoko",
+    "hauteur": "Low Pass",
+    "resultat": "réussie",
+    "type_passe": "Throw-in",
+    "centre": false,
+    "credite": false,
+    "raison_non_credite": "coup de pied arrêté"
+   },
+   {
+    "index": 890,
+    "type": "Ball Receipt*",
+    "periode": 1,
+    "timestamp": "00:26:41.684",
+    "minute": 26,
+    "seconde": 41,
+    "t_relatif_s": 1.235,
+    "duree_s": null,
+    "equipe": "Mali",
+    "joueur": "Lassine Sinayoko",
+    "player_id": 105182,
+    "location": [
+     113.4,
+     14.5
+    ]
+   },
+   {
+    "index": 891,
+    "type": "Carry",
+    "periode": 1,
+    "timestamp": "00:26:41.684",
+    "minute": 26,
+    "seconde": 41,
+    "t_relatif_s": 1.235,
+    "duree_s": 0.995103,
+    "equipe": "Mali",
+    "joueur": "Lassine Sinayoko",
+    "player_id": 105182,
+    "location": [
+     113.4,
+     14.5
+    ],
+    "end_location": [
+     114.0,
+     13.5
+    ],
+    "credite": false,
+    "raison_non_credite": "conduite de moins de 3 unités"
+   },
+   {
+    "index": 892,
+    "type": "Pressure",
+    "periode": 1,
+    "timestamp": "00:26:41.944",
+    "minute": 26,
+    "seconde": 41,
+    "t_relatif_s": 1.495,
+    "duree_s": 0.837261,
+    "equipe": "Namibia",
+    "joueur": "Ivan Kamberipa",
+    "player_id": 103799,
+    "location": [
+     6.8,
+     66.0
+    ]
+   },
+   {
+    "index": 893,
+    "type": "Dribbled Past",
+    "periode": 1,
+    "timestamp": "00:26:42.679",
+    "minute": 26,
+    "seconde": 42,
+    "t_relatif_s": 2.23,
+    "duree_s": 0.0,
+    "equipe": "Namibia",
+    "joueur": "Ivan Kamberipa",
+    "player_id": 103799,
+    "location": [
+     6.1,
+     66.6
+    ]
+   },
+   {
+    "index": 894,
+    "type": "Dribble",
+    "periode": 1,
+    "timestamp": "00:26:42.679",
+    "minute": 26,
+    "seconde": 42,
+    "t_relatif_s": 2.23,
+    "duree_s": 0.0,
+    "equipe": "Mali",
+    "joueur": "Lassine Sinayoko",
+    "player_id": 105182,
+    "location": [
+     114.0,
+     13.5
+    ],
+    "resultat": "Complete"
+   },
+   {
+    "index": 895,
+    "type": "Carry",
+    "periode": 1,
+    "timestamp": "00:26:42.679",
+    "minute": 26,
+    "seconde": 42,
+    "t_relatif_s": 2.23,
+    "duree_s": 3.313709,
+    "equipe": "Mali",
+    "joueur": "Lassine Sinayoko",
+    "player_id": 105182,
+    "location": [
+     114.0,
+     13.5
+    ],
+    "end_location": [
+     113.3,
+     19.6
+    ],
+    "credite": true,
+    "xt_depart": 0.027245,
+    "xt_arrivee": 0.027245,
+    "xt_ajoute": 0.0
+   },
+   {
+    "index": 896,
+    "type": "Pressure",
+    "periode": 1,
+    "timestamp": "00:26:45.024",
+    "minute": 26,
+    "seconde": 45,
+    "t_relatif_s": 4.575,
+    "duree_s": 1.23616,
+    "equipe": "Namibia",
+    "joueur": "Aprocious Petrus",
+    "player_id": 136406,
+    "location": [
+     9.3,
+     57.5
+    ]
+   },
+   {
+    "index": 897,
+    "type": "Pressure",
+    "periode": 1,
+    "timestamp": "00:26:45.533",
+    "minute": 26,
+    "seconde": 45,
+    "t_relatif_s": 5.084,
+    "duree_s": 0.709262,
+    "equipe": "Namibia",
+    "joueur": "Ivan Kamberipa",
+    "player_id": 103799,
+    "location": [
+     5.3,
+     59.4
+    ]
+   },
+   {
+    "index": 898,
+    "type": "Pass",
+    "periode": 1,
+    "timestamp": "00:26:45.993",
+    "minute": 26,
+    "seconde": 45,
+    "t_relatif_s": 5.544,
+    "duree_s": 1.615223,
+    "equipe": "Mali",
+    "joueur": "Lassine Sinayoko",
+    "player_id": 105182,
+    "location": [
+     113.3,
+     19.6
+    ],
+    "end_location": [
+     97.8,
+     16.5
+    ],
+    "receveur": "Yves Bissouma",
+    "hauteur": "Ground Pass",
+    "resultat": "réussie",
+    "type_passe": null,
+    "centre": false,
+    "credite": true,
+    "xt_depart": 0.027245,
+    "xt_arrivee": 0.024949,
+    "xt_ajoute": -0.002296
+   },
+   {
+    "index": 899,
+    "type": "Ball Receipt*",
+    "periode": 1,
+    "timestamp": "00:26:47.608",
+    "minute": 26,
+    "seconde": 47,
+    "t_relatif_s": 7.159,
+    "duree_s": null,
+    "equipe": "Mali",
+    "joueur": "Yves Bissouma",
+    "player_id": 4385,
+    "location": [
+     97.8,
+     16.5
+    ]
+   },
+   {
+    "index": 900,
+    "type": "Carry",
+    "periode": 1,
+    "timestamp": "00:26:47.608",
+    "minute": 26,
+    "seconde": 47,
+    "t_relatif_s": 7.159,
+    "duree_s": 0.626501,
+    "equipe": "Mali",
+    "joueur": "Yves Bissouma",
+    "player_id": 4385,
+    "location": [
+     97.8,
+     16.5
+    ],
+    "end_location": [
+     97.2,
+     13.5
+    ],
+    "credite": true,
+    "xt_depart": 0.024949,
+    "xt_arrivee": 0.021448,
+    "xt_ajoute": -0.003501
+   },
+   {
+    "index": 901,
+    "type": "Pass",
+    "periode": 1,
+    "timestamp": "00:26:48.235",
+    "minute": 26,
+    "seconde": 48,
+    "t_relatif_s": 7.786,
+    "duree_s": 1.584657,
+    "equipe": "Mali",
+    "joueur": "Yves Bissouma",
+    "player_id": 4385,
+    "location": [
+     97.2,
+     13.5
+    ],
+    "end_location": [
+     78.6,
+     18.7
+    ],
+    "receveur": "Sikou Niakaté",
+    "hauteur": "Ground Pass",
+    "resultat": "réussie",
+    "type_passe": null,
+    "centre": false,
+    "credite": true,
+    "xt_depart": 0.021448,
+    "xt_arrivee": 0.015058,
+    "xt_ajoute": -0.006389
+   },
+   {
+    "index": 902,
+    "type": "Ball Receipt*",
+    "periode": 1,
+    "timestamp": "00:26:49.819",
+    "minute": 26,
+    "seconde": 49,
+    "t_relatif_s": 9.37,
+    "duree_s": null,
+    "equipe": "Mali",
+    "joueur": "Sikou Niakaté",
+    "player_id": 7295,
+    "location": [
+     78.6,
+     18.7
+    ]
+   },
+   {
+    "index": 903,
+    "type": "Carry",
+    "periode": 1,
+    "timestamp": "00:26:49.819",
+    "minute": 26,
+    "seconde": 49,
+    "t_relatif_s": 9.37,
+    "duree_s": 0.469969,
+    "equipe": "Mali",
+    "joueur": "Sikou Niakaté",
+    "player_id": 7295,
+    "location": [
+     78.6,
+     18.7
+    ],
+    "end_location": [
+     76.9,
+     20.2
+    ],
+    "credite": false,
+    "raison_non_credite": "conduite de moins de 3 unités"
+   },
+   {
+    "index": 904,
+    "type": "Pass",
+    "periode": 1,
+    "timestamp": "00:26:50.289",
+    "minute": 26,
+    "seconde": 50,
+    "t_relatif_s": 9.84,
+    "duree_s": 1.94083,
+    "equipe": "Mali",
+    "joueur": "Sikou Niakaté",
+    "player_id": 7295,
+    "location": [
+     76.9,
+     20.2
+    ],
+    "end_location": [
+     66.9,
+     47.4
+    ],
+    "receveur": "Kiki Kouyaté",
+    "hauteur": "Ground Pass",
+    "resultat": "réussie",
+    "type_passe": null,
+    "centre": false,
+    "credite": true,
+    "xt_depart": 0.015689,
+    "xt_arrivee": 0.011404,
+    "xt_ajoute": -0.004285
+   },
+   {
+    "index": 905,
+    "type": "Ball Receipt*",
+    "periode": 1,
+    "timestamp": "00:26:52.230",
+    "minute": 26,
+    "seconde": 52,
+    "t_relatif_s": 11.781,
+    "duree_s": null,
+    "equipe": "Mali",
+    "joueur": "Kiki Kouyaté",
+    "player_id": 23331,
+    "location": [
+     66.9,
+     47.4
+    ]
+   },
+   {
+    "index": 906,
+    "type": "Carry",
+    "periode": 1,
+    "timestamp": "00:26:52.230",
+    "minute": 26,
+    "seconde": 52,
+    "t_relatif_s": 11.781,
+    "duree_s": 1.497248,
+    "equipe": "Mali",
+    "joueur": "Kiki Kouyaté",
+    "player_id": 23331,
+    "location": [
+     66.9,
+     47.4
+    ],
+    "end_location": [
+     71.5,
+     50.4
+    ],
+    "credite": true,
+    "xt_depart": 0.011404,
+    "xt_arrivee": 0.01323,
+    "xt_ajoute": 0.001826
+   },
+   {
+    "index": 907,
+    "type": "Pass",
+    "periode": 1,
+    "timestamp": "00:26:53.727",
+    "minute": 26,
+    "seconde": 53,
+    "t_relatif_s": 13.278,
+    "duree_s": 1.277046,
+    "equipe": "Mali",
+    "joueur": "Kiki Kouyaté",
+    "player_id": 23331,
+    "location": [
+     71.5,
+     50.4
+    ],
+    "end_location": [
+     70.9,
+     66.6
+    ],
+    "receveur": "Hamari Traoré",
+    "hauteur": "Ground Pass",
+    "resultat": "réussie",
+    "type_passe": null,
+    "centre": false,
+    "credite": true,
+    "xt_depart": 0.01323,
+    "xt_arrivee": 0.012321,
+    "xt_ajoute": -0.000909
+   },
+   {
+    "index": 908,
+    "type": "Ball Receipt*",
+    "periode": 1,
+    "timestamp": "00:26:55.004",
+    "minute": 26,
+    "seconde": 55,
+    "t_relatif_s": 14.555,
+    "duree_s": null,
+    "equipe": "Mali",
+    "joueur": "Hamari Traoré",
+    "player_id": 3248,
+    "location": [
+     70.9,
+     66.6
+    ]
+   },
+   {
+    "index": 909,
+    "type": "Carry",
+    "periode": 1,
+    "timestamp": "00:26:55.004",
+    "minute": 26,
+    "seconde": 55,
+    "t_relatif_s": 14.555,
+    "duree_s": 1.006392,
+    "equipe": "Mali",
+    "joueur": "Hamari Traoré",
+    "player_id": 3248,
+    "location": [
+     70.9,
+     66.6
+    ],
+    "end_location": [
+     71.7,
+     67.7
+    ],
+    "credite": false,
+    "raison_non_credite": "conduite de moins de 3 unités"
+   },
+   {
+    "index": 910,
+    "type": "Pass",
+    "periode": 1,
+    "timestamp": "00:26:56.011",
+    "minute": 26,
+    "seconde": 56,
+    "t_relatif_s": 15.562,
+    "duree_s": 1.823733,
+    "equipe": "Mali",
+    "joueur": "Hamari Traoré",
+    "player_id": 3248,
+    "location": [
+     71.7,
+     67.7
+    ],
+    "end_location": [
+     101.5,
+     64.8
+    ],
+    "receveur": "Youssoufou Niakaté",
+    "hauteur": "Ground Pass",
+    "resultat": "réussie",
+    "type_passe": null,
+    "centre": false,
+    "credite": true,
+    "xt_depart": 0.011759,
+    "xt_arrivee": 0.024273,
+    "xt_ajoute": 0.012514
+   },
+   {
+    "index": 911,
+    "type": "Pressure",
+    "periode": 1,
+    "timestamp": "00:26:57.505",
+    "minute": 26,
+    "seconde": 57,
+    "t_relatif_s": 17.056,
+    "duree_s": 0.759997,
+    "equipe": "Namibia",
+    "joueur": "Lubeni Haukongo",
+    "player_id": 135004,
+    "location": [
+     16.4,
+     15.3
+    ]
+   },
+   {
+    "index": 912,
+    "type": "Ball Receipt*",
+    "periode": 1,
+    "timestamp": "00:26:57.834",
+    "minute": 26,
+    "seconde": 57,
+    "t_relatif_s": 17.385,
+    "duree_s": null,
+    "equipe": "Mali",
+    "joueur": "Youssoufou Niakaté",
+    "player_id": 51750,
+    "location": [
+     101.5,
+     64.8
+    ]
+   },
+   {
+    "index": 913,
+    "type": "Carry",
+    "periode": 1,
+    "timestamp": "00:26:57.834",
+    "minute": 26,
+    "seconde": 57,
+    "t_relatif_s": 17.385,
+    "duree_s": 0.374166,
+    "equipe": "Mali",
+    "joueur": "Youssoufou Niakaté",
+    "player_id": 51750,
+    "location": [
+     101.5,
+     64.8
+    ],
+    "end_location": [
+     104.0,
+     65.2
+    ],
+    "credite": false,
+    "raison_non_credite": "conduite de moins de 3 unités"
+   },
+   {
+    "index": 914,
+    "type": "Pass",
+    "periode": 1,
+    "timestamp": "00:26:58.209",
+    "minute": 26,
+    "seconde": 58,
+    "t_relatif_s": 17.76,
+    "duree_s": 0.780358,
+    "equipe": "Mali",
+    "joueur": "Youssoufou Niakaté",
+    "player_id": 51750,
+    "location": [
+     104.0,
+     65.2
+    ],
+    "end_location": [
+     104.7,
+     71.8
+    ],
+    "receveur": "Fousseni Diabaté",
+    "hauteur": "Ground Pass",
+    "resultat": "réussie",
+    "type_passe": null,
+    "centre": false,
+    "credite": true,
+    "xt_depart": 0.024273,
+    "xt_arrivee": 0.02147,
+    "xt_ajoute": -0.002803
+   },
+   {
+    "index": 915,
+    "type": "Ball Receipt*",
+    "periode": 1,
+    "timestamp": "00:26:58.989",
+    "minute": 26,
+    "seconde": 58,
+    "t_relatif_s": 18.54,
+    "duree_s": null,
+    "equipe": "Mali",
+    "joueur": "Fousseni Diabaté",
+    "player_id": 3710,
+    "location": [
+     104.7,
+     71.8
+    ]
+   },
+   {
+    "index": 916,
+    "type": "Pass",
+    "periode": 1,
+    "timestamp": "00:26:58.989",
+    "minute": 26,
+    "seconde": 58,
+    "t_relatif_s": 18.54,
+    "duree_s": 0.97418,
+    "equipe": "Mali",
+    "joueur": "Fousseni Diabaté",
+    "player_id": 3710,
+    "location": [
+     107.9,
+     71.0
+    ],
+    "end_location": [
+     105.0,
+     66.6
+    ],
+    "receveur": "Youssoufou Niakaté",
+    "hauteur": "Ground Pass",
+    "resultat": "réussie",
+    "type_passe": null,
+    "centre": false,
+    "credite": true,
+    "xt_depart": 0.022912,
+    "xt_arrivee": 0.027686,
+    "xt_ajoute": 0.004774
+   },
+   {
+    "index": 917,
+    "type": "Ball Receipt*",
+    "periode": 1,
+    "timestamp": "00:26:59.963",
+    "minute": 26,
+    "seconde": 59,
+    "t_relatif_s": 19.514,
+    "duree_s": null,
+    "equipe": "Mali",
+    "joueur": "Youssoufou Niakaté",
+    "player_id": 51750,
+    "location": [
+     105.0,
+     66.6
+    ]
+   },
+   {
+    "index": 918,
+    "type": "Carry",
+    "periode": 1,
+    "timestamp": "00:26:59.963",
+    "minute": 26,
+    "seconde": 59,
+    "t_relatif_s": 19.514,
+    "duree_s": 0.829956,
+    "equipe": "Mali",
+    "joueur": "Youssoufou Niakaté",
+    "player_id": 51750,
+    "location": [
+     105.0,
+     66.6
+    ],
+    "end_location": [
+     105.6,
+     60.9
+    ],
+    "credite": true,
+    "xt_depart": 0.027686,
+    "xt_arrivee": 0.027686,
+    "xt_ajoute": 0.0
+   },
+   {
+    "index": 919,
+    "type": "Pressure",
+    "periode": 1,
+    "timestamp": "00:27:00.456",
+    "minute": 27,
+    "seconde": 0,
+    "t_relatif_s": 20.007,
+    "duree_s": 0.559995,
+    "equipe": "Namibia",
+    "joueur": "Aprocious Petrus",
+    "player_id": 136406,
+    "location": [
+     15.9,
+     21.9
+    ]
+   },
+   {
+    "index": 920,
+    "type": "Pass",
+    "periode": 1,
+    "timestamp": "00:27:00.793",
+    "minute": 27,
+    "seconde": 0,
+    "t_relatif_s": 20.344,
+    "duree_s": 0.837409,
+    "equipe": "Mali",
+    "joueur": "Youssoufou Niakaté",
+    "player_id": 51750,
+    "location": [
+     105.6,
+     60.9
+    ],
+    "end_location": [
+     113.9,
+     37.7
+    ],
+    "receveur": "Lassine Sinayoko",
+    "hauteur": "High Pass",
+    "resultat": "réussie",
+    "type_passe": null,
+    "centre": true,
+    "credite": true,
+    "xt_depart": 0.027686,
+    "xt_arrivee": 0.281539,
+    "xt_ajoute": 0.253853
+   },
+   {
+    "index": 921,
+    "type": "Ball Receipt*",
+    "periode": 1,
+    "timestamp": "00:27:01.631",
+    "minute": 27,
+    "seconde": 1,
+    "t_relatif_s": 21.182,
+    "duree_s": null,
+    "equipe": "Mali",
+    "joueur": "Lassine Sinayoko",
+    "player_id": 105182,
+    "location": [
+     113.9,
+     37.7
+    ]
+   },
+   {
+    "index": 922,
+    "type": "Shot",
+    "periode": 1,
+    "timestamp": "00:27:01.771",
+    "minute": 27,
+    "seconde": 1,
+    "t_relatif_s": 21.322,
+    "duree_s": 0.706024,
+    "equipe": "Mali",
+    "joueur": "Lassine Sinayoko",
+    "player_id": 105182,
+    "location": [
+     113.9,
+     37.7
+    ],
+    "end_location": [
+     120.0,
+     34.7,
+     0.9
+    ],
+    "xg": 0.32371634,
+    "resultat": "Off T",
+    "surface": "Head",
+    "type_tir": "Open Play"
+   },
+   {
+    "index": 923,
+    "type": "Goal Keeper",
+    "periode": 1,
+    "timestamp": "00:27:02.477",
+    "minute": 27,
+    "seconde": 2,
+    "t_relatif_s": 22.028,
+    "duree_s": 0.0,
+    "equipe": "Namibia",
+    "joueur": "Lloyd Junior Kazapua",
+    "player_id": 125324,
+    "location": [
+     1.7,
+     39.4
+    ]
+   }
+  ]
+ }
+}
