@@ -1,0 +1,22 @@
+VOIX OFF : vidéo « le compte expliqué », version 2 (validée par Diaby le 14/10/2026, générée par lui sur ElevenLabs)
+
+Namibie, Mali. Zéro à zéro. Sur la feuille de match : rien.
+Mais ce match, c'est deux mille six cent quatre-vingt-cinq événements enregistrés. On le passe aux rayons X.
+Prenons une seule action. Vingt-septième minute : vingt-deux secondes, neuf passes, huit Maliens, chaque position mesurée.
+Au moment de la tête, Sinayoko et Dorgeles, côte à côte.
+Le centre de Niakaté fait bondir la menace.
+La tête : une chance sur trois. À côté. Ça, le score ne le dira jamais.
+Sur tout le tournoi : soixante-quatre tirs, deux cent onze ballons récupérés.
+Et derrière chaque joueur, une fiche. Lui, il était dans l'action.
+Le score te donne le résultat. Nous, on te montre le match. MaliDataFoot.
+Et toi, quel joueur on passe aux rayons X ? Dis-le en commentaire.
+
+Vérification (événements StatsBomb, recomptés le 14/10/2026) :
+- 0-0 : aucun but dans les événements de Namibie-Mali (match 3920417, 24/01/2024).
+- 2 685 événements enregistrés pour ce match.
+- 27e minute : l'action commence à 26'40 (sur touche), la tête de Sinayoko est à 27'01 ; 22,03 s.
+- 9 passes du Mali, 8 Maliens différents (Diarra, Sinayoko, Bissouma, S. Niakaté, Kouyaté, Hamari, Y. Niakaté, Diabaté).
+- Dorgeles (milieu gauche) dans l'arrêt sur image du tir, à côté de Sinayoko.
+- Centre de Youssoufou Niakaté : +0,25 de menace (notre modèle xT).
+- Tête : 0,32 de buts attendus (StatsBomb) = « une chance sur trois » ; résultat « Off T » = à côté.
+- Tournoi : 64 tirs (dont 1 penalty), 211 récupérations réussies (récupérations sans échec + interceptions gagnées).
