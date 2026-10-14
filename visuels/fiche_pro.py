@@ -7,6 +7,10 @@ SRC=sys.argv[1] if len(sys.argv)>1 else '../outputs/fiches/hamari-traore_poste.j
 OUT=sys.argv[2] if len(sys.argv)>2 else 'fiche_pro.html'
 FMT=sys.argv[3] if len(sys.argv)>3 else 'x'
 F=json.load(open(SRC,encoding='utf-8')); B=F['bassin']
+# FLOU=1 : chiffres, barres, forme du radar et listes floutés (effet vidéo, illisibles).
+# Une fiche marquée « fictif » (chiffres d'illustration) ne sort JAMAIS sans flou.
+FLOU=os.environ.get('FLOU')=='1'
+if F.get('fictif') and not FLOU: sys.exit('fiche fictive : rendu refusé sans FLOU=1')
 fr=lambda v,d=1:(f'{v:.{d}f}').replace('.',',')
 # coupure des libellés autour du radar (présentation seulement ; la liste des critères vient du pipeline)
 COUPE={'passes_into_box_p90':['Passes dans','la surface'],'prog_passes_p90':['Passes','progressives'],'prog_carries_p90':['Conduites','progressives'],
@@ -28,8 +32,9 @@ g+=f'<circle cx="{cx}" cy="{cy}" r="{R*.5:.1f}" fill="none" stroke="#8E9A91" str
 for i in range(N):
     x,y=pol(R,i); g+=f'<line x1="{cx}" y1="{cy}" x2="{x:.1f}" y2="{y:.1f}" stroke="#E4E8E3" stroke-width="1.3"/>'
 pts=[pol(R*max(PCT[k],2)/100,i) for i,(k,_,_,_) in enumerate(CRIT)]
+g+='<defs><filter id="bl" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/></filter></defs><g'+(' filter="url(#bl)"' if FLOU else '')+'>'
 g+='<polygon points="'+' '.join(f'{x:.1f},{y:.1f}' for x,y in pts)+'" fill="#19A552" fill-opacity=".2" stroke="#0B7A3B" stroke-width="3" stroke-linejoin="round"/>'
-g+=''.join(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="5.5" fill="#fff" stroke="#0B7A3B" stroke-width="3"/>' for x,y in pts)
+g+=''.join(f'<circle cx="{x:.1f}" cy="{y:.1f}" r="5.5" fill="#fff" stroke="#0B7A3B" stroke-width="3"/>' for x,y in pts)+'</g>'
 HORIZ=(len(sys.argv)>3 and sys.argv[3]=='tiktok')   # en vertical, place sur les côtés : libellés droits, sans chevauchement
 for i,(k,_,lines,_) in enumerate(CRIT):
     a=-math.pi/2+i*2*math.pi/N
@@ -75,7 +80,7 @@ NB={1:'Un',2:'Deux',3:'Trois',4:'Quatre',5:'Cinq',6:'Six',7:'Sept'}.get(F['match
 f='node_modules/@fontsource/'
 TH='<div class="th"><span style="left:168px;width:100px;text-align:right">par 90 min</span><span style="right:0">centile</span></div>'
 L1=f"Centile : part des autres {B['pluriel']} qu'il dépasse. Note : moyenne des dix centiles."
-L2=f"{NB} matchs seulement, à lire avec prudence. Données StatsBomb Open Data."
+L2=f"{NB} matchs seulement, à lire avec prudence. Données StatsBomb Open Data." if not F.get('fictif') else "Chiffres d'illustration, floutés : pas encore de données mesurées pour ce joueur."
 SOC='<b><img src="logo_x.png" alt="X" style="height:22px"><img src="logo_tt.png" alt="TikTok" style="height:30px">@MaliDataFoot</b>'
 if FMT=='tiktok':
     # format vertical : radar au-dessus, tableau sur deux colonnes (les deux premières familles à gauche, le reste à droite)
@@ -113,6 +118,7 @@ else:
     TABLE=f'<div id="tb">{TH}{rows}</div>'
     NOTE=f'<div id="note"><span>{L1}<br>{L2}{CREDIT}</span>{SOC}</div>'
     CSSV=''
+FLOUCSS='#sc span,#m2,.r .v,.r .b,.r .c,#bt ul,#st{filter:blur(9px)}#sc b{filter:blur(24px)}' if FLOU else ''
 html=f'''<!doctype html><html lang="fr"><head><meta charset="utf-8"><style>
 @font-face{{font-family:"BC";font-style:italic;font-weight:900;src:url({f}barlow-condensed/files/barlow-condensed-latin-900-italic.woff2)}}
 @font-face{{font-family:"BCS";font-style:italic;font-weight:400;src:url({f}barlow-condensed/files/barlow-condensed-latin-400-italic.woff2)}}
@@ -169,13 +175,13 @@ html=f'''<!doctype html><html lang="fr"><head><meta charset="utf-8"><style>
 #st em{{position:absolute;bottom:-24px;font:500 15px/1 "IN";font-style:normal;color:var(--gris)}}
 #note{{position:absolute;left:56px;right:56px;top:{NOTE_TOP}px;display:flex;justify-content:space-between;align-items:flex-start;font:500 {NOTE_FS}px/1.4 "IN";color:rgba(14,26,19,.78);white-space:nowrap}}
 #note b{{display:flex;align-items:center;gap:12px;font:700 23px/1 "IN";color:var(--vert-d)}}#note b img{{display:block}}
-{CSSV}</style></head><body><div id="c">
-<div id="top"><div id="brand"><img src="logo-verte.png" alt=""><div><b>Mali<i>Data</i>Foot</b></div></div><div id="ctx">Coupe d'Afrique des nations 2023</div></div>
+{CSSV}{FLOUCSS}</style></head><body><div id="c">
+<div id="top"><div id="brand"><img src="logo-verte.png" alt=""><div><b>Mali<i>Data</i>Foot</b></div></div><div id="ctx">{F.get("contexte","Coupe d'Afrique des nations 2023")}</div></div>
 <div id="hero"><div class="ph">{PHOTO}</div>
  <div id="nm">{F['player']}</div><div id="m1">{F['poste']} · {F['team']}{CLUBH}</div><div id="m2">{F['minutes']} minutes en {F['matches']} matchs</div>
- <div id="sc"><small>Note du tournoi</small><b>{F['note']:.0f}</b><span>{ordi(F['rang'])} sur {B['effectif']} {B['pluriel']}</span></div></div>
+ <div id="sc"><small>{'Note' if F.get('fictif') else 'Note du tournoi'}</small><b>{F['note']:.0f}</b><span>{ordi(F['rang'])} sur {B['effectif']} {B['pluriel']}</span></div></div>
 <div id="p">
- <div id="ph"><h3>Son tournoi sur dix critères du poste</h3><div id="lg"><span><i style="background:#0B7A3B"></i>fort</span><span><i style="background:#E3A600"></i>moyen</span><span><i style="background:#D4252A"></i>faible</span></div></div>
+ <div id="ph"><h3>{'Son profil' if F.get('fictif') else 'Son tournoi'} sur dix critères du poste</h3><div id="lg"><span><i style="background:#0B7A3B"></i>fort</span><span><i style="background:#E3A600"></i>moyen</span><span><i style="background:#D4252A"></i>faible</span></div></div>
  <svg id="rad" viewBox="0 0 500 524">{g}</svg>
  <div id="cap">Pointillé : le niveau médian des {B['pluriel']}</div>
  {TABLE}

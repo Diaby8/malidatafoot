@@ -1,0 +1,183 @@
+{
+ "reussite": [],
+ "player": "Mamadou Sangaré",
+ "player_id": "mamadou-sangare-2002",
+ "team": "Mali",
+ "poste": "Milieu",
+ "role": "MIL",
+ "minutes": 333,
+ "matches": 3,
+ "bassin": {
+  "type": "poste",
+  "code": "MIL",
+  "singulier": "milieu",
+  "pluriel": "milieux",
+  "effectif": 26,
+  "min_minutes": 180
+ },
+ "note": 57.4,
+ "rang": 11,
+ "criteres": [
+  {
+   "k": "tackles_interceptions_p90",
+   "nom": "Tacles + interceptions",
+   "court": "Tacles + interceptions",
+   "famille": "Défense",
+   "valeur": 0.9062,
+   "rang": 7,
+   "max": 3.27,
+   "mediane": 1.45,
+   "centile": 18
+  },
+  {
+   "k": "recoveries_p90",
+   "nom": "Récupérations",
+   "court": "Récupérations",
+   "famille": "Défense",
+   "valeur": 5.5223,
+   "rang": 7,
+   "max": 7.47,
+   "mediane": 3.98,
+   "centile": 79
+  },
+  {
+   "k": "pressures_p90",
+   "nom": "Pressions",
+   "court": "Pressions",
+   "famille": "Défense",
+   "valeur": 22.2413,
+   "rang": 13,
+   "max": 29.95,
+   "mediane": 19.77,
+   "centile": 58
+  },
+  {
+   "k": "prog_passes_p90",
+   "nom": "Passes progressives",
+   "court": "Passes progressives",
+   "famille": "Construction",
+   "valeur": 4.5371,
+   "rang": 4,
+   "max": 9.14,
+   "mediane": 3.33,
+   "centile": 77
+  },
+  {
+   "k": "passes_final_third_p90",
+   "nom": "Passes vers le dernier tiers",
+   "court": "Vers le dernier tiers",
+   "famille": "Construction",
+   "valeur": 2.3182,
+   "rang": 7,
+   "max": 7.01,
+   "mediane": 2.81,
+   "centile": 34
+  },
+  {
+   "k": "prog_carries_p90",
+   "nom": "Conduites progressives",
+   "court": "Conduites progressives",
+   "famille": "Construction",
+   "valeur": 2.7319,
+   "rang": 26,
+   "max": 8.41,
+   "mediane": 2.35,
+   "centile": 61
+  },
+  {
+   "k": "xa_p90",
+   "nom": "Passes décisives attendues",
+   "court": "Passes déc. attendues",
+   "famille": "Création",
+   "valeur": 0.0788,
+   "rang": 17,
+   "max": 0.45,
+   "mediane": 0.07,
+   "centile": 58
+  },
+  {
+   "k": "key_passes_p90",
+   "nom": "Passes clés",
+   "court": "Passes clés",
+   "famille": "Création",
+   "valeur": 0.9735,
+   "rang": 16,
+   "max": 3.2,
+   "mediane": 1.18,
+   "centile": 34
+  },
+  {
+   "k": "passes_into_box_p90",
+   "nom": "Passes dans la surface",
+   "court": "Passes dans la surface",
+   "famille": "Création",
+   "valeur": 0.8475,
+   "rang": 22,
+   "max": 2.34,
+   "mediane": 0.6,
+   "centile": 81
+  },
+  {
+   "k": "npxg_p90",
+   "nom": "Buts attendus hors penalty",
+   "court": "Buts attendus hors pen.",
+   "famille": "Création",
+   "valeur": 0.1193,
+   "rang": 2,
+   "max": 0.28,
+   "mediane": 0.09,
+   "centile": 74
+  }
+ ],
+ "proches": [
+  {
+   "player_id": 66887,
+   "player": "Hamdi Fathi",
+   "team": "Égypte",
+   "proche": 80
+  },
+  {
+   "player_id": 7023,
+   "player": "Franck Kessié",
+   "team": "Côte d'Ivoire",
+   "proche": 74
+  },
+  {
+   "player_id": 8349,
+   "player": "Deroy Duarte",
+   "team": "Cap-Vert",
+   "proche": 72
+  }
+ ],
+ "notes_bassin": [
+  25.6,
+  28.4,
+  28.4,
+  32.4,
+  36.0,
+  37.2,
+  38.0,
+  38.0,
+  39.6,
+  40.0,
+  43.2,
+  43.6,
+  46.4,
+  50.8,
+  54.0,
+  57.4,
+  59.6,
+  60.0,
+  60.8,
+  63.2,
+  63.6,
+  64.4,
+  66.8,
+  67.2,
+  69.6,
+  81.6
+ ],
+ "fictif": true,
+ "contexte": "Fiche MaliDataFoot",
+ "_avertissement": "FICHE FICTIVE : chiffres d'illustration tirés au hasard, pour l'effet de défilé flouté de la vidéo explicative. Ne jamais publier sans flou ; fiche_pro.py refuse de la rendre sans FLOU=1."
+}
