@@ -16,7 +16,8 @@ for m in MATCHS:
             R['tirs'].append({'x': e['location'][0], 'y': e['location'][1], 'xg': round(e['shot']['statsbomb_xg'], 4),
                               'but': e['shot']['outcome']['name'] == 'Goal', 'penalty': e['shot']['type']['name'] == 'Penalty', 'match': m})
         if t in ('Ball Recovery', 'Interception') and 'location' in e:
-            ok = not (t == 'Ball Recovery' and e.get('ball_recovery', {}).get('recovery_failure'))
+            # récupération réussie seulement : Ball Recovery sans échec, interception gagnée (Won, Success In Play / Out)
+            ok = (not e.get('ball_recovery', {}).get('recovery_failure')) if t == 'Ball Recovery' else e['interception']['outcome']['name'] in ('Won', 'Success In Play', 'Success Out')
             if ok: R['recuperations'].append({'x': e['location'][0], 'y': e['location'][1], 'type': t})
         if t == 'Pass' and 'outcome' not in e.get('pass', {}) and e['pass'].get('recipient') and e['pass'].get('type', {}).get('name') not in ('Corner', 'Free Kick', 'Throw-in', 'Goal Kick', 'Kick Off'):
             a, b = e['player']['name'], e['pass']['recipient']['name']

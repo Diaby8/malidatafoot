@@ -77,7 +77,7 @@ canvas{position:absolute;left:0;top:0}.cache{display:none}
 <div class="t h2" id="q0" style="top:1110px;left:0;right:0;text-align:center">RIEN À VOIR ?</div>
 <div class="t kick" id="k1" style="top:166px">NAMIBIE 0-0 MALI · CAN 2023 · <b>27e MINUTE</b></div>
 <div class="t h1" id="h1" style="top:206px">AUX RAYONS X</div>
-<div class="t lab" id="L1" style="top:372px">COUCHE 1 · <span>LE BALLON · 22 SECONDES · 12 GESTES</span></div>
+<div class="t lab" id="L1" style="top:372px">COUCHE 1 · <span>LE BALLON · 22 SECONDES · 9 PASSES · 8 MALIENS</span></div>
 <div class="t lab" id="L2" style="top:372px">COUCHE 2 · <span>LES JOUEURS AU MOMENT DE LA TÊTE</span></div>
 <div class="t lab" id="L3" style="top:372px">COUCHE 3 · <span>LA MENACE · NOTRE MODÈLE (xT)</span></div>
 <div class="t lab" id="L4" style="top:372px">COUCHE 4 · <span>LE TIR · 32 % DE CHANCE DE BUT</span></div>
