@@ -18,3 +18,8 @@ Points de vigilance trouvés :
 3. **Fin de la courbe (image 2)** : la ligne rouge monte en 2025-2026 (adversaires forts de la CAN 2025). Lecture juste, la légende suffit.
 4. **Rafraîchir les données le jour de la publication** (martj42 bouge).
 5. **Version TikTok** (carrousel 1080 × 1920) à faire.
+
+## Limites à écrire dans le post (règle de Diaby : toujours dire les points faibles)
+- 50 matchs : petit échantillon.
+- Les 10 derniers matchs (CAN 2025 comprise) : 7 encaissés, contre 12,7 attendus (adversaires forts). La courbe remonte, mais reste sous l'attendu.
+- Maroc-Mali (26/12/2025) : le modèle attend 3,78 buts, au-delà de tout ce qu'il a vu en 2000-2019 (2,51 au plus) : extrapolation. Sans ce match : 21 encaissés pour 40,0 attendus. Avec un plafond à 2 buts par match : 41,9 attendus. La conclusion tient.
