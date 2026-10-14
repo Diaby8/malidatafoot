@@ -75,6 +75,7 @@ canvas{position:absolute;left:0;top:0}.cache{display:none}
 <div id="zero">0-0</div>
 <div class="t kick" id="k0" style="top:470px">NAMIBIE · MALI · <b>CAN 2023</b></div>
 <div class="t h2" id="q0" style="top:1110px;left:0;right:0;text-align:center">RIEN À VOIR ?</div>
+<div class="t kick" id="q1" style="top:1230px;left:0;right:0;text-align:center;font-size:40px"><b style="color:#F6C41C">2 685</b> ÉVÉNEMENTS ENREGISTRÉS</div>
 <div class="t kick" id="k1" style="top:166px">NAMIBIE 0-0 MALI · CAN 2023 · <b>27e MINUTE</b></div>
 <div class="t h1" id="h1" style="top:206px">AUX RAYONS X</div>
 <div class="t lab" id="L1" style="top:372px">COUCHE 1 · <span>LE BALLON · 22 SECONDES · 9 PASSES · 8 MALIENS</span></div>
@@ -186,7 +187,7 @@ function reseau(g,a){ if(a<=0)return; const N=D.reseau.noeuds; let mx=0; D.resea
 function recup(g,a){ if(a<=0)return; let sx=0; for(const r of D.recup){sx+=r.x; ring(g,r.x,r.y,.75*a,'#F6C41C',.16,'rgba(246,196,28,.55)');}
   const m=sx/D.recup.length; if(a>.5) seg(g,[m,-3,.02],[m,83,.02],'#FF6B5E',.35,[1.4,1]);}
 // ---------------------------------------------------------------- le carrousel et le mur (canevas 2)
-const T={hook:0, plonge:2.0, couche1:3.2, couche2:6.7, couche3:8.0, couche4:9.3, tournoi:11.2, flash:1.15, carrousel:15.0, mur:17.8, fin:20.9, duree:25.0};
+const T={hook:0, plonge:2.0, couche1:3.2, couche2:6.7, couche3:8.0, couche4:9.3, tournoi:11.2, flash:1.15, carrousel:15.0, mur:17.1, fin:20.9, duree:25.0};
 window.DUREE=T.duree;
 function mur(m){ const S=lerp(.78,.10,m), rx=lerp(0,28,m)*Math.PI/180, rz=lerp(0,-14,m)*Math.PI/180, yc=lerp(960,960,m), co=Math.cos(rx), GX=1180, GY=1580, DD=2400;
   const L=[]; for(const [r,c,k] of D.cases){const x0=(c-D.cc)*GX, y0=(r-D.rr)*GY; const Xr=x0*Math.cos(rz)-y0*Math.sin(rz), Yr=x0*Math.sin(rz)+y0*Math.cos(rz);
@@ -197,7 +198,7 @@ function mur(m){ const S=lerp(.78,.10,m), rx=lerp(0,28,m)*Math.PI/180, rz=lerp(0
     if(centre&&k2>.3)X2.drawImage($('fp5'),0,120,1080,1460,-540,-730,1080,1460); else X2.drawImage($('ti'+k),-540,-730,1080,1460); X2.restore();}}
 D.rr=D.rc;
 function carrousel(t){ // un train de fiches côte à côte qui file de gauche à droite et s'arrête sur Dorgeles (la dernière)
-  const N=6, S=.78, PAS=880, u=cl((t-T.carrousel-.2)/2.3), e=1-Math.pow(1-u,4);
+  const N=6, S=.78, PAS=880, u=cl((t-T.carrousel-.15)/1.55), e=1-Math.pow(1-u,4);
   const tete=lerp(-460,540+(N-1)*PAS,e);   // position de la 1re fiche (Hamari), en tête du train
   for(let i=0;i<N;i++){const x=tete-i*PAS; if(x<-460||x>1540)continue; X2.save(); X2.translate(x,960); X2.scale(S,S); X2.drawImage($('fp'+i),0,120,1080,1460,-540,-730,1080,1460);
     if(i<2){X2.fillStyle='#D4252A'; X2.fillRect(-540,-830,560,84); X2.fillStyle='#FFFFFF'; X2.font='800 46px SC'; X2.textAlign='left'; X2.fillText("DANS L'ACTION",-512,-772);}
@@ -214,7 +215,7 @@ window.seek=function(t){
   X.clearRect(0,0,W,H); X2.clearRect(0,0,W,H);
   // 1. l'accroche
   const z=$('zero'); const zu=oc(cl(t/.35)), zo=cl((t-T.plonge)/.45); z.style.opacity=(zu*(1-zo)).toFixed(3); z.style.transform=`scale(${(1+.6*io(zo)).toFixed(3)})`;
-  vis('k0',t,.15,T.plonge); vis('q0',t,.75,T.plonge);
+  vis('k0',t,.15,T.plonge); vis('q0',t,.75,T.plonge); vis('q1',t,1.35,T.plonge);
   // 2. le terrain
   if(t<T.carrousel+.6){ camAt(t); const sa=cl((t-T.plonge)/.6); X.globalAlpha=1; stade(X,sa);
     const reel=cl((t-T.couche1)/(T.couche2-T.couche1-.3))*D.reel;
@@ -236,7 +237,7 @@ window.seek=function(t){
   // 3. le jaune entre par la gauche, puis le carrousel
   const j=io(cl((t-T.carrousel)/.45)); $('jaune').style.opacity=j>0?1:0; $('jaune').style.clipPath=`inset(0 ${(100-100*j).toFixed(2)}% 0 0)`;
   if(t>=T.carrousel&&t<T.mur) carrousel(t);
-  vis('dor',t,T.carrousel+2.0,T.mur+.2,20);
+  vis('dor',t,T.carrousel+1.3,T.mur+.2,20);
   // 4. le mur
   if(t>=T.mur) mur(io(cl((t-T.mur)/2.6)));
   // 5. la fin
