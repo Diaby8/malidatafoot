@@ -91,6 +91,8 @@ def drap(p,t=38):
     return f'<svg width="{t}" height="{t}" viewBox="-1 -1 22 22" style="display:block"><clipPath id="{k}"><circle cx="10" cy="10" r="10"/></clipPath><g clip-path="url(#{k})">{DR[p]}</g><circle cx="10" cy="10" r="10" fill="none" stroke="#fff" stroke-width="1.4"/></svg>'
 
 # ---------- post 1, image 1 : le classement des défenses africaines
+# les compétitions comptées, écrites sur l'image (demande de Diaby, 15/10/2026)
+COMPET='<div style="position:absolute;left:64px;top:336px;font:700 22px/1 SC;letter-spacing:.04em;color:#04331A;white-space:nowrap">(CAN, ÉLIMINATOIRES CAN ET ÉLIMINATOIRES MONDIAL · SANS LES AMICAUX)</div>'
 A=json.load(open(ICI/'../outputs/analyses/defense_afrique.json',encoding='utf-8')); D=json.load(open(ICI/'../outputs/analyses/defense_aigles.json',encoding='utf-8'))
 def p1_image1(tt=False):
     # TikTok : barres plus courtes, pour que les chiffres des rangs 6 à 10 restent avant x = 946
@@ -105,7 +107,7 @@ def p1_image1(tt=False):
             f'<div style="position:absolute;left:{x0+L+14:.0f}px;top:{y+1}px;font:italic 900 40px/1 BC;color:{"#0B7A3B" if mali else "#064A25"}">{fr(e["par_match"])}</div>')
     r=D['reference']['par_match']
     b+=f'<div class="bigR" style="top:{top+10*rh+44}px"><b>{A["mali"]["rang"]}<span style="font:italic 900 70px BC;color:#064A25;letter-spacing:0">e</span></b><span>DÉFENSE D\'AFRIQUE DEPUIS 2020<br>CONTRE <em>{fr(r)}</em> BUT PAR MATCH DE 2000 À 2019</span></div>'
-    return page('DEPUIS 2020 · MATCHS OFFICIELS · <b>BUTS ENCAISSÉS PAR MATCH</b>','LA DÉFENSE','DES AIGLES',fr(A['mali']['par_match']),b,
+    return page('DEPUIS 2020 · MATCHS OFFICIELS · <b>BUTS ENCAISSÉS PAR MATCH</b>','LA DÉFENSE','DES AIGLES',fr(A['mali']['par_match']),COMPET+b,
          'Matchs officiels : CAN et éliminatoires (CAN, Coupe du monde) · Données : résultats internationaux (martj42)',tt)
 ecrire(1,p1_image1()); ecrire('1_tt',p1_image1(True))
 
@@ -135,7 +137,7 @@ def p1_image2(tt=False):
     body+=f'<div style="position:absolute;left:64px;top:{cy1+104}px;font:600 22px/1 SC;letter-spacing:.03em;color:rgba(4,51,26,.8)">PAR MATCH, EN MOYENNE DEPUIS LE PREMIER MATCH OFFICIEL DE 2020</div>'
     AE=D['a_adversaires_egaux']
     body+=f'<div class="bigR" style="top:{cy1+160}px"><b>{AE["buts_reels"]}</b><span>BUTS ENCAISSÉS EN {D["depuis_2020"]["matchs"]} MATCHS DEPUIS 2020<br>POUR <em>{round(AE["buts_attendus"])}</em> ATTENDUS FACE AUX MÊMES ADVERSAIRES</span></div>'
-    return page('2020-2026 · MATCHS OFFICIELS · <b>DEUX FOIS MOINS DE BUTS QU\'ATTENDU</b>','LA DÉFENSE','DEPUIS 2020','22',body,
+    return page('2020-2026 · MATCHS OFFICIELS · <b>DEUX FOIS MOINS DE BUTS QU\'ATTENDU</b>','LA DÉFENSE','DEPUIS 2020','22',COMPET+body,
          'Attendus : selon la force de l\'adversaire (classement Elo) et le lieu · Données : résultats internationaux (martj42)',tt)
 ecrire(2,p1_image2()); ecrire('2_tt',p1_image2(True))
 
