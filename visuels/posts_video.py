@@ -112,23 +112,30 @@ ecrire(1,p1_image1()); ecrire('1_tt',p1_image1(True))
 # ---------- post 1, image 2 : la courbe depuis 2000, avec ce que le Mali d'avant aurait encaissé
 import datetime as dt
 def p1_image2(tt=False):
-    M=D['matchs']; n=20  # 20 matchs : sur 10, la courbe faisait de fausses grosses chutes (Diaby, 14/10/2026)
-    roll=lambda k:[sum(m[k] for m in M[i-n+1:i+1])/n for i in range(n-1,len(M))]
-    re_,at_=roll('buts_contre'),roll('attendu'); ds=[dt.date.fromisoformat(m['date']) for m in M][n-1:]
-    cx0,cx1,cy0,cy1=110,900,390,880; t0,t1=dt.date(2001,1,1),dt.date(2026,12,31); ymax=2.0
+    # B2, choix de Diaby (14/10/2026) : seulement depuis 2020, les deux courbes sur les mêmes 50 matchs.
+    # Moyenne depuis le premier match de 2020 (pas de moyenne glissante : pas de fausses chutes ; pas de cumul : pas d'impression que ça empire).
+    # Tracée à partir du 2e match : après le 1er (1-0), la moyenne vaut 0 et faisait un trait depuis l'axe.
+    M=[m for m in D['matchs'] if m['periode']=='depuis_2020']
+    re_=[];at_=[];r=a=0
+    for i,m in enumerate(M,1): r+=m['buts_contre']; a+=m['attendu']; re_.append(r/i); at_.append(a/i)
+    ds=[dt.date.fromisoformat(m['date']) for m in M][1:]; re_,at_=re_[1:],at_[1:]
+    cx0,cx1,cy0,cy1=110,(860 if tt else 900),390,880; t0,t1=dt.date(2020,1,1),dt.date(2026,12,31); ymax=1.5
     sx=lambda d:cx0+(d-t0).days/(t1-t0).days*(cx1-cx0); sy=lambda v:cy1-v/ymax*(cy1-cy0)
     g=f'<line class="ax" x1="{cx0}" y1="{cy0}" x2="{cx0}" y2="{cy1}"/><line class="ax" x1="{cx0}" y1="{cy1}" x2="{cx1}" y2="{cy1}"/>'
-    for v in (0.5,1,1.5,2): g+=f'<text class="t" x="{cx0-14}" y="{sy(v)+9:.0f}" text-anchor="end">{fr(v,1).replace(",0","")}</text>'
-    for a in (2005,2010,2015,2020,2025): g+=f'<text class="t" x="{sx(dt.date(a,1,1)):.0f}" y="{cy1+38}" text-anchor="middle">{a}</text>'
-    x20=sx(dt.date(2020,1,1)); g+=f'<line class="pl" x1="{x20:.0f}" y1="{cy0}" x2="{x20:.0f}" y2="{cy1}"/>'
+    for v in (0.5,1,1.5): g+=f'<text class="t" x="{cx0-14}" y="{sy(v)+9:.0f}" text-anchor="end">{fr(v,1).replace(",0","")}</text>'
+    for y in range(2020,2027): g+=f'<text class="t" x="{sx(dt.date(y,1,1)):.0f}" y="{cy1+38}" text-anchor="middle">{y}</text>'
     pa=lambda vs:'M'+'L'.join(f'{sx(d):.1f} {sy(v):.1f}' for d,v in zip(ds,vs))
     g+=f'<path d="{pa(at_)}" fill="none" stroke="#D4252A" stroke-width="4" stroke-dasharray="11 9"/><path d="{pa(re_)}" fill="none" stroke="#0B7A3B" stroke-width="6" stroke-linejoin="round"/>'
+    xe=sx(ds[-1])+12
+    g+=f'<text x="{xe:.0f}" y="{sy(at_[-1])+10:.0f}" style="font:italic 900 36px BC;fill:#D4252A">{fr(at_[-1])}</text><text x="{xe:.0f}" y="{sy(re_[-1])+12:.0f}" style="font:italic 900 36px BC;fill:#0B7A3B">{fr(re_[-1])}</text>'
+    xm=(sx(dt.date(2020,1,1))+sx(dt.date(2020,11,1)))/2+4
+    g+='<text text-anchor="middle" style="font:700 18px SC;fill:#04331A">'+''.join(f'<tspan x="{xm:.0f}" y="{sy(0.42)+i*22:.0f}">{t}</tspan>' for i,t in enumerate(('(COVID :','AUCUN','MATCH','OFFICIEL','AVANT','NOV. 2020)')))+'</text>'
     body=f'<svg style="position:absolute;left:0;top:0" width="{W}" height="{H}">{g}</svg>'
-    body+=f'<div class="leg" style="top:{cy1+70}px{";font-size:23px;gap:20px" if tt else ""}"><span><i style="display:block;width:34px;height:9px;border-radius:5px;background:#0B7A3B"></i>BUTS ENCAISSÉS</span><span><svg width="36" height="9"><line x1="0" y1="4.5" x2="36" y2="4.5" stroke="#D4252A" stroke-width="5" stroke-dasharray="11 7"/></svg>LE MALI DE 2000-2019, FACE AUX MÊMES ADVERSAIRES</span></div>'
-    body+=f'<div style="position:absolute;left:64px;top:{cy1+104}px;font:600 22px/1 SC;letter-spacing:.03em;color:rgba(4,51,26,.8)">PAR MATCH, EN MOYENNE SUR LES {n} DERNIERS MATCHS OFFICIELS</div>'
+    body+=f'<div class="leg" style="top:{cy1+70}px{";font-size:23px;gap:20px" if tt else ""}"><span><i style="display:block;width:34px;height:9px;border-radius:5px;background:#0B7A3B"></i>BUTS ENCAISSÉS</span><span><svg width="36" height="9"><line x1="0" y1="4.5" x2="36" y2="4.5" stroke="#D4252A" stroke-width="5" stroke-dasharray="11 7"/></svg>ATTENDUS FACE AUX MÊMES ADVERSAIRES</span></div>'
+    body+=f'<div style="position:absolute;left:64px;top:{cy1+104}px;font:600 22px/1 SC;letter-spacing:.03em;color:rgba(4,51,26,.8)">PAR MATCH, EN MOYENNE DEPUIS LE PREMIER MATCH OFFICIEL DE 2020</div>'
     AE=D['a_adversaires_egaux']
     body+=f'<div class="bigR" style="top:{cy1+160}px"><b>{AE["buts_reels"]}</b><span>BUTS ENCAISSÉS EN {D["depuis_2020"]["matchs"]} MATCHS DEPUIS 2020<br>POUR <em>{round(AE["buts_attendus"])}</em> ATTENDUS FACE AUX MÊMES ADVERSAIRES</span></div>'
-    return page('2000-2026 · MATCHS OFFICIELS · <b>DEUX FOIS MOINS DE BUTS ENCAISSÉS</b>','LA DÉFENSE','DEPUIS 2000','22',body,
+    return page('2020-2026 · MATCHS OFFICIELS · <b>DEUX FOIS MOINS DE BUTS QU\'ATTENDU</b>','LA DÉFENSE','DEPUIS 2020','22',body,
          'Attendus : selon la force de l\'adversaire (classement Elo) et le lieu · Données : résultats internationaux (martj42)',tt)
 ecrire(2,p1_image2()); ecrire('2_tt',p1_image2(True))
 
