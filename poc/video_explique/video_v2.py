@@ -81,6 +81,7 @@ canvas{position:absolute;left:0;top:0}.cache{display:none}
 <div class="t lab" id="L2" style="top:372px">COUCHE 2 · <span>LES JOUEURS AU MOMENT DE LA TÊTE</span></div>
 <div class="t lab" id="L3" style="top:372px">COUCHE 3 · <span>LA MENACE · NOTRE MODÈLE (xT)</span></div>
 <div class="t lab" id="L4" style="top:372px">COUCHE 4 · <span>LE TIR · 32 % DE CHANCE DE BUT</span></div>
+<div class="t" id="clk" style="top:428px;font:italic 900 72px/1 BC;color:#FFFFFF"><span id="clkv">26'40</span> <span id="clkl" style="font:800 26px SC;letter-spacing:.06em;color:#F6C41C;vertical-align:14px">TEMPS DE JEU RÉEL</span></div>
 <div class="t sm" id="s1" style="top:430px">22 SECONDES · 8 MALIENS · 12 GESTES MESURÉS</div>
 <div class="t sm" id="n3" style="top:430px">LE CENTRE DE Y. NIAKATÉ AJOUTE <span style="color:#FF6B5E">+0,25</span> DE MENACE<br><span style="color:rgba(255,255,255,.75)">PLUS LA CASE EST CHAUDE, PLUS UN BUT Y EST PROCHE</span><span id="v3" style="display:none"></span></div>
 <div class="t sm" id="n4" style="top:430px">LA TÊTE DE SINAYOKO : <span style="color:#F6C41C">32 % DE CHANCE DE BUT</span><br><span style="color:#F6C41C">À CÔTÉ. LE SCORE DIT 0-0.</span><span id="v4" style="display:none"></span></div>
@@ -95,7 +96,7 @@ canvas{position:absolute;left:0;top:0}.cache{display:none}
 <div id="src">Positions et trajectoires réelles · Menace : modèle MaliDataFoot (xT) · Données <img src="logo_statsbomb.png" style="height:22px;vertical-align:-5px"></div>
 <div class="t h2" id="dor" style="top:1560px;left:0;right:0;text-align:center;color:#064A25">LUI, <span style="color:#D4252A">IL ÉTAIT DANS L'ACTION.</span></div>
 <div id="voile"></div>
-<div id="fin"><img class="lg" src="logo-verte.png"><div class="wm">Mali<i>Data</i>Foot</div><div class="so"><img src="logo_x.png" style="height:40px"><img src="logo_tt.png" style="height:52px"><span>@MaliDataFoot</span></div></div>
+<div id="fin"><img class="lg" src="logo-verte.png"><div class="wm">Mali<i>Data</i>Foot</div><div class="so"><img src="logo_x.png" style="height:40px"><img src="logo_tt.png" style="height:52px"><span>@MaliDataFoot</span></div><div id="qq" style="margin-top:70px;font:italic 800 64px/1.1 BC;color:#064A25;text-transform:uppercase">Quel joueur on passe<br><span style="color:#D4252A">aux rayons X ensuite ?</span></div></div>
 @@IMGS@@
 </div><script>
 const D=@@DATA@@;
@@ -131,7 +132,7 @@ function fleche(g,x1,y1,x2,y2,col,w,dash,u){   // flèche au sol qui se dessine 
   const xe=lerp(x1,x2,u), ye=lerp(y1,y2,u); seg(g,[x1,y1,.02],[xe,ye,.02],col,w,dash);
   if(u>=1){const L=Math.hypot(x2-x1,y2-y1)||1, ux=(x2-x1)/L, uy=(y2-y1)/L, h=Math.max(1.4,w*4);
     poly(g,[[x2,y2,.03],[x2-ux*h-uy*h*.55,y2-uy*h+ux*h*.55,.03],[x2-ux*h+uy*h*.55,y2-uy*h-ux*h*.55,.03]],col);}}
-function texte(g,x,y,z,txt,col,px,align){const s=P(x,y,z); if(!s)return; g.font=`800 ${px}px SC`; g.fillStyle=col; g.textAlign=align||'center'; g.fillText(txt,s[0],s[1]);}
+function texte(g,x,y,z,txt,col,px,align){const s=P(x,y,z); if(!s)return; g.font=`800 ${px}px SC`; g.textAlign=align||'center'; const w=g.measureText(txt).width, x0=align=='left'?s[0]:(align=='right'?s[0]-w:s[0]-w/2); if(x0<16||x0+w>1064)return; g.fillStyle=col; g.fillText(txt,s[0],s[1]);}   // un nom coupé par le bord n'est pas affiché
 // ---------------------------------------------------------------- le stade
 function stade(g,alpha){
   g.globalAlpha=alpha;
@@ -171,6 +172,7 @@ function joueurs(g,a,tir,lab3){ if(a<=0)return; g.globalAlpha=a;
   for(const j of J){const col=j.tireur?'#FF6B5E':(j.mali?'#F6C41C':'#FFFFFF'); seg(g,[j.x,j.y,0],[j.x,j.y,2.1],col,.16); const s=P(j.x,j.y,2.35); if(s){g.fillStyle=col;g.beginPath();g.arc(s[0],s[1],Math.max(4,.42*kz(j.x,j.y,2.35)),0,7);g.fill();}}
   for(const j of J){ if(!j.mali)continue; const n=j.nom=='Nene Dorgeles'?'DORGELES':j.nom.split(' ').slice(-1)[0].toUpperCase(); const al=j.tireur?'right':(j.nom=='Nene Dorgeles'?'left':'center'); texte(g,j.x,j.y,3.7,n,j.tireur?'#FF6B5E':'#F6C41C',Math.round(lerp(26,40,cl((kz(j.x,j.y)-20)/40))),al);}
   g.globalAlpha=1;
+  if(lab3>0){const c=D.gestes.find(e=>e.xt>.1); X.globalAlpha=lab3*a; ring(g,c.x1,c.y1,1.5,'#F6C41C',.26); seg(g,[c.x1,c.y1,0],[c.x1,c.y1,2.1],'#F6C41C',.16); texte(g,c.x1,c.y1,3.7,'Y. NIAKATÉ','#F6C41C',34,'left'); X.globalAlpha=a;}
   if(lab3>0){const c=D.gestes.find(e=>e.xt>.1); const mx=(c.x1+c.x2)/2, my=(c.y1+c.y2)/2; X.globalAlpha=lab3; texteBig(g,mx,my,4.2,'+'+(.25*oc(lab3)).toFixed(2).replace('.',','),'#FF6B5E',96); X.globalAlpha=a;}
   if(tir>0){X.globalAlpha=cl(tir*2); texteBig(g,D.tir.x,D.tir.y,6.2,Math.round(32*oc(cl(tir)))+' %','#F6C41C',110); X.globalAlpha=1;}
   if(tir>.6){X.globalAlpha=cl((tir-.6)*3); texte(g,D.tir.fin[0],D.tir.fin[1]-1.5,3.4,'À CÔTÉ','#FFFFFF',34); X.globalAlpha=1;}
@@ -178,11 +180,13 @@ function joueurs(g,a,tir,lab3){ if(a<=0)return; g.globalAlpha=a;
 function tirs(g,a){ if(a<=0)return; for(const s of D.tirs){const r=.6+Math.sqrt(s.xg)*3.6; ring(g,s.x,s.y,r*a,s.but?'#F6C41C':'#FFFFFF',.18,s.but?'rgba(246,196,28,.85)':'rgba(255,255,255,.12)');}}
 function reseau(g,a){ if(a<=0)return; const N=D.reseau.noeuds; let mx=0; D.reseau.liens.forEach(l=>mx=Math.max(mx,l[2]));
   for(const [p,q,n] of D.reseau.liens){const A=N[p],B=N[q]; const u=io(cl(a*1.6-.3)); seg(g,[A[0],A[1],.02],[lerp(A[0],B[0],u),lerp(A[1],B[1],u),.02],'#F6C41C',.08+.42*n/mx);}
-  for(const p in N){const v=N[p]; ring(g,v[0],v[1],1.2+v[2]/220*a,'#F6C41C',.2,'#063D20');}}
+  for(const p in N){const v=N[p]; ring(g,v[0],v[1],1.2+v[2]/220*a,'#F6C41C',.2,'#063D20');}
+  const NOMS={'Boubakar Kouyate':'KOUYATÉ','Sikou Niakate':'S. NIAKATÉ','Hamari Traoré':'HAMARI'}; g.globalAlpha=cl(a*2-.6);
+  for(const p in NOMS) if(N[p]) texte(g,N[p][0],N[p][1],3.2,NOMS[p],'#FFFFFF',30); g.globalAlpha=1;}
 function recup(g,a){ if(a<=0)return; let sx=0; for(const r of D.recup){sx+=r.x; ring(g,r.x,r.y,.75*a,'#F6C41C',.16,'rgba(246,196,28,.55)');}
   const m=sx/D.recup.length; if(a>.5) seg(g,[m,-3,.02],[m,83,.02],'#FF6B5E',.35,[1.4,1]);}
 // ---------------------------------------------------------------- le carrousel et le mur (canevas 2)
-const T={hook:0, plonge:2.0, couche1:3.2, couche2:6.7, couche3:8.0, couche4:9.3, tournoi:11.2, flash:1.15, carrousel:15.0, mur:17.8, fin:20.9, duree:23.6};
+const T={hook:0, plonge:2.0, couche1:3.2, couche2:6.7, couche3:8.0, couche4:9.3, tournoi:11.2, flash:1.15, carrousel:15.0, mur:17.8, fin:20.9, duree:25.0};
 window.DUREE=T.duree;
 function mur(m){ const S=lerp(.78,.10,m), rx=lerp(0,28,m)*Math.PI/180, rz=lerp(0,-14,m)*Math.PI/180, yc=lerp(960,960,m), co=Math.cos(rx), GX=1180, GY=1580, DD=2400;
   const L=[]; for(const [r,c,k] of D.cases){const x0=(c-D.cc)*GX, y0=(r-D.rr)*GY; const Xr=x0*Math.cos(rz)-y0*Math.sin(rz), Yr=x0*Math.sin(rz)+y0*Math.cos(rz);
@@ -195,12 +199,14 @@ D.rr=D.rc;
 function carrousel(t){ // un train de fiches côte à côte qui file de gauche à droite et s'arrête sur Dorgeles (la dernière)
   const N=6, S=.78, PAS=880, u=cl((t-T.carrousel-.2)/2.3), e=1-Math.pow(1-u,4);
   const tete=lerp(-460,540+(N-1)*PAS,e);   // position de la 1re fiche (Hamari), en tête du train
-  for(let i=0;i<N;i++){const x=tete-i*PAS; if(x<-460||x>1540)continue; X2.save(); X2.translate(x,960); X2.scale(S,S); X2.drawImage($('fp'+i),0,120,1080,1460,-540,-730,1080,1460); X2.restore();}}
+  for(let i=0;i<N;i++){const x=tete-i*PAS; if(x<-460||x>1540)continue; X2.save(); X2.translate(x,960); X2.scale(S,S); X2.drawImage($('fp'+i),0,120,1080,1460,-540,-730,1080,1460);
+    if(i<2){X2.fillStyle='#D4252A'; X2.fillRect(-540,-830,560,84); X2.fillStyle='#FFFFFF'; X2.font='800 46px SC'; X2.textAlign='left'; X2.fillText("DANS L'ACTION",-512,-772);}
+    X2.restore();}}
 // ---------------------------------------------------------------- le temps
 function vis(id,t,a,b,dy=30){const e=$(id); const u=oc(cl((t-a)/.4)), v=b==null?0:cl((t-b)/.3); e.style.opacity=(u*(1-v)).toFixed(3); e.style.transform=`translateY(${((1-u)*dy).toFixed(1)}px)`;}
 const K=[ // images clés de la caméra : temps, position, cible, focale, centre vertical (caméra derrière le but que le Mali attaque)
  [0,[88,40,200],[88.5,40,0],1250,1000],[T.plonge,[88,40,200],[88.5,40,0],1250,1000],[T.couche1,[150,40,36],[84,40,0],1250,950],
- [T.couche2-.2,[146,40,30],[92,40,0],1350,950],[T.couche2+.9,[142,40,27],[100,40,0],1300,960],[T.couche4+1.6,[140,40,25],[102,40,0],1300,960],
+ [T.couche2-.2,[146,40,30],[92,40,0],1350,950],[T.couche2+.9,[143,43,28],[100,43,0],1220,960],[T.couche4+1.6,[141,43,26],[102,43,0],1220,960],
  [T.tournoi+.5,[152,40,72],[70,40,0],1300,920],[T.carrousel,[152,40,72],[70,40,0],1300,920]];
 function camAt(t){let i=0; while(i<K.length-2&&t>K[i+1][0])i++; const a=K[i], b=K[i+1]; const u=io(cl((t-a[0])/(b[0]-a[0])));
   camera(a[1].map((v,j)=>lerp(v,b[1][j],u)),a[2].map((v,j)=>lerp(v,b[2][j],u)),lerp(a[3],b[3],u),lerp(a[4],b[4],u));}
@@ -221,7 +227,8 @@ window.seek=function(t){
     // le terrain s'efface vers la droite quand le jaune entre
   }
   vis('k1',t,T.plonge+.5,T.tournoi); vis('h1',t,T.plonge+.65,T.tournoi);
-  vis('L1',t,T.couche1,T.couche2); vis('L2',t,T.couche2,T.couche3); vis('L3',t,T.couche3,T.couche4); vis('L4',t,T.couche4,T.tournoi);
+  vis('L1',t,T.couche1,T.couche2); vis('clk',t,T.couche1,T.couche3);
+  {const r=cl((t-T.couche1)/(T.couche2-T.couche1-.3))*D.reel, sec=1600+r; $('clkv').textContent=Math.floor(sec/60)+"'"+String(Math.floor(sec%60)).padStart(2,'0'); $('clkl').textContent=t>=T.couche2?'ARRÊT SUR IMAGE · LA TÊTE':'TEMPS DE JEU RÉEL';} vis('L2',t,T.couche2,T.couche3); vis('L3',t,T.couche3,T.couche4); vis('L4',t,T.couche4,T.tournoi);
   $('s1').style.opacity=0; $('n3').style.opacity=0; $('n4').style.opacity=0;
   $('v3').textContent='+'+(.25*oc(cl((t-T.couche3-.2)/.7))).toFixed(2).replace('.',','); $('v4').textContent=Math.round(32*oc(cl((t-T.couche4-.25)/.7)));
   const f=T.flash, t5=T.tournoi; vis('k5',t,t5,T.carrousel); vis('h5a',t,t5,t5+f); vis('l5a',t,t5+.1,t5+f); vis('h5b',t,t5+f,t5+2*f); vis('l5b',t,t5+f+.1,t5+2*f); vis('h5c',t,t5+2*f,T.carrousel); vis('l5c',t,t5+2*f+.1,T.carrousel);
