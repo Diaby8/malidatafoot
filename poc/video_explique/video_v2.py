@@ -187,11 +187,11 @@ function joueurs(g,a,tir,lab3){ if(a<=0)return; g.globalAlpha=a;
   J.sort((p,q)=>q.x-p.x);
   for(const j of J){const col=j.tireur?'#FF6B5E':(j.mali?'#F6C41C':'#FFFFFF'); ring(g,j.x,j.y,1.5,col,.26);}
   for(const j of J){const col=j.tireur?'#FF6B5E':(j.mali?'#F6C41C':'#FFFFFF'); seg(g,[j.x,j.y,0],[j.x,j.y,2.1],col,.16); const s=P(j.x,j.y,2.35); if(s){g.fillStyle=col;g.beginPath();g.arc(s[0],s[1],Math.max(4,.42*kz(j.x,j.y,2.35)),0,7);g.fill();}}
-  for(const j of J){ if(!j.mali)continue; const n=j.nom=='Nene Dorgeles'?'DORGELES':j.nom.split(' ').slice(-1)[0].toUpperCase(); const al=j.tireur?'right':(j.nom=='Nene Dorgeles'?'left':'center'); texte(g,j.x,j.y,3.7,n,j.tireur?'#FF6B5E':'#F6C41C',Math.round(lerp(26,40,cl((kz(j.x,j.y)-20)/40))),al);}
+  for(const j of J){ if(!j.mali||!(j.tireur||j.nom=='Nene Dorgeles'))continue; const n=j.nom=='Nene Dorgeles'?'DORGELES':j.nom.split(' ').slice(-1)[0].toUpperCase(); const al=j.tireur?'right':(j.nom=='Nene Dorgeles'?'left':'center'); texte(g,j.x,j.y,3.7,n,j.tireur?'#FF6B5E':'#F6C41C',Math.round(lerp(26,40,cl((kz(j.x,j.y)-20)/40))),al);}
   g.globalAlpha=1;
-  if(lab3>0){const c=D.gestes.find(e=>e.xt>.1); X.globalAlpha=lab3*a; ring(g,c.x1,c.y1,1.5,'#F6C41C',.26); seg(g,[c.x1,c.y1,0],[c.x1,c.y1,2.1],'#F6C41C',.16); texte(g,c.x1,c.y1,3.7,'Y. NIAKATÉ','#F6C41C',34,'left'); X.globalAlpha=a;}
-  if(lab3>0){const c=D.gestes.find(e=>e.xt>.1); const mx=(c.x1+c.x2)/2, my=(c.y1+c.y2)/2; X.globalAlpha=lab3; texteBig(g,mx,my,4.2,'+'+(.25*oc(lab3)).toFixed(2).replace('.',','),'#FF6B5E',96); X.globalAlpha=a;}
-  if(tir>0){X.globalAlpha=cl(tir*2)*a; texteBig(g,D.tir.x,D.tir.y,6.2,Math.round(32*oc(cl(tir)))+' %','#F6C41C',110); X.globalAlpha=1;}
+  if(lab3>0){const c=D.gestes.find(e=>e.xt>.1); X.globalAlpha=lab3*a; ring(g,c.x1,c.y1,1.5,'#F6C41C',.26); seg(g,[c.x1,c.y1,0],[c.x1,c.y1,2.1],'#F6C41C',.16); texte(g,c.x1,c.y1,3.7,'Y. NIAKATÉ','#F6C41C',34,'center'); X.globalAlpha=a;}
+  if(lab3>0){const c=D.gestes.find(e=>e.xt>.1); const mx=c.x1, my=c.y1; X.globalAlpha=lab3*a; texteBig(g,mx,my,9,'+'+(.25*oc(lab3)).toFixed(2).replace('.',','),'#FF6B5E',96); X.globalAlpha=a;}
+  if(tir>0){X.globalAlpha=cl(tir*2)*a; texteBig(g,D.tir.x,D.tir.y,11,Math.round(32*oc(cl(tir)))+' %','#F6C41C',110); X.globalAlpha=1;}
   if(tir>.6){X.globalAlpha=cl((tir-.6)*3)*a; texte(g,D.tir.fin[0],D.tir.fin[1]-1.5,3.4,'À CÔTÉ','#FFFFFF',34); X.globalAlpha=1;}
   if(tir>0){const e=D.tir.fin; const u=io(cl(tir)); seg(g,[D.tir.x,D.tir.y,1.9],[lerp(D.tir.x,e[0],u),lerp(D.tir.y,e[1],u),lerp(1.9,e[2]||.9,u)],'#FFFFFF',.16,[.5,.5]);}}
 function tirs(g,a){ if(a<=0)return; for(const s of D.tirs){const r=.6+Math.sqrt(s.xg)*3.6; ring(g,s.x,s.y,r*a,s.but?'#F6C41C':'#FFFFFF',.18,s.but?'rgba(246,196,28,.85)':'rgba(255,255,255,.12)');}}
@@ -237,8 +237,8 @@ function carrousel(t){ // les fiches entrent par la gauche une par une, chacune 
 // ---------------------------------------------------------------- le temps
 function vis(id,t,a,b,dy=30){const e=$(id); const u=oc(cl((t-a)/.4)), v=b==null?0:cl((t-b)/.3); e.style.opacity=(u*(1-v)).toFixed(3); e.style.transform=`translateY(${((1-u)*dy).toFixed(1)}px)`;}
 const K=[ // images clés de la caméra : temps, position, cible, focale, centre vertical (caméra derrière le but que le Mali attaque)
- [0,[88,40,200],[88.5,40,0],1250,1000],[T.plonge,[88,40,200],[88.5,40,0],1250,1000],[T.couche1,[150,40,36],[84,40,0],1250,950],
- [T.couche2-.2,[146,40,30],[92,40,0],1350,950],[T.couche2+.9,[143,43,28],[100,43,0],1220,960],[T.couche4+1.6,[141,43,26],[102,43,0],1220,960],
+ [0,[88,40,200],[88.5,40,0],1250,1000],[T.plonge,[88,40,200],[88.5,40,0],1250,1000],[T.couche1,[150,36,44],[86,36,0],760,1000],
+ [T.couche2-.2,[150,36,40],[90,36,0],760,1000],[T.couche2+.9,[148,37,36],[96,37,0],760,1010],[T.couche4+1.6,[147,37,35],[97,37,0],760,1010],
  [T.tournoi+.6,[152,40,72],[70,40,0],1300,870],[T.carrousel,[152,40,72],[70,40,0],1300,870]];
 function camAt(t){let i=0; while(i<K.length-2&&t>K[i+1][0])i++; const a=K[i], b=K[i+1]; const u=io(cl((t-a[0])/(b[0]-a[0])));
   camera(a[1].map((v,j)=>lerp(v,b[1][j],u)),a[2].map((v,j)=>lerp(v,b[2][j],u)),lerp(a[3],b[3],u),lerp(a[4],b[4],u));}
