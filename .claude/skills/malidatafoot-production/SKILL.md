@@ -100,3 +100,7 @@ Voir `docs/boite_a_idees.md` (statut de chaque sujet : publié, prêt, POC, à f
 - **Programmer** : si Diaby n'est pas disponible, lui proposer de programmer la publication (X et TikTok le permettent depuis l'ordinateur).
 - **Avant de poster** : rappeler les vérifications du brouillon (corrections convenues faites, bonne version du fichier, images dans l'ordre, description, son au téléphone).
 - **Le calendrier est tenu dans `docs/calendrier_publications.md`** : ce qui est publié, ce qui est programmé, ce qui est prêt. Le mettre à jour à chaque publication et à chaque post prêt.
+
+## 9. Toujours montrer des exemples (Diaby, 15 octobre 2026 : « à chaque fois, il faut que tu montres des exemples pour que je comprenne »)
+
+Quand j'explique un plan, un thread, une correction ou une idée : montrer l'exemple concret tout de suite (le texte exact du tweet, l'image, le chiffre réel, le match précis), pas une description abstraite. Et vérifier que l'angle colle à la réalité du foot que Diaby connaît (ex. le Rwanda est faible en Afrique : ne pas le présenter comme un gros danger, expliquer d'où vient le danger, ici jouer chez lui).
