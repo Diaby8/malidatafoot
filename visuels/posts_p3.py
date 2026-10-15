@@ -19,11 +19,11 @@ ordre=sorted(tab,key=lambda e:(-tab[e]['pts'],-(tab[e]['bp']-tab[e]['bc']),-tab[
 b=''; y0=430
 b+=f'<div style="position:absolute;left:64px;top:{y0}px;width:952px;display:flex;font:800 22px/1 SC;letter-spacing:.06em;color:rgba(4,51,26,.75)"><span style="width:470px"></span><span style="width:120px;text-align:center">JOUÉS</span><span style="width:120px;text-align:center">POINTS</span><span style="width:120px;text-align:center">DIFF.</span><span style="width:122px;text-align:center">BUTS</span></div>'
 for i,e in enumerate(ordre):
-    t=tab[e]; y=y0+44+i*92; m=e=='Mali'; r=e=='Rwanda'
-    bg='#064A25' if m else 'rgba(255,246,208,.55)'; col='#FFFFFF' if m else '#04331A'; acc='#F6C41C' if m else '#064A25'
+    t=tab[e]; y=y0+44+i*92; m=e=='Mali'
+    col='#0B7A3B' if m else '#04331A'; acc='#0B7A3B' if m else '#064A25'
     d=t['bp']-t['bc']; ds=f'+{d}' if d>0 else str(d)
-    bu=f'<b style="color:{"#F6C41C" if m else "#D4252A"}">{t["bp"]}</b>' if e in('Mali','Rwanda') else str(t['bp'])
-    b+=f'''<div style="position:absolute;left:64px;top:{y}px;width:952px;height:76px;border-radius:8px;background:{bg};display:flex;align-items:center;color:{col}">
+    bu=f'<b style="color:#D4252A">{t["bp"]}</b>' if e in('Mali','Rwanda') else str(t['bp'])
+    b+=f'''<div style="position:absolute;left:64px;top:{y}px;width:952px;height:76px;display:flex;align-items:center;color:{col};border-bottom:2px solid rgba(6,74,37,.22)">
 <span style="width:70px;text-align:center;font:italic 900 46px/1 BC;color:{acc}">{i+1}</span><span style="width:60px">{drap(e,44)}</span>
 <span style="width:340px;font:800 34px/1 SC;letter-spacing:.03em">{FRN[e].upper()}</span>
 <span style="width:120px;text-align:center;font:700 32px/1 SC">{t["j"]}</span><span style="width:120px;text-align:center;font:italic 900 50px/1 BC;color:{acc}">{t["pts"]}</span>
@@ -71,7 +71,7 @@ open(ICI/'_p3_3.html','w',encoding='utf-8').write(page('ÉLIMINATOIRES CAN 2027 
 def jauge(y,titre,m):
     v,n,dd=pc(m['victoire']),pc(m['nul']),pc(m['defaite'])
     s=f'<div style="position:absolute;left:64px;top:{y}px;font:800 30px/1 SC;letter-spacing:.04em;color:#04331A">{titre}</div>'
-    s+=f'<div style="position:absolute;left:64px;top:{y+48}px;width:952px;height:84px;display:flex;border-radius:8px;overflow:hidden">'
+    s+=f'<div style="position:absolute;left:64px;top:{y+48}px;width:952px;height:84px;display:flex;border-radius:3px;overflow:hidden">'
     for val,c,tc,lab in ((v,'#064A25','#FFFFFF','VICTOIRE'),(n,'#FFF3C4','#04331A','NUL'),(dd,'#D4252A','#FFFFFF','DÉFAITE')):
         s+=f'<div style="width:{val}%;background:{c};color:{tc};display:flex;flex-direction:column;justify-content:center;padding-left:{14 if val>=12 else 6}px;overflow:hidden;white-space:nowrap"><b style="font:italic 900 {46 if val>=12 else 30}px/1 BC">{val}&#8239;%</b>'+(f'<span style="font:800 16px/1 SC;letter-spacing:.05em">{lab}</span>' if val>=12 else '')+'</div>'
     return s+'</div>'
