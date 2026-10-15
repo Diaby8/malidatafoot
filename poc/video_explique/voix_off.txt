@@ -22,6 +22,6 @@ Vérification (événements StatsBomb, recomptés le 14/10/2026) :
 - Tournoi : 64 tirs (dont 1 penalty), 211 récupérations réussies (récupérations sans échec + interceptions gagnées).
 
 À l'écran pendant le dézoom (au rythme de la voix) : EN SÉLECTION · EN CLUB (pas « la relève », Diaby, 14/10/2026).
-- 7 712 actions du Mali avec le ballon (5 matchs). Menace laissée aux adversaires : 0,66 par match, 1re sur 24 (Guinée 0,73, Maroc 0,73), notre modèle xT.
+- 7 712 actions du Mali avec le ballon (5 matchs). Menace laissée aux adversaires : 0,70 par match (xT par 90 min × minutes / 90 / matchs ; 0,66 par 90 min), 1re sur 24 (Guinée 0,72, Maroc 0,73), notre modèle xT. Corrigé le 15/10/2026 (v3e).
 - 211 récupérations (20e sur 24) et 64 tirs seuls (8e sur 24) jugés trop faibles pour être mis en avant (Diaby).
 Voix enregistrée : ElevenLabs, voix « Nicolas Petit – Deep Narrator », eleven_v4, 50,8 s (livrables/video-explique/voix_nicolas_petit.mp3).
