@@ -190,7 +190,8 @@ def run(cfg: Config, n: int = 100_000) -> dict:
     kigali = np.sign(sim["tirages"][k2][1] - sim["tirages"][k2][0])
     scen = {"deux_victoires": (bamako == 1) & (kigali == 1), "une_victoire_un_nul": ((bamako == 1) & (kigali == 0)) | ((bamako == 0) & (kigali == 1)),
             "deux_nuls": (bamako == 0) & (kigali == 0), "une_victoire_une_defaite": ((bamako == 1) & (kigali == -1)) | ((bamako == -1) & (kigali == 1)),
-            "nul_et_defaite": ((bamako == 0) & (kigali == -1)) | ((bamako == -1) & (kigali == 0)), "deux_defaites": (bamako == -1) & (kigali == -1)}
+            "nul_et_defaite": ((bamako == 0) & (kigali == -1)) | ((bamako == -1) & (kigali == 0)), "deux_defaites": (bamako == -1) & (kigali == -1),
+            "victoire_bamako_defaite_kigali": (bamako == 1) & (kigali == -1)}
     rm = R[equipe].to_numpy(); pm = P[equipe].to_numpy()
     sortie = {
         "question": "Le Mali va-t-il à la CAN 2027, et finit-il premier du groupe K ?",
