@@ -25,3 +25,4 @@ Vérification (événements StatsBomb, recomptés le 14/10/2026) :
 - 7 712 actions du Mali avec le ballon (5 matchs). Menace laissée aux adversaires : 0,70 par match (xT par 90 min × minutes / 90 / matchs ; 0,66 par 90 min), 1re sur 24 (Guinée 0,72, Maroc 0,73), notre modèle xT. Corrigé le 15/10/2026 (v3e).
 - 211 récupérations (20e sur 24) et 64 tirs seuls (8e sur 24) jugés trop faibles pour être mis en avant (Diaby).
 Voix enregistrée : ElevenLabs, voix « Nicolas Petit – Deep Narrator », eleven_v4, 50,8 s (livrables/video-explique/voix_nicolas_petit.mp3).
+- Images du match (enregistrement d'écran envoyé par Diaby le 15/10/2026) : horloge 27:01-27:02, centre venu de la droite, tête plongeante près du premier poteau, à côté, le n°27 (Dorgeles) juste à côté du buteur. Concorde avec StatsBomb (Sinayoko n°25, tête 27'01, Dorgeles n°27). Images non réutilisées (droits de diffusion).
