@@ -234,3 +234,4 @@ des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliD
 - 15/10/2026 · Post 4 : 29 compos relevées (poc/onze_type/compos_relevees.csv), deux sources par match lues une à une (11v11, Eurosport, FotMob, Foot Mercato, BeSoccer, presse) ; 23 nettes, 6 à finir (Mali-Ghana 2024 : Adama Traoré Malouda ou Noss ; Soudan du Sud-Mali 2022 : une seule source ; 4 matchs Saintfiet avec initiales).
 - 15/10/2026 · Post 4 : Chelle et Saintfiet seulement (ni Da Silva, 2 matchs ; ni Magassouba). 32 compos validées avec deux sources. Postes : StatsBomb pour la CAN 2023, poste habituel sourcé pour les autres matchs (captures officielles jugées trop longues).
 - 15/10/2026 · Post 2 validé par Diaby : v3e prête à poster sur TikTok, sons gardés tels quels, description dans livrables/video-explique/description-TikTok.txt.
+- 15/10/2026 · Skill production : section 8 « Planifier les publications » + docs/calendrier_publications.md (demande de Diaby).

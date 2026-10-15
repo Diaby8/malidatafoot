@@ -90,3 +90,13 @@ Puis proposer en s'appuyant dessus : dire ce qu'on a déjà, ce qui manque, et d
 ## 7. Prochains contenus
 
 Voir `docs/boite_a_idees.md` (statut de chaque sujet : publié, prêt, POC, à faire, en attente de source). À relire en début de session pour proposer la suite.
+
+## 8. Planifier les publications (Diaby, 15 octobre 2026 : « faut mettre dans les skills de m'aider à planifier »)
+
+- **Dès qu'un post est prêt, dire sans attendre qu'on le demande** : dans quel ordre poster, quel jour, à quelle heure (heure de Paris et heure de Bamako : 2 h d'écart en été, 1 h en hiver), sur quelle plateforme, quels fichiers prendre (dans l'ordre du carrousel) et le texte à coller. Diaby ne doit jamais se demander « je poste quoi en premier ».
+- **Un sujet par jour au maximum.** Le thread X et le TikTok d'un même sujet sortent le même jour ; le sujet suivant, le lendemain ou plus tard.
+- **Ordre** : celui validé dans `docs/etat_du_projet.md`. Un post lié à l'actu passe avant l'événement (ex. la simulation du groupe K avant Mali-Rwanda de novembre).
+- **Heure** : on n'invente pas de « meilleure heure ». Tant qu'on n'a pas nos propres chiffres, on poste en soirée, et on note les vues 48 h après dans le calendrier pour apprendre ce qui marche.
+- **Programmer** : si Diaby n'est pas disponible, lui proposer de programmer la publication (X et TikTok le permettent depuis l'ordinateur).
+- **Avant de poster** : rappeler les vérifications du brouillon (corrections convenues faites, bonne version du fichier, images dans l'ordre, description, son au téléphone).
+- **Le calendrier est tenu dans `docs/calendrier_publications.md`** : ce qui est publié, ce qui est programmé, ce qui est prêt. Le mettre à jour à chaque publication et à chaque post prêt.
