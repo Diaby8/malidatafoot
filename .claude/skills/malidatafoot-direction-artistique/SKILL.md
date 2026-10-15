@@ -176,3 +176,9 @@ Dans le dépôt `malidatafoot`, dossier `visuels/`.
 | `shotu.mjs` | la capture d'une page |
 
 Toutes les commandes passent par `python taches.py …`. Si ces fichiers ne sont pas dans l'espace de travail, demander à Diaby le dépôt à jour.
+
+## Images de match (Diaby, 15 octobre 2026)
+
+- Pour les prochains posts : **images libres de droits** seulement (licence vérifiée et notée avec la source, ex. Wikimedia Commons en CC BY / CC BY-SA avec l'auteur crédité, ou CC0). Pas d'images de diffusion (CAF, chaînes TV, YouTube) dans nos vidéos.
+- Si Diaby choisit malgré tout un extrait de diffusion : 2 à 3 s maximum, son du diffuseur coupé, transformé par nos repères (minute, noms fléchés), mention « Images : CAF » ; lui rappeler le risque (son coupé ou vidéo retirée).
+- Les images de match servent surtout à **vérifier** nos reconstitutions (ex. Namibie-Mali, tête de 27'01 confirmée le 15/10/2026).
