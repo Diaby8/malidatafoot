@@ -236,3 +236,4 @@ des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliD
 - 15/10/2026 · Post 2 validé par Diaby : v3e prête à poster sur TikTok, sons gardés tels quels, description dans livrables/video-explique/description-TikTok.txt.
 - 15/10/2026 · Skill production : section 8 « Planifier les publications » + docs/calendrier_publications.md (demande de Diaby).
 - 15/10/2026 · Post 1 posté sur X vers 19 h (version de Diaby du thread). TikTok et vidéo rayons X à suivre le même soir.
+- 15/10/2026 · Post 1 sur TikTok : en carrousel, TikTok rogne l'image en 3:4 (bande y 240–1680) et le nom du compte couvre le surtitre. Règle ajoutée au skill DA (zones du carrousel) ; à appliquer dès le prochain post (Diaby).

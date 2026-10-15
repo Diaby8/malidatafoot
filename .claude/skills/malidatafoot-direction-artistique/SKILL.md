@@ -116,6 +116,7 @@ Critique faite à Diaby, et qu'il a validée (« améliore tout ») : nos visuel
 |---|---|---|
 | X | 1080 × 1350 (capture ×2) | marges 56 px ; le plus petit texte reste lisible sur téléphone |
 | TikTok | 1080 × 1920 (capture ×2) | rien d'important au-dessus de 150 px ni dans les 340 px du bas ; à droite, rester sous x = 946 en dessous de y = 880 |
+| TikTok **carrousel de photos** | 1080 × 1920, mais l'appli n'affiche que la bande centrale **y 240–1680** (format 3:4, mesuré le 15/10/2026 sur l'iPhone de Diaby avec le post défense : le haut du surtitre était rogné) | dans cette bande : rien d'important avant **y ≈ 400** (nom du compte, date, flèche retour et « 1/2 » couvrent le haut) ; colonne d'icônes à droite (photo, cœur, commentaires) au-delà de **x ≈ 940** dès y ≈ 1000 ; les points du carrousel vers y ≈ 1640. Le plus simple : composer le carrousel directement en 1080 × 1440 avec ces marges. Contrôle : simuler l'écran avant livraison |
 | Bannière X | 1500 × 500 (exporter en 3000 × 1000) | **zone sûre x 560–1230, y 210–448** (mesurée le 13 octobre sur l'iPhone de Diaby : l'appli ne montre que x 338–1393, y 79–500, l'heure couvre le haut, les boutons retour et recherche sont à mi-hauteur sur les côtés, la photo couvre x 360–575 dès y = 455 ; sur ordinateur, la photo couvre x 40–395, y 287–500). Contrôle : `apercu_iphone.py` et `apercu_profil.py` |
 
 Toujours livrer la version X **et** la version TikTok d'un visuel retenu.
