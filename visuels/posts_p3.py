@@ -74,7 +74,7 @@ b4=f'''<div style="position:absolute;left:64px;top:390px;width:440px">
 <div style="margin-top:14px;font:800 26px/1.25 SC;letter-spacing:.04em;color:#04331A">CHANCES DE VICTOIRE À KIGALI<br>SELON LE MODÈLE</div></div>
 <div style="position:absolute;left:560px;top:390px;width:460px">
 <div style="font:italic 900 150px/.86 BC;color:#0B7A3B">{tx}<span style="font-size:80px"> %</span></div>
-<div style="margin-top:14px;font:800 26px/1.25 SC;letter-spacing:.04em;color:#04331A">{XM["victoires"]} VICTOIRES SUR {XM["matchs"]} QUAND LE MALI<br>PART FAVORI À L'EXTÉRIEUR</div></div>'''
+<div style="margin-top:14px;font:800 26px/1.25 SC;letter-spacing:.04em;color:#04331A">{XM["victoires"]} VICTOIRES SUR {XM["matchs"]} QUAND LE MALI PART<br>NETTEMENT FAVORI À L'EXTÉRIEUR</div></div>'''
 L=list(reversed(X['matchs_mali'])); half=(len(L)+1)//2
 for k,(d,adv,x,y) in enumerate(L):
     col,row=k//half,k%half; xx=64+col*480; yy=650+row*66
