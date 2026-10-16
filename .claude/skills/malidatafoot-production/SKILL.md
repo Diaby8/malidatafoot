@@ -43,6 +43,12 @@ Puis proposer en s'appuyant dessus : dire ce qu'on a déjà, ce qui manque, et d
 - **Bio TikTok** : « Le football malien par la data 📊🇲🇱 / Aigles • Maliens & binationaux en club • Page indépendante ».
 - **Nom affiché sur X** : à passer de « MLdata » à « MaliDataFoot ».
 
+- **Pas de texte qui sonne « IA »** (Diaby, 16 octobre 2026, sur le thread du onze type). Les tweets et descriptions doivent se lire comme écrits par un fan qui connaît le foot, et rester courts. À éviter :
+  - les phrases à deux-points en série (« Le plus régulier : … », « Les limites : … », « Ceux qui restent : … ») ;
+  - les formules en miroir (« deux sélectionneurs, deux onzes types ») et les accroches de pub ;
+  - un tweet par idée quand deux idées tiennent dans un seul ; le 🧵 et les emojis en décoration.
+  Exemple. Avant : « Le plus régulier : Hamari Traoré, titulaire 12 fois sur 15. » Après : « Sous Chelle, Hamari Traoré est le plus régulier avec 12 titularisations sur 15. »
+  Garder la fin qui marche : les limites dites simplement, puis une question au lecteur.
 - **Toujours dire les limites** (Diaby, 14 octobre 2026 : « les points de faiblesse, faut toujours en parler, pour pas qu'un petit malin essaie de debunk, et ça rend le truc encore plus crédible »). Chaque post d'analyse finit par ses limites, en clair : taille de l'échantillon, choix qu'on a faits (année de départ, compétitions retenues), là où le modèle force, ce qui va contre notre conclusion. Et à chaque fois, dire si la conclusion tient quand même (tester l'autre choix, enlever le match qui pose problème).
 
 ## 3. Workflow d'un post
