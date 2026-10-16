@@ -1,0 +1,39 @@
+"""Post 4 « Le onze type de Chelle et de Saintfiet » : brouillon de 2 images X (gabarit posts_video.py, DA jaune).
+Titularisations : poc/onze_type/compos_relevees.csv (deux sources par match) + StatsBomb pour la CAN 2023.
+Le système et les postes viennent des compos où on les connaît (voir docs/audits/post4-onze-type.md)."""
+import csv, collections, re, duckdb
+src=open('posts_video.py',encoding='utf-8').read(); exec(src.split('# ---------- post 1')[0])
+R=list(csv.DictReader(open(ICI/'../poc/onze_type/compos_relevees.csv',encoding='utf-8')))
+N={'Boubakar Kouyate':'Boubakar Kouyaté','Sikou Niakate':'Sikou Niakaté','Diadie Samassekou':'Diadié Samassékou','Sekou Koita':'Sékou Koïta','Nene Dorgeles':'Néné Dorgeles','Adama Traoré':'Adama Traoré','Youssoufou Niakaté':'Youssouf Niakaté'}
+con=duckdb.connect(str(ICI/'../data/warehouse.duckdb'),read_only=True)
+xi=con.execute("select match_id,player from silver.starting_xi where team='Mali'").fetchdf()
+T=collections.defaultdict(collections.Counter); NB=collections.Counter()
+for mid,g in xi.groupby('match_id'):
+    NB['Chelle']+=1
+    for p in g.player: T['Chelle'][N.get(p,p)]+=1
+for r in R:
+    if r['coach'] not in ('Chelle','Saintfiet'): continue
+    NB[r['coach']]+=1
+    for p in r['titulaires'].split(';'): T[r['coach']][re.sub(r' \((probable|Malouda)\)','',p)]+=1
+# onze par poste (système le plus vu) : (nom affiché, clé, x, y) sur le terrain 0-100 (y = 0 en attaque)
+ONZE={'Chelle':('4-1-2-1-2 (LOSANGE)',[('D. DIARRA','Djigui Diarra',50,92),('H. TRAORÉ','Hamari Traoré',86,70),('KOUYATÉ','Boubakar Kouyaté',62,76),('S. NIAKATÉ','Sikou Niakaté',38,76),('SACKO','Falaye Sacko',14,70),
+   ('M. CAMARA','Mohamed Camara',50,58),('DIENG','Aliou Dieng',74,46),('A. HAÏDARA','Amadou Haïdara',26,46),('K. DOUMBIA','Kamory Doumbia',50,32),('A. TRAORÉ','Adama Traoré',66,14),('SINAYOKO','Lassine Sinayoko',34,14)]),
+ 'Saintfiet':('4-2-3-1',[('D. DIARRA','Djigui Diarra',50,92),('DOUCOURÉ','Fodé Doucouré',86,70),('FOFANA','Mamadou Fofana',62,76),('DIABY','Abdoulaye Diaby',38,76),('DANTÉ','Amadou Danté',14,70),
+   ('DIENG','Aliou Dieng',64,56),('L. COULIBALY','Lassana Coulibaly',36,56),('K. DOUMBIA','Kamory Doumbia',84,34),('BISSOUMA','Yves Bissouma',50,34),('DORGELES','Néné Dorgeles',16,34),('SINAYOKO','Lassine Sinayoko',50,12)])}
+def terrain(coach):
+    sysm,J=ONZE[coach]; n=NB[coach]; X0,Y0,W0,H0=64,370,952,740
+    g=f'<rect x="{X0}" y="{Y0}" width="{W0}" height="{H0}" rx="6" fill="#0B7A3B"/>'
+    L='stroke="#FFF3C4" stroke-width="3" fill="none" opacity=".75"'
+    g+=f'<rect x="{X0+20}" y="{Y0+20}" width="{W0-40}" height="{H0-40}" {L}/><line x1="{X0+20}" y1="{Y0+H0/2}" x2="{X0+W0-20}" y2="{Y0+H0/2}" {L}/><circle cx="{X0+W0/2}" cy="{Y0+H0/2}" r="80" {L}/>'
+    g+=f'<rect x="{X0+W0/2-200}" y="{Y0+20}" width="400" height="130" {L}/><rect x="{X0+W0/2-200}" y="{Y0+H0-150}" width="400" height="130" {L}/>'
+    for nom,cle,x,y in J:
+        cx,cy=X0+40+(W0-80)*x/100, Y0+30+(H0-60)*y/100; t=T[coach][cle]
+        g+=f'<circle cx="{cx:.0f}" cy="{cy:.0f}" r="40" fill="#F6C41C"/><text x="{cx:.0f}" y="{cy+15:.0f}" text-anchor="middle" style="font:italic 900 44px BC;fill:#064A25">{t}</text>'
+        g+=f'<text x="{cx:.0f}" y="{cy+74:.0f}" text-anchor="middle" style="font:800 24px SC;letter-spacing:.03em;fill:#FFFFFF">{nom}</text>'
+    return f'<svg style="position:absolute;left:0;top:0" width="1080" height="1350">{g}</svg>', sysm, n
+for k,(coach,per,h2) in enumerate((('Chelle','2022-2024','ÉRIC CHELLE'),('Saintfiet','2024-2026','TOM SAINTFIET')),1):
+    body,sysm,n=terrain(coach)
+    body+=f'<div class="leg" style="top:1130px;font-size:22px"><span><i style="display:block;width:24px;height:24px;border-radius:50%;background:#F6C41C"></i>TITULARISATIONS SUR {n} MATCHS · SYSTÈME : {sysm}</span></div>'
+    open(ICI/f'_p4_{k}.html','w',encoding='utf-8').write(page(f'MALI · {per} · <b>{n} MATCHS OFFICIELS</b>','LE ONZE TYPE',h2,str(n),body,
+      'Compos : deux sources par match (11v11, Eurosport, FotMob, presse) · CAN 2023 : StatsBomb · Amicaux exclus'))
+for c in ('Chelle','Saintfiet'): print(c, NB[c], [(cle,T[c][cle]) for _,cle,_,_ in ONZE[c][1]])
