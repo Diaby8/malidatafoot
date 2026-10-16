@@ -192,14 +192,14 @@ def run(cfg: Config, n: int = 100_000) -> dict:
             "deux_nuls": (bamako == 0) & (kigali == 0), "une_victoire_une_defaite": ((bamako == 1) & (kigali == -1)) | ((bamako == -1) & (kigali == 1)),
             "nul_et_defaite": ((bamako == 0) & (kigali == -1)) | ((bamako == -1) & (kigali == 0)), "deux_defaites": (bamako == -1) & (kigali == -1),
             "victoire_bamako_defaite_kigali": (bamako == 1) & (kigali == -1)}
-    # le Mali à l'extérieur contre bien plus faible que lui (au moins 200 points d'Elo d'écart), comparé au favori africain moyen
+    # le Mali à l'extérieur contre bien plus faible que lui (au moins 150 points d'Elo d'écart ; 200 pts : 8 V sur 9, voir l'audit), comparé au favori africain moyen
     # dans la même situation (même critère, matchs officiels africains depuis 2015). Le Rwanda est à 248 points sous le Mali.
     ext = m[~m.neutral.astype(bool)].copy(); ext["ecart"] = ext.elo_away_avant - ext.elo_home_avant
-    ext = ext[(ext.ecart >= 200) & (ext.date >= "2015-01-01")]
+    ext = ext[(ext.ecart >= 150) & (ext.date >= "2015-01-01")]
     vnd_ = lambda d: {"matchs": int(len(d)), "victoires": int((d.away_score > d.home_score).sum()),
                       "nuls": int((d.away_score == d.home_score).sum()), "defaites": int((d.away_score < d.home_score).sum())}
     mx = ext[ext.away_team == equipe]
-    exterieur = {"critere": "visiteur plus fort d'au moins 200 points d'Elo, matchs officiels africains depuis 2015",
+    exterieur = {"critere": "visiteur plus fort d'au moins 150 points d'Elo, matchs officiels africains depuis 2015",
                  "tous": vnd_(ext), equipe: vnd_(mx),
                  "matchs_mali": [[str(r.date)[:10], r.home_team, int(r.home_score), int(r.away_score)] for r in mx.itertuples()]}
     rm = R[equipe].to_numpy(); pm = P[equipe].to_numpy()

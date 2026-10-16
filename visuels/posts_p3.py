@@ -8,9 +8,9 @@ pc=lambda v:round(100*v)
 DR['Rwanda']='<rect width="20" height="10" fill="#00A1DE"/><rect y="10" width="20" height="5" fill="#FAD201"/><rect y="15" width="20" height="5" fill="#20603D"/><circle cx="15" cy="4.6" r="2.2" fill="#FAD201"/>'
 DR['Cape Verde']='<rect width="20" height="20" fill="#003893"/><rect y="10.5" width="20" height="1.4" fill="#fff"/><rect y="11.9" width="20" height="1.4" fill="#CF2027"/><rect y="13.3" width="20" height="1.4" fill="#fff"/>'+''.join(f'<circle cx="{7.5+3.6*math.cos(k*math.pi/5):.2f}" cy="{12.4+3.6*math.sin(k*math.pi/5):.2f}" r=".55" fill="#F7D116"/>' for k in range(10))
 DR['Liberia']=''.join(f'<rect y="{i*20/11:.2f}" width="20" height="{20/11+.05:.2f}" fill="{"#BF0A30" if i%2==0 else "#fff"}"/>' for i in range(11))+'<rect width="9" height="9.1" fill="#002868"/>'+et(4.5,4.6,2.6,'#fff')
-CF={'Mali':'ml','Rwanda':'rw','Cape Verde':'cv','Liberia':'lr','South Sudan':'ss','Chad':'td','Namibia':'na','Congo':'cg','Guinea-Bissau':'gw'}
+CF={'Mali':'ml','Rwanda':'rw','Cape Verde':'cv','Liberia':'lr','South Sudan':'ss','Chad':'td','Namibia':'na','Congo':'cg','Guinea-Bissau':'gw','Botswana':'bw','Equatorial Guinea':'gq','Burundi':'bi','Kenya':'ke','Mozambique':'mz'}
 def drapv(p,t=44): return f'<img src="drapeaux/{CF[p]}.svg" style="width:{t}px;height:{t}px;display:block;border-radius:50%">'
-FRN.update({'Rwanda':'Rwanda','Cape Verde':'Cap-Vert','Liberia':'Liberia','South Sudan':'Soudan du Sud','Chad':'Tchad','Namibia':'Namibie','Congo':'Congo','Guinea-Bissau':'Guinée-Bissau'})
+FRN.update({'Rwanda':'Rwanda','Cape Verde':'Cap-Vert','Liberia':'Liberia','South Sudan':'Soudan du Sud','Chad':'Tchad','Namibia':'Namibie','Congo':'Congo','Guinea-Bissau':'Guinée-Bissau','Botswana':'Botswana','Equatorial Guinea':'Guinée équat.','Burundi':'Burundi','Kenya':'Kenya','Mozambique':'Mozambique'})
 
 # ---- image 1 : le classement du groupe K après 2 journées (calculé depuis les matchs joués)
 tab={e:dict(j=0,pts=0,bp=0,bc=0) for e in S['equipes']}
@@ -68,18 +68,20 @@ open(ICI/'_p3_3.html','w',encoding='utf-8').write(page('ÉLIMINATOIRES CAN 2027 
   f'Modèle (force Elo et lieu) appris sur {S["modele"]["appris_sur_matchs"]:,} matchs officiels africains depuis 2000 · Les 2 premiers sont qualifiés'.replace(',',' ')))
 
 # ---- image 4 : à Kigali, le modèle (moyenne africaine) contre le vrai bilan du Mali à l'extérieur face à bien plus faible
-X=S['exterieur_contre_plus_faible']; XM=X['Mali']
-b4=f'''<div style="position:absolute;left:64px;top:400px;width:440px">
+X=S['exterieur_contre_plus_faible']; XM=X['Mali']; tx=pc(XM['victoires']/XM['matchs'])
+b4=f'''<div style="position:absolute;left:64px;top:390px;width:440px">
 <div style="font:italic 900 150px/.86 BC;color:#064A25">{pc(S["match_kigali"]["victoire"])}<span style="font-size:80px"> %</span></div>
 <div style="margin-top:14px;font:800 26px/1.25 SC;letter-spacing:.04em;color:#04331A">CHANCES DE VICTOIRE À KIGALI<br>SELON LE MODÈLE</div></div>
-<div style="position:absolute;left:560px;top:400px;width:460px">
-<div style="font:italic 900 150px/.86 BC;color:#0B7A3B">{XM["victoires"]}<span style="font-size:80px"> / {XM["matchs"]}</span></div>
-<div style="margin-top:14px;font:800 26px/1.25 SC;letter-spacing:.04em;color:#04331A">VICTOIRES DU MALI À L'EXTÉRIEUR<br>FACE À BIEN PLUS FAIBLE</div></div>'''
-for k,(d,adv,x,y) in enumerate(reversed(X['matchs_mali'])):
-    col,row=k%2,k//2; xx=64+col*480; yy=700+row*76
-    b4+=f'''<div style="position:absolute;left:{xx}px;top:{yy}px;width:452px;height:60px;display:flex;align-items:center;gap:14px;border-bottom:2px solid rgba(6,74,37,.22)">
-<span style="width:62px;font:700 24px/1 SC;color:rgba(4,51,26,.75)">{d[:4]}</span>{drapv(adv,36)}<span style="flex:1;font:800 26px/1 SC;letter-spacing:.02em;color:#04331A;white-space:nowrap">{FRN[adv].upper()}</span>
-<span style="font:italic 900 40px/1 BC;color:{"#0B7A3B" if y>x else "#064A25"}">{x}-{y}</span></div>'''
-open(ICI/'_p3_4.html','w',encoding='utf-8').write(page('NOVEMBRE · <b>RWANDA - MALI, À KIGALI</b>','LE MODÈLE','SOUS-ESTIME LES AIGLES ?','8/9',b4,
-  'Matchs officiels africains depuis 2015 où le Mali, visiteur, avait 200 pts d\'Elo de plus · Données : martj42'))
+<div style="position:absolute;left:560px;top:390px;width:460px">
+<div style="font:italic 900 150px/.86 BC;color:#0B7A3B">{tx}<span style="font-size:80px"> %</span></div>
+<div style="margin-top:14px;font:800 26px/1.25 SC;letter-spacing:.04em;color:#04331A">{XM["victoires"]} VICTOIRES SUR {XM["matchs"]} DU MALI<br>CHEZ BIEN PLUS FAIBLE</div></div>'''
+L=list(reversed(X['matchs_mali'])); half=(len(L)+1)//2
+for k,(d,adv,x,y) in enumerate(L):
+    col,row=k//half,k%half; xx=64+col*480; yy=650+row*66
+    c='#0B7A3B' if y>x else ('#D4252A' if y<x else '#064A25')
+    b4+=f'''<div style="position:absolute;left:{xx}px;top:{yy}px;width:452px;height:56px;display:flex;align-items:center;gap:14px;border-bottom:2px solid rgba(6,74,37,.22)">
+<span style="width:62px;font:700 24px/1 SC;color:rgba(4,51,26,.75)">{d[:4]}</span>{drapv(adv,34)}<span style="flex:1;font:800 25px/1 SC;letter-spacing:.02em;color:#04331A;white-space:nowrap">{FRN[adv].upper()}</span>
+<span style="font:italic 900 38px/1 BC;color:{c}">{x}-{y}</span></div>'''
+open(ICI/'_p3_4.html','w',encoding='utf-8').write(page('NOVEMBRE · <b>RWANDA - MALI, À KIGALI</b>','LE MODÈLE','SOUS-ESTIME LES AIGLES ?',f'{tx}%',b4,
+  'Matchs officiels africains depuis 2015 où le Mali, visiteur, avait au moins 150 pts d\'Elo de plus · Données : martj42'))
 print('ok')
