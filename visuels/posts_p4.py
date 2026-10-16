@@ -17,9 +17,9 @@ for r in R:
     for p in r['titulaires'].split(';'): T[r['coach']][re.sub(r' \((probable|Malouda)\)','',p)]+=1
 # onze par poste (système le plus vu) : (nom affiché, clé, x, y) sur le terrain 0-100 (y = 0 en attaque)
 ONZE={'Chelle':('4-1-2-1-2 (LOSANGE)',[('D. DIARRA','Djigui Diarra',50,86),('H. TRAORÉ','Hamari Traoré',88,62),('KOUYATÉ','Boubakar Kouyaté',66,70),('S. NIAKATÉ','Sikou Niakaté',34,70),('SACKO','Falaye Sacko',12,62),
-   ('M. CAMARA','Mohamed Camara',50,52),('DIENG','Aliou Dieng',76,40),('A. HAÏDARA','Amadou Haïdara',24,40),('K. DOUMBIA','Kamory Doumbia',50,27),('A. TRAORÉ','Adama Traoré',66,10),('SINAYOKO','Lassine Sinayoko',34,10)]),
+   ('M. CAMARA','Mohamed Camara',50,52),('DIENG','Aliou Dieng',76,36),('A. HAÏDARA','Amadou Haïdara',24,36),('K. DOUMBIA','Kamory Doumbia',50,27),('A. TRAORÉ','Adama Traoré',66,10),('SINAYOKO','Lassine Sinayoko',34,10)]),
  'Saintfiet':('4-2-3-1',[('D. DIARRA','Djigui Diarra',50,86),('DOUCOURÉ','Fodé Doucouré',88,62),('FOFANA','Mamadou Fofana',66,70),('DIABY','Abdoulaye Diaby',34,70),('DANTÉ','Amadou Danté',12,62),
-   ('DIENG','Aliou Dieng',64,49),('L. COULIBALY','Lassana Coulibaly',36,49),('K. DOUMBIA','Kamory Doumbia',84,29),('BISSOUMA','Yves Bissouma',50,29),('DORGELES','Néné Dorgeles',16,29),('SINAYOKO','Lassine Sinayoko',50,8)])}
+   ('DIENG','Aliou Dieng',67,49),('L. COULIBALY','Lassana Coulibaly',33,49),('K. DOUMBIA','Kamory Doumbia',84,26),('BISSOUMA','Yves Bissouma',50,26),('DORGELES','Néné Dorgeles',16,26),('SINAYOKO','Lassine Sinayoko',50,5)])}
 PHOTO={'Djigui Diarra':'djigui-diarra','Hamari Traoré':'3248','Boubakar Kouyaté':'kiki-kouyate','Sikou Niakaté':'sikou-niakate','Falaye Sacko':'falaye-sacko',
  'Mohamed Camara':'mohamed-camara','Aliou Dieng':'aliou-dieng','Amadou Haïdara':'amadou-haidara-1998','Kamory Doumbia':'kamory-doumbia-2003','Adama Traoré':'adama-traore-malouda',
  'Lassine Sinayoko':'105182','Fodé Doucouré':'fode-doucoure','Mamadou Fofana':'mamadou-fofana','Abdoulaye Diaby':'abdoulaye-diaby','Amadou Danté':'amadou-dante',
@@ -36,12 +36,11 @@ def terrain(coach):
         g+=f'<clipPath id="c{i}"><circle cx="{cx:.0f}" cy="{cy:.0f}" r="{R0}"/></clipPath><circle cx="{cx:.0f}" cy="{cy:.0f}" r="{R0}" fill="#FFF3C4"/>'
         g+=f'<image href="photos/{i}.png" x="{cx-R0:.0f}" y="{cy-R0:.0f}" width="{2*R0}" height="{2*R0}" clip-path="url(#c{i})" preserveAspectRatio="xMidYMid slice"/>'
         g+=f'<circle cx="{cx:.0f}" cy="{cy:.0f}" r="{R0}" fill="none" stroke="#F6C41C" stroke-width="4"/>'
-        g+=f'<circle cx="{bx:.0f}" cy="{by:.0f}" r="21" fill="#F6C41C" stroke="#064A25" stroke-width="3"/><text x="{bx:.0f}" y="{by+9:.0f}" text-anchor="middle" style="font:italic 900 27px BC;fill:#064A25">{t}</text>'
-        g+=f'<text x="{cx:.0f}" y="{cy+R0+30:.0f}" text-anchor="middle" style="font:800 23px SC;letter-spacing:.03em;fill:#FFFFFF;stroke:#0B7A3B;stroke-width:7px;paint-order:stroke;stroke-linejoin:round">{nom}</text>'
+        g+=f'<text x="{cx:.0f}" y="{cy+R0+30:.0f}" text-anchor="middle" style="font:800 23px SC;letter-spacing:.03em;fill:#FFFFFF;stroke:#0B7A3B;stroke-width:7px;paint-order:stroke;stroke-linejoin:round">{nom}<tspan dx="6" style="font:700 19px SC;fill:#F6C41C">({t})</tspan></text>'
     return f'<svg style="position:absolute;left:0;top:0" width="1080" height="1350">{g}</svg>', sysm, n
 for k,(coach,per,h2) in enumerate((('Chelle','2022-2024','ÉRIC CHELLE'),('Saintfiet','2024-2026','TOM SAINTFIET')),1):
     body,sysm,n=terrain(coach)
-    body+=f'<div class="leg" style="top:1130px;font-size:22px"><span><i style="display:block;width:24px;height:24px;border-radius:50%;background:#F6C41C"></i>TITULARISATIONS SUR {n} MATCHS · SYSTÈME : {sysm}</span></div>'
+    body+=f'<div class="leg" style="top:1130px;font-size:22px"><span>ENTRE PARENTHÈSES : TITULARISATIONS SUR {n} MATCHS · SYSTÈME : {sysm}</span></div>'
     open(ICI/f'_p4_{k}.html','w',encoding='utf-8').write(page(f'MALI · {per} · <b>{n} MATCHS OFFICIELS</b>','LE ONZE TYPE',h2,str(n),body,
       'Compos : deux sources par match (11v11, Eurosport, FotMob, presse) · CAN 2023 : StatsBomb · Amicaux exclus'))
 for c in ('Chelle','Saintfiet'): print(c, NB[c], [(cle,T[c][cle]) for _,cle,_,_ in ONZE[c][1]])
