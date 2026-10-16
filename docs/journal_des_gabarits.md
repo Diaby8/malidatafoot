@@ -238,3 +238,4 @@ des tirs). C'est le réglage par défaut de `sfx_md2.py`. Fichier final : `MaliD
 - 15/10/2026 · Post 1 posté sur X vers 19 h (version de Diaby du thread). TikTok et vidéo rayons X à suivre le même soir.
 - 15/10/2026 · Post 1 sur TikTok : en carrousel, TikTok rogne l'image en 3:4 (bande y 240–1680) et le nom du compte couvre le surtitre. Règle ajoutée au skill DA (zones du carrousel) ; à appliquer dès le prochain post (Diaby).
 - 15/10/2026 · Images de match : images libres de droits pour les prochains posts (Diaby) ; règle ajoutée au skill DA.
+- 16/10/2026 · Post 3 : thread X prêt (4 images + 5 tweets). Angle final (Diaby) : le Mali va à la CAN, le modèle (44 % à Kigali) sous-estime les Aigles : 11 victoires sur 14 quand ils partent favoris à l'extérieur depuis 2015. Formulation neutre (« part favori », pas « bien plus faible »). TikTok après.
