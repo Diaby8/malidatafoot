@@ -93,6 +93,13 @@ Puis proposer en s'appuyant dessus : dire ce qu'on a déjà, ce qui manque, et d
 - **Le suivi de tous les sujets (statut, données, formats) est dans `docs/boite_a_idees.md`** : le mettre à jour à chaque idée nouvelle, POC ou publication. La banque d'exemples est dans `docs/banque_idees.md`. Ce sont des exemples, pas une liste fermée : on continue d'en proposer de nouveaux au même niveau, et on y ajoute ceux qui plaisent.
 - Formats : posts, threads sur X, TikTok en motion design avec voix off (scripts écrits avec les règles de texte ci-dessus).
 
+## 6 bis. Ligne éditoriale : d'abord les joueurs (Diaby, 16 octobre 2026)
+
+- **Hors rassemblement, on parle surtout des joueurs** : ceux qui jouent déjà pour le Mali, les binationaux qui peuvent le choisir, les jeunes. Leurs dernières performances en club, en data (modèle : des pages comme Data'Scout ou DATA'Foot, qui sortent des contenus sur les joueurs).
+- **L'équipe nationale, surtout pendant les rassemblements** (avant, pendant, juste après les matchs).
+- **Toutes les catégories** : Aigles A, Aigles Dames, U23, U20, U17.
+- **Veille régulière** : à chaque session, regarder ce qui s'est passé depuis la dernière fois (matchs du Mali, des Dames, des jeunes, Maliens en club) et proposer des sujets qui en sortent, avec un exemple concret (le joueur, le chiffre, le match). Trop de sujets généraux ou historiques : à éviter.
+
 ## 7. Prochains contenus
 
 Voir `docs/boite_a_idees.md` (statut de chaque sujet : publié, prêt, POC, à faire, en attente de source). À relire en début de session pour proposer la suite.
