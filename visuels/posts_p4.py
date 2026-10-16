@@ -20,10 +20,10 @@ ONZE={'Chelle':('4-4-2 LOSANGE',[('D. DIARRA','Djigui Diarra',50,86),('H. TRAOR�
    ('M. CAMARA','Mohamed Camara',50,52),('DIENG','Aliou Dieng',76,36),('A. HAÏDARA','Amadou Haïdara',24,36),('K. DOUMBIA','Kamory Doumbia',50,27),('A. TRAORÉ','Adama Traoré',66,10),('SINAYOKO','Lassine Sinayoko',34,10)]),
  'Saintfiet':('4-2-3-1',[('D. DIARRA','Djigui Diarra',50,86),('DOUCOURÉ','Fodé Doucouré',88,62),('FOFANA','Mamadou Fofana',66,67),('DIABY','Abdoulaye Diaby',34,67),('DANTÉ','Amadou Danté',12,62),
    ('DIENG','Aliou Dieng',67,47),('L. COULIBALY','Lassana Coulibaly',33,47),('K. DOUMBIA','Kamory Doumbia',84,26),('BISSOUMA','Yves Bissouma',50,26),('DORGELES','Néné Dorgeles',16,26),('SINAYOKO','Lassine Sinayoko',50,5)])}
-PHOTO={'Djigui Diarra':'djigui-diarra','Hamari Traoré':'3248','Boubakar Kouyaté':'kiki-kouyate','Sikou Niakaté':'sikou-niakate','Falaye Sacko':'falaye-sacko',
- 'Mohamed Camara':'mohamed-camara','Aliou Dieng':'aliou-dieng','Amadou Haïdara':'amadou-haidara-1998','Kamory Doumbia':'kamory-doumbia-2003','Adama Traoré':'adama-traore-malouda',
+PHOTO={'Djigui Diarra':'djigui-diarra','Hamari Traoré':'3248-onze','Boubakar Kouyaté':'kiki-kouyate','Sikou Niakaté':'sikou-niakate','Falaye Sacko':'falaye-sacko',
+ 'Mohamed Camara':'mohamed-camara','Aliou Dieng':'aliou-dieng','Amadou Haïdara':'amadou-haidara-1998','Kamory Doumbia':'kamory-doumbia-2003-onze','Adama Traoré':'adama-traore-malouda',
  'Lassine Sinayoko':'105182','Fodé Doucouré':'fode-doucoure','Mamadou Fofana':'mamadou-fofana','Abdoulaye Diaby':'abdoulaye-diaby','Amadou Danté':'amadou-dante',
- 'Lassana Coulibaly':'lassana-coulibaly','Yves Bissouma':'yves-bissouma','Néné Dorgeles':'nene-dorgeles-2002'}
+ 'Lassana Coulibaly':'lassana-coulibaly','Yves Bissouma':'yves-bissouma','Néné Dorgeles':'nene-dorgeles-2002-onze'}
 def terrain(coach):
     sysm,J=ONZE[coach]; n=NB[coach]; X0,Y0,W0,H0=64,366,952,722
     g=f'<rect x="{X0}" y="{Y0}" width="{W0}" height="{H0}" rx="6" fill="#0B7A3B"/>'
