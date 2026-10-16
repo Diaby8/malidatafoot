@@ -8,9 +8,9 @@ pc=lambda v:round(100*v)
 DR['Rwanda']='<rect width="20" height="10" fill="#00A1DE"/><rect y="10" width="20" height="5" fill="#FAD201"/><rect y="15" width="20" height="5" fill="#20603D"/><circle cx="15" cy="4.6" r="2.2" fill="#FAD201"/>'
 DR['Cape Verde']='<rect width="20" height="20" fill="#003893"/><rect y="10.5" width="20" height="1.4" fill="#fff"/><rect y="11.9" width="20" height="1.4" fill="#CF2027"/><rect y="13.3" width="20" height="1.4" fill="#fff"/>'+''.join(f'<circle cx="{7.5+3.6*math.cos(k*math.pi/5):.2f}" cy="{12.4+3.6*math.sin(k*math.pi/5):.2f}" r=".55" fill="#F7D116"/>' for k in range(10))
 DR['Liberia']=''.join(f'<rect y="{i*20/11:.2f}" width="20" height="{20/11+.05:.2f}" fill="{"#BF0A30" if i%2==0 else "#fff"}"/>' for i in range(11))+'<rect width="9" height="9.1" fill="#002868"/>'+et(4.5,4.6,2.6,'#fff')
-CF={'Mali':'ml','Rwanda':'rw','Cape Verde':'cv','Liberia':'lr'}
+CF={'Mali':'ml','Rwanda':'rw','Cape Verde':'cv','Liberia':'lr','South Sudan':'ss','Chad':'td','Namibia':'na','Congo':'cg','Guinea-Bissau':'gw'}
 def drapv(p,t=44): return f'<img src="drapeaux/{CF[p]}.svg" style="width:{t}px;height:{t}px;display:block;border-radius:50%">'
-FRN.update({'Rwanda':'Rwanda','Cape Verde':'Cap-Vert','Liberia':'Liberia'})
+FRN.update({'Rwanda':'Rwanda','Cape Verde':'Cap-Vert','Liberia':'Liberia','South Sudan':'Soudan du Sud','Chad':'Tchad','Namibia':'Namibie','Congo':'Congo','Guinea-Bissau':'Guinée-Bissau'})
 
 # ---- image 1 : le classement du groupe K après 2 journées (calculé depuis les matchs joués)
 tab={e:dict(j=0,pts=0,bp=0,bc=0) for e in S['equipes']}
@@ -67,17 +67,19 @@ b3+=f'<div class="bigR" style="top:{yb+150}px"><b>+98<span style="font:italic 90
 open(ICI/'_p3_3.html','w',encoding='utf-8').write(page('ÉLIMINATOIRES CAN 2027 · GROUPE K · <b>100 000 SIMULATIONS</b>','ON A JOUÉ','LE GROUPE','',b3,
   f'Modèle (force Elo et lieu) appris sur {S["modele"]["appris_sur_matchs"]:,} matchs officiels africains depuis 2000 · Les 2 premiers sont qualifiés'.replace(',',' ')))
 
-# ---- image 4 : les deux matchs contre le Rwanda
-def jauge(y,titre,m):
-    v,n,dd=pc(m['victoire']),pc(m['nul']),pc(m['defaite'])
-    s=f'<div style="position:absolute;left:64px;top:{y}px;font:800 30px/1 SC;letter-spacing:.04em;color:#04331A">{titre}</div>'
-    s+=f'<div style="position:absolute;left:64px;top:{y+48}px;width:952px;height:84px;display:flex;border-radius:3px;overflow:hidden">'
-    for val,c,tc,lab in ((v,'#064A25','#FFFFFF','VICTOIRE'),(n,'#FFF3C4','#04331A','NUL'),(dd,'#D4252A','#FFFFFF','DÉFAITE')):
-        s+=f'<div style="width:{val}%;background:{c};color:{tc};display:flex;flex-direction:column;justify-content:center;padding-left:{14 if val>=12 else 6}px;overflow:hidden;white-space:nowrap"><b style="font:italic 900 {46 if val>=12 else 30}px/1 BC">{val}&#8239;%</b>'+(f'<span style="font:800 16px/1 SC;letter-spacing:.05em">{lab}</span>' if val>=12 else '')+'</div>'
-    return s+'</div>'
-b4=jauge(420,'MALI - RWANDA · À DOMICILE',S['match_bamako'])+jauge(620,'RWANDA - MALI · À KIGALI',S['match_kigali'])
-b4+='<div class="leg" style="top:790px;gap:22px"><span>'+sw('#064A25')+'VICTOIRE DU MALI</span><span>'+sw('#FFF3C4')+'NUL</span><span>'+sw('#D4252A')+'DÉFAITE DU MALI</span></div>'
-b4+=f'<div class="bigR" style="top:900px"><b>{pc(S["match_kigali"]["nul"])}<span style="font:italic 900 70px BC;color:#064A25"> %</span></b><span>DE CHANCES DE NUL À KIGALI<br>CHEZ LUI, IL A TENU <em>LE SÉNÉGAL ET LE NIGERIA</em></span></div>'
-open(ICI/'_p3_4.html','w',encoding='utf-8').write(page('NOVEMBRE · <b>MALI - RWANDA, ALLER ET RETOUR</b>','LE PIÈGE','C\'EST LE NUL','30%',b4,
-  'Chances selon notre modèle (force Elo et lieu) · Rwanda 1-1 Sénégal (09/2023), Rwanda 0-0 Nigeria (09/2024)'))
+# ---- image 4 : à Kigali, le modèle (moyenne africaine) contre le vrai bilan du Mali à l'extérieur face à bien plus faible
+X=S['exterieur_contre_plus_faible']; XM=X['Mali']
+b4=f'''<div style="position:absolute;left:64px;top:400px;width:440px">
+<div style="font:italic 900 150px/.86 BC;color:#064A25">{pc(S["match_kigali"]["victoire"])}<span style="font-size:80px"> %</span></div>
+<div style="margin-top:14px;font:800 26px/1.25 SC;letter-spacing:.04em;color:#04331A">CHANCES DE VICTOIRE À KIGALI<br>SELON LE MODÈLE</div></div>
+<div style="position:absolute;left:560px;top:400px;width:460px">
+<div style="font:italic 900 150px/.86 BC;color:#0B7A3B">{XM["victoires"]}<span style="font-size:80px"> / {XM["matchs"]}</span></div>
+<div style="margin-top:14px;font:800 26px/1.25 SC;letter-spacing:.04em;color:#04331A">VICTOIRES DU MALI À L'EXTÉRIEUR<br>FACE À BIEN PLUS FAIBLE</div></div>'''
+for k,(d,adv,x,y) in enumerate(reversed(X['matchs_mali'])):
+    col,row=k%2,k//2; xx=64+col*480; yy=700+row*76
+    b4+=f'''<div style="position:absolute;left:{xx}px;top:{yy}px;width:452px;height:60px;display:flex;align-items:center;gap:14px;border-bottom:2px solid rgba(6,74,37,.22)">
+<span style="width:62px;font:700 24px/1 SC;color:rgba(4,51,26,.75)">{d[:4]}</span>{drapv(adv,36)}<span style="flex:1;font:800 26px/1 SC;letter-spacing:.02em;color:#04331A;white-space:nowrap">{FRN[adv].upper()}</span>
+<span style="font:italic 900 40px/1 BC;color:{"#0B7A3B" if y>x else "#064A25"}">{x}-{y}</span></div>'''
+open(ICI/'_p3_4.html','w',encoding='utf-8').write(page('NOVEMBRE · <b>RWANDA - MALI, À KIGALI</b>','LE MODÈLE','SOUS-ESTIME LES AIGLES ?','8/9',b4,
+  'Matchs officiels africains depuis 2015 où le Mali, visiteur, avait 200 pts d\'Elo de plus · Données : martj42'))
 print('ok')

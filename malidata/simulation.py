@@ -192,6 +192,16 @@ def run(cfg: Config, n: int = 100_000) -> dict:
             "deux_nuls": (bamako == 0) & (kigali == 0), "une_victoire_une_defaite": ((bamako == 1) & (kigali == -1)) | ((bamako == -1) & (kigali == 1)),
             "nul_et_defaite": ((bamako == 0) & (kigali == -1)) | ((bamako == -1) & (kigali == 0)), "deux_defaites": (bamako == -1) & (kigali == -1),
             "victoire_bamako_defaite_kigali": (bamako == 1) & (kigali == -1)}
+    # le Mali à l'extérieur contre bien plus faible que lui (au moins 200 points d'Elo d'écart), comparé au favori africain moyen
+    # dans la même situation (même critère, matchs officiels africains depuis 2015). Le Rwanda est à 248 points sous le Mali.
+    ext = m[~m.neutral.astype(bool)].copy(); ext["ecart"] = ext.elo_away_avant - ext.elo_home_avant
+    ext = ext[(ext.ecart >= 200) & (ext.date >= "2015-01-01")]
+    vnd_ = lambda d: {"matchs": int(len(d)), "victoires": int((d.away_score > d.home_score).sum()),
+                      "nuls": int((d.away_score == d.home_score).sum()), "defaites": int((d.away_score < d.home_score).sum())}
+    mx = ext[ext.away_team == equipe]
+    exterieur = {"critere": "visiteur plus fort d'au moins 200 points d'Elo, matchs officiels africains depuis 2015",
+                 "tous": vnd_(ext), equipe: vnd_(mx),
+                 "matchs_mali": [[str(r.date)[:10], r.home_team, int(r.home_score), int(r.away_score)] for r in mx.itertuples()]}
     rm = R[equipe].to_numpy(); pm = P[equipe].to_numpy()
     sortie = {
         "question": "Le Mali va-t-il à la CAN 2027, et finit-il premier du groupe K ?",
@@ -208,6 +218,7 @@ def run(cfg: Config, n: int = 100_000) -> dict:
         "match_kigali": dict(zip(("victoire", "nul", "defaite"), vnd(matrice(modele, elo["Rwanda"], elo[equipe]))[::-1])),
         "novembre": {k: {"probabilite": float(v.mean()), "qualifie": float((rm[v] <= 2).mean()) if v.any() else None,
                          "premier": float((rm[v] == 1).mean()) if v.any() else None} for k, v in scen.items()},
+        "exterieur_contre_plus_faible": exterieur,
         "robustesse_modele_depuis_2010": {"matchs": m10["matchs"], "qualifie": float((s10["rangs"][cfg.raw["resultats_internationaux"]["equipe"]] <= 2).mean()),
                                           "premier": float((s10["rangs"][cfg.raw["resultats_internationaux"]["equipe"]] == 1).mean())},
         "regles": "Les deux premiers du groupe vont à la CAN 2027 (CAF). Classement simplifié : points, confrontations directes (points, différence, buts ; un seul passage, sans buts à l'extérieur), différence de buts générale, buts. Les critères omis changent la probabilité du Mali de moins de 0,3 point (recomptage du 14 octobre 2026).",

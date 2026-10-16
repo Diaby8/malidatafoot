@@ -17,3 +17,9 @@
 | Rwanda 0-0 Nigeria, 10/09/2024, Kigali (élim. CAN 2025) | martj42 | SuperSport, AllAfrica |
 
 Point ouvert : le stade de Mali-Rwanda (Bamako probable, comme Mali-Cap-Vert) à confirmer avant publication ; sur les images on écrit « à domicile ».
+
+## Vérification demandée par Diaby (16/10) : « 44 % seulement de gagner au Rwanda ? »
+- Le 44 % est la moyenne africaine : visiteur plus fort de 200 à 300 pts d'Elo, matchs officiels africains depuis 2000 : 215 matchs, 44 % V, 32 % N, 24 % D (depuis 2015 : 75 matchs, 45 / 35 / 20). Le modèle colle donc à l'histoire du continent.
+- Mais le Mali fait beaucoup mieux : visiteur avec au moins 200 pts d'Elo de plus, depuis 2015 : 9 matchs, 8 V, 1 N, 0 D (pipeline, `exterieur_contre_plus_faible`). Robustesse du seuil : ≥100 pts 12 V 4 N 3 D sur 19 ; ≥150 pts 11 V 2 N 1 D sur 14 ; ≥250 pts 7 sur 7.
+- Les 9 matchs recoupés : 2020-2026 déjà recoupés au post 1 (FBref, RSSSF, presse) ; Soudan du Sud 0-3 (04/06/2016, Radio Tamazuj), Soudan du Sud 0-3 (09/09/2018, Wikipédia groupe C), Tchad 0-2 (17/11/2019, N'Djamena, Alwihda Info).
+- Angle retenu (Diaby, 16/10) : « le modèle sous-estime les Aigles ? ». Limite à dire : 9 matchs, c'est peu.
