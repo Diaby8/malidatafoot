@@ -1,8 +1,14 @@
 # données téléchargées et produites par le pipeline (retrouvées avec : python taches.py donnees)
 data/
 outputs/
-# tout ce que fabriquent les visuels
-livrables/
+# tout ce que fabriquent les visuels ; on garde dans le dépôt les versions finales des posts (trace de la DA)
+livrables/*
+!livrables/post*/
+!livrables/video-explique/
+livrables/video-explique/*
+!livrables/video-explique/v3e-voix.mp4
+!livrables/video-explique/description-TikTok.txt
+!livrables/video-explique/texte-X.txt
 visuels/node_modules
 visuels/_*.html
 visuels/_images/

@@ -1,0 +1,17 @@
+[vidéo : v3e-voix.mp4, 53,8 s]
+
+Namibie-Mali, CAN 2023 : 0-0. Sur la feuille de match, rien. Mais ce match, c'est 2 685 événements enregistrés. On l'a passé aux rayons X.
+
+Une seule action, à la 27e minute : 22 secondes, 9 passes, 8 Maliens. Le centre de Niakaté fait bondir la menace (+0,25), et la tête de Sinayoko avait une chance sur trois de finir au fond. À côté.
+
+Sur tout le tournoi, aucune équipe n'a laissé moins de danger à ses adversaires : 1er sur 24, par match.
+
+Pour être clairs :
+- La « menace » vient de notre propre modèle (xT), appris sur plus de 2 500 matchs. La « chance sur trois », ce sont les buts attendus (xG) de StatsBomb.
+- Le classement de la menace porte sur 5 matchs : c'est peu.
+- Les fiches de Sangaré et de Dorgeles sont des maquettes : leurs chiffres sont floutés.
+
+Données : StatsBomb Open Data.
+
+Quel joueur on passe aux rayons X ? Dis-le en commentaire.
+#Mali #AiglesDuMali #CAN #football #data

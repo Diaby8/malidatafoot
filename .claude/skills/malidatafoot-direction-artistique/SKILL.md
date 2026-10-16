@@ -20,6 +20,8 @@ Puis proposer en s'appuyant dessus : dire ce qu'on a déjà, ce qui manque, et d
 
 ## 0. LA DA DES POSTS : le style de la vidéo (validé le 13 octobre 2026, « la DA, elle est parfaite, c'est ça que je veux »)
 
+**Les visuels validés, en images : `docs/da_reference.md`** (à compléter à chaque post validé, avec ses choix de forme).
+
 C'est la référence pour **tout post** (X, TikTok) et tout nouveau visuel de données. Gabarit : `visuels/posts_video.py`
 (trois exemples validés : classement des défenses africaines, courbe depuis 2000, points FIFA). Partir de ce fichier,
 ne jamais redessiner « dans l'esprit ».

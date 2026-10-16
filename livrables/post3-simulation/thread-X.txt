@@ -1,0 +1,24 @@
+1/5 [image 1-groupe-k-X.png]
+Le Rwanda est devant le Mali dans le groupe K : 6 points chacun, mais un but marqué de plus.
+
+Faut-il s'inquiéter avant les deux matchs de novembre ? On a fait tourner les chiffres. 🧵
+
+2/5 [image 2-modele-fiable-X.png]
+Notre modèle prédit le score d'un match selon la force des deux équipes et le lieu.
+
+Testé sur 995 matchs africains qu'il n'avait jamais vus : quand il annonce un favori à 85 %, ce favori gagne 82 % du temps. Vers 67 %, il est un peu trop sûr de lui (58 % en vrai).
+
+3/5 [image 3-cent-mille-simulations-X.png]
+On a joué la fin du groupe 100 000 fois.
+
+Le Mali va à la CAN plus de 98 fois sur 100, et finit premier plus de 8 fois sur 10.
+
+4/5 [image 4-kigali-X.png]
+À Kigali, le modèle donne 44 % de victoire au Mali : la moyenne d'un favori africain à l'extérieur.
+
+Mais les Aigles font mieux : en qualifs, quand ils partent nettement favoris à l'extérieur, 11 victoires en 14 matchs depuis 2015. Dont un 0-3 au Rwanda en 2021.
+
+5/5
+Les limites : 14 matchs, c'est peu. Le modèle ne connaît ni les blessés ni la forme du moment, et garde la force des équipes fixe. On arrondit donc vers le bas.
+
+Et toi, ton pronostic pour Mali-Rwanda ?
