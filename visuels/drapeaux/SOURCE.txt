@@ -1,0 +1,1 @@
+Drapeaux ronds : circle-flags 2.8.3 (HatScripts, licence MIT, npm). Copiés le 16/10/2026 pour le post 3.
