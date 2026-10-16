@@ -51,8 +51,8 @@ for k,(coach,per,h2) in enumerate((('Chelle','2022-2024','ÉRIC CHELLE'),('Saint
     suiv=reste[:4]; assert reste[4][1]<suiv[-1][1], 'égalité coupée'
     COURT={'Lassana Coulibaly':'L. COULIBALY','Mamadou Fofana':'M. FOFANA','Diadié Samassékou':'SAMASSÉKOU','Ismaël Diawara':'DIAWARA','Mohamed Camara':'M. CAMARA','Mamadou Sangaré':'SANGARÉ','Salim Diakité':'S. DIAKITÉ','El Bilal Touré':'E. B. TOURÉ'}
     js=' · '.join(f'{COURT[p]} ({v})' for p,v in suiv)
-    body+=f'<div class="leg" style="top:1104px;font-size:22px"><span>ENTRE PARENTHÈSES : TITULARISATIONS SUR {n} MATCHS · SYSTÈME : {sysm}</span></div>'
-    body+=f'<div class="leg" style="top:1138px;font-size:22px"><span>JUSTE DERRIÈRE : {js}</span></div>'
+    body+=f'<div class="leg" style="top:1104px;font-size:22px;font-weight:500"><span>ENSUITE : {js}</span></div>'
+    body+=f'<div class="leg" style="top:1138px;font-size:22px"><span>ENTRE PARENTHÈSES : TITULARISATIONS SUR {n} MATCHS · SYSTÈME : {sysm}</span></div>'
     open(ICI/f'_p4_{k}.html','w',encoding='utf-8').write(page(f'MALI · {per} · <b>{n} MATCHS OFFICIELS</b>','LE ONZE TYPE',h2,'',photo_coach(coach)+body,
-      'Matchs amicaux exclus'+(' · Données CAN 2023 : StatsBomb' if coach=='Chelle' else '')))
+      'Matchs amicaux exclus'))
 for c in ('Chelle','Saintfiet'): print(c, NB[c], [(cle,T[c][cle]) for _,cle,_,_ in ONZE[c][1]])
