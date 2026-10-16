@@ -16,7 +16,7 @@ for r in R:
     NB[r['coach']]+=1
     for p in r['titulaires'].split(';'): T[r['coach']][re.sub(r' \((probable|Malouda)\)','',p)]+=1
 # onze par poste (système le plus vu) : (nom affiché, clé, x, y) sur le terrain 0-100 (y = 0 en attaque)
-ONZE={'Chelle':('4-1-2-1-2 (LOSANGE)',[('D. DIARRA','Djigui Diarra',50,86),('H. TRAORÉ','Hamari Traoré',88,62),('KOUYATÉ','Boubakar Kouyaté',66,70),('S. NIAKATÉ','Sikou Niakaté',34,70),('SACKO','Falaye Sacko',12,62),
+ONZE={'Chelle':('4-4-2 LOSANGE',[('D. DIARRA','Djigui Diarra',50,86),('H. TRAORÉ','Hamari Traoré',88,62),('KOUYATÉ','Boubakar Kouyaté',66,70),('S. NIAKATÉ','Sikou Niakaté',34,70),('SACKO','Falaye Sacko',12,62),
    ('M. CAMARA','Mohamed Camara',50,52),('DIENG','Aliou Dieng',76,36),('A. HAÏDARA','Amadou Haïdara',24,36),('K. DOUMBIA','Kamory Doumbia',50,27),('A. TRAORÉ','Adama Traoré',66,10),('SINAYOKO','Lassine Sinayoko',34,10)]),
  'Saintfiet':('4-2-3-1',[('D. DIARRA','Djigui Diarra',50,86),('DOUCOURÉ','Fodé Doucouré',88,62),('FOFANA','Mamadou Fofana',66,70),('DIABY','Abdoulaye Diaby',34,70),('DANTÉ','Amadou Danté',12,62),
    ('DIENG','Aliou Dieng',67,49),('L. COULIBALY','Lassana Coulibaly',33,49),('K. DOUMBIA','Kamory Doumbia',84,26),('BISSOUMA','Yves Bissouma',50,26),('DORGELES','Néné Dorgeles',16,26),('SINAYOKO','Lassine Sinayoko',50,5)])}
@@ -38,9 +38,16 @@ def terrain(coach):
         g+=f'<circle cx="{cx:.0f}" cy="{cy:.0f}" r="{R0}" fill="none" stroke="#F6C41C" stroke-width="4"/>'
         g+=f'<text x="{cx:.0f}" y="{cy+R0+30:.0f}" text-anchor="middle" style="font:800 23px SC;letter-spacing:.03em;fill:#FFFFFF;stroke:#0B7A3B;stroke-width:7px;paint-order:stroke;stroke-linejoin:round">{nom}<tspan dx="6" style="font:700 19px SC;fill:#F6C41C">({t})</tspan></text>'
     return f'<svg style="position:absolute;left:0;top:0" width="1080" height="1350">{g}</svg>', sysm, n
+COACH={'Chelle':('eric-chelle',('ml','fr')),'Saintfiet':('tom-saintfiet',('be',))}
+def photo_coach(coach):
+    ph,drs=COACH[coach]; D=196; F=50; x0=(D-len(drs)*F-(len(drs)-1)*4)/2
+    h=f'<div style="position:absolute;left:{1016-D}px;top:100px;width:{D}px;height:{D}px"><img src="photos/{ph}.png" style="display:block;width:{D}px;height:{D}px;border-radius:50%;background:#FFF3C4;border:6px solid #064A25;box-sizing:border-box;object-fit:cover">'
+    for j,d in enumerate(drs):
+        h+=f'<img src="drapeaux/{d}.svg" style="position:absolute;left:{x0+j*(F+4)-4:.0f}px;bottom:-14px;width:{F}px;height:{F}px;border-radius:50%;border:4px solid #FBD134">'
+    return h+'</div>'
 for k,(coach,per,h2) in enumerate((('Chelle','2022-2024','ÉRIC CHELLE'),('Saintfiet','2024-2026','TOM SAINTFIET')),1):
     body,sysm,n=terrain(coach)
     body+=f'<div class="leg" style="top:1130px;font-size:22px"><span>ENTRE PARENTHÈSES : TITULARISATIONS SUR {n} MATCHS · SYSTÈME : {sysm}</span></div>'
-    open(ICI/f'_p4_{k}.html','w',encoding='utf-8').write(page(f'MALI · {per} · <b>{n} MATCHS OFFICIELS</b>','LE ONZE TYPE',h2,str(n),body,
+    open(ICI/f'_p4_{k}.html','w',encoding='utf-8').write(page(f'MALI · {per} · <b>{n} MATCHS OFFICIELS</b>','LE ONZE TYPE',h2,'',photo_coach(coach)+body,
       'Compos : deux sources par match (11v11, Eurosport, FotMob, presse) · CAN 2023 : StatsBomb · Amicaux exclus'))
 for c in ('Chelle','Saintfiet'): print(c, NB[c], [(cle,T[c][cle]) for _,cle,_,_ in ONZE[c][1]])
