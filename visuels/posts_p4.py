@@ -16,10 +16,14 @@ for r in R:
     NB[r['coach']]+=1
     for p in r['titulaires'].split(';'): T[r['coach']][re.sub(r' \((probable|Malouda)\)','',p)]+=1
 # onze par poste (système le plus vu) : (nom affiché, clé, x, y) sur le terrain 0-100 (y = 0 en attaque)
-ONZE={'Chelle':('4-1-2-1-2 (LOSANGE)',[('D. DIARRA','Djigui Diarra',50,92),('H. TRAORÉ','Hamari Traoré',86,70),('KOUYATÉ','Boubakar Kouyaté',62,76),('S. NIAKATÉ','Sikou Niakaté',38,76),('SACKO','Falaye Sacko',14,70),
-   ('M. CAMARA','Mohamed Camara',50,58),('DIENG','Aliou Dieng',74,46),('A. HAÏDARA','Amadou Haïdara',26,46),('K. DOUMBIA','Kamory Doumbia',50,32),('A. TRAORÉ','Adama Traoré',66,14),('SINAYOKO','Lassine Sinayoko',34,14)]),
- 'Saintfiet':('4-2-3-1',[('D. DIARRA','Djigui Diarra',50,92),('DOUCOURÉ','Fodé Doucouré',86,70),('FOFANA','Mamadou Fofana',62,76),('DIABY','Abdoulaye Diaby',38,76),('DANTÉ','Amadou Danté',14,70),
-   ('DIENG','Aliou Dieng',64,56),('L. COULIBALY','Lassana Coulibaly',36,56),('K. DOUMBIA','Kamory Doumbia',84,34),('BISSOUMA','Yves Bissouma',50,34),('DORGELES','Néné Dorgeles',16,34),('SINAYOKO','Lassine Sinayoko',50,12)])}
+ONZE={'Chelle':('4-1-2-1-2 (LOSANGE)',[('D. DIARRA','Djigui Diarra',50,86),('H. TRAORÉ','Hamari Traoré',88,62),('KOUYATÉ','Boubakar Kouyaté',66,70),('S. NIAKATÉ','Sikou Niakaté',34,70),('SACKO','Falaye Sacko',12,62),
+   ('M. CAMARA','Mohamed Camara',50,52),('DIENG','Aliou Dieng',76,40),('A. HAÏDARA','Amadou Haïdara',24,40),('K. DOUMBIA','Kamory Doumbia',50,27),('A. TRAORÉ','Adama Traoré',66,10),('SINAYOKO','Lassine Sinayoko',34,10)]),
+ 'Saintfiet':('4-2-3-1',[('D. DIARRA','Djigui Diarra',50,86),('DOUCOURÉ','Fodé Doucouré',88,62),('FOFANA','Mamadou Fofana',66,70),('DIABY','Abdoulaye Diaby',34,70),('DANTÉ','Amadou Danté',12,62),
+   ('DIENG','Aliou Dieng',64,49),('L. COULIBALY','Lassana Coulibaly',36,49),('K. DOUMBIA','Kamory Doumbia',84,29),('BISSOUMA','Yves Bissouma',50,29),('DORGELES','Néné Dorgeles',16,29),('SINAYOKO','Lassine Sinayoko',50,8)])}
+PHOTO={'Djigui Diarra':'djigui-diarra','Hamari Traoré':'3248','Boubakar Kouyaté':'kiki-kouyate','Sikou Niakaté':'sikou-niakate','Falaye Sacko':'falaye-sacko',
+ 'Mohamed Camara':'mohamed-camara','Aliou Dieng':'aliou-dieng','Amadou Haïdara':'amadou-haidara-1998','Kamory Doumbia':'kamory-doumbia-2003','Adama Traoré':'adama-traore-malouda',
+ 'Lassine Sinayoko':'105182','Fodé Doucouré':'fode-doucoure','Mamadou Fofana':'mamadou-fofana','Abdoulaye Diaby':'abdoulaye-diaby','Amadou Danté':'amadou-dante',
+ 'Lassana Coulibaly':'lassana-coulibaly','Yves Bissouma':'yves-bissouma','Néné Dorgeles':'nene-dorgeles-2002'}
 def terrain(coach):
     sysm,J=ONZE[coach]; n=NB[coach]; X0,Y0,W0,H0=64,370,952,740
     g=f'<rect x="{X0}" y="{Y0}" width="{W0}" height="{H0}" rx="6" fill="#0B7A3B"/>'
@@ -28,8 +32,12 @@ def terrain(coach):
     g+=f'<rect x="{X0+W0/2-200}" y="{Y0+20}" width="400" height="130" {L}/><rect x="{X0+W0/2-200}" y="{Y0+H0-150}" width="400" height="130" {L}/>'
     for nom,cle,x,y in J:
         cx,cy=X0+40+(W0-80)*x/100, Y0+30+(H0-60)*y/100; t=T[coach][cle]
-        g+=f'<circle cx="{cx:.0f}" cy="{cy:.0f}" r="40" fill="#F6C41C"/><text x="{cx:.0f}" y="{cy+15:.0f}" text-anchor="middle" style="font:italic 900 44px BC;fill:#064A25">{t}</text>'
-        g+=f'<text x="{cx:.0f}" y="{cy+74:.0f}" text-anchor="middle" style="font:800 24px SC;letter-spacing:.03em;fill:#FFFFFF">{nom}</text>'
+        R0=48; i=PHOTO[cle]; bx,by=cx+R0*.72,cy+R0*.72
+        g+=f'<clipPath id="c{i}"><circle cx="{cx:.0f}" cy="{cy:.0f}" r="{R0}"/></clipPath><circle cx="{cx:.0f}" cy="{cy:.0f}" r="{R0}" fill="#FFF3C4"/>'
+        g+=f'<image href="photos/{i}.png" x="{cx-R0:.0f}" y="{cy-R0:.0f}" width="{2*R0}" height="{2*R0}" clip-path="url(#c{i})" preserveAspectRatio="xMidYMid slice"/>'
+        g+=f'<circle cx="{cx:.0f}" cy="{cy:.0f}" r="{R0}" fill="none" stroke="#F6C41C" stroke-width="4"/>'
+        g+=f'<circle cx="{bx:.0f}" cy="{by:.0f}" r="21" fill="#F6C41C" stroke="#064A25" stroke-width="3"/><text x="{bx:.0f}" y="{by+9:.0f}" text-anchor="middle" style="font:italic 900 27px BC;fill:#064A25">{t}</text>'
+        g+=f'<text x="{cx:.0f}" y="{cy+R0+30:.0f}" text-anchor="middle" style="font:800 23px SC;letter-spacing:.03em;fill:#FFFFFF;stroke:#0B7A3B;stroke-width:7px;paint-order:stroke;stroke-linejoin:round">{nom}</text>'
     return f'<svg style="position:absolute;left:0;top:0" width="1080" height="1350">{g}</svg>', sysm, n
 for k,(coach,per,h2) in enumerate((('Chelle','2022-2024','ÉRIC CHELLE'),('Saintfiet','2024-2026','TOM SAINTFIET')),1):
     body,sysm,n=terrain(coach)
