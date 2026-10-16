@@ -74,7 +74,7 @@ b4=f'''<div style="position:absolute;left:64px;top:390px;width:440px">
 <div style="margin-top:14px;font:800 26px/1.25 SC;letter-spacing:.04em;color:#04331A">CHANCES DE VICTOIRE À KIGALI<br>SELON LE MODÈLE</div></div>
 <div style="position:absolute;left:560px;top:390px;width:460px">
 <div style="font:italic 900 150px/.86 BC;color:#0B7A3B">{tx}<span style="font-size:80px"> %</span></div>
-<div style="margin-top:14px;font:800 26px/1.25 SC;letter-spacing:.04em;color:#04331A">{XM["victoires"]} VICTOIRES SUR {XM["matchs"]} QUAND LE MALI PART<br>NETTEMENT FAVORI À L'EXTÉRIEUR</div></div>'''
+<div style="margin-top:14px;font:800 25px/1.3 SC;letter-spacing:.03em;color:#04331A;white-space:nowrap">{XM["victoires"]} VICTOIRES SUR {XM["matchs"]} À L'EXTÉRIEUR<br>QUAND LE MALI EST NETTEMENT FAVORI</div></div>'''
 L=list(reversed(X['matchs_mali'])); half=(len(L)+1)//2
 for k,(d,adv,x,y) in enumerate(L):
     col,row=k//half,k%half; xx=64+col*480; yy=650+row*66
@@ -83,5 +83,5 @@ for k,(d,adv,x,y) in enumerate(L):
 <span style="width:62px;font:700 24px/1 SC;color:rgba(4,51,26,.75)">{d[:4]}</span>{drapv(adv,34)}<span style="flex:1;font:800 25px/1 SC;letter-spacing:.02em;color:#04331A;white-space:nowrap">{FRN[adv].upper()}</span>
 <span style="font:italic 900 38px/1 BC;color:{c}">{x}-{y}</span></div>'''
 open(ICI/'_p3_4.html','w',encoding='utf-8').write(page('NOVEMBRE · <b>RWANDA - MALI, À KIGALI</b>','LE MODÈLE','SOUS-ESTIME LES AIGLES ?',f'{tx}%',b4,
-  'Matchs officiels africains depuis 2015 où le Mali, visiteur, avait au moins 150 pts d\'Elo de plus · Données : martj42'))
+  'Éliminatoires CAN et Mondial depuis 2015, Mali visiteur avec au moins 150 pts d\'Elo de plus · Données : martj42'))
 print('ok')
